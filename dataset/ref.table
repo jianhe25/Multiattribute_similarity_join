@@ -1,0 +1,22 @@
+entityId 	|title 	|journal 	|author 	|number 	|pages 	|volume 	|year
+1	|Futher Normalization of the Data Base Relational Model.	|IBM Research Report, San Jose, California	|E. F. Codd	|NULL	|NULL	|RJ909	|1971
+2	|Common Subexpression Identification in General Algebraic Systems.	|Technical Rep. UKSC 0060, IBM United Kingdom Scientific Centre	|Patrick A. V. Hall	|NULL	|NULL	|NULL	|1974
+3	|Principles of Distributed Object Database Languages.	|technical Report 248, ETH Zürich, Dept. of Computer Science	|Markus Tresch	|NULL	|NULL	|NULL	|1996
+4	|Interactive Support for Non-Programmers: The Relational and Network Approaches.	|IBM Research Report, San Jose, California	|E. F. Codd	|NULL	|NULL	|RJ1400	|1974
+4	|Interactive Support for Non-Programmers: The Relational and Network Approaches.	|IBM Research Report, San Jose, California	|C. J. Date	|NULL	|NULL	|RJ1400	|1974
+7	|Data Base Sublanguage Founded on the Relational Calculus.	|IBM Research Report, San Jose, California	|E. F. Codd	|NULL	|NULL	|RJ893	|1971
+8	|Relational Completeness of Data Base Sublanguages.	|In: R. Rustin (ed.): Database Systems: 65-98, Prentice Hall and IBM Research Report RJ 987, San Jose, California	|E. F. Codd	|NULL	|NULL	|NULL	|1972
+9	|Derivability, Redundancy and Consistency of Relations Stored in Large Data Banks.	|IBM Research Report, San Jose, California	|E. F. Codd	|NULL	|NULL	|RJ599	|1969
+11	|The Capabilities of Relational Database Management Systems.	|IBM Research Report, San Jose, California	|E. F. Codd	|NULL	|NULL	|RJ3132	|1981
+12	|DB&LP: A WWW Bibliography on Databases and Logic Programming	|Compulog Newsletter	|Michael Ley	|NULL	|NULL	|NULL	|1995
+13	|Catchment classification by runoff behaviour with self-organizing maps (SOM)	|Hydrology and Earth System Sciences	|Rita Ley	|NULL	|2947-2962	|15	|2011
+13	|Catchment classification by runoff behaviour with self-organizing maps (SOM)	|Hydrology and Earth System Sciences	|Markus Casper	|NULL	|2947-2962	|15	|2011
+13	|Catchment classification by runoff behaviour with self-organizing maps (SOM)	|Hydrology and Earth System Sciences	|Hugo Hellebrand	|NULL	|2947-2962	|15	|2011
+13	|Catchment classification by runoff behaviour with self-organizing maps (SOM)	|Hydrology and Earth System Sciences	|Ralf Merz	|NULL	|2947-2962	|15	|2011
+16	|Normalized Data Base Structure: A Brief Tutorial.	|IBM Research Report, San Jose, California	|E. F. Codd	|NULL	|NULL	|RJ935	|1971
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|Markus Casper	|NULL	|409-421	|16	|2012
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|Gayane Grigoryan	|NULL	|409-421	|16	|2012
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|Oliver Gronz	|NULL	|409-421	|16	|2012
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|Oliver Gutjahr	|NULL	|409-421	|16	|2012
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|Günther Heinemann	|NULL	|409-421	|16	|2012
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|Rita Ley	|NULL	|409-421	|16	|2012

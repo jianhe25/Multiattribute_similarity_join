@@ -1,0 +1,25 @@
+This is my graduate project for multi-dimensions similarity search & join
+
+FOLDERS:
+	dataset/ 	: 	Collect DBLP.xml and load it to Mysql, or generate data
+	src/		:	
+		filters/	: 	Various filters, such as length filter, prefix filter, token distribution filter
+		estimater/  :   Estimate time and cost of each filter in each column
+		(TO DO)
+		parser/		:	A simple parser which supports select and join columns of DBLP data (mainly for test purpose, or scripting test cases)
+
+	test/			:	Load data from Mysql, and test correctiness
+
+
+
+
+Algorithm:
+
+	1) Estimate cost of every column by different filters, m * f estimations 
+	2) Select 
+
+1. 验证
+1）弄清楚过滤算法，以及如何链接过滤器
+2）改善估计算法
+3）如何对每一列排序，对过滤器排序
+
