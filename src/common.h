@@ -8,6 +8,7 @@ using namespace std;
 void splitString(const char *s, char delimiter, vector<string> &container);
 void stripString(string &word);
 int getTimeStamp();
+void PrintTime(int milli_sec);
 
 /*
  * tranpose row table to column table

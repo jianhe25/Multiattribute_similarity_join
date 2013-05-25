@@ -8,6 +8,13 @@ string Filter::EchoType() {
 string Verifier::EchoType() {
 	return "Verifier";
 }
+
+int Verifier::edit_distance() {
+	return edit_distance_;
+}
+int Verifier::overlap() {
+	return overlap_;
+}
 bool Verifier::VerifyEditDistance(const string &a, const string &b, int dist) {
 	const int LIMIT = dist + 1;
 	vector<vector<int>> dp(a.length()+1, vector<int>(b.length()+1, LIMIT));
@@ -24,25 +31,26 @@ bool Verifier::VerifyEditDistance(const string &a, const string &b, int dist) {
 			isUpdate = true;
 		}
 		if (!isUpdate)
-			break;
+			return false;
 	}
-	return dp[a.length()][b.length()] <= dist;
+	edit_distance_ = dp[a.length()][b.length()];
+	return edit_distance_ <= dist;
 }
 // TODO : add early termination
 bool Verifier::VerifyOverlapToken(const vector<int> tokensA, const vector<int> tokensB, int needOverlap) {
-	int overlap = 0;
+	overlap_ = 0;
 	int j = 0;
 	for (int i = 0; i < (int)tokensA.size(); ++i) {
 		while (j < (int)tokensB.size() && tokensA[i] > tokensB[j])
 			++j;
 		if (j < (int)tokensB.size()) {
 			if (tokensA[i] == tokensB[j]) {
-				overlap++;
+				overlap_++;
 				++j;
 			}
 		}
 	}
-	return overlap >= needOverlap;
+	return overlap_ >= needOverlap;
 }
 
 bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {

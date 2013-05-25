@@ -35,3 +35,20 @@ int getTimeStamp()
 	return t.tv_sec * 1000000 + t.tv_usec;
 }
 
+void PrintTime(int milli_sec)
+{
+	milli_sec /= 1000;
+	int v=milli_sec;
+	int hours=v/(1000*60*60); v%=(1000*60*60);
+	int minutes=v/(1000*60); v%=(1000*60);
+	int seconds=v/1000; v%=1000;
+	int milli_seconds=v;
+	int first=1;
+	printf("%d[", milli_sec);
+	if(hours) {if(!first) printf(":"); printf("%dh", hours); first=0;}
+	if(minutes) {if(!first) printf(":"); printf("%dm", minutes); first=0;}
+	if(seconds) {if(!first) printf(":"); printf("%ds", seconds); first=0;}
+	if(milli_seconds) {if(!first) printf(":"); printf("%dms", milli_seconds); first=0;}
+	printf("]");
+}
+

@@ -1,3 +1,4 @@
+#include <gflags/gflags.h>
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -7,11 +8,14 @@ using namespace std;
 
 const int MAX_LINE_LENGTH = 10000;
 
+DEFINE_int32(max_tuple_number, 100000, "max tuple number in table1 and table2");
+
 DIST_TYPE getType(const string &operand) {
 	if (operand == "ED")
 		return ED;
-	else
+	if (operand == "JACCARD")
 		return JACCARD;
+	return NON_DEFINE;
 }
 void showSearchQueryFormat() {
 	printf("search_query_file format : \n\
@@ -53,15 +57,24 @@ void loadTable(string table_file_name, Table &table) {
 		cerr << "open FILE " + table_file_name + " error" << endl;
 		throw "open FILE " + table_file_name + " error";
 	}
+	int column_number = -1;
 	while (fgets(line, MAX_LINE_LENGTH, input_file)) {
 		vector<string> strs;
 		splitString(line, '|', strs);
+		// Validate column_number
+		if (column_number != -1 && (int)strs.size() != column_number) {
+			cerr << "Warning : table row has different column number" << " tuple_number = " << table.size() << endl;
+			continue;
+		}
+		column_number = strs.size();
 		Row row;
 		for (auto &word : strs) {
 			stripString(word);
 			row.push_back(Field(word));
 		}
 		table.push_back(row);
+		if ((int)table.size() > FLAGS_max_tuple_number)
+			break;
 	}
 }
 void loadMapping(string mapping_file_name,
@@ -78,7 +91,14 @@ void loadMapping(string mapping_file_name,
 	char operand[100];
 	mappingPairs.clear();
 	while (fscanf(mapping_file, "%s %d %d %lf", operand, &col1, &col2, &dist) != EOF) {
+		if (getType(operand) == NON_DEFINE) {
+			cerr << "NonExist Similarity Function" << endl;
+			break;
+		}
 		mappingPairs.push_back(Similarity(col1, col2, dist, getType(operand)));
+	}
+	for (auto sim : mappingPairs) {
+		cout << sim.colX << " " << sim.colY << " " << sim.dist << endl;
 	}
 }
 
@@ -88,6 +108,8 @@ void print(Row tuple) {
 	cout << endl;
 }
 int main(int argc, char **argv) {
+	int start = getTimeStamp();
+	google::ParseCommandLineFlags(&argc, &argv, true);
 	if (argc > 4) {
 		printf("Usage : ./testMultiJoin [mapping_file] [table_file1] [table_file2] > result");
 		showJoinQueryFormat();
@@ -122,14 +144,19 @@ int main(int argc, char **argv) {
 	/*
 	 *	Output sim_pairs
 	 */
+	freopen("result","w",stdout);
+	cout << sim_pairs.size() << endl;
 	for (auto pair : sim_pairs) {
 		auto tuple1 = table1[pair.first];
 		auto tuple2 = table2[pair.second];
-		printf("simPair %d %d\n",pair.first, pair.second);
 		print(tuple1);
 		print(tuple2);
 		puts("");
 	}
+
+	int delta = getTimeStamp() - start;
+	printf("Your program has successfully passed all tests.\n");
+	printf("Time="); PrintTime(delta); printf("\n");
 }
 
 

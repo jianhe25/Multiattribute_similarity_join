@@ -27,7 +27,7 @@ typedef vector<Field> Column;
 typedef vector<Row> Table;
 
 typedef enum {
-	ED, JACCARD
+	ED, JACCARD, NON_DEFINE
 } DIST_TYPE;
 
 struct Similarity {
@@ -35,9 +35,12 @@ struct Similarity {
 	double dist;
 	DIST_TYPE distType;
 
+	Similarity(DIST_TYPE _distType, double _dist) :
+		colX(0), colY(0), dist(_dist), distType(_distType) {}
+
 	Similarity(int _colX, int _colY, double _dist, DIST_TYPE _distType) :
 		colX(_colX), colY(_colY), dist(_dist), distType(_distType) {}
-
+	Similarity() {}
 	int CalcOverlap(int lenS, int lenR) const {
 		if (distType == ED)
 			return max(lenS, lenR) - GRAM_LENGTH * int(dist);

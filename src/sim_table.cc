@@ -4,6 +4,8 @@
 #include <algorithm>
 using namespace std;
 
+DEFINE_int32(exp_version, 0, "experiment version");
+
 SimTable::SimTable() {}
 SimTable::SimTable(const Table &table) {
 	Init(table);
@@ -13,7 +15,9 @@ void SimTable::Init(const Table &table) {
 	table_ = table;
 	row_num_ = table_.size();
 	col_num_ = table_[0].size();
+	cout << "start transpose !" << endl;
 	transpose(table_, &column_table_);
+	cout << "transpose successfully!" << endl;
 /*
 	tokenCounter = new unordered_map<int, int>[colNum];
 	TokenColumn *tokenTable = new TokenColumn[colNum];
@@ -26,7 +30,9 @@ void SimTable::Init(const Table &table) {
 vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<Similarity> &sims) {
 	Init(table1);
 	vector<pair<RowID, RowID>> simPairs;;
+	startJoinTime = getTimeStamp();
 	for (unsigned i = 0; i < table2.size(); ++i) {
+		cout << "search " << i << endl;
 		vector<RowID> results = Search(table2[i], sims);
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
@@ -34,49 +40,18 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 	return simPairs;
 }
 vector<RowID> SimTable::Search(const Row &query_row, vector<Similarity> &sims) {
-	vector<int> candidateIDs(row_num_, 0);
-	for (unsigned i = 0; i < candidateIDs.size(); ++i)
-		candidateIDs[i] = i;
-
-	vector<Estimation> estimations;
-	for (auto &sim : sims)
-		estimations.push_back(Estimate(column_table_[sim.colX], query_row[sim.colY], sim, candidateIDs));
-
-	sort(estimations.begin(), estimations.end(),
-		[](const Estimation &a, const Estimation &b) {
-			return a.ratio / a.cost > b.ratio / b.cost;
-		});
-
-	/*
-	 * First round filter
-	 */
-	for (auto &estimation : estimations) {
-		auto sim = estimation.sim;
-		Column &column = column_table_[sim->colX];
-		vector<int> ids;
-		for (int id : candidateIDs) {
-			if (estimation.filter->filter(column[id], query_row[sim->colY], *sim))
-				ids.push_back(id);
+	vector<RowID> result;
+	switch (FLAGS_exp_version) {
+		case 0 : { result = Search0_NoEstimate(query_row, sims); break; }
+		case 1 : { result = Search1_Estimate(query_row, sims); break; }
+		case 2 : { result = Search2_TuneEstimate(query_row, sims); break; }
+		default: {
+			cerr << "Error: NonExist exp_version, exp_version is in [" << 0 << ", " << 2 << "]" << endl;
+			result = vector<RowID>(0);
 		}
-		candidateIDs = ids;
 	}
-	cout << "After first round filter, candidates.size() = " << candidateIDs.size() << endl;
-	/*
-	 * Verify candidates
-	 */
-	Verifier *verifier = new Verifier();
-	for (auto &estimation : estimations)
-	if (estimation.filter->EchoType() != "Verifier") {
-		auto sim = estimation.sim;
-		Column &column = column_table_[sim->colX];
-		vector<int> ids;
-		for (int id : candidateIDs) {
-			if (verifier->filter(column[id], query_row[sim->colY], *sim))
-				ids.push_back(id);
-		}
-		candidateIDs = ids;
-	}
-	return candidateIDs;
+	PrintTime(getTimeStamp() - startJoinTime);
+	return result;
 }
 Estimation SimTable::Estimate(const Column &column,
 							const Field &query,
@@ -104,7 +79,7 @@ Estimation SimTable::Estimate(const Column &column,
 			best_cost = cost;
 		}
 	}
-	printf("ratio = %f, cost = %f, filter = %s\n",best_ratio, best_cost, best_filter->EchoType().c_str());
+//	printf("ratio = %f, cost = %f, filter = %s\n",best_ratio, best_cost, best_filter->EchoType().c_str());
 	Estimation estimation;
 	estimation.ratio = best_ratio;
 	estimation.cost = best_cost;

@@ -1,11 +1,13 @@
-#include <iostream>
-#include "core.h"
-#include "filter.h"
-using namespace std;
-
 #ifndef SRC_SIM_TABLE
 #define SRC_SIM_TABLE
 
+#include <iostream>
+#include "core.h"
+#include "filter.h"
+#include <gflags/gflags.h>
+using namespace std;
+
+DECLARE_int32(exp_version);
 typedef int RowID;
 struct Estimation {
 	double ratio;
@@ -27,6 +29,14 @@ class SimTable {
 			const Field& query,
 			Similarity &sim,
 			const vector<int> &ids);
+	int startJoinTime;
+
+	/*
+	 * Following method are for experiment purpose, it's flexible component
+	 */
+	vector<RowID> Search0_NoEstimate(const Row &query_row, vector<Similarity> &sims);
+	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims);
+	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims);
 public:
 	SimTable();
 	SimTable(const Table &table);
