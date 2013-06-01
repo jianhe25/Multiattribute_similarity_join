@@ -6,6 +6,17 @@ using namespace std;
 
 DEFINE_int32(exp_version, 0, "experiment version");
 
+Estimation::Estimation(double _ratio, double _cost, Filter *_filter, Similarity *_sim) :
+	ratio(_ratio), cost(_cost), filter(_filter), sim(_sim) {
+}
+bool Estimation::operator > (const Estimation &other) const {
+	return this->ratio * other.cost < this->cost * other.ratio;
+	// aka. ratio / cost < other.ratio / other.cost
+}
+bool Estimation::operator < (const Estimation &other) const {
+	return !(*this > other);
+}
+
 SimTable::SimTable() {}
 SimTable::SimTable(const Table &table) {
 	Init(table);
@@ -15,6 +26,8 @@ void SimTable::Init(const Table &table) {
 	table_ = table;
 	row_num_ = table_.size();
 	col_num_ = table_[0].size();
+//	*ed_indexes_ = new Index[MAX_COLUMN_NUMBER];
+//	*jc_indexes_ = new Index[MAX_COLUMN_NUMBER];
 	cout << "start transpose !" << endl;
 	transpose(table_, &column_table_);
 	cout << "transpose successfully!" << endl;
@@ -27,12 +40,20 @@ void SimTable::Init(const Table &table) {
 	}
 */
 }
+/*
+void SimTable::InitIndexes(Similarity &sims) {
+	for (auto &sim : sims) {
+		ed_index[sim.colX].build();
+	}
+}
+*/
 vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<Similarity> &sims) {
 	Init(table1);
+//	InitIndexes(sims);
 	vector<pair<RowID, RowID>> simPairs;;
 	startJoinTime = getTimeStamp();
 	for (unsigned i = 0; i < table2.size(); ++i) {
-		cout << "search " << i << endl;
+	//	cout << "search " << i << endl;
 		vector<RowID> results = Search(table2[i], sims);
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
@@ -50,42 +71,26 @@ vector<RowID> SimTable::Search(const Row &query_row, vector<Similarity> &sims) {
 			result = vector<RowID>(0);
 		}
 	}
-	PrintTime(getTimeStamp() - startJoinTime);
+//	PrintTime(getTimeStamp() - startJoinTime);
 	return result;
 }
 Estimation SimTable::Estimate(const Column &column,
 							const Field &query,
 							Similarity &sim,
-							const vector<int> &ids) {
-	vector<int> sampleIDs;
-	for (int i = 0; i < ids.size() * SAMPLE_RATIO; ++i)
-		sampleIDs.push_back(ids[rand() % ids.size()]);
-	double max_ratio_cost = 0.0;
-	double best_ratio = 0.0;
-	double best_cost = 1.0; // if cost is zero, then ratio_cost would be nan.
-	Filter *best_filter = NULL;
-	for (auto filter : g_filters) {
-		int pass = 0;
-		int startTime = getTimeStamp();
-		for (int id : sampleIDs)
-			pass += filter->filter(column[id], query, sim);
-		double cost = double(getTimeStamp() - startTime) / sampleIDs.size();
-		double ratio = 1.0 - double(pass) / sampleIDs.size();
-
-		if ((cost > 0 && ratio / cost > max_ratio_cost) || (cost == 0 && ratio > 0)) {
-			max_ratio_cost = ratio / cost;
-			best_filter = filter;
-			best_ratio = ratio;
-			best_cost = cost;
-		}
+							const vector<int> &ids,
+							Filter *filter) {
+	static vector<int> sampleIDs;
+	if (sampleIDs.empty()) {
+		for (int i = 0; i < ids.size() * SAMPLE_RATIO; ++i)
+			sampleIDs.push_back(ids[rand() % ids.size()]);
 	}
-//	printf("ratio = %f, cost = %f, filter = %s\n",best_ratio, best_cost, best_filter->EchoType().c_str());
-	Estimation estimation;
-	estimation.ratio = best_ratio;
-	estimation.cost = best_cost;
-	estimation.filter = best_filter;
-	estimation.sim = &sim;
-	return estimation;
+	int pass = 0;
+	int startTime = getTimeStamp();
+	for (int id : sampleIDs)
+		pass += filter->filter(column[id], query, sim);
+	double cost = double(getTimeStamp() - startTime) / sampleIDs.size();
+	double ratio = 1.0 - double(pass) / sampleIDs.size();
+	return Estimation(ratio, cost, filter, &sim);
 }
 /*
  * Sort only by IDF of column1

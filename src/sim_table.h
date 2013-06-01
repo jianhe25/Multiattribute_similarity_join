@@ -6,18 +6,17 @@
 #include "filter.h"
 #include <gflags/gflags.h>
 using namespace std;
-
 DECLARE_int32(exp_version);
 typedef int RowID;
 struct Estimation {
 	double ratio;
 	double cost;
-//	typedef enum {EXACT, HYBRID} Type;
-//	Type type;
 	Filter *filter;
 	Similarity *sim;
+	Estimation(double _ratio, double _cost, Filter *_filter, Similarity *_sim);
+	bool operator > (const Estimation &other) const;
+	bool operator < (const Estimation &other) const;
 };
-
 class SimTable {
 	int col_num_;
 	int row_num_;
@@ -28,7 +27,8 @@ class SimTable {
 	Estimation Estimate(const Column &column,
 			const Field& query,
 			Similarity &sim,
-			const vector<int> &ids);
+			const vector<int> &ids,
+			Filter *filter);
 	int startJoinTime;
 
 	/*
@@ -37,6 +37,9 @@ class SimTable {
 	vector<RowID> Search0_NoEstimate(const Row &query_row, vector<Similarity> &sims);
 	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims);
 	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims);
+
+//	Index ed_indexes_;
+// 	Index indexes;
 public:
 	SimTable();
 	SimTable(const Table &table);

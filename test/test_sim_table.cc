@@ -8,7 +8,8 @@ using namespace std;
 
 const int MAX_LINE_LENGTH = 10000;
 
-DEFINE_int32(max_tuple_number, 100000, "max tuple number in table1 and table2");
+DEFINE_int32(max_base_table_size, 1000, "max tuple number in table1");
+DEFINE_int32(max_query_table_size, 100, "max tuple number in table2");
 
 DIST_TYPE getType(const string &operand) {
 	if (operand == "ED")
@@ -51,7 +52,7 @@ Table table1;
 Table table2;
 char line[MAX_LINE_LENGTH];
 
-void loadTable(string table_file_name, Table &table) {
+void loadTable(string table_file_name, Table &table, int read_limit) {
 	FILE *input_file = fopen(table_file_name.c_str(), "r");
 	if (input_file == NULL) {
 		cerr << "open FILE " + table_file_name + " error" << endl;
@@ -63,7 +64,7 @@ void loadTable(string table_file_name, Table &table) {
 		splitString(line, '|', strs);
 		// Validate column_number
 		if (column_number != -1 && (int)strs.size() != column_number) {
-			cerr << "Warning : table row has different column number" << " tuple_number = " << table.size() << endl;
+			//cerr << "Warning : table row has different column number" << " tuple_number = " << table.size() << endl;
 			continue;
 		}
 		column_number = strs.size();
@@ -73,7 +74,7 @@ void loadTable(string table_file_name, Table &table) {
 			row.push_back(Field(word));
 		}
 		table.push_back(row);
-		if ((int)table.size() > FLAGS_max_tuple_number)
+		if ((int)table.size() > read_limit)
 			break;
 	}
 }
@@ -111,13 +112,13 @@ int main(int argc, char **argv) {
 	int start = getTimeStamp();
 	google::ParseCommandLineFlags(&argc, &argv, true);
 	if (argc > 4) {
-		printf("Usage : ./testMultiJoin [mapping_file] [table_file1] [table_file2] > result");
+		printf("Usage : ./testTableJoin [mapping_file] [table_file1] [table_file2] > result");
 		showJoinQueryFormat();
-		// TODO : support this query format
+		// TODO : support search query format
 		// showSearchQueryFormat();
 	}
-	string table1_file_name = "dataset/ref.table";
-	string table2_file_name = "dataset/ref1.table";
+	string table1_file_name = "dataset/dblp.table";
+	string table2_file_name = "dataset/ref.table";
 	string mapping_file_name = "";
 	vector<Similarity> mappingPairs;
 
@@ -130,8 +131,8 @@ int main(int argc, char **argv) {
 
 	try {
 		string f1 = table1_file_name;
-		loadTable(table1_file_name, table1);
-		loadTable(table2_file_name, table2);
+		loadTable(table1_file_name, table1, FLAGS_max_base_table_size);
+		loadTable(table2_file_name, table2, FLAGS_max_query_table_size);
 		if (mapping_file_name != "")
 			loadMapping(mapping_file_name, table1, table2, mappingPairs);
 	} catch (char *errorMsg) {
@@ -144,6 +145,7 @@ int main(int argc, char **argv) {
 	/*
 	 *	Output sim_pairs
 	 */
+	/*
 	freopen("result","w",stdout);
 	cout << sim_pairs.size() << endl;
 	for (auto pair : sim_pairs) {
@@ -153,10 +155,21 @@ int main(int argc, char **argv) {
 		print(tuple2);
 		puts("");
 	}
-
+	*/
+	cout << sim_pairs.size() << endl;
 	int delta = getTimeStamp() - start;
-	printf("Your program has successfully passed all tests.\n");
+	//printf("Your program has successfully passed all tests.\n");
 	printf("Time="); PrintTime(delta); printf("\n");
+	try {
+		FILE *stat_file = fopen("stat_file.csv","ap");
+		if (FLAGS_exp_version == 2)
+			fprintf(stat_file, "%d\n", delta / 1000);
+		else
+			fprintf(stat_file, "%d,", delta / 1000);
+	} catch (char *errorMsg) {
+		cerr << errorMsg << endl;
+		return -1;
+	}
 }
 
 
