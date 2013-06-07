@@ -5,6 +5,7 @@
 #include "core.h"
 #include "filter.h"
 #include <gflags/gflags.h>
+#include "index/index.h"
 using namespace std;
 DECLARE_int32(exp_version);
 typedef int RowID;
@@ -22,30 +23,30 @@ class SimTable {
 	int row_num_;
 	Table table_; // table_ means rowTable
 	Table column_table_;
-//	void sortByIDF(TokenColumn *tokenColumn, unordered_map<int, int> *tokenCounter);
-//	void buildIndex(Table &table);
+
 	Estimation Estimate(const Column &column,
 			const Field& query,
 			Similarity &sim,
 			const vector<int> &ids,
 			Filter *filter);
 	int startJoinTime;
-
 	/*
 	 * Following method are for experiment purpose, it's flexible component
 	 */
-	vector<RowID> Search0_NoEstimate(const Row &query_row, vector<Similarity> &sims);
-	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims);
-	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims);
+	vector<RowID> Search0_NoEstimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
+	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
+	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 
-//	Index ed_indexes_;
-// 	Index indexes;
+	vector<SimIndex*> indexes;
+	Similarity *ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
+	void InitIndex(vector<Similarity> &sims);
 public:
 	SimTable();
-	SimTable(const Table &table);
-	void Init(const Table &table);
+	~SimTable();
+	SimTable(Table &table);
+	void Init(Table &table);
 	vector<pair<RowID, RowID>> Join(Table &table1, Table &table2, vector<Similarity> &sims);
-	vector<RowID> Search(const Row &query_row, vector<Similarity> &sims);
+	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
 };
 
 #endif // SRC_SIM_TABLE

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 using namespace std;
 
 void splitString(const char *s, char delimiter, vector<string> &container);
@@ -16,10 +17,11 @@ void PrintTime(int milli_sec);
 template<class T>
 void transpose(const vector<vector<T>> &table, vector<vector<T>> *column_table) {
 	int column_num = table[0].size();
-	column_table->resize(column_num, vector<T>(table.size(), T()));
+	column_table->resize(column_num);
 	for (int i = 0; i < (int)table.size(); ++i)
 		for (int j = 0; j < column_num; ++j)
-			(*column_table)[j][i] = table[i][j];
+			(*column_table)[j].push_back(table[i][j]);
 }
+
 #endif // SRC_COMMON_H
 

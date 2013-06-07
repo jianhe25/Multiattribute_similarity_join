@@ -11,7 +11,10 @@ int HashCode(const string &word) {
 	return g_string_map[word];
 }
 
-Field::Field(const string &_str) : str(_str) {
+Field::Field() {
+	//cout << "Construct empty Field " << endl;
+}
+Field::Field(const string &_str, int _id) : str(_str), id(_id) {
 	vector<string> words;
 	splitString(str.c_str(), ' ', words);
 	tokens.clear();
@@ -22,5 +25,30 @@ Field::Field(const string &_str) : str(_str) {
 	// TODO: to sort by index in the future
 	sort(tokens.begin(), tokens.end());
 }
+void Field::GenerateGrams() {
+	grams.clear();
+	//cout << "str = " << str << " " << str.length() << " " << grams.size() << endl;
+	for (int i = 0; i <= (int)str.length() - GRAM_LENGTH; ++i) {
+		int t = HashCode(str.substr(i, GRAM_LENGTH));
+		grams.push_back(t);
+	}
+	//cout << "Finish GenerateGrams " << endl;
+}
+Field::~Field() {
+	//cout << "deconstruct field  " << str << endl;
+}
 
 
+int printCounter = 0;
+void print(const Table &table) {
+	cout << "================================== " << ++printCounter << "\n";
+	for (const Row &row : table) {
+		for (const Field &field : row) {
+			//cout << field.id << endl;
+			for (const auto token : field.tokens)
+				cout << token << " ";
+			cout << endl;
+		}
+	}
+	cout << "==================================\n";
+}

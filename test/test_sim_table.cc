@@ -59,6 +59,7 @@ void loadTable(string table_file_name, Table &table, int read_limit) {
 		throw "open FILE " + table_file_name + " error";
 	}
 	int column_number = -1;
+	int rowid = 0;
 	while (fgets(line, MAX_LINE_LENGTH, input_file)) {
 		vector<string> strs;
 		splitString(line, '|', strs);
@@ -71,12 +72,14 @@ void loadTable(string table_file_name, Table &table, int read_limit) {
 		Row row;
 		for (auto &word : strs) {
 			stripString(word);
-			row.push_back(Field(word));
+			row.push_back(Field(word, rowid));
 		}
+		rowid++;
 		table.push_back(row);
-		if ((int)table.size() > read_limit)
+		if ((int)table.size() >= read_limit)
 			break;
 	}
+	fclose(input_file);
 }
 void loadMapping(string mapping_file_name,
 				Table &table1,
@@ -99,8 +102,9 @@ void loadMapping(string mapping_file_name,
 		mappingPairs.push_back(Similarity(col1, col2, dist, getType(operand)));
 	}
 	for (auto sim : mappingPairs) {
-		cout << sim.colX << " " << sim.colY << " " << sim.dist << endl;
+		cout << sim.colx << " " << sim.coly << " " << sim.dist << endl;
 	}
+	fclose(mapping_file);
 }
 
 void print(Row tuple) {
@@ -119,7 +123,7 @@ int main(int argc, char **argv) {
 	}
 	string table1_file_name = "dataset/dblp.table";
 	string table2_file_name = "dataset/ref.table";
-	string mapping_file_name = "";
+	string mapping_file_name = "dataset/mapping_rule";
 	vector<Similarity> mappingPairs;
 
 	if (argc >= 2)
@@ -130,7 +134,6 @@ int main(int argc, char **argv) {
 		table2_file_name = argv[3];
 
 	try {
-		string f1 = table1_file_name;
 		loadTable(table1_file_name, table1, FLAGS_max_base_table_size);
 		loadTable(table2_file_name, table2, FLAGS_max_query_table_size);
 		if (mapping_file_name != "")
@@ -139,6 +142,8 @@ int main(int argc, char **argv) {
 		cerr << errorMsg << endl;
 		return -1;
 	}
+
+//	print(table1);
 	SimTable sim_table;
 	vector<pair<RowID, RowID>> sim_pairs = sim_table.Join(table1, table2, mappingPairs);
 
@@ -163,9 +168,9 @@ int main(int argc, char **argv) {
 	try {
 		FILE *stat_file = fopen("stat_file.csv","ap");
 		if (FLAGS_exp_version == 2)
-			fprintf(stat_file, "%d\n", delta / 1000);
+			fprintf(stat_file, "(%d,%d)\n", delta / 1000, (int)sim_pairs.size());
 		else
-			fprintf(stat_file, "%d,", delta / 1000);
+			fprintf(stat_file, "(%d,%d), ", delta / 1000, (int)sim_pairs.size());
 	} catch (char *errorMsg) {
 		cerr << errorMsg << endl;
 		return -1;

@@ -1,5 +1,6 @@
 #include "filter.h"
 #include <algorithm>
+#include <iostream>
 
 string Filter::EchoType() {
 	return "NULL";
@@ -30,8 +31,10 @@ bool Verifier::VerifyEditDistance(const string &a, const string &b, int dist) {
 			dp[i+1][j+1] = min(dp[i+1][j+1], dp[i][j] + (a[i] != b[j]));
 			isUpdate = true;
 		}
-		if (!isUpdate)
+		if (!isUpdate) {
+			edit_distance_ = LIMIT;
 			return false;
+		}
 	}
 	edit_distance_ = dp[a.length()][b.length()];
 	return edit_distance_ <= dist;
@@ -57,6 +60,7 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool result = false;
 	if (sim.distType == ED) {
 		result = VerifyEditDistance(a.str, b.str, sim.dist);
+//		cout << "Verify " << a.str << "----------" << b.str << " " << result << " ED = " << edit_distance_ << endl;
 	} else {
 		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
 		result = VerifyOverlapToken(a.tokens, b.tokens, overlap);

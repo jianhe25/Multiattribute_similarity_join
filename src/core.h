@@ -17,9 +17,13 @@ int HashCode(const string &word);
 
 struct Field {
 	string str;
+	int id;
 	vector<int> tokens;
-	Field() {}
-	Field(const string &_str);
+	vector<int> grams;
+	Field();
+	~Field();
+	Field(const string &_str, int id=0);
+	void GenerateGrams();
 };
 
 typedef vector<Field> Row;
@@ -27,20 +31,23 @@ typedef vector<Field> Column;
 typedef vector<Row> Table;
 
 typedef enum {
-	ED, JACCARD, NON_DEFINE
+	ED, JACCARD, COSINE, DICE, NON_DEFINE
 } DIST_TYPE;
 
 struct Similarity {
-	int colX, colY;
+	int colx, coly;
 	double dist;
 	DIST_TYPE distType;
+	bool isSearched;
 
 	Similarity(DIST_TYPE _distType, double _dist) :
-		colX(0), colY(0), dist(_dist), distType(_distType) {}
+		colx(0), coly(0), dist(_dist), distType(_distType), isSearched(false) {}
 
-	Similarity(int _colX, int _colY, double _dist, DIST_TYPE _distType) :
-		colX(_colX), colY(_colY), dist(_dist), distType(_distType) {}
-	Similarity() {}
+	Similarity(int _colx, int _coly, double _dist, DIST_TYPE _distType) :
+		colx(_colx), coly(_coly), dist(_dist), distType(_distType), isSearched(false) {}
+
+	Similarity() : isSearched(false) {}
+
 	int CalcOverlap(int lenS, int lenR) const {
 		if (distType == ED)
 			return max(lenS, lenR) - GRAM_LENGTH * int(dist);
@@ -53,5 +60,6 @@ struct Similarity {
 	}
 };
 
+void print(const Table &table);
 #endif // SRC_CORE_H
 
