@@ -5,11 +5,9 @@
 string Filter::EchoType() {
 	return "NULL";
 }
-
 string Verifier::EchoType() {
 	return "Verifier";
 }
-
 int Verifier::edit_distance() {
 	return edit_distance_;
 }
@@ -62,9 +60,9 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 		result = VerifyEditDistance(a.str, b.str, sim.dist);
 //		cout << "Verify " << a.str << "----------" << b.str << " " << result << " ED = " << edit_distance_ << endl;
 	} else {
-		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
+		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
 		result = VerifyOverlapToken(a.tokens, b.tokens, overlap);
-//		cout << "Verify " << a.str << "----------" << b.str << " " << result << " o = " << overlap << endl;
+		//cout << "Verify " << a.str << "----------" << b.str << " " << result << " o = " << overlap << endl;
 	}
 	return result;
 }
@@ -77,7 +75,7 @@ bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim)
 	if (sim.distType == ED)
 		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
 	else {
-		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
+		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
 		result = ((int)a.tokens.size() >= overlap && (int)b.tokens.size() >= overlap);
 	}
 //	cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
@@ -92,7 +90,7 @@ bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim
 	if (sim.distType == ED)
 		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
 	else {
-		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
+		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
 		result = ((int)a.tokens.size() >= overlap && (int)b.tokens.size() >= overlap);
 	}
 //	cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;

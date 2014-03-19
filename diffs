@@ -1,0 +1,733 @@
+diff --git "a/5\343\200\201\350\256\241\347\256\227\346\234\272\345\255\246\351\231\242\346\234\254\347\247\221\346\257\225\344\270\232\350\256\276\350\256\241(\350\256\272\346\226\207)\350\247\204\350\214\203\345\214\226\350\246\201\346\261\202.doc" "b/5\343\200\201\350\256\241\347\256\227\346\234\272\345\255\246\351\231\242\346\234\254\347\247\221\346\257\225\344\270\232\350\256\276\350\256\241(\350\256\272\346\226\207)\350\247\204\350\214\203\345\214\226\350\246\201\346\261\202.doc"
+deleted file mode 100644
+index b481bc4..0000000
+Binary files "a/5\343\200\201\350\256\241\347\256\227\346\234\272\345\255\246\351\231\242\346\234\254\347\247\221\346\257\225\344\270\232\350\256\276\350\256\241(\350\256\272\346\226\207)\350\247\204\350\214\203\345\214\226\350\246\201\346\261\202.doc" and /dev/null differ
+diff --git a/makefile b/makefile
+index 81a9ace..a0062ee 100644
+--- a/makefile
++++ b/makefile
+@@ -5,26 +5,29 @@ CPPFLAGS = -I$(GTEST_DIR)/include
+ 
+ SRC_OBJ=./src/core.o ./src/sim_table.o ./src/common.o ./src/filter.o 
+ EXP_OBJ=./src/exp/Search0_NoEstimate.o ./src/exp/Search1_Estimate.o ./src/exp/Search2_TuneEstimate.o
+-INDEX_OBJ=./src/index/index.o ./src/index/prefix_index/prefix_index.o
++INDEX_OBJ=./src/index/index.o ./src/index/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
+ 
+ COMMON_OBJ=$(SRC_OBJ) $(EXP_OBJ) $(INDEX_OBJ)
+-TEST_OBJS=./test/filter_test.o
+-RUN_OBJ=./test/test_sim_table.o
++TEST_OBJS=./src/test/filter_test.o
++RUN_OBJ=./src/test/test_sim_table.o
+ 
+ RUN_ELF=./test_sim_table 
+ 
+-TESTS=./test/filter_test
++TESTS=./src/test/filter_test
++
++run: $(RUN_ELF)
++	$(RUN_ELF) ./dataset/mapping_rule ./dataset/dblp.table ./dataset/dblp.table --exp_version=4 --max_base_table_size=1000000 --max_query_table_size=1 --index_version=0 
+ 
+ tests : $(TESTS)
+-	./test/filter_test
++	./src/test/filter_test
+ 
+-./test/filter_test: $(COMMON_OBJ) ./test/filter_test.o gtest_main.a
++./src/test/filter_test: $(COMMON_OBJ) ./src/test/filter_test.o gtest_main.a
+ 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+ 
+-run: $(RUN_ELF)
+-	$(RUN_ELF) ./dataset/mapping_rule ./dataset/dblp.table ./dataset/dblp.table --exp_version=2 --max_base_table_size=1000 --max_query_table_size=1000 --index_version=1
+ gdb: $(RUN_ELF)
+-	gdb $(RUN_ELF)
++	gdb --args $(RUN_ELF) ./dataset/mapping_rule ./dataset/dblp.table ./dataset/dblp.table --exp_version=4 --max_base_table_size=100 --max_query_table_size=100 --index_version=0
++
++
+ 
+ $(RUN_ELF) : $(COMMON_OBJ) $(RUN_OBJ)
+ 	$(CXX) $(CXXFLAGS) $^ -o $@ 
+diff --git a/run_exp.py b/run_exp.py
+deleted file mode 100644
+index 5e69b87..0000000
+--- a/run_exp.py
++++ /dev/null
+@@ -1,33 +0,0 @@
+-import sys
+-import datetime
+-from subprocess import call
+-
+-max_base_table_size = 10000
+-for threshold in range(1, 10):
+-	print threshold
+-	mapping_config = open('dataset/mapping_config','w');
+-	mapping_config.write('ED 3 3 ' + str(threshold) + '\n');
+-	mapping_config.write('ED 5 5 ' + str(threshold) + '\n');
+-	mapping_config.write('JACCARD 2 2 ' + str(1.0 - float(threshold) / 10.0) + '\n');
+-	mapping_config.write('JACCARD 1 1 ' + str(1.0 - float(threshold) / 10.0) + '\n');
+-	mapping_config.close()
+-
+-	#stat_file = open("stat_file.csv","w");
+-	#stat_file.write("");
+-	#stat_file.close();
+-
+-	for version in range(0, 3):
+-#	for max_query_table_size in range(100, 100 * 10, 100):
+-		startTime = datetime.datetime.now()
+-		call(['./test_sim_table', 
+-			  'dataset/mapping_config', 
+-			  'dataset/dblp.table', 
+-			  'dataset/ref.table',
+-			  '--exp_version='+str(version),
+-			  '--max_base_table_size='+str(max_base_table_size),
+-			  '--index_version='+str(0)
+-			   ])
+-		endTime = datetime.datetime.now();
+-		print (endTime - startTime).microseconds,
+-	print ""
+-
+diff --git a/src/common.cc b/src/common.cc
+index 83ac71f..0c2d868 100644
+--- a/src/common.cc
++++ b/src/common.cc
+@@ -28,11 +28,11 @@ void stripString(string &word) {
+ 		word.pop_back();
+ }
+ 
+-int getTimeStamp()
++double getTimeStamp()
+ {
+ 	struct timeval t;
+ 	gettimeofday(&t, NULL);
+-	return t.tv_sec * 1000000 + t.tv_usec;
++	return (t.tv_sec * 1000000 + t.tv_usec) * 1e-6;
+ }
+ 
+ void PrintTime(int milli_sec)
+diff --git a/src/common.h b/src/common.h
+index 37665b8..47a7a24 100644
+--- a/src/common.h
++++ b/src/common.h
+@@ -1,14 +1,13 @@
+-#ifndef SRC_COMMON_H
+-#define SRC_COMMON_H
++#pragma once
+ 
+ #include <vector>
+ #include <string>
+-#include <iostream>
++/*#include <iostream>*/
+ using namespace std;
+ 
+ void splitString(const char *s, char delimiter, vector<string> &container);
+ void stripString(string &word);
+-int getTimeStamp();
++double getTimeStamp();
+ void PrintTime(int milli_sec);
+ 
+ /*
+@@ -16,12 +15,14 @@ void PrintTime(int milli_sec);
+  */
+ template<class T>
+ void transpose(const vector<vector<T>> &table, vector<vector<T>> *column_table) {
+-	int column_num = table[0].size();
+-	column_table->resize(column_num);
+-	for (int i = 0; i < (int)table.size(); ++i)
+-		for (int j = 0; j < column_num; ++j)
+-			(*column_table)[j].push_back(table[i][j]);
++    int num_row = table.size();
++	int num_col = table[0].size();
++	column_table->resize(num_col);
++	for (int j = 0; j < num_col; ++j)
++        (*column_table)[j].resize(num_row);
++	for (int i = 0; i < (int)table.size(); ++i) {
++		for (int j = 0; j < num_col; ++j)
++			(*column_table)[j][i] = table[i][j];
++    }
+ }
+ 
+-#endif // SRC_COMMON_H
+-
+diff --git a/src/core.cc b/src/core.cc
+index 5bd8a3d..d86d30d 100644
+--- a/src/core.cc
++++ b/src/core.cc
+@@ -3,6 +3,7 @@
+ using namespace std;
+ 
+ unordered_map<string, int> g_string_map;
++int g_string_max_length;
+ 
+ int HashCode(const string &word) {
+ 	if (g_string_map.find(word) == g_string_map.end()) {
+@@ -15,6 +16,9 @@ Field::Field() {
+ 	//cout << "Construct empty Field " << endl;
+ }
+ Field::Field(const string &_str, int _id) : str(_str), id(_id) {
++}
++
++void Field::GenerateTokens() {
+ 	vector<string> words;
+ 	splitString(str.c_str(), ' ', words);
+ 	tokens.clear();
+@@ -22,17 +26,17 @@ Field::Field(const string &_str, int _id) : str(_str), id(_id) {
+ 		stripString(word);
+ 		tokens.push_back(HashCode(word));
+ 	}
+-	// TODO: to sort by index in the future
++	// TODO: to sort by TF in the future
+ 	sort(tokens.begin(), tokens.end());
++    g_string_max_length = max(g_string_max_length, (int)tokens.size());
+ }
+ void Field::GenerateGrams() {
+-	grams.clear();
+-	//cout << "str = " << str << " " << str.length() << " " << grams.size() << endl;
++	tokens.clear();
+ 	for (int i = 0; i <= (int)str.length() - GRAM_LENGTH; ++i) {
+ 		int t = HashCode(str.substr(i, GRAM_LENGTH));
+-		grams.push_back(t);
++		tokens.push_back(t);
+ 	}
+-	//cout << "Finish GenerateGrams " << endl;
++    g_string_max_length = max(g_string_max_length, (int)tokens.size());
+ }
+ Field::~Field() {
+ 	//cout << "deconstruct field  " << str << endl;
+@@ -52,3 +56,39 @@ void print(const Table &table) {
+ 	}
+ 	cout << "==================================\n";
+ }
++
++int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
++	//cout << "CalcOverlap " << lenS << " " << lenR << " " << int(ceil((lenS + lenR) * sim.dist / (1.0+sim.dist)));
++	if (sim.distType == ED)
++		return max(lenS, lenR) - GRAM_LENGTH * int(sim.dist);
++	else if (sim.distType == JACCARD)
++		return int(ceil((lenS + lenR) * sim.dist / (1.0 + sim.dist)));
++	else {
++		cerr << "Unkown DIST_TYPE in CalcOverlap" << endl;
++		return -1;
++	}
++}
++
++int CalcPrefixLength(int len, Similarity sim) {
++	if (sim.distType == ED) {
++		//cout << "prefixLength = " << min(len, GRAM_LENGTH * int(sim.dist) + 1) << endl;
++		return min(len, GRAM_LENGTH * int(sim.dist) + 1);
++	} else if (sim.distType == JACCARD) {
++		return min(len, len - int(ceil(len * sim.dist / (1.0 + sim.dist))) + 1);
++	}
++	cerr << "Unkown DIST_TYPE in CalcPrefixLength" << endl;
++	return -1;
++}
++
++// TODO: Precompute Bound
++pair<int,int> CalcLengthBound(int lenS, const Similarity &sim) {
++	if (sim.distType == ED)
++		return make_pair(lenS - sim.dist, lenS + sim.dist);
++	else if (sim.distType == JACCARD) {
++		double c = sim.dist / (1.0 + sim.dist);
++		return make_pair(lenS * c / (1.0 - c), lenS / c - lenS);
++	else {
++		cerr << "Unkown DIST_TYPE in CalcLengthBound" << endl;
++		return -1;
++	}
++}
+diff --git a/src/core.h b/src/core.h
+index a9f8699..cc027c2 100644
+--- a/src/core.h
++++ b/src/core.h
+@@ -1,5 +1,4 @@
+-#ifndef SRC_CORE_H
+-#define SRC_CORE_H
++#pragma once
+ 
+ #include "common.h"
+ #include <string>
+@@ -8,10 +7,12 @@
+ #include <math.h>
+ using namespace std;
+ 
+-#define GRAM_LENGTH 4
++#define GRAM_LENGTH 3
+ #define SAMPLE_RATIO 0.05
+ 
++typedef int RowID;
+ extern unordered_map<string, int> g_string_map;
++extern int g_string_max_length;
+ 
+ int HashCode(const string &word);
+ 
+@@ -19,11 +20,11 @@ struct Field {
+ 	string str;
+ 	int id;
+ 	vector<int> tokens;
+-	vector<int> grams;
+ 	Field();
+-	~Field();
++    ~Field();
+ 	Field(const string &_str, int id=0);
+ 	void GenerateGrams();
++    void GenerateTokens();
+ };
+ 
+ typedef vector<Field> Row;
+@@ -48,18 +49,12 @@ struct Similarity {
+ 
+ 	Similarity() : isSearched(false) {}
+ 
+-	int CalcOverlap(int lenS, int lenR) const {
+-		if (distType == ED)
+-			return max(lenS, lenR) - GRAM_LENGTH * int(dist);
+-		else if (distType == JACCARD)
+-			return int(ceil((lenS + lenR) * dist / (1+dist)));
+-		else {
+-			cerr << "Unkown DIST_TYPE in CalcOverlap" << endl;
+-			return -1;
+-		}
+-	}
+ };
+ 
+ void print(const Table &table);
+-#endif // SRC_CORE_H
+ 
++int CalcOverlap(int lenS, int lenR, const Similarity &sim);
++
++int CalcPrefixLength(int len, Similarity sim);
++
++pair<int,int> CalcLengthBound(int lenS, const Similarity &sim);
+diff --git a/src/exp/Search1_Estimate.cc b/src/exp/Search1_Estimate.cc
+index 12a33ca..199e82b 100644
+--- a/src/exp/Search1_Estimate.cc
++++ b/src/exp/Search1_Estimate.cc
+@@ -8,7 +8,6 @@ vector<RowID> SimTable::Search1_Estimate(const Row &query_row,
+ 	vector<Estimation> estimations;
+ 	Verifier *verifier = new Verifier();
+ 	for (auto &sim : sims) {
+-		if (sim.isSearched) continue;
+ 		estimations.push_back(Estimate(column_table_[sim.colx], query_row[sim.coly],
+ 			sim, candidateIDs, verifier));
+ 	}
+diff --git a/src/filter.cc b/src/filter.cc
+index a67a877..7ba8bcb 100644
+--- a/src/filter.cc
++++ b/src/filter.cc
+@@ -60,9 +60,9 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
+ 		result = VerifyEditDistance(a.str, b.str, sim.dist);
+ //		cout << "Verify " << a.str << "----------" << b.str << " " << result << " ED = " << edit_distance_ << endl;
+ 	} else {
+-		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
++		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
+ 		result = VerifyOverlapToken(a.tokens, b.tokens, overlap);
+-//		cout << "Verify " << a.str << "----------" << b.str << " " << result << " o = " << overlap << endl;
++		//cout << "Verify " << a.str << "----------" << b.str << " " << result << " o = " << overlap << endl;
+ 	}
+ 	return result;
+ }
+@@ -75,7 +75,7 @@ bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim)
+ 	if (sim.distType == ED)
+ 		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
+ 	else {
+-		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
++		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
+ 		result = ((int)a.tokens.size() >= overlap && (int)b.tokens.size() >= overlap);
+ 	}
+ //	cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
+@@ -90,7 +90,7 @@ bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim
+ 	if (sim.distType == ED)
+ 		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
+ 	else {
+-		int overlap = sim.CalcOverlap(a.tokens.size(), b.tokens.size());
++		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
+ 		result = ((int)a.tokens.size() >= overlap && (int)b.tokens.size() >= overlap);
+ 	}
+ //	cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
+diff --git a/src/index/prefix_index/prefix_index.cc b/src/index/prefix_index/prefix_index.cc
+index a8815f6..448ae8d 100644
+--- a/src/index/prefix_index/prefix_index.cc
++++ b/src/index/prefix_index/prefix_index.cc
+@@ -4,7 +4,7 @@ using namespace std;
+ 
+ void PrefixIndex::CalcTF(const vector<Field> &fields, Similarity *sim) {
+ 	for (auto &field : fields) {
+-		const vector<int> &tokens = (sim->distType == ED)? field.grams : field.tokens;
++		const vector<int> &tokens = field.tokens;
+ 		for (int token : tokens)
+ 			token_counter_[token]++;
+ 	}
+@@ -30,27 +30,26 @@ int PrefixIndex::CalcPrefixLength(int size, Similarity *sim) {
+ void PrefixIndex::build(vector<Field> &fields, Similarity *sim) {
+ 	sim_ = sim;
+ 	fields_ = &fields;
+-	if (sim->distType == ED) {
+-		for (auto &field : fields)
+-			if (field.grams.empty()) {
+-				field.GenerateGrams();
+-			}
+-	}
++	//if (sim->distType == ED) {
++		//for (auto &field : fields)
++			//if (field.grams.empty()) {
++				//field.GenerateGrams();
++			//}
++	//}
+ 	CalcTF(fields, sim);
+ 	for (auto &field : fields) {
+-		vector<int> &tokens = (sim->distType == ED)? field.grams : field.tokens;
++		vector<int> &tokens = field.tokens;
+ 		sort(tokens.begin(), tokens.end(), CompareTokenByTF(*this));
+ 	}
+ 	for (auto &field : fields) {
+-		vector<int> &tokens = (sim->distType == ED)? field.grams : field.tokens;
++		vector<int> &tokens = field.tokens;
+ 		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+ 		for (int i = 0; i < prefixlength; ++i)
+ 			index_[tokens[i]].push_back(field.id);
+ 	}
+ }
+ void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
+-	query.GenerateGrams();
+-	vector<int> &tokens = (sim_->distType == ED)? query.grams : query.tokens;
++	vector<int> &tokens = query.tokens;
+ 	sort(tokens.begin(), tokens.end(), CompareTokenByTF(*this));
+ 	int prefixlength = CalcPrefixLength(tokens.size(), sim_);
+ 	unordered_set<FieldID> candidates;
+@@ -60,7 +59,7 @@ void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
+ 	/* TODO: PrefixIndex is buggy, preset prefixlength = 0 would get more matchIDs than only use prefix. */
+ 	//prefixlength = 0;
+ 	if (prefixlength == 0) {
+-		for (int fieldid = 0; fieldid < fields_->size(); ++fieldid)
++		for (int fieldid = 0; fieldid < int(fields_->size()); ++fieldid)
+ 			candidates.insert(fieldid);
+ 	} else {
+ 		for (int i = 0; i < prefixlength; ++i) {
+diff --git a/src/sim_table.cc b/src/sim_table.cc
+index 038754e..3d306bf 100644
+--- a/src/sim_table.cc
++++ b/src/sim_table.cc
+@@ -28,7 +28,7 @@ void SimTable::InitIndex(vector<Similarity> &sims) {
+ 	// Install index plugin, default is prefix_index
+ 	indexes.clear();
+ 	SimIndexFactory::InstallIndex();
+-	for (int c = 0; c < col_num_; ++c)
++	for (int c = 0; c < num_col_; ++c)
+ 		indexes.push_back(SimIndexFactory::GetIndex()->GetInstance());
+ 	for (auto &sim : sims)
+ 		indexes[sim.colx]->build(column_table_[sim.colx], &sim);
+@@ -38,8 +38,8 @@ void SimTable::Init(Table &table) {
+ 	initFilters();
+ // TODO: currently no need for row matrix
+ //	table_ = table;
+-	row_num_ = table.size();
+-	col_num_ = table[0].size();
++	num_row_ = table.size();
++	num_col_ = table[0].size();
+ 	cout << "start transpose !" << endl;
+ 	transpose(table, &column_table_);
+ 	cout << "transpose successfully!" << endl;
+@@ -54,6 +54,7 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
+ 		for (int id : results)
+ 			simPairs.push_back(make_pair(id, i));
+ 	}
++    cout << table1.size() << " " << table2.size() << endl;
+ 	return simPairs;
+ }
+ Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
+@@ -61,7 +62,7 @@ Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &
+ 		cerr << " No Similarity in ChooseBestIndexColumn" << endl;
+ 		return NULL;
+ 	}
+-	int least_candidates_number = row_num_ + 1;
++	int least_candidates_number = num_row_ + 1;
+ 	Similarity *least_sim = NULL;
+ 	for (auto &sim : sims) {
+ 		vector<int> candidateIDs;
+@@ -84,17 +85,18 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
+ 	Similarity *sim = ChooseBestIndexColumn(query_row, sims);
+ 	vector<int> candidateIDs;
+ 	indexes[sim->colx]->search(query_row[sim->coly], &candidateIDs);
+-	sim->isSearched = true;
++//	sim->isSearched = true; For default index, nothing has been searched
+ 
+ 	vector<RowID> result;
+-	switch (FLAGS_exp_version) {
+-		case 0 : { result = Search0_NoEstimate(query_row, sims, candidateIDs); break; }
+-		case 1 : { result = Search1_Estimate(query_row, sims, candidateIDs); break; }
+-		case 2 : { result = Search2_TuneEstimate(query_row, sims, candidateIDs); break; }
+-		default: {
+-			cerr << "Error: NonExist exp_version, exp_version is in [" << 0 << ", " << 2 << "]" << endl;
+-			result = vector<RowID>(0);
+-		}
++	if (FLAGS_exp_version == 0) {
++        result = Search0_NoEstimate(query_row, sims, candidateIDs);
++    } else if (FLAGS_exp_version == 1) {
++        result = Search1_Estimate(query_row, sims, candidateIDs);
++    } else if (FLAGS_exp_version == 2) {
++        result = Search2_TuneEstimate(query_row, sims, candidateIDs);
++    } else {
++        cerr << "Error: NonExist exp_version, exp_version is in [" << 0 << ", " << 2 << "]" << endl;
++        result = vector<RowID>(0);
+ 	}
+ 	return result;
+ }
+diff --git a/src/sim_table.h b/src/sim_table.h
+index f4caa4d..81e74c7 100644
+--- a/src/sim_table.h
++++ b/src/sim_table.h
+@@ -1,14 +1,14 @@
+-#ifndef SRC_SIM_TABLE
+-#define SRC_SIM_TABLE
++#pragma once
+ 
+ #include <iostream>
+ #include "core.h"
+ #include "filter.h"
+ #include <gflags/gflags.h>
+ #include "index/index.h"
++
+ using namespace std;
+ DECLARE_int32(exp_version);
+-typedef int RowID;
++
+ struct Estimation {
+ 	double ratio;
+ 	double cost;
+@@ -19,8 +19,8 @@ struct Estimation {
+ 	bool operator < (const Estimation &other) const;
+ };
+ class SimTable {
+-	int col_num_;
+-	int row_num_;
++	int num_col_;
++	int num_row_;
+ 	Table table_; // table_ means rowTable
+ 	Table column_table_;
+ 
+@@ -49,7 +49,6 @@ public:
+ 	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
+ };
+ 
+-#endif // SRC_SIM_TABLE
+ 
+ 
+ 
+diff --git a/test/filter_test.cc b/test/filter_test.cc
+deleted file mode 100644
+index 4e57661..0000000
+--- a/test/filter_test.cc
++++ /dev/null
+@@ -1,30 +0,0 @@
+-#include "../src/filter.h"
+-#include "../src/core.h"
+-#include "gtest/gtest.h"
+-namespace {
+-	class VerifierTest : public ::testing::Test {
+-		public:
+-			virtual void SetUp() {
+-			}
+-			Verifier verifier_;
+-	};
+-	TEST_F(VerifierTest, VerifyED) {
+-		EXPECT_TRUE(verifier_.filter(Field("sigmod"), Field("sigir"), Similarity(ED, 3)));
+-		EXPECT_EQ(3, verifier_.edit_distance());
+-
+-		EXPECT_FALSE(verifier_.filter(Field("sigir"), Field("sigmod"), Similarity(ED, 2)));
+-	}
+-
+-	TEST_F(VerifierTest, VerifyOverlap) {
+-		EXPECT_TRUE(verifier_.filter(Field("sigmod test awesome"), Field("sigmod awesome"), Similarity(JACCARD, 0.5)));
+-		EXPECT_EQ(2, verifier_.overlap());
+-
+-		EXPECT_FALSE(verifier_.filter(Field("sigir really"), Field("sigmod"), Similarity(JACCARD, 0.8)));
+-		EXPECT_EQ(0, verifier_.overlap());
+-	}
+-	int main(int argc, char **argv) {
+-		::testing::InitGoogleTest(&argc, argv);
+-		return RUN_ALL_TESTS();
+-	}
+-}
+-
+diff --git a/test/test_sim_table.cc b/test/test_sim_table.cc
+deleted file mode 100644
+index 16707ec..0000000
+--- a/test/test_sim_table.cc
++++ /dev/null
+@@ -1,180 +0,0 @@
+-#include <gflags/gflags.h>
+-#include <iostream>
+-#include <stdio.h>
+-#include <string>
+-#include "../src/common.h"
+-#include "../src/sim_table.h"
+-using namespace std;
+-
+-const int MAX_LINE_LENGTH = 10000;
+-
+-DEFINE_int32(max_base_table_size, 1000, "max tuple number in table1");
+-DEFINE_int32(max_query_table_size, 100, "max tuple number in table2");
+-
+-DIST_TYPE getType(const string &operand) {
+-	if (operand == "ED")
+-		return ED;
+-	if (operand == "JACCARD")
+-		return JACCARD;
+-	return NON_DEFINE;
+-}
+-void showSearchQueryFormat() {
+-	printf("search_query_file format : \n\
+-			SELECT * WHERE 		\n\
+-			ED(column_name, your query word) = edit_distance(integer) AND(OR) \
+-			JACCARD(column_name, your query word) = similarity(float number, range in [0, 1] \
+-			e.g. \
+-			SELECT * WHERE \
+-			ED(author, EF codd) = 1 AND \
+-			JACCARD(title, a relational view of database) = 0.9 AND \
+-			example can be viewed in dataset/sample.query\n");
+-}
+-
+-void showJoinQueryFormat() {
+-printf("Mapping_file format : 	 										\n\
+-=========================================================				\n\
+-ED 0 0 1 																\n\
+-JACCARD 1 1 0.9 														\n\
+-========================================================				\n\
+-Explaination:															\n\
+-	ED(0,0) = 1 means edit_distance between word in column 0 in table1 to word in column 0 in table2 <= 1 \n\
+-	JACCARD (1,1) = 0.9 means JACCARD_distance between string in column1 in table1 to string in column1 in table2 <= 1 \n\
+-Table_file format:														\n\
+-=========================================================				\n\
+-record00 | record01 | record02 | record03 | ....						\n\
+-record10 | record11 | record12 | record13 | ....						\n\
+-...																		\n\
+-=========================================================				\n\
+-");
+-}
+-int columnNum;
+-Table table1;
+-Table table2;
+-char line[MAX_LINE_LENGTH];
+-
+-void loadTable(string table_file_name, Table &table, int read_limit) {
+-	FILE *input_file = fopen(table_file_name.c_str(), "r");
+-	if (input_file == NULL) {
+-		cerr << "open FILE " + table_file_name + " error" << endl;
+-		throw "open FILE " + table_file_name + " error";
+-	}
+-	int column_number = -1;
+-	int rowid = 0;
+-	while (fgets(line, MAX_LINE_LENGTH, input_file)) {
+-		vector<string> strs;
+-		splitString(line, '|', strs);
+-		// Validate column_number
+-		if (column_number != -1 && (int)strs.size() != column_number) {
+-			//cerr << "Warning : table row has different column number" << " tuple_number = " << table.size() << endl;
+-			continue;
+-		}
+-		column_number = strs.size();
+-		Row row;
+-		for (auto &word : strs) {
+-			stripString(word);
+-			row.push_back(Field(word, rowid));
+-		}
+-		rowid++;
+-		table.push_back(row);
+-		if ((int)table.size() >= read_limit)
+-			break;
+-	}
+-	fclose(input_file);
+-}
+-void loadMapping(string mapping_file_name,
+-				Table &table1,
+-				Table &table2,
+-				vector<Similarity> &mappingPairs) {
+-	FILE *mapping_file = fopen(mapping_file_name.c_str(), "r");
+-	if (mapping_file == NULL) {
+-		cerr << "open FILE " + mapping_file_name + " error" << endl;
+-		throw "open FILE " + mapping_file_name + " error";
+-	}
+-	int col1, col2;
+-	double dist;
+-	char operand[100];
+-	mappingPairs.clear();
+-	while (fscanf(mapping_file, "%s %d %d %lf", operand, &col1, &col2, &dist) != EOF) {
+-		if (getType(operand) == NON_DEFINE) {
+-			cerr << "NonExist Similarity Function" << endl;
+-			break;
+-		}
+-		mappingPairs.push_back(Similarity(col1, col2, dist, getType(operand)));
+-	}
+-	for (auto sim : mappingPairs) {
+-		cout << sim.colx << " " << sim.coly << " " << sim.dist << endl;
+-	}
+-	fclose(mapping_file);
+-}
+-
+-void print(Row tuple) {
+-	for (auto field : tuple)
+-		cout << field.str << "\t|";
+-	cout << endl;
+-}
+-int main(int argc, char **argv) {
+-	int start = getTimeStamp();
+-	google::ParseCommandLineFlags(&argc, &argv, true);
+-	if (argc > 4) {
+-		printf("Usage : ./testTableJoin [mapping_file] [table_file1] [table_file2] > result");
+-		showJoinQueryFormat();
+-		// TODO : support search query format
+-		// showSearchQueryFormat();
+-	}
+-	string table1_file_name = "dataset/dblp.table";
+-	string table2_file_name = "dataset/ref.table";
+-	string mapping_file_name = "dataset/mapping_rule";
+-	vector<Similarity> mappingPairs;
+-
+-	if (argc >= 2)
+-		mapping_file_name = argv[1];
+-	if (argc >= 3)
+-		table1_file_name = argv[2];
+-	if (argc >= 4)
+-		table2_file_name = argv[3];
+-
+-	try {
+-		loadTable(table1_file_name, table1, FLAGS_max_base_table_size);
+-		loadTable(table2_file_name, table2, FLAGS_max_query_table_size);
+-		if (mapping_file_name != "")
+-			loadMapping(mapping_file_name, table1, table2, mappingPairs);
+-	} catch (char *errorMsg) {
+-		cerr << errorMsg << endl;
+-		return -1;
+-	}
+-
+-//	print(table1);
+-	SimTable sim_table;
+-	vector<pair<RowID, RowID>> sim_pairs = sim_table.Join(table1, table2, mappingPairs);
+-
+-	/*
+-	 *	Output sim_pairs
+-	 */
+-	/*
+-	freopen("result","w",stdout);
+-	cout << sim_pairs.size() << endl;
+-	for (auto pair : sim_pairs) {
+-		auto tuple1 = table1[pair.first];
+-		auto tuple2 = table2[pair.second];
+-		print(tuple1);
+-		print(tuple2);
+-		puts("");
+-	}
+-	*/
+-	cout << sim_pairs.size() << endl;
+-	int delta = getTimeStamp() - start;
+-	//printf("Your program has successfully passed all tests.\n");
+-	printf("Time="); PrintTime(delta); printf("\n");
+-	try {
+-		FILE *stat_file = fopen("stat_file.csv","ap");
+-		if (FLAGS_exp_version == 2)
+-			fprintf(stat_file, "(%d,%d)\n", delta / 1000, (int)sim_pairs.size());
+-		else
+-			fprintf(stat_file, "(%d,%d), ", delta / 1000, (int)sim_pairs.size());
+-	} catch (char *errorMsg) {
+-		cerr << errorMsg << endl;
+-		return -1;
+-	}
+-}
+-
+-

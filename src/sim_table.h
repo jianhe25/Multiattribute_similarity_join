@@ -1,14 +1,14 @@
-#ifndef SRC_SIM_TABLE
-#define SRC_SIM_TABLE
+#pragma once
 
 #include <iostream>
 #include "core.h"
 #include "filter.h"
 #include <gflags/gflags.h>
 #include "index/index.h"
+
 using namespace std;
 DECLARE_int32(exp_version);
-typedef int RowID;
+
 struct Estimation {
 	double ratio;
 	double cost;
@@ -19,8 +19,8 @@ struct Estimation {
 	bool operator < (const Estimation &other) const;
 };
 class SimTable {
-	int col_num_;
-	int row_num_;
+	int num_col_;
+	int num_row_;
 	Table table_; // table_ means rowTable
 	Table column_table_;
 
@@ -49,7 +49,6 @@ public:
 	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
 };
 
-#endif // SRC_SIM_TABLE
 
 
 

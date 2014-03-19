@@ -28,7 +28,7 @@ void SimTable::InitIndex(vector<Similarity> &sims) {
 	// Install index plugin, default is prefix_index
 	indexes.clear();
 	SimIndexFactory::InstallIndex();
-	for (int c = 0; c < col_num_; ++c)
+	for (int c = 0; c < num_col_; ++c)
 		indexes.push_back(SimIndexFactory::GetIndex()->GetInstance());
 	for (auto &sim : sims)
 		indexes[sim.colx]->build(column_table_[sim.colx], &sim);
@@ -38,8 +38,8 @@ void SimTable::Init(Table &table) {
 	initFilters();
 // TODO: currently no need for row matrix
 //	table_ = table;
-	row_num_ = table.size();
-	col_num_ = table[0].size();
+	num_row_ = table.size();
+	num_col_ = table[0].size();
 	cout << "start transpose !" << endl;
 	transpose(table, &column_table_);
 	cout << "transpose successfully!" << endl;
@@ -54,6 +54,7 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
 	}
+    cout << table1.size() << " " << table2.size() << endl;
 	return simPairs;
 }
 Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
@@ -61,7 +62,7 @@ Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &
 		cerr << " No Similarity in ChooseBestIndexColumn" << endl;
 		return NULL;
 	}
-	int least_candidates_number = row_num_ + 1;
+	int least_candidates_number = num_row_ + 1;
 	Similarity *least_sim = NULL;
 	for (auto &sim : sims) {
 		vector<int> candidateIDs;
@@ -84,17 +85,19 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 	Similarity *sim = ChooseBestIndexColumn(query_row, sims);
 	vector<int> candidateIDs;
 	indexes[sim->colx]->search(query_row[sim->coly], &candidateIDs);
-	sim->isSearched = true;
+	cout << id << " " << endl;
+//	sim->isSearched = true; For default index, nothing has been searched
 
 	vector<RowID> result;
-	switch (FLAGS_exp_version) {
-		case 0 : { result = Search0_NoEstimate(query_row, sims, candidateIDs); break; }
-		case 1 : { result = Search1_Estimate(query_row, sims, candidateIDs); break; }
-		case 2 : { result = Search2_TuneEstimate(query_row, sims, candidateIDs); break; }
-		default: {
-			cerr << "Error: NonExist exp_version, exp_version is in [" << 0 << ", " << 2 << "]" << endl;
-			result = vector<RowID>(0);
-		}
+	if (FLAGS_exp_version == 0) {
+        result = Search0_NoEstimate(query_row, sims, candidateIDs);
+    } else if (FLAGS_exp_version == 1) {
+        result = Search1_Estimate(query_row, sims, candidateIDs);
+    } else if (FLAGS_exp_version == 2) {
+        result = Search2_TuneEstimate(query_row, sims, candidateIDs);
+    } else {
+        cerr << "Error: NonExist exp_version, exp_version is in [" << 0 << ", " << 2 << "]" << endl;
+        result = vector<RowID>(0);
 	}
 	return result;
 }

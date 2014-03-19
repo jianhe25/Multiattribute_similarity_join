@@ -28,11 +28,11 @@ void stripString(string &word) {
 		word.pop_back();
 }
 
-int getTimeStamp()
+double getTimeStamp()
 {
 	struct timeval t;
 	gettimeofday(&t, NULL);
-	return t.tv_sec * 1000000 + t.tv_usec;
+	return (t.tv_sec * 1000000 + t.tv_usec) * 1e-6;
 }
 
 void PrintTime(int milli_sec)

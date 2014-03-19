@@ -1,5 +1,4 @@
-#ifndef SRC_CORE_H
-#define SRC_CORE_H
+#pragma once
 
 #include "common.h"
 #include <string>
@@ -8,10 +7,12 @@
 #include <math.h>
 using namespace std;
 
-#define GRAM_LENGTH 4
+#define GRAM_LENGTH 3
 #define SAMPLE_RATIO 0.05
 
+typedef int RowID;
 extern unordered_map<string, int> g_string_map;
+extern int g_string_max_length;
 
 int HashCode(const string &word);
 
@@ -19,11 +20,11 @@ struct Field {
 	string str;
 	int id;
 	vector<int> tokens;
-	vector<int> grams;
 	Field();
-	~Field();
+    ~Field();
 	Field(const string &_str, int id=0);
 	void GenerateGrams();
+    void GenerateTokens();
 };
 
 typedef vector<Field> Row;
@@ -48,18 +49,12 @@ struct Similarity {
 
 	Similarity() : isSearched(false) {}
 
-	int CalcOverlap(int lenS, int lenR) const {
-		if (distType == ED)
-			return max(lenS, lenR) - GRAM_LENGTH * int(dist);
-		else if (distType == JACCARD)
-			return int(ceil((lenS + lenR) * dist / (1+dist)));
-		else {
-			cerr << "Unkown DIST_TYPE in CalcOverlap" << endl;
-			return -1;
-		}
-	}
 };
 
 void print(const Table &table);
-#endif // SRC_CORE_H
 
+int CalcOverlap(int lenS, int lenR, const Similarity &sim);
+
+int CalcPrefixLength(int len, Similarity sim);
+
+pair<int,int> CalcLengthBound(int lenS, const Similarity &sim);

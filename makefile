@@ -2,29 +2,32 @@ CXX=g++-4.7
 CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -lgflags 
 # Flags passed to the preprocessor.
 CPPFLAGS = -I$(GTEST_DIR)/include
-
+EXP=4
 SRC_OBJ=./src/core.o ./src/sim_table.o ./src/common.o ./src/filter.o 
 EXP_OBJ=./src/exp/Search0_NoEstimate.o ./src/exp/Search1_Estimate.o ./src/exp/Search2_TuneEstimate.o
-INDEX_OBJ=./src/index/index.o ./src/index/prefix_index/prefix_index.o
+INDEX_OBJ=./src/index/index.o ./src/index/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
 
 COMMON_OBJ=$(SRC_OBJ) $(EXP_OBJ) $(INDEX_OBJ)
-TEST_OBJS=./test/filter_test.o
-RUN_OBJ=./test/test_sim_table.o
+TEST_OBJS=./src/test/filter_test.o
+RUN_OBJ=./src/test/test_sim_table.o
 
 RUN_ELF=./test_sim_table 
 
-TESTS=./test/filter_test
+TESTS=./src/test/filter_test
 
-tests : $(TESTS)
-	./test/filter_test
-
-./test/filter_test: $(COMMON_OBJ) ./test/filter_test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+ARGS=./dataset/mapping_rule ./dataset/dblp.table ./dataset/dblp.table --exp_version=$(EXP) --max_base_table_size=5000 --max_query_table_size=5000 --index_version=1 
 
 run: $(RUN_ELF)
-	$(RUN_ELF) ./dataset/mapping_rule ./dataset/dblp.table ./dataset/dblp.table --exp_version=2 --max_base_table_size=1000 --max_query_table_size=1000 --index_version=1
+	$(RUN_ELF) $(ARGS)
+
+tests : $(TESTS)
+	./src/test/filter_test
+
+./src/test/filter_test: $(COMMON_OBJ) ./src/test/filter_test.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+
 gdb: $(RUN_ELF)
-	gdb $(RUN_ELF)
+	gdb --args $(RUN_ELF) $(ARGS)
 
 $(RUN_ELF) : $(COMMON_OBJ) $(RUN_OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@ 
