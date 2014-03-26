@@ -1,5 +1,5 @@
 CXX=g++-4.7
-CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -I$(GTEST_DIR)/include 
+CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -I$(GTEST_DIR)/include -lgflags
 # Flags passed to the preprocessor.
 
 EXP=0
@@ -22,7 +22,7 @@ run: $(RUN_ELF)
 	$(RUN_ELF) $(ARGS)
 
 $(RUN_ELF) : $(COMMON_OBJ) $(RUN_OBJ)
-	$(CXX) $(CXXFLAGS) $^ -o $@ -lgflags
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
 
 tests : $(TESTS)
 	./src/test/filter_test
