@@ -1,8 +1,9 @@
 CXX=g++-4.7
-CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -lgflags 
+CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -I$(GTEST_DIR)/include 
 # Flags passed to the preprocessor.
-CPPFLAGS = -I$(GTEST_DIR)/include
-EXP=4
+
+EXP=0
+
 SRC_OBJ=./src/core.o ./src/sim_table.o ./src/common.o ./src/filter.o 
 EXP_OBJ=./src/exp/Search0_NoEstimate.o ./src/exp/Search1_Estimate.o ./src/exp/Search2_TuneEstimate.o
 INDEX_OBJ=./src/index/index.o ./src/index/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
@@ -20,20 +21,21 @@ ARGS=./dataset/mapping_rule ./dataset/dblp.table ./dataset/dblp.table --exp_vers
 run: $(RUN_ELF)
 	$(RUN_ELF) $(ARGS)
 
+$(RUN_ELF) : $(COMMON_OBJ) $(RUN_OBJ)
+	$(CXX) $(CXXFLAGS) $^ -o $@ -lgflags
+
 tests : $(TESTS)
 	./src/test/filter_test
 
 ./src/test/filter_test: $(COMMON_OBJ) ./src/test/filter_test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ -lgflags
 
 gdb: $(RUN_ELF)
 	gdb --args $(RUN_ELF) $(ARGS)
 
-$(RUN_ELF) : $(COMMON_OBJ) $(RUN_OBJ)
-	$(CXX) $(CXXFLAGS) $^ -o $@ 
 
 clean:
-	rm $(COMMON_OBJ) $(TEST_OBJS) $(RUN_OBJ) $(RUN_ELF)
+	rm -f $(COMMON_OBJ) $(TEST_OBJS) $(RUN_OBJ) $(RUN_ELF)
 
 submit:
 	make clean

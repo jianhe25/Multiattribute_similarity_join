@@ -23,6 +23,7 @@ class SimTable {
 	int num_row_;
 	Table table_; // table_ means rowTable
 	Table column_table_;
+    Verifier verifier_;
 
 	Estimation Estimate(const Column &column,
 			const Field& query,
@@ -40,6 +41,7 @@ class SimTable {
 	vector<SimIndex*> indexes;
 	Similarity *ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
 	void InitIndex(vector<Similarity> &sims);
+
 public:
 	SimTable();
 	~SimTable();

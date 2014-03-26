@@ -14,7 +14,6 @@ public:
 	unordered_map<int, vector<FieldID> > index_;
 
 	void CalcTF(const vector<Field> &fields, Similarity *sim);
-	int CalcPrefixLength(int size, Similarity *sim);
 
 	struct CompareTokenByTF {
 		const PrefixIndex& prefixindex;
@@ -37,5 +36,8 @@ public:
 	void build(vector<Field> &fields, Similarity *sim);
 	void search(Field &query, vector<int> *matchIDs);
 	PrefixIndex *GetInstance();
+
+    double mergeListTime_;
+    double verifyTime_;
 };
 

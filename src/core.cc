@@ -1,5 +1,6 @@
 #include "core.h"
 #include <algorithm>
+#include <cassert>
 using namespace std;
 
 unordered_map<string, int> g_string_map;
@@ -70,16 +71,23 @@ int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
 		return -1;
 	}
 }
-
-int CalcPrefixLength(int len, Similarity sim) {
-	if (sim.distType == ED) {
-		//cout << "prefixLength = " << min(len, GRAM_LENGTH * int(sim.dist) + 1) << endl;
-		return min(len, GRAM_LENGTH * int(sim.dist) + 1);
-	} else if (sim.distType == JACCARD) {
-		return min(len, len - int(ceil(len * sim.dist / (1.0 + sim.dist))) + 1);
+int CalcPrefixLength(int size, Similarity sim) {
+	double tau = sim.dist;
+	int common = -1;
+	if (sim.distType == JACCARD)
+		common = size * tau / (1.0 + tau);
+	else if (sim.distType == COSINE)
+		common = sqrt(double(size)) * tau;
+	else if (sim.distType == DICE)
+		common = size * tau / 2.0;
+	else if (sim.distType == ED)
+		common = max(0, size - (int)(tau * GRAM_LENGTH));
+	else {
+        cerr << "Unkown DIST_TYPE in CalcPrefixLength" << endl;
+		assert(0);
+		return -1;
 	}
-	cerr << "Unkown DIST_TYPE in CalcPrefixLength" << endl;
-	return -1;
+	return size - max(common-1, 0);
 }
 
 // TODO: Precompute Bound

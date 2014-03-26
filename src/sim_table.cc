@@ -9,20 +9,26 @@ DEFINE_int32(exp_version, 0, "experiment version");
 Estimation::Estimation(double _ratio, double _cost, Filter *_filter, Similarity *_sim) :
 	ratio(_ratio), cost(_cost), filter(_filter), sim(_sim) {
 }
+
 bool Estimation::operator > (const Estimation &other) const {
 	return this->ratio * other.cost < this->cost * other.ratio;
 	// aka. ratio / cost < other.ratio / other.cost
 }
+
 bool Estimation::operator < (const Estimation &other) const {
 	return !(*this > other);
 }
+
 SimTable::SimTable() {
 }
+
 SimTable::~SimTable() {
 }
+
 SimTable::SimTable(Table &table) {
 	Init(table);
 }
+
 void SimTable::InitIndex(vector<Similarity> &sims) {
 	cout << "Start init index" << endl;
 	// Install index plugin, default is prefix_index
@@ -44,6 +50,7 @@ void SimTable::Init(Table &table) {
 	transpose(table, &column_table_);
 	cout << "transpose successfully!" << endl;
 }
+
 vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<Similarity> &sims) {
 	Init(table1);
 	InitIndex(sims);
@@ -54,10 +61,13 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
 	}
+    cout << "Join time " << getTimeStamp() - startJoinTime << endl;
     cout << table1.size() << " " << table2.size() << endl;
 	return simPairs;
 }
+
 Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
+    return &sims[0];
 	if (sims.empty()) {
 		cerr << " No Similarity in ChooseBestIndexColumn" << endl;
 		return NULL;
@@ -66,7 +76,7 @@ Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &
 	Similarity *least_sim = NULL;
 	for (auto &sim : sims) {
 		vector<int> candidateIDs;
-		int startTime = getTimeStamp();
+		double startTime = getTimeStamp();
 		// TODO: change index search to estimate
 		indexes[sim.colx]->search(query_row[sim.coly], &candidateIDs);
 #ifdef STAT
@@ -81,12 +91,17 @@ Similarity *SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &
 //	cout << "choose column " << least_sim.colx << endl;
 	return least_sim;
 }
+
 vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
-	Similarity *sim = ChooseBestIndexColumn(query_row, sims);
+    Similarity *sim = ChooseBestIndexColumn(query_row, sims);
+    //Similarity *sim = &sims[0];
 	vector<int> candidateIDs;
 	indexes[sim->colx]->search(query_row[sim->coly], &candidateIDs);
-	cout << id << " " << endl;
 //	sim->isSearched = true; For default index, nothing has been searched
+
+    cout << query_row[0].id << endl << " candidateIDs = ";
+    for (int id : candidateIDs) cout << " " << id;
+    cout << endl;
 
 	vector<RowID> result;
 	if (FLAGS_exp_version == 0) {
@@ -101,6 +116,7 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 	}
 	return result;
 }
+
 Estimation SimTable::Estimate(const Column &column,
 							const Field &query,
 							Similarity &sim,

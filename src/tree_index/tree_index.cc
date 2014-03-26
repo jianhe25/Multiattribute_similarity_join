@@ -1,7 +1,7 @@
 #include "tree_index.h"
 #include <cassert>
 
-#define PREFIX_BUCKET_SIZE 1000
+#define PREFIX_BUCKET_SIZE 100
 
 int Node::g_node_id = 0;
 Node::Node(int max_length) {
@@ -67,6 +67,8 @@ void TreeIndex::BuildIndex(Node *node,
 
 	// TODO: add estimation logic here
 
+    vector<int> lengthCounter(g_string_max_length + 1, 0);
+    vector<int> hitCounter(g_string_max_length + 1, 0);
 	vector<unordered_map<int, vector<int>>> id_set_per_length;
 	id_set_per_length.resize(g_string_max_length + 1);
 	for (int id : ids1) {
@@ -75,10 +77,23 @@ void TreeIndex::BuildIndex(Node *node,
 		for (int i = 0; i < prefix_length; ++i) {
 			int bucket_id = tokens[i] % PREFIX_BUCKET_SIZE;
 			vector<int> &id_set = id_set_per_length[tokens.size()][bucket_id];
-			if (id_set.empty() || id_set.back() != id)
+			if (id_set.empty() || id_set.back() != id) {
 				id_set.push_back(id);
+                hitCounter[tokens.size()] += 1;
+            }
 		}
+        lengthCounter[tokens.size()] += prefix_length;
 	}
+    if (depth == 0) {
+        for (int len = 0; len < (int)node->prefixMaps.size(); ++len)
+            if (!id_set_per_length[len].empty()) {
+                cout << "======================== len = " << len << " count = " << lengthCounter[len]
+                     << " hit = " << hitCounter[len] << " prefix_len = " << CalcPrefixLength(len, sim) << " ==============" << endl;
+                //for (const auto& kv : id_set_per_length[len]) {
+                //cout << kv.first << ", id_set_size = " << kv.second.size() << endl;
+                //}
+            }
+    }
 
 	for (int len = 0; len < (int)node->prefixMaps.size(); ++len)
 	if (!id_set_per_length[len].empty()) {
@@ -87,9 +102,9 @@ void TreeIndex::BuildIndex(Node *node,
 		for (const auto& kv : id_set_per_length[len]) {
 			prefix_map[kv.first] = new Node(g_string_max_length);
 			BuildIndex(prefix_map[kv.first],
-					sims,
-					kv.second,
-					depth+1);
+                       sims,
+                       kv.second,
+                       depth+1);
 		}
 	}
 }
@@ -139,6 +154,7 @@ void TreeIndex::TreeSearch(Node *node, const Row &row, int depth) {
 				continue;
 			if (visited[bucket_id])
 				continue;
+            visited[bucket_id] = true;
 			Node *child = prefix_map[bucket_id];
 			this->TreeSearch(child, row, depth + 1);
 		}

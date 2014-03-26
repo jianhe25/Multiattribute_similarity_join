@@ -55,16 +55,16 @@ bool Verifier::VerifyOverlapToken(const vector<int> tokensA, const vector<int> t
 }
 
 bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
-	bool result = false;
+	bool isMatch = false;
 	if (sim.distType == ED) {
-		result = VerifyEditDistance(a.str, b.str, sim.dist);
-//		cout << "Verify " << a.str << "----------" << b.str << " " << result << " ED = " << edit_distance_ << endl;
+		isMatch = VerifyEditDistance(a.str, b.str, sim.dist);
+        //cout << "Verify " << a.str << "----------" << b.str << " " << result << " ED = " << edit_distance_ << endl;
 	} else {
 		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
-		result = VerifyOverlapToken(a.tokens, b.tokens, overlap);
+		isMatch = VerifyOverlapToken(a.tokens, b.tokens, overlap);
 		//cout << "Verify " << a.str << "----------" << b.str << " " << result << " o = " << overlap << endl;
 	}
-	return result;
+	return isMatch;
 }
 
 string LengthFilter::EchoType() {

@@ -9,24 +9,6 @@ void PrefixIndex::CalcTF(const vector<Field> &fields, Similarity *sim) {
 			token_counter_[token]++;
 	}
 }
-int PrefixIndex::CalcPrefixLength(int size, Similarity *sim) {
-	double tau = sim->dist;
-	int common = -1;
-	if (sim->distType == JACCARD)
-		common = size * tau / (1.0 + tau);
-	else if (sim->distType == COSINE)
-		common = sqrt(double(size)) * tau;
-	else if (sim->distType == DICE)
-		common = size * tau / 2.0;
-	else if (sim->distType == ED)
-		common = max(0, size - (int)(tau * GRAM_LENGTH));
-	else {
-		cerr << "Non exist Similarity type when CalcPrefixLength\n";
-		assert(0);
-		return -1;
-	}
-	return size - max(common-1, 0);
-}
 void PrefixIndex::build(vector<Field> &fields, Similarity *sim) {
 	sim_ = sim;
 	fields_ = &fields;
@@ -36,6 +18,8 @@ void PrefixIndex::build(vector<Field> &fields, Similarity *sim) {
 				//field.GenerateGrams();
 			//}
 	//}
+
+    // TODO: Put TF calculation and sort before build
 	CalcTF(fields, sim);
 	for (auto &field : fields) {
 		vector<int> &tokens = field.tokens;
@@ -43,7 +27,7 @@ void PrefixIndex::build(vector<Field> &fields, Similarity *sim) {
 	}
 	for (auto &field : fields) {
 		vector<int> &tokens = field.tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		int prefixlength = CalcPrefixLength(tokens.size(), *sim);
 		for (int i = 0; i < prefixlength; ++i)
 			index_[tokens[i]].push_back(field.id);
 	}
@@ -51,14 +35,17 @@ void PrefixIndex::build(vector<Field> &fields, Similarity *sim) {
 void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
 	vector<int> &tokens = query.tokens;
 	sort(tokens.begin(), tokens.end(), CompareTokenByTF(*this));
-	int prefixlength = CalcPrefixLength(tokens.size(), sim_);
+	int prefixlength = CalcPrefixLength(tokens.size(), *sim_);
 	unordered_set<FieldID> candidates;
 	/*
 	 * prefixlength == 0 means no prefix can be used to filter candidates
 	 */
 	/* TODO: PrefixIndex is buggy, preset prefixlength = 0 would get more matchIDs than only use prefix. */
 	//prefixlength = 0;
-	if (prefixlength == 0) {
+	double time = getTimeStamp();
+
+    int num_candidates_scanned = 0;
+    if (prefixlength == 0) {
 		for (int fieldid = 0; fieldid < int(fields_->size()); ++fieldid)
 			candidates.insert(fieldid);
 	} else {
@@ -67,13 +54,19 @@ void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
 				for (int fieldid: index_[ tokens[i] ]) {
 					candidates.insert(fieldid);
 				}
+            num_candidates_scanned += index_[ tokens[i] ].size();
 		}
 	}
+    mergeListTime_ += getTimeStamp() - time;
+    //cout << "MergeList time " << mergeListTime_ << " Scanned: " << num_candidates_scanned << " Verified: " << candidates.size();
+    time = getTimeStamp();
 	Verifier *verifier = new Verifier();
 	for (auto fieldid : candidates) {
 		if (verifier->filter(query, (*fields_)[fieldid], *sim_))
 			matchIDs->push_back(fieldid);
 	}
+    verifyTime_ += getTimeStamp() - time;
+    //cout << ", Verify time " << verifyTime_ << endl;
 }
 PrefixIndex* PrefixIndex::GetInstance() {
 	return new PrefixIndex();
