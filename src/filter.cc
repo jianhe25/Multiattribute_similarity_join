@@ -62,7 +62,7 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 		isMatch = VerifyEditDistance(a.str, b.str, sim.dist);
 		//if (a.id == b.id)
 			//cout << "VerifyED " << a.str << "----------" << b.str << " match=" << isMatch << " ED = " << edit_distance_ << endl;
-	} else{
+	} else {
 		int needOverlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
 		isMatch = VerifyOverlapToken(a.tokens, b.tokens, needOverlap);
 		//if (a.id == b.id) {
@@ -77,6 +77,7 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 string LengthFilter::Type() {
 	return "LengthFilter";
 }
+
 bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool result = false;
 	if (sim.distType == ED)

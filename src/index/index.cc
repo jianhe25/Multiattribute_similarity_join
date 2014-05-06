@@ -6,7 +6,12 @@ using namespace std;
 DEFINE_int32(index_version, 0, "index version, 0 means no index at all");
 
 unordered_set<int> SimIndex::getPrefixList(Field &query) {
-    return unordered_set<int>();
+	print_debug("Error: call getPrefixList in base class SimIndex");
+	return unordered_set<int>();
+}
+int SimIndex::calcPrefixListSize(Field &query) {
+	print_debug("Error: we should never call calcPrefixListSize in base class SimIndex");
+	return 0;
 }
 
 SimIndex* SimIndexFactory::g_index = NULL;
