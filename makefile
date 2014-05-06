@@ -36,7 +36,7 @@ gdb: $(RUN_ELF)
 
 
 clean:
-	rm -f $(COMMON_OBJ) $(TEST_OBJS) $(RUN_OBJ) $(RUN_ELF)
+	rm -f $(COMMON_OBJ) $(TEST_OBJS) $(RUN_OBJ) $(RUN_ELF) *.o *.a
 
 submit:
 	make clean
