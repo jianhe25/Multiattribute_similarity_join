@@ -5,15 +5,15 @@
 #include <unordered_set>
 using namespace std;
 
-/* PrefixIndex is buggy, preset prefixlength = 0 would get more matchIDs than only use prefix. */
 class PrefixIndex : public SimIndex {
 public:
 	typedef int Token;
 	typedef int FieldID;
 	unordered_map<int, int> token_counter_;
 	unordered_map<int, vector<FieldID> > index_;
+    Verifier verifier_;
 
-	void CalcTF(const vector<Field> &fields, Similarity *sim);
+	void CalcTF(const vector<Field*> &fields, Similarity *sim);
 
 	struct CompareTokenByTF {
 		const PrefixIndex& prefixindex;
@@ -33,7 +33,11 @@ public:
 			}
 		}
 	};
-	void build(vector<Field> &fields, Similarity *sim);
+	void build(vector<Field*> &fields1, vector<Field*> &fields2, Similarity *sim);
+
+    unordered_set<int> getPrefixList(Field &query);
+	int calcPrefixListSize(Field &query);
+
 	void search(Field &query, vector<int> *matchIDs);
 	PrefixIndex *GetInstance();
 

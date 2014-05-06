@@ -22,7 +22,7 @@ DIST_TYPE getType(const string &operand) {
 	return NON_DEFINE;
 }
 void showSearchQueryFormat() {
-	printf("search_query_file format : \n\
+	print_debug("search_query_file format : \n\
 			SELECT * WHERE 		\n\
 			ED(column_name, your query word) = edit_distance(integer) AND(OR) \
 			JACCARD(column_name, your query word) = similarity(float number, range in [0, 1] \
@@ -34,7 +34,7 @@ void showSearchQueryFormat() {
 }
 
 void showJoinQueryFormat() {
-printf("Mapping_file format : 	 										\n\
+print_debug("Mapping_file format : 	 										\n\
 =========================================================				\n\
 ED 0 0 1 																\n\
 JACCARD 1 1 0.9 														\n\
@@ -119,26 +119,28 @@ void print(Row tuple) {
 }
 void GenerateTokensOrGram(const vector<Similarity> &mapping_pairs) {
 	// GenerateTokens or GenerateGrams
-	for (const auto &sim : mapping_pairs) {
-		for (unsigned i = 0; i < table1.size(); ++i) {
-			if (sim.distType == JACCARD)
-				table1[i][ sim.colx ].GenerateTokens();
-			else
-				table1[i][ sim.colx ].GenerateGrams();
-		}
-		for (unsigned i = 0; i < table2.size(); ++i) {
-			if (sim.distType == JACCARD)
-				table2[i][ sim.coly ].GenerateTokens();
-			else
-				table2[i][ sim.coly ].GenerateGrams();
-		}
-	}
+    for (unsigned i = 0; i < table1.size(); ++i) {
+        for (const auto &sim : mapping_pairs) {
+            if (sim.distType == JACCARD)
+                table1[i][ sim.colx ].GenerateTokens();
+            else
+                table1[i][ sim.colx ].GenerateGrams();
+        }
+    }
+    for (unsigned i = 0; i < table2.size(); ++i) {
+        for (const auto &sim : mapping_pairs) {
+            if (sim.distType == JACCARD)
+                table2[i][ sim.coly ].GenerateTokens();
+            else
+                table2[i][ sim.coly ].GenerateGrams();
+        }
+    }
 }
 int main(int argc, char **argv) {
 	google::ParseCommandLineFlags(&argc, &argv, true);
     cout << FLAGS_exp_version << endl;
 	if (argc > 4) {
-		printf("Usage : ./testTableJoin [mapping_file] [table_file1] [table_file2] > result");
+		print_debug("Usage : ./testTableJoin [mapping_file] [table_file1] [table_file2] > result");
 		showJoinQueryFormat();
 		// TODO : support search query format
 		// showSearchQueryFormat();
@@ -165,26 +167,25 @@ int main(int argc, char **argv) {
 		cerr << errorMsg << endl;
 		return -1;
 	}
-	printf("Load table time: %.3fs\n", getTimeStamp() - time);
+	print_debug("Load table time: %.3fs\n", getTimeStamp() - time);
 	time = getTimeStamp();
 	GenerateTokensOrGram(mapping_pairs);
-	printf("GenerateTokensOrGram time: %.3fs\n", getTimeStamp() - time);
+	print_debug("GenerateTokensOrGram time: %.3fs\n", getTimeStamp() - time);
 	time = getTimeStamp();
 
     vector<pair<RowID, RowID>> sim_pairs;
 	if (FLAGS_exp_version == 4) {
-        TreeIndex tree_index(0);
+        TreeIndex tree_index;
         sim_pairs = tree_index.Join(table1, table2, mapping_pairs);
     } else {
-        SimTable sim_table;
-        sim_pairs = sim_table.Join(table1, table2, mapping_pairs);
+        SimTable *sim_table = new SimTable();;
+        sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
     }
 
 	/*
 	 *	Output sim_pairs
 	 */
-
-	printf("sim_pairs.size() = %d\n", sim_pairs.size());
+	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
 	//freopen("result","w",stdout);
 	//for (auto pair : sim_pairs) {
 		//auto tuple1 = table1[pair.first];
@@ -198,8 +199,6 @@ int main(int argc, char **argv) {
 	//freopen("/dev/stdout", "w", stdout);
 
 	double delta = getTimeStamp() - time;
-	//printf("Your program has successfully passed all tests.\n");
-	printf("Join time: %.2fs\n", getTimeStamp() - time);
 	try {
 		FILE *stat_file = fopen("stat_file.csv","ap");
         fprintf(stat_file, "exp_version %d : (%.2f, %d)\n", FLAGS_exp_version, delta, (int)sim_pairs.size());

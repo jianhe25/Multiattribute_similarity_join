@@ -10,7 +10,7 @@ using namespace std;
 class Filter {
 public:
 	virtual bool filter(const Field &a, const Field &b, const Similarity &sim) = 0;
-	virtual string EchoType();
+	virtual string Type();
 };
 
 class Verifier : public Filter {
@@ -19,7 +19,7 @@ class Verifier : public Filter {
 	int edit_distance_;
 	int overlap_;
 public:
-	string EchoType();
+	string Type();
 	bool filter(const Field &a, const Field &b, const Similarity &sim);
 	int edit_distance();
 	int overlap();
@@ -27,13 +27,13 @@ public:
 
 class LengthFilter : public Filter {
 public:
-	string EchoType();
+	string Type();
 	bool filter(const Field &a, const Field &b, const Similarity &sim);
 };
 
 class ContentFilter : public Filter {
 public:
-	string EchoType();
+	string Type();
 	bool filter(const Field &a, const Field &b, const Similarity &sim);
 };
 

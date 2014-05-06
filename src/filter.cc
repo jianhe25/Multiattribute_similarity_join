@@ -2,10 +2,10 @@
 #include <algorithm>
 #include <iostream>
 
-string Filter::EchoType() {
+string Filter::Type() {
 	return "NULL";
 }
-string Verifier::EchoType() {
+string Verifier::Type() {
 	return "Verifier";
 }
 int Verifier::edit_distance() {
@@ -15,7 +15,9 @@ int Verifier::overlap() {
 	return overlap_;
 }
 bool Verifier::VerifyEditDistance(const string &a, const string &b, int dist) {
-	const int LIMIT = dist + 1;
+	int LIMIT = dist + 1;
+    //cout << "a = " << a << endl;
+    //cout << "b = " << b << endl;
 	vector<vector<int>> dp(a.length()+1, vector<int>(b.length()+1, LIMIT));
 	dp[0][0] = 0;
 	for (int i = 0; i < (int)a.length(); ++i) {
@@ -58,16 +60,21 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool isMatch = false;
 	if (sim.distType == ED) {
 		isMatch = VerifyEditDistance(a.str, b.str, sim.dist);
-        //cout << "Verify " << a.str << "----------" << b.str << " " << result << " ED = " << edit_distance_ << endl;
-	} else {
-		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
-		isMatch = VerifyOverlapToken(a.tokens, b.tokens, overlap);
-		//cout << "Verify " << a.str << "----------" << b.str << " " << result << " o = " << overlap << endl;
+		//if (a.id == b.id)
+			//cout << "VerifyED " << a.str << "----------" << b.str << " match=" << isMatch << " ED = " << edit_distance_ << endl;
+	} else{
+		int needOverlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
+		isMatch = VerifyOverlapToken(a.tokens, b.tokens, needOverlap);
+		//if (a.id == b.id) {
+			//for (int id : a.tokens) cout << id << " "; cout << endl;
+			//for (int id : b.tokens) cout << id << " "; cout << endl;
+			//cout << "VerifyOverlap " << a.str << "----------" << b.str << " match=" << isMatch << " o = " << needOverlap << " " << a.tokens.size() << " " << b.tokens.size() << endl;
+		//}
 	}
 	return isMatch;
 }
 
-string LengthFilter::EchoType() {
+string LengthFilter::Type() {
 	return "LengthFilter";
 }
 bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim) {
@@ -82,7 +89,7 @@ bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim)
 	return result;
 }
 
-string ContentFilter::EchoType() {
+string ContentFilter::Type() {
 	return "ContentFilter";
 }
 bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim) {

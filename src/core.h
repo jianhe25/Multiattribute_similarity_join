@@ -55,6 +55,8 @@ void print(const Table &table);
 
 int CalcOverlap(int lenS, int lenR, const Similarity &sim);
 
-int CalcPrefixLength(int len, Similarity sim);
+int CalcPrefixLength(int len, const Similarity &sim);
 
 pair<int,int> CalcLengthBound(int lenS, const Similarity &sim);
+
+void printRow(const vector<Field> &row);

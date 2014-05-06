@@ -39,6 +39,8 @@ void Field::GenerateGrams() {
 	}
 	if (str.length() < GRAM_LENGTH)
 		tokens.push_back(HashCode(str));
+	// TODO: to sort by TF in the future
+	sort(tokens.begin(), tokens.end());
     g_string_max_length = max(g_string_max_length, (int)tokens.size());
 }
 Field::~Field() {
@@ -71,7 +73,7 @@ int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
 		return -1;
 	}
 }
-int CalcPrefixLength(int size, Similarity sim) {
+int CalcPrefixLength(int size, const Similarity& sim) {
 	double tau = sim.dist;
 	int common = -1;
 	if (sim.distType == JACCARD)
@@ -100,5 +102,11 @@ pair<int,int> CalcLengthBound(int lenS, const Similarity &sim) {
 	}
 	cerr << "Unkown DIST_TYPE in CalcLengthBound" << endl;
 	return make_pair(-1, -1);
+}
+
+void printRow(const vector<Field> &row) {
+    for (auto field : row)
+        cout << field.str << " ";
+    cout << endl;
 }
 

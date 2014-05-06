@@ -9,40 +9,27 @@ vector<RowID> SimTable::Search2_TuneEstimate(const Row &query_row,
 	for (auto &sim : sims) {
 		if (sim.isSearched) continue;
 		for (auto filter : g_filters) {
-			estimations.push_back(Estimate(column_table_[sim.colx], query_row[sim.coly],
+			estimations.push_back(Estimate(column_table1_[sim.colx], query_row[sim.coly],
 				sim, candidateIDs, filter));
 		}
 	}
-
 	sort(estimations.begin(), estimations.end());
 
 	/*
 	 * First round filter
 	 */
-	for (auto &estimation : estimations) {
-		auto sim = estimation.sim;
-		Column &column = column_table_[sim->colx];
-		vector<int> ids;
-		for (int id : candidateIDs) {
-			if (estimation.filter->filter(column[id], query_row[sim->coly], *sim))
-				ids.push_back(id);
+	vector<int> result_ids;
+	for (int id : candidateIDs) {
+		bool is_same = true;
+		for (auto &estimation : estimations) {
+			const auto &sim = estimation.sim;
+			if (!estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
+				is_same = false;
+				break;
+			}
 		}
-		candidateIDs = ids;
+		if (is_same)
+			result_ids.push_back(id);
 	}
-	/*
-	 * Verify candidates
-	Verifier *verifier = new Verifier();
-	for (auto &estimation : estimations)
-	if (estimation.filter->EchoType() != "Verifier") {
-		auto sim = estimation.sim;
-		Column &column = column_table_[sim->colx];
-		vector<int> ids;
-		for (int id : candidateIDs) {
-			if (verifier->filter(column[id], query_row[sim->coly], *sim))
-				ids.push_back(id);
-		}
-		candidateIDs = ids;
-	}
-	*/
-	return candidateIDs;
+	return result_ids;
 }

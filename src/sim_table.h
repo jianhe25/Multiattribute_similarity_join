@@ -21,15 +21,16 @@ struct Estimation {
 class SimTable {
 	int num_col_;
 	int num_row_;
-	Table table_; // table_ means rowTable
-	Table column_table_;
+	Table *tablePtr_; // table_ means rowTable
+	vector<vector<Field*>> column_table1_;
+	vector<vector<Field*>> column_table2_;
     Verifier verifier_;
 
-	Estimation Estimate(const Column &column,
-			const Field& query,
-			Similarity &sim,
-			const vector<int> &ids,
-			Filter *filter);
+	Estimation Estimate(const vector<Field*> &column,
+            const Field& query,
+            Similarity &sim,
+            const vector<int> &ids,
+            Filter *filter);
 	int startJoinTime;
 	/*
 	 * Following method are for experiment purpose, it's flexible component
@@ -45,8 +46,7 @@ class SimTable {
 public:
 	SimTable();
 	~SimTable();
-	SimTable(Table &table);
-	void Init(Table &table);
+	void Init(Table &table1, Table &table2);
 	vector<pair<RowID, RowID>> Join(Table &table1, Table &table2, vector<Similarity> &sims);
 	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
 };

@@ -24,7 +24,7 @@ void splitString(const char *s, char delimiter, vector<string> &container)
 }
 
 void stripString(string &word) {
-	while (word.back() == ' ' || word.back() == '\t' || word.back() == '\n' || word.back() == '\r')
+	while (!word.empty() && (word.back() == ' ' || word.back() == '\t' || word.back() == '\n' || word.back() == '\r'))
 		word.pop_back();
 }
 
@@ -51,5 +51,4 @@ void PrintTime(int milli_sec)
 	if(milli_seconds) {if(!first) printf(":"); printf("%dms", milli_seconds); first=0;}
 	printf("]");
 }
-
 

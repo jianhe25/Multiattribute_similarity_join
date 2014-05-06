@@ -6,25 +6,30 @@ vector<RowID> SimTable::Search1_Estimate(const Row &query_row,
 										 vector<Similarity> &sims,
 										 vector<int> &candidateIDs) {
 	vector<Estimation> estimations;
-	Verifier *verifier = new Verifier();
 	for (auto &sim : sims) {
-		estimations.push_back(Estimate(column_table_[sim.colx], query_row[sim.coly],
-			sim, candidateIDs, verifier));
+		estimations.push_back(Estimate(column_table1_[sim.colx], query_row[sim.coly],
+			sim, candidateIDs, &verifier_));
 	}
 	sort(estimations.begin(), estimations.end());
-
 	/*
 	 * First round filter
 	 */
-	for (auto &estimation : estimations) {
-		auto sim = estimation.sim;
-		Column &column = column_table_[sim->colx];
-		vector<int> ids;
-		for (int id : candidateIDs) {
-			if (estimation.filter->filter(column[id], query_row[sim->coly], *sim))
-				ids.push_back(id);
+    //cout << "Before Estimation " << query_row[0].id << endl;
+    //for (int id : candidateIDs) cout << id << " "; cout << endl;
+
+
+	vector<int> result_ids;
+	for (int id : candidateIDs) {
+		bool is_same = true;
+		for (auto &estimation : estimations) {
+			const auto &sim = estimation.sim;
+			if (!estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
+				is_same = false;
+				break;
+			}
 		}
-		candidateIDs = ids;
+		if (is_same)
+			result_ids.push_back(id);
 	}
-	return candidateIDs;
+	return result_ids;
 }

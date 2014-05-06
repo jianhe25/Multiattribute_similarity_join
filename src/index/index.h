@@ -6,19 +6,23 @@
 #include "../filter.h"
 #include <vector>
 #include <gflags/gflags.h>
+#include <unordered_set>
 using namespace std;
 
 DECLARE_int32(index_version);
 class SimIndex {
 public:
 	Similarity *sim_;
-	vector<Field> *fields_;
+	vector<Field*> *fields_;
 
-	virtual void build(vector<Field> &fields, Similarity *sim) = 0;
+	virtual void build(vector<Field*> &fields1, vector<Field*> &fields2, Similarity *sim) = 0;
 
 	virtual void search(Field &query, vector<int> *matchIDs) = 0;
 
 	virtual SimIndex *GetInstance() = 0;
+
+    virtual unordered_set<int> getPrefixList(Field &query);
+	virtual int calcPrefixListSize(Field &query);
 };
 class SimIndexFactory {
 public:
@@ -31,7 +35,7 @@ public:
 
 class EmptyIndex : public SimIndex {
 
-	void build(vector<Field> &fields, Similarity *sim);
+	void build(vector<Field*> &fields1, vector<Field*> &fields2, Similarity *sim);
 
 	void search(Field &query, vector<int> *matchIDs);
 
