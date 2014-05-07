@@ -25,6 +25,12 @@ public:
 	int overlap();
 };
 
+class PrefixFilter : public Filter {
+public:
+	string Type();
+	bool filter(const Field &a, const Field &b, const Similarity &sim);
+};
+
 class LengthFilter : public Filter {
 public:
 	string Type();

@@ -31,7 +31,7 @@ class SimTable {
             Similarity &sim,
             const vector<int> &ids,
             Filter *filter);
-	int startJoinTime;
+	int startJoinTime_;
 	/*
 	 * Following method are for experiment purpose, it's flexible component
 	 */

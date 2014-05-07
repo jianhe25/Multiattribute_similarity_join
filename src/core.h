@@ -40,6 +40,7 @@ struct Similarity {
 	double dist;
 	DIST_TYPE distType;
 	bool isSearched;
+	int num_estimated_candidates;
 
 	Similarity(DIST_TYPE _distType, double _dist) :
 		colx(0), coly(0), dist(_dist), distType(_distType), isSearched(false) {}

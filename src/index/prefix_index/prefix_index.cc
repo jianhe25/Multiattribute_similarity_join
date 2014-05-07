@@ -179,7 +179,7 @@ void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
 	}
     debugCandidatesNum += candidates.size();
     debugMatchidNum += matchIDs->size();
-    print_debug("#candidates: %d %d %d %d\n", int(candidates.size()), int(matchIDs->size()), debugCandidatesNum, debugMatchidNum);
+	//print_debug("#candidates: %d %d %d %d\n", int(candidates.size()), int(matchIDs->size()), debugCandidatesNum, debugMatchidNum);
     verifyTime_ += getTimeStamp() - time;
 }
 PrefixIndex* PrefixIndex::GetInstance() {
