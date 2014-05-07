@@ -108,8 +108,8 @@ bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim
 vector<Filter*> g_filters;
 void initFilters() {
 	g_filters.clear();
-	registerFilter(new Verifier());
 	registerFilter(new LengthFilter());
+	registerFilter(new Verifier());
 }
 void registerFilter(Filter *filter) {
 	g_filters.push_back(filter);

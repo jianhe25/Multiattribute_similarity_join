@@ -17,12 +17,16 @@ Estimation::Estimation(double _ratio, double _cost, Filter *_filter, Similarity 
 }
 
 bool Estimation::operator > (const Estimation &other) const {
-	return this->ratio * other.cost < this->cost * other.ratio;
-	// aka. ratio / cost < other.ratio / other.cost
+	return !(*this < other);
 }
 
 bool Estimation::operator < (const Estimation &other) const {
-	return !(*this > other);
+	if (this->ratio == 0 && other.ratio == 0) {
+		//print_debug("both 0\n");
+		return this->cost < other.cost;
+	}
+	return this->ratio * other.cost > this->cost * other.ratio;
+	// aka. ratio / cost > other.ratio / other.cost
 }
 
 SimTable::SimTable() {
@@ -121,7 +125,9 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
     double time = getTimeStamp();
 
 #ifdef INTERSECT_PREFIX_LIST
-	//sort(sims.begin(), sims.end(), compareSimSize);
+	for (auto &sim : sims)
+		sim.num_estimated_candidates = indexes[sim.colx]->calcPrefixListSize(query_row[sim.coly]);
+	sort(sims.begin(), sims.end(), compareSimSize);
 	unordered_set<int> new_candidates;
 	for (int i = 0; i < int(2); ++i) {
 		unordered_set<int> candidates = std::move(indexes[sims[i].colx]->getPrefixList(query_row[sims[i].coly]));
@@ -134,12 +140,14 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 		candidateIDs.push_back(id);
 #else
 	Similarity *index_column = ChooseBestIndexColumn(query_row, sims);
-	//auto new_candidates = indexes[index_column->colx]->getPrefixList(query_row[index_column->coly]);
-	//for (int id : new_candidates)
-		//candidateIDs.push_back(id);
-	indexes[index_column->colx]->search(query_row[index_column->coly], &candidateIDs);
-#endif
 
+	// Use old_set
+	auto new_candidates = std::move( indexes[index_column->colx]->getPrefixList(query_row[index_column->coly]) );
+	for (int id : new_candidates)
+		candidateIDs.push_back(id);
+
+	//indexes[index_column->colx]->search(query_row[index_column->coly], &candidateIDs);
+#endif
 
 	double index_filter_time = getTimeStamp() - time;
     total_index_filter_time += index_filter_time;
@@ -190,17 +198,16 @@ Estimation SimTable::Estimate(const vector<Field*> &column,
 							Similarity &sim,
 							const vector<int> &ids,
 							Filter *filter) {
-	static vector<int> sampleIDs;
-	if (sampleIDs.empty()) {
-		for (int i = 0; i < ids.size() * SAMPLE_RATIO; ++i)
-			sampleIDs.push_back(ids[rand() % ids.size()]);
-	}
+	//int num_sample = 1;
+	int num_sample = 5;
 	int pass = 0;
-	int startTime = getTimeStamp();
-	for (int id : sampleIDs) {
+	double startTime = getTimeStamp();
+	for (int i = 0; i < num_sample; ++i) {
+		int id = ids[rand() % ids.size()];
 		pass += filter->filter(*column[id], query, sim);
     }
-	double cost = double(getTimeStamp() - startTime) / sampleIDs.size();
-	double ratio = 1.0 - double(pass) / sampleIDs.size();
+	//print_debug("sampleIDs.size() = %d %d, pass = %d\n", sampleIDs.size(), ids.size(), pass);
+	double cost = double(getTimeStamp() - startTime) / num_sample;
+	double ratio = 1.0 - double(pass) / num_sample;
 	return Estimation(ratio, cost, filter, &sim);
 }

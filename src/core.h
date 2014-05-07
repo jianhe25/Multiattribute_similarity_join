@@ -8,7 +8,7 @@
 using namespace std;
 
 #define GRAM_LENGTH 3
-#define SAMPLE_RATIO 0.05
+#define SAMPLE_RATIO 0.005
 
 typedef int RowID;
 extern unordered_map<string, int> g_string_map;
