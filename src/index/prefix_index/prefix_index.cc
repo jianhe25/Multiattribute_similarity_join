@@ -4,6 +4,15 @@ using namespace std;
 
 int total_num_candidates_scanned = 0;
 int total_num_large_index_candidates_scanned = 0;
+
+PrefixIndex::PrefixIndex() {
+	indexType_ = PREFIX_SINGLE_INDEX;
+}
+
+PrefixIndex::PrefixIndex(int _indexType) {
+	indexType_ = _indexType;
+}
+
 void PrefixIndex::CalcTF(const vector<Field*> &fields, Similarity *sim) {
 	for (auto field : fields) {
 		for (int token : field->tokens)
@@ -35,50 +44,46 @@ void PrefixIndex::build(vector<Field*> &fields1, vector<Field*> &fields2, Simila
 			index_[tokens[i]].push_back(field->id);
 	}
 
-    /*
-     * Build recursive prefix index
-     * 1) Sort list by list_length
-     * 2) Select long list to split, and split by other attributes
-     *      2.1) Select list that has less repeated tokens.
-     *      2.2) number of new token after add list >= 0.7 * sum(list.size())
-     *      2.3) list should be long enough to split, otherwise is meaningless
-     */
-    int total = 0;
-    for (auto list : index_) {
-        total += list.second.size();
-    }
-    vector<pair<int, vector<int>>> sorted_lists;
-    for (auto list : index_) {
-        sorted_lists.push_back(make_pair(list.first, list.second));
-    }
-    // sort list by list size, from large to small
-    sort(sorted_lists.begin(), sorted_lists.end(), CompareList);
+		/*
+		 * Build recursive prefix index
+		 * 1) Sort list by list_length
+		 * 2) Select long list to split, and split by other attributes
+		 *      2.1) Select list that has less repeated tokens.
+		 *      2.2) number of new token after add list >= 0.7 * sum(list.size())
+		 *      2.3) list should be long enough to split, otherwise is meaningless
+		 */
+		int total = 0;
+		for (auto list : index_) {
+			total += list.second.size();
+		}
+		vector<pair<int, vector<int>>> sorted_lists;
+		for (auto list : index_) {
+			sorted_lists.push_back(make_pair(list.first, list.second));
+		}
+		// sort list by list size, from large to small
+		sort(sorted_lists.begin(), sorted_lists.end(), CompareList);
 
-    //print_debug("list size %d\n", sorted_lists.size());
-    //for (int i = 0; i < sorted_lists.size(); ++i) {
-        //if (i < 100)
-            //print_debug("%d\n", int(sorted_lists[i].second.size()));
-    //}
-
-    int num_large_list = 0;
-    int list_place = 0;
-    unordered_map<int, int> tokenMap;
-    for (const auto &list : sorted_lists) {
-        int num_new_token = 0;
-        for (int id : list.second) {
-            if (tokenMap.find(id) == tokenMap.end()) {
-                num_new_token++;
-            }
-        }
-        if (num_new_token > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size())) {
-            for (int id : list.second)
-                tokenMap[id]++;
-            num_large_list += list.second.size();
-            list_has_subtree.insert(list.first);
-        }
-        ++list_place;
-    }
-    cout << "tokenMap.size() = " << tokenMap.size() << " num_large_list = " << num_large_list << endl;
+		int num_large_list = 0;
+		int list_place = 0;
+		unordered_map<int, int> tokenMap;
+		for (const auto &list : sorted_lists) {
+			int num_new_token = 0;
+			for (int id : list.second) {
+				if (tokenMap.find(id) == tokenMap.end()) {
+					num_new_token++;
+				}
+			}
+			// Split list
+			if (num_new_token > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size())) {
+				for (int id : list.second) {
+					tokenMap[id]++;
+				}
+				num_large_list += list.second.size();
+				list_has_subtree.insert(list.first);
+			}
+			++list_place;
+		}
+		cout << "tokenMap.size() = " << tokenMap.size() << " num_large_list = " << num_large_list << endl;
 
     //freopen("inverted.txt","w", stdout);
     //cout << "tokenNum = " << sizeArray.size() << endl;

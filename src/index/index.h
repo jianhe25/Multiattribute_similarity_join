@@ -10,9 +10,15 @@
 using namespace std;
 
 DECLARE_int32(index_version);
+extern const int PREFIX_SINGLE_INDEX;
+extern const int PREFIX_TREE_INDEX;
+
 class SimIndex {
 public:
+	int indexType_;
+
 	Similarity *sim_;
+
 	vector<Field*> *fields_;
 
 	virtual void build(vector<Field*> &fields1, vector<Field*> &fields2, Similarity *sim) = 0;

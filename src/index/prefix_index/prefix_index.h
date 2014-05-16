@@ -13,6 +13,9 @@ public:
 	unordered_map<int, vector<FieldID> > index_;
     Verifier verifier_;
 
+	PrefixIndex();
+	PrefixIndex(int _indexType);
+
 	void CalcTF(const vector<Field*> &fields, Similarity *sim);
 
 	struct CompareTokenByTF {

@@ -33,9 +33,9 @@ void TreeIndex::CalcTF() {
 	}
 }
 
-vector<pair<RowID, RowID>> TreeIndex::Join(Table &table1,
-										   Table &table2,
-										   vector<Similarity> &sims) {
+void TreeIndex::Build(Table &table1,
+					  Table &table2,
+					  vector<Similarity> &sims) {
 	sims_ = sims;
 	tablePtr1_ = &table1;
 	tablePtr2_ = &table2;
@@ -44,10 +44,11 @@ vector<pair<RowID, RowID>> TreeIndex::Join(Table &table1,
 	for (unsigned id = 0; id < table1.size(); ++id)
 		row_ids1[id] = id;
 
-	double time = getTimeStamp();
 	root_ = new Node();
 
     this->CalcTF();
+
+	//print_debug("col %d %d sim.size = %lu\n",this->sims_[0].colx, this->sims_[1].colx, this->sims_.size());
 
 	//freopen("result", "w", stdout);
 	BuildIndex(root_,
@@ -61,19 +62,6 @@ vector<pair<RowID, RowID>> TreeIndex::Join(Table &table1,
             std::sort(row[sim.colx].tokens.begin(), row[sim.colx].tokens.end());
         }
 	}
-	print_debug("BuildIndex time: %.3fs\n", getTimeStamp() - time);
-
-    time = getTimeStamp();
-	// TODO: use only one vector<pair<RowID,RowID>> to hold all sim_pairs
-	vector<pair<RowID,RowID> >  all_sim_pairs;
-	for (int i = 0; i < int(table2.size()); ++i) {
-        vector<pair<RowID,RowID> > temp = std::move(this->Search(table2[i]));
-        for (const pair<int,int> &sim_pair : temp)
-            all_sim_pairs.push_back(sim_pair);
-        assert(!temp.empty());
-	}
-    print_debug("Join time: %.3fs\n", getTimeStamp() - time);
-	return all_sim_pairs;
 }
 
 bool CompareListPair(const pair<int, vector<int>> &list1,
@@ -85,6 +73,7 @@ void TreeIndex::BuildIndex(Node *node,
                            int depth,
                            bool hasSubtree) {
 
+	node->list = ids1; // TODO: for debug only
     node->hasSubtree = hasSubtree;
     node->leafIds = ids1;
 	if (!hasSubtree) {
@@ -97,7 +86,9 @@ void TreeIndex::BuildIndex(Node *node,
     const Similarity &sim = sims_[depth];
     for (int id : ids1) {
 		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
+		//print_debug("depth = %d tokens.size() = %d\n", depth, tokens.size());
 		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		//print_debug("prefixlength = %d\n", prefixlength);
 		for (int i = 0; i < prefixlength; ++i) {
             auto &list = index[ tokens[i] ];
             if (list.empty() || list.back() != id)
@@ -138,7 +129,7 @@ void TreeIndex::BuildIndex(Node *node,
         int token = list.first;
         Node *new_child = new Node();
         node->children[token] = new_child;
-        if (depth < 2 && depth < int(sims_.size()) &&
+        if (depth < 1 &&
                 num_new_id > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size())) {
             BuildIndex(new_child, list.second, depth+1, /*hasSubtree=*/true);
             for (int id : list.second)
@@ -159,29 +150,40 @@ bool TreeIndex::VerifyRow(Row a, Row b) {
 	return true;
 }
 
-vector<pair<RowID, RowID> > TreeIndex::Search(const Row &row) {
+unordered_set<int> TreeIndex::getPrefixList(const Row &row) {
 	// Would change vector elements
 	candidates_.clear();
-	simPairs_.clear();
     debug_count_leaf_ = 0;
     debug_save_ = 0;
-	this->TreeSearch(root_, row, 0);
-    print_debug("debug_count_leaf_ = %d %d %d\n", debug_count_leaf_, int(candidates_.size()), debug_save_);
-	return simPairs_;
+	this->TreeSearch(root_, row, 0, /*calcPrefixListSizeOnly=*/false);
+	//print_debug("debug_count_leaf_ = %d %d %d\n", debug_count_leaf_, int(candidates_.size()), debug_save_);
+	return candidates_;
 }
 
-void TreeIndex::TreeSearch(Node *node, const Row &row, int depth) {
+int TreeIndex::calcPrefixListSize(const Row &row) {
+	numEstimatedCandidates_ = 0;
+    debug_count_leaf_ = 0;
+    debug_save_ = 0;
+	//print_debug("col %d %d sim.size = %lu\n",sims_[0].colx, sims_[1].colx, sims_.size());
+	this->TreeSearch(root_, row, 0, /*calcPrefixListSizeOnly=*/true);
+	return numEstimatedCandidates_;
+}
+
+void TreeIndex::TreeSearch(Node *node, const Row &row, int depth, int calcPrefixListSizeOnly) {
 	if (!node->hasSubtree) {
 		debug_count_leaf_ += node->leafIds.size();
-		for (int id : node->leafIds)
-		if (candidates_.find(id) == candidates_.end()) {
-			candidates_.insert(id);
-			if (this->VerifyRow((*tablePtr1_)[id], row)) {
-				simPairs_.push_back(make_pair(id, row[0].id));
+		if (calcPrefixListSizeOnly) {
+			numEstimatedCandidates_ += node->leafIds.size();
+		} else {
+			for (int id : node->leafIds) {
+				candidates_.insert(id);
 			}
 		}
 		return;
 	}
+
+	const auto &list = node->list;
+
     if (node != root_ && node->hasSubtree) {
         debug_save_ += node->leafIds.size();
     }
@@ -195,7 +197,8 @@ void TreeIndex::TreeSearch(Node *node, const Row &row, int depth) {
             this->TreeSearch(
                     node->children[ tokens[i] ],
                     row,
-                    depth+1);
+                    depth+1,
+					calcPrefixListSizeOnly);
         }
     }
 }

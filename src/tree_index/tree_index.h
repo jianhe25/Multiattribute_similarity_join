@@ -17,6 +17,7 @@ struct Node {
 	Node();
 	bool hasSubtree;
 	vector<int> leafIds;
+	vector<int> list; // TODO: to be deleted
 };
 
 class TreeIndex {
@@ -24,28 +25,33 @@ class TreeIndex {
 	/*vector<bool> is_column1_searched_;*/
 	unordered_set<int> candidates_; // TODO: Can use big array
 	Node *root_;
-	vector<pair<RowID, RowID> > simPairs_;
 	Verifier verifier_;
 	Table *tablePtr1_;
 	Table *tablePtr2_;
-	vector<Similarity> sims_;
     unordered_map<int,int> token_counter_[100]; // MAX COLUMN NUMBER = 100
+	int numEstimatedCandidates_;
 
     public:
+
+	vector<Similarity> sims_;
+
 	TreeIndex();
     ~TreeIndex();
 
     void CalcTF();
-    vector<pair<RowID, RowID> > Join(Table &table1,
-									 Table &table2,
-									 vector<Similarity> &sims);
+
+    void Build(Table &table1,
+			   Table &table2,
+			   vector<Similarity> &sims);
+
     void BuildIndex(Node *node,
                     const vector<int> &ids1,
                     int depth,
                     bool hasSubtree);
 
-	vector<pair<RowID, RowID> > Search(const Row &row);
-	void TreeSearch(Node *node, const vector<Field> &row, int depth);
+	unordered_set<int> getPrefixList(const Row &row);
+	void TreeSearch(Node *node, const vector<Field> &row, int depth, int CalcPrefixListSizeOnly);
+	int calcPrefixListSize(const Row &row);
 	bool VerifyRow(Row a, Row b);
 
 	struct CompareTokenByTF {

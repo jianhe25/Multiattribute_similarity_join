@@ -5,6 +5,7 @@
 #include "filter.h"
 #include <gflags/gflags.h>
 #include "index/index.h"
+#include "tree_index/tree_index.h"
 
 using namespace std;
 DECLARE_int32(exp_version);
@@ -39,9 +40,10 @@ class SimTable {
 	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 
-	vector<SimIndex*> indexes;
-	Similarity *ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
-	void InitIndex(vector<Similarity> &sims);
+	vector<SimIndex*> indexes_;
+	vector<TreeIndex*> treeIndexes_;
+	Similarity ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
+	void InitIndex(Table &table1, Table &table2, vector<Similarity> &sims);
 
 public:
 	SimTable();

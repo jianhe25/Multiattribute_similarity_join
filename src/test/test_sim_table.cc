@@ -174,13 +174,8 @@ int main(int argc, char **argv) {
 	time = getTimeStamp();
 
     vector<pair<RowID, RowID>> sim_pairs;
-	if (FLAGS_exp_version == 4) {
-        TreeIndex tree_index;
-        sim_pairs = tree_index.Join(table1, table2, mapping_pairs);
-    } else {
-        SimTable *sim_table = new SimTable();;
-        sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
-    }
+	SimTable *sim_table = new SimTable();;
+	sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
 
 	/*
 	 *	Output sim_pairs

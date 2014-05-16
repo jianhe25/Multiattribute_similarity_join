@@ -4,6 +4,9 @@
 using namespace std;
 
 DEFINE_int32(index_version, 0, "index version, 0 means no index at all");
+// TODO: not use, delete later
+const int PREFIX_SINGLE_INDEX = 1;
+const int PREFIX_TREE_INDEX = 10;
 
 unordered_set<int> SimIndex::getPrefixList(Field &query) {
 	print_debug("Error: call getPrefixList in base class SimIndex");
@@ -21,7 +24,8 @@ SimIndex* SimIndexFactory::GetIndex() {
 void SimIndexFactory::InstallIndex() {
 	switch(FLAGS_index_version) {
 		case 0 : { g_index = new EmptyIndex(); break; }
-		case 1 : { g_index = new PrefixIndex(); break; }
+		case 1 : { g_index = new PrefixIndex(PREFIX_SINGLE_INDEX); break; }
+		case 2 : { g_index = new PrefixIndex(PREFIX_TREE_INDEX); break; }
 		default : {
 			cerr << "index version is out of range" << endl;
 			break;
