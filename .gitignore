@@ -1,4 +1,5 @@
-dataset/
+dataset/*.table
+dataset/*.xml
 .DS_Store
 *.o
 stat_file.csv

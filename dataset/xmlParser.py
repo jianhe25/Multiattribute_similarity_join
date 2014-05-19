@@ -1,10 +1,7 @@
 import xml.sax
-import MySQLdb;
 import sys
  
 stack = []
-connect = MySQLdb.connect('localhost', 'hejian', 'hejian486', 'dblp')
-cur = connect.cursor()
 insertCount = 0
 
 tableSet = set(["article", "inproceedings", "proceedings", "book",
@@ -46,24 +43,27 @@ class ContentHandler(xml.sax.ContentHandler):
         global cur
         stack.append(name)
         self.content = ""
-        if name in tableSet:
+        #print "start " + name
+        if name == "article":
             self.entityId += 1
             self.mdate = attrs.getValue("mdate")
             self.entityKey = attrs.getValue("key")
             self.type = name
             self.clearFields()
 
+    counter = 0
     def endElement(self, name):
         global insertCount
+        #ContentHandler.counter += 1
+        #print "end " + name + " " + str(insertCount) + " " + str(ContentHandler.counter);
         if name == "article": 
             self.articleId += 1
             authors = ', '.join(self.authors)
-            self.out_file.write(str(self.entityId) + "\t|" + self.title + "\t|" + self.journal + "\t|" + 
+            self.out_file.write(str(self.articleId) + "\t|" + self.title + "\t|" + self.journal + "\t|" + 
                 authors + "\t|" + self.number + "\t|" + self.pages + "\t|" + self.volume + "\t|" + self.year + "\n")
             insertCount += 1
             if insertCount % 1000 == 0:
                 print "Commit {0}".format(insertCount);
-                connect.commit();
         global stack
         stack.pop()
 

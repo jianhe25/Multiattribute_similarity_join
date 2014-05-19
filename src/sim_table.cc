@@ -50,18 +50,17 @@ void SimTable::InitIndex(Table &table1, Table &table2, vector<Similarity> &sims)
 		//}
 	// This is PREFIX_TREE_INDEX
 	//else if (FLAGS_exp_version == 2) {
-		for (int i = 0; i < num_col_; ++i)
-			treeIndexes_.push_back(new TreeIndex());
-		for (int i = 0; i < int(sims.size()); ++i) {
-			vector<Similarity> tree_sims;
-			tree_sims.push_back(sims[i]);
-			if (i > 0)
-				tree_sims.push_back(sims[0]);
-			else
-				tree_sims.push_back(sims[1]);
-			treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
-			const auto &sim = sims[i];
-		}
+		//for (int i = 0; i < num_col_; ++i)
+			//treeIndexes_.push_back(new TreeIndex());
+		//for (int i = 0; i < int(sims.size()); ++i) {
+			//vector<Similarity> tree_sims;
+			//tree_sims.push_back(sims[i]);
+			//if (i > 0)
+				//tree_sims.push_back(sims[0]);
+			//else
+				//tree_sims.push_back(sims[1]);
+			//treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
+		//}
 		//}
 
 	// Debug and statistics
@@ -112,13 +111,13 @@ Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &s
 	Similarity least_sim;
 	for (auto &sim : sims) {
 		int num_estimated_candidates = 0;
-		//if (FLAGS_index_version == 0 || FLAGS_index_version == 1) {
-			int num_estimated_candidates1 = indexes_[sim.colx]->calcPrefixListSize(query_row[sim.coly]);
-			//} else {
+		if (FLAGS_index_version == 0 || FLAGS_index_version == 1) {
+			num_estimated_candidates = indexes_[sim.colx]->calcPrefixListSize(query_row[sim.coly]);
+		} else {
 			num_estimated_candidates = treeIndexes_[sim.colx]->calcPrefixListSize(query_row);
-			//}
-		fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, sim.colx,
-				num_estimated_candidates1, num_estimated_candidates, num_estimated_candidates - num_estimated_candidates1);
+		}
+		//fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, sim.colx,
+		//num_estimated_candidates1, num_estimated_candidates, num_estimated_candidates - num_estimated_candidates1);
 
 		if (num_estimated_candidates < least_candidates_number) {
 			least_candidates_number = num_estimated_candidates;
