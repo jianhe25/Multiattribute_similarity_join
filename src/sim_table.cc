@@ -102,13 +102,14 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 bool compareSimSize(const Similarity &a, const Similarity &b) {
 	return a.num_estimated_candidates < b.num_estimated_candidates;
 }
-FILE *fp = fopen("num_candidates.txt","w");
+FILE *fp = fopen("least_num_candidates.txt","w");
 Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
 	if (sims.empty()) {
 		cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!! No Similarity in ChooseBestIndexColumn" << endl;
 		return Similarity();
 	}
-	int least_candidates_number = num_row_ + 1;
+	int real_least = num_row_ + 1;
+	int least_candidates_number = 0, least_candidates_number1 = 0;
 	Similarity least_sim;
 	for (auto &sim : sims) {
 		int num_estimated_candidates = 0;
@@ -117,15 +118,22 @@ Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &s
 			//} else {
 			num_estimated_candidates = treeIndexes_[sim.colx]->calcPrefixListSize(query_row);
 			//}
-		fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, sim.colx,
-				num_estimated_candidates1, num_estimated_candidates, num_estimated_candidates - num_estimated_candidates1);
-
-		if (num_estimated_candidates < least_candidates_number) {
+		if (num_estimated_candidates < real_least) {
+			real_least = num_estimated_candidates;
 			least_candidates_number = num_estimated_candidates;
+			least_candidates_number1 = num_estimated_candidates1;
+			least_sim = sim;
+		}
+		if (num_estimated_candidates1 < real_least) {
+			real_least = num_estimated_candidates1;
+			least_candidates_number = num_estimated_candidates;
+			least_candidates_number1 = num_estimated_candidates1;
 			least_sim = sim;
 		}
 		sim.num_estimated_candidates = num_estimated_candidates;
 	}
+	fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, least_sim.colx,
+			least_candidates_number1, least_candidates_number, least_candidates_number - least_candidates_number1);
 	if (query_row[0].id % 1000 == 0) {
 		print_debug("choose column %d\n", least_sim.colx);
 	}
