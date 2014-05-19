@@ -17,8 +17,8 @@ RUN_ELF=./test_sim_table
 TESTS=./src/test/filter_test
 
 EXP=2
-INDEX_VERSION=1
-RUN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp_204.table --exp_version=$(EXP) --max_base_table_size=1200000 --max_query_table_size=5000 --index_version=$(INDEX_VERSION)
+INDEX_VERSION=2
+RUN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp_204.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=5000 --index_version=$(INDEX_VERSION)
 
 run: $(RUN_ELF)
 	$(RUN_ELF) $(RUN_ARGS)

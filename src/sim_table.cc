@@ -50,17 +50,17 @@ void SimTable::InitIndex(Table &table1, Table &table2, vector<Similarity> &sims)
 		//}
 	// This is PREFIX_TREE_INDEX
 	//else if (FLAGS_exp_version == 2) {
-		//for (int i = 0; i < num_col_; ++i)
-			//treeIndexes_.push_back(new TreeIndex());
-		//for (int i = 0; i < int(sims.size()); ++i) {
-			//vector<Similarity> tree_sims;
-			//tree_sims.push_back(sims[i]);
-			//if (i > 0)
-				//tree_sims.push_back(sims[0]);
-			//else
-				//tree_sims.push_back(sims[1]);
-			//treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
-		//}
+		for (int i = 0; i < num_col_; ++i)
+			treeIndexes_.push_back(new TreeIndex());
+		for (int i = 0; i < int(sims.size()); ++i) {
+			vector<Similarity> tree_sims;
+			tree_sims.push_back(sims[i]);
+			if (i > 0)
+				tree_sims.push_back(sims[0]);
+			else
+				tree_sims.push_back(sims[1]);
+			treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
+		}
 		//}
 
 	// Debug and statistics
@@ -101,30 +101,41 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 bool compareSimSize(const Similarity &a, const Similarity &b) {
 	return a.num_estimated_candidates < b.num_estimated_candidates;
 }
-FILE *fp = fopen("num_candidates.txt","w");
+FILE *fp = fopen("least_num_candidates.txt","w");
 Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
 	if (sims.empty()) {
 		cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!! No Similarity in ChooseBestIndexColumn" << endl;
 		return Similarity();
 	}
-	int least_candidates_number = num_row_ + 1;
+	int real_least = num_row_ + 1;
+	int least_candidates_number = 0, least_candidates_number1 = 0;
 	Similarity least_sim;
 	for (auto &sim : sims) {
 		int num_estimated_candidates = 0;
-		if (FLAGS_index_version == 0 || FLAGS_index_version == 1) {
-			num_estimated_candidates = indexes_[sim.colx]->calcPrefixListSize(query_row[sim.coly]);
-		} else {
+		//if (FLAGS_index_version == 0 || FLAGS_index_version == 1) {
+			int num_estimated_candidates1 = indexes_[sim.colx]->calcPrefixListSize(query_row[sim.coly]);
+			//} else {
 			num_estimated_candidates = treeIndexes_[sim.colx]->calcPrefixListSize(query_row);
-		}
+			//}
 		//fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, sim.colx,
 		//num_estimated_candidates1, num_estimated_candidates, num_estimated_candidates - num_estimated_candidates1);
 
-		if (num_estimated_candidates < least_candidates_number) {
+		if (num_estimated_candidates < real_least) {
+			real_least = num_estimated_candidates;
 			least_candidates_number = num_estimated_candidates;
+			least_candidates_number1 = num_estimated_candidates1;
+			least_sim = sim;
+		}
+		if (num_estimated_candidates1 < real_least) {
+			real_least = num_estimated_candidates1;
+			least_candidates_number = num_estimated_candidates;
+			least_candidates_number1 = num_estimated_candidates1;
 			least_sim = sim;
 		}
 		sim.num_estimated_candidates = num_estimated_candidates;
 	}
+	fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, least_sim.colx,
+			least_candidates_number1, least_candidates_number, least_candidates_number - least_candidates_number1);
 	if (query_row[0].id % 1000 == 0) {
 		print_debug("choose column %d\n", least_sim.colx);
 	}
