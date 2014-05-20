@@ -43,6 +43,7 @@ class SimTable {
 	vector<SimIndex*> indexes_;
 	vector<TreeIndex*> treeIndexes_;
 	Similarity ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
+	Similarity ChooseBestIndexColumn1(Row &query_row, vector<Similarity> &sims);
 	void InitIndex(Table &table1, Table &table2, vector<Similarity> &sims);
 
 public:
