@@ -6,7 +6,7 @@ CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -I$(GTEST_DIR)/include $(DEFINES)
 
 SRC_OBJ=./src/core.o ./src/sim_table.o ./src/common.o ./src/filter.o ./src/lib/debugutils.o ./src/lib/utils.o
 EXP_OBJ=./src/exp/Search0_NoEstimate.o ./src/exp/Search1_Estimate.o ./src/exp/Search2_TuneEstimate.o 
-INDEX_OBJ=./src/index/index.o ./src/index/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
+INDEX_OBJ=./src/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
 
 COMMON_OBJ=$(SRC_OBJ) $(EXP_OBJ) $(INDEX_OBJ)
 TEST_OBJS=./src/test/filter_test.o
@@ -17,8 +17,8 @@ RUN_ELF=./test_sim_table
 TESTS=./src/test/filter_test
 
 EXP=2
-INDEX_VERSION=2
-RUN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp_204.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=20000 --index_version=$(INDEX_VERSION)
+INDEX_VERSION=1
+RUN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp_204.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=5000 --index_version=$(INDEX_VERSION)
 
 run: $(RUN_ELF)
 	$(RUN_ELF) $(RUN_ARGS)

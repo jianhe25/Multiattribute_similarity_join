@@ -5,14 +5,6 @@ using namespace std;
 int total_num_candidates_scanned = 0;
 int total_num_large_index_candidates_scanned = 0;
 
-PrefixIndex::PrefixIndex() {
-	indexType_ = PREFIX_SINGLE_INDEX;
-}
-
-PrefixIndex::PrefixIndex(int _indexType) {
-	indexType_ = _indexType;
-}
-
 void PrefixIndex::CalcTF(const vector<Field*> &fields, Similarity *sim) {
 	for (auto field : fields) {
 		for (int token : field->tokens)
@@ -187,8 +179,3 @@ void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
 	//print_debug("#candidates: %d %d %d %d\n", int(candidates.size()), int(matchIDs->size()), debugCandidatesNum, debugMatchidNum);
     verifyTime_ += getTimeStamp() - time;
 }
-PrefixIndex* PrefixIndex::GetInstance() {
-	return new PrefixIndex();
-}
-
-

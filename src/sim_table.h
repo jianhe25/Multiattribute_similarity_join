@@ -4,7 +4,7 @@
 #include "core.h"
 #include "filter.h"
 #include <gflags/gflags.h>
-#include "index/index.h"
+#include "prefix_index/prefix_index.h"
 #include "tree_index/tree_index.h"
 
 using namespace std;
@@ -40,7 +40,7 @@ class SimTable {
 	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 
-	vector<SimIndex*> indexes_;
+	vector<PrefixIndex*> indexes_;
 	vector<TreeIndex*> treeIndexes_;
 	Similarity ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
 	Similarity ChooseBestIndexColumn1(Row &query_row, vector<Similarity> &sims);

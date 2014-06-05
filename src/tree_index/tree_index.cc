@@ -129,8 +129,8 @@ void TreeIndex::BuildIndex(Node *node,
         int token = list.first;
         Node *new_child = new Node();
         node->children[token] = new_child;
-        if (depth < 1 &&
-                num_new_id > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size()) / 3) {
+        if (depth < 1) {
+			//num_new_id > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size()) / 3) {
             BuildIndex(new_child, list.second, depth+1, /*hasSubtree=*/true);
             for (int id : list.second)
                 tokenMap[id]++;

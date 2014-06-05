@@ -1,11 +1,16 @@
-#include "../index.h"
 #include <cassert>
 #include <iostream>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
+#include <gflags/gflags.h>
+
+#include "../common.h"
+#include "../core.h"
+#include "../filter.h"
 using namespace std;
 
-class PrefixIndex : public SimIndex {
+class PrefixIndex {
 public:
 	typedef int Token;
 	typedef int FieldID;
@@ -13,8 +18,9 @@ public:
 	unordered_map<int, vector<FieldID> > index_;
     Verifier verifier_;
 
-	PrefixIndex();
-	PrefixIndex(int _indexType);
+	Similarity *sim_;
+
+	vector<Field*> *fields_;
 
 	void CalcTF(const vector<Field*> &fields, Similarity *sim);
 
@@ -42,7 +48,6 @@ public:
 	int calcPrefixListSize(Field &query);
 
 	void search(Field &query, vector<int> *matchIDs);
-	PrefixIndex *GetInstance();
 
     double mergeListTime_;
     double verifyTime_;

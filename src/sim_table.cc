@@ -6,6 +6,7 @@
 using namespace std;
 
 DEFINE_int32(exp_version, 0, "experiment version");
+DEFINE_int32(index_version, 0, "index version, 0 means no index at all");
 
 // Following variable used for debugging and statistics
 int choosen_index_count[100];
@@ -41,19 +42,16 @@ SimTable::~SimTable() {
 
 void SimTable::InitIndex(Table &table1, Table &table2, vector<Similarity> &sims) {
     double index_time = getTimeStamp();
-	indexes_.clear();
 	// Install index plugin, default is prefix_index
-	//if (FLAGS_index_version == 0 ||  FLAGS_index_version == 1) {
-		SimIndexFactory::InstallIndex();
+	if (FLAGS_index_version == 1) {
 		for (int c = 0; c < num_col_; ++c)
-			indexes_.push_back(SimIndexFactory::GetIndex()->GetInstance());
-
+			indexes_.push_back(new PrefixIndex());
 		for (auto &sim : sims) {
 			indexes_[sim.colx]->build(column_table1_[sim.colx], column_table2_[sim.coly], &sim);
 		}
-		//}
+	}
 	//This is PREFIX_TREE_INDEX
-	//else if (FLAGS_exp_version == 2) {
+	else if (FLAGS_exp_version == 2) {
 		for (int i = 0; i < num_col_; ++i)
 			treeIndexes_.push_back(new TreeIndex());
 		for (int i = 0; i < int(sims.size()); ++i) {
@@ -65,7 +63,7 @@ void SimTable::InitIndex(Table &table1, Table &table2, vector<Similarity> &sims)
 				tree_sims.push_back(sims[1]);
 			treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
 		}
-		//}
+	}
 
 	// Debug and statistics
     print_debug("Build Index time: %.3fs\n", getTimeStamp() - index_time);
