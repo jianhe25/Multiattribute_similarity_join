@@ -10,6 +10,8 @@ using namespace std;
 #define GRAM_LENGTH 3
 #define SAMPLE_RATIO 0.005
 
+const int MAX_COLUMN_NUM = 50;
+
 typedef int RowID;
 extern unordered_map<string, int> g_string_map;
 extern int g_string_max_length;

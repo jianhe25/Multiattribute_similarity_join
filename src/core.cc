@@ -85,7 +85,7 @@ int CalcPrefixLength(int size, const Similarity& sim) {
 	else if (sim.distType == ED)
 		common = max(0, size - (int)(tau * GRAM_LENGTH));
 	else {
-        cerr << "Unkown DIST_TYPE in CalcPrefixLength" << endl;
+        print_debug("Unkown DIST_TYPE in CalcPrefixLength %d\n", sim.distType);
 		assert(0);
 		return -1;
 	}

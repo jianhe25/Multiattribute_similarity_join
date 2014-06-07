@@ -28,7 +28,8 @@ class TreeIndex {
 	Verifier verifier_;
 	Table *tablePtr1_;
 	Table *tablePtr2_;
-    unordered_map<int,int> token_counter_[100]; // MAX COLUMN NUMBER = 100
+    unordered_map<int,int> token_counter_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
+    unordered_map<int,int> token_counter2_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
 	int numEstimatedCandidates_;
 
     public:
@@ -46,8 +47,8 @@ class TreeIndex {
 
     void BuildIndex(Node *node,
                     const vector<int> &ids1,
-                    int depth,
-                    bool hasSubtree);
+                    const vector<int> &ids2,
+                    int depth);
 
 	unordered_set<int> getPrefixList(const Row &row);
 	void TreeSearch(Node *node, const vector<Field> &row, int depth, int CalcPrefixListSizeOnly);
