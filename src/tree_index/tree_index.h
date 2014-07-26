@@ -17,13 +17,22 @@ struct Node {
 	Node();
 	bool hasSubtree;
 	vector<int> leafIds;
-	vector<int> list; // TODO: to be deleted
+	/*vector<int> list; // TODO: to be deleted*/
 };
 
+typedef enum {
+	UNORDERED_JOIN_TREE,
+	ORDERED_JOIN_TREE,
+	ORDERED_SEARCH_TREE,
+	UNORDERED_SEARCH_TREE,
+	FULL_SPLIT_TREE
+} TreeType;
+
 class TreeIndex {
+	TreeType treeType_;
 	/*Table column_table_;*/
 	/*vector<bool> is_column1_searched_;*/
-	unordered_set<int> candidates_; // TODO: Can use big array
+	vector<int> candidates_; // TODO: Can use big array
 	Node *root_;
 	Verifier verifier_;
 	Table *tablePtr1_;
@@ -31,27 +40,33 @@ class TreeIndex {
     unordered_map<int,int> token_counter_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
     unordered_map<int,int> token_counter2_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
 	int numEstimatedCandidates_;
+	int treeListSize_;
 
     public:
 
 	vector<Similarity> sims_;
 
 	TreeIndex();
+	TreeIndex(TreeType treeType);
     ~TreeIndex();
 
     void CalcTF();
 
     void Build(Table &table1,
 			   Table &table2,
-			   vector<Similarity> &sims);
+			   const vector<Similarity> &sims);
 
-    void BuildIndex(Node *node,
-                    const vector<int> &ids1,
-                    const vector<int> &ids2,
-                    int depth);
+    void BuildJoinIndex(Node *node,
+						const vector<int> &ids1,
+						const vector<int> &ids2,
+						int depth);
 
-	unordered_set<int> getPrefixList(const Row &row);
-	void TreeSearch(Node *node, const vector<Field> &row, int depth, int CalcPrefixListSizeOnly);
+    void BuildSearchIndex(Node *node,
+					      const vector<int> &ids1,
+						  int depth);
+
+	vector<int> getPrefixList(const Row &row);
+	void TreeSearch(const Node *node, const vector<Field> &row, int depth, int CalcPrefixListSizeOnly);
 	int calcPrefixListSize(const Row &row);
 	bool VerifyRow(Row a, Row b);
 
@@ -73,7 +88,14 @@ class TreeIndex {
 		}
 	};
 
+	long long estimateJoinCost(const vector<int> &ids1,
+							   const vector<int> &ids2,
+							   const Similarity &sim);
+
+	double estimateSearchEntropy(const vector<int> &ids1,
+								 const Similarity &sim);
+
 	int debug_count_leaf_;
-    int debug_save_;
+	int debug_save_;
 };
 

@@ -1,6 +1,7 @@
 CXX=g++-4.7
 DEFINES = -DDEBUG #-DINTERSECT_PREFIX_LIST
-CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -I$(GTEST_DIR)/include $(DEFINES)
+CXXFLAGS=-O3 -ggdb -Wall -std=c++11 -I$(GTEST_DIR)/include $(DEFINES) 
+LDFLAGS=-L /lib64 -l pthread
 # Flags passed to the preprocessor.
 
 
@@ -10,34 +11,42 @@ INDEX_OBJ=./src/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
 
 COMMON_OBJ=$(SRC_OBJ) $(EXP_OBJ) $(INDEX_OBJ)
 TEST_OBJS=./src/test/filter_test.o
-RUN_OBJ=./src/test/test_sim_table.o
+JOIN_OBJ=./src/test/sim_table_join.o ./src/test/help_text.o
 
-RUN_ELF=./test_sim_table 
+JOIN_ELF=./sim_table_join
 
 TESTS=./src/test/filter_test
 
 EXP=2
-INDEX_VERSION=1
-RUN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp_204.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=100000 --index_version=$(INDEX_VERSION)
+INDEX_VERSION=3
+# 1: single index
+# 2: unordered-join tree
+# 3: ordered-join tree
+# 4: ordered-search tree
+JOIN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp204_subset.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000 --index_version=$(INDEX_VERSION)
 
-run: $(RUN_ELF)
-	$(RUN_ELF) $(RUN_ARGS)
 
-$(RUN_ELF) : $(COMMON_OBJ) $(RUN_OBJ)
+join: $(JOIN_ELF)
+	$(JOIN_ELF) $(JOIN_ARGS)
+
+help: $(JOIN_ELF)
+	$(JOIN_ELF) --help
+
+$(JOIN_ELF) : $(COMMON_OBJ) $(JOIN_OBJ)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $^ -o $@ -lgflags
 
 $(TESTS): $(COMMON_OBJ) ./src/test/filter_test.o gtest_main.a
-	$(CXX) $(CXXFLAGS) $(DEFINES) $^ -o $@ -lgflags
+	$(CXX) $(CXXFLAGS) $(DEFINES) $^ -o $@ -lgflags $(LDFLAGS)
 
 tests : $(TESTS)
 	./src/test/filter_test
 
-gdb: $(RUN_ELF)
-	gdb --args $(RUN_ELF) $(RUN_ARGS)
+gdb: $(JOIN_ELF)
+	gdb --args $(JOIN_ELF) $(JOIN_ARGS)
 
 
 clean:
-	rm -f $(COMMON_OBJ) $(TEST_OBJS) $(RUN_OBJ) $(RUN_ELF) *.o *.a
+	rm -f $(COMMON_OBJ) $(TEST_OBJS) $(JOIN_OBJ) $(JOIN_ELF) *.o *.a
 
 submit:
 	make clean

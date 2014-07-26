@@ -43,6 +43,13 @@ void Field::GenerateGrams() {
 	sort(tokens.begin(), tokens.end());
     g_string_max_length = max(g_string_max_length, (int)tokens.size());
 }
+void Field::GenerateContent() {
+	contentPairs_.clear();
+	for (int i = 0; i < int(str.length()); ++i) {
+		contentPairs_[str[i]]++;
+	}
+}
+
 Field::~Field() {
 	//cout << "deconstruct field  " << str << endl;
 }
@@ -109,4 +116,27 @@ void printRow(const vector<Field> &row) {
         cout << field.str << " ";
     cout << endl;
 }
-
+void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy) {
+	// Generate Content
+	for (const auto &sim : sims) {
+		int col = isColy? sim.coly : sim.colx;
+		for (unsigned i = 0; i < table.size(); ++i) {
+            if (sim.distType == ED) {
+				table[i][col].GenerateContent();
+			}
+        }
+    }
+}
+void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy) {
+	// GenerateTokens or GenerateGrams
+	for (const auto &sim : sims) {
+		int col = isColy? sim.coly : sim.colx;
+		for (unsigned i = 0; i < table.size(); ++i) {
+            if (sim.distType == JACCARD) {
+				table[i][col].GenerateTokens();
+			} else {
+				table[i][col].GenerateGrams();
+			}
+        }
+    }
+}

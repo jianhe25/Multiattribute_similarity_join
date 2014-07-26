@@ -21,6 +21,7 @@ public:
 	Similarity *sim_;
 
 	vector<Field*> *fields_;
+	int indexSize_;
 
 	void CalcTF(const vector<Field*> &fields, Similarity *sim);
 
@@ -47,7 +48,7 @@ public:
     unordered_set<int> getPrefixList(Field &query);
 	int calcPrefixListSize(Field &query);
 
-	void search(Field &query, vector<int> *matchIDs);
+	vector<int> search(Field &query);
 
     double mergeListTime_;
     double verifyTime_;

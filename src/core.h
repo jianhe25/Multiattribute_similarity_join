@@ -22,11 +22,13 @@ struct Field {
 	string str;
 	int id;
 	vector<int> tokens;
+	unordered_map<char, int> contentPairs_;
 	Field();
     ~Field();
 	Field(const string &_str, int id=0);
 	void GenerateGrams();
     void GenerateTokens();
+	void GenerateContent();
 };
 
 typedef vector<Field> Row;
@@ -43,6 +45,8 @@ struct Similarity {
 	DIST_TYPE distType;
 	bool isSearched;
 	int num_estimated_candidates;
+	long long splitedCost;
+	double splitedEntropy;
 
 	Similarity(DIST_TYPE _distType, double _dist) :
 		colx(0), coly(0), dist(_dist), distType(_distType), isSearched(false) {}
@@ -52,6 +56,17 @@ struct Similarity {
 
 	Similarity() : isSearched(false) {}
 
+	string type() const {
+		if (distType == ED)
+			return "ED";
+		else if (distType == JACCARD)
+			return "JACCARD";
+		else if (distType == COSINE)
+			return "COSINE";
+		else if (distType == DICE)
+			return "DICE";
+		return "NON_DEFINE";
+	}
 };
 
 void print(const Table &table);
@@ -63,3 +78,10 @@ int CalcPrefixLength(int len, const Similarity &sim);
 pair<int,int> CalcLengthBound(int lenS, const Similarity &sim);
 
 void printRow(const vector<Field> &row);
+
+void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy);
+
+void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy);
+
+
+

@@ -5,14 +5,14 @@
 #include "../common.h"
 #include "../sim_table.h"
 #include "../tree_index/tree_index.h"
+#include "help_text.h"
 
 using namespace std;
 
 const int MAX_LINE_LENGTH = 10000;
-const int MAX_COLUMN_NUM = 20;
 
 DEFINE_int32(max_base_table_size, 1000, "max tuple number in table1");
-DEFINE_int32(max_query_table_size, 100, "max tuple number in table2");
+DEFINE_int32(max_query_table_size, 1000, "max tuple number in table2");
 
 DIST_TYPE getType(const string &operand) {
 	if (operand == "ED")
@@ -21,35 +21,7 @@ DIST_TYPE getType(const string &operand) {
 		return JACCARD;
 	return NON_DEFINE;
 }
-void showSearchQueryFormat() {
-	print_debug("search_query_file format : \n\
-			SELECT * WHERE 		\n\
-			ED(column_name, your query word) = edit_distance(integer) AND(OR) \
-			JACCARD(column_name, your query word) = similarity(float number, range in [0, 1] \
-			e.g. \
-			SELECT * WHERE \
-			ED(author, EF codd) = 1 AND \
-			JACCARD(title, a relational view of database) = 0.9 AND \
-			example can be viewed in dataset/sample.query\n");
-}
 
-void showJoinQueryFormat() {
-print_debug("Mapping_file format : 	 										\n\
-=========================================================				\n\
-ED 0 0 1 																\n\
-JACCARD 1 1 0.9 														\n\
-========================================================				\n\
-Explaination:															\n\
-	ED(0,0) = 1 means edit_distance between word in column 0 in table1 to word in column 0 in table2 <= 1 \n\
-	JACCARD (1,1) = 0.9 means JACCARD_distance between string in column1 in table1 to string in column1 in table2 <= 1 \n\
-Table_file format:														\n\
-=========================================================				\n\
-record00 | record01 | record02 | record03 | ....						\n\
-record10 | record11 | record12 | record13 | ....						\n\
-...																		\n\
-=========================================================				\n\
-");
-}
 int columnNum;
 Table table1;
 Table table2;
@@ -104,9 +76,15 @@ void loadMapping(string mapping_file_name,
 		}
 		mapping_pairs.push_back(Similarity(col1, col2, dist, getType(operand)));
 	}
-	puts("Mapping rules are:");
+	puts("==================================");
+	puts("Mapping rules:");
 	for (auto sim : mapping_pairs) {
-		cout << sim.colx << " " << sim.coly << " " << sim.dist << endl;
+		string type;
+		if (sim.distType == ED) {
+			cout << "ED" << " (" << sim.colx << ", " << sim.coly << ") < " << sim.dist << endl;
+		} else {
+			cout << "JACCARD" << " (" << sim.colx << ", " << sim.coly << ") > " << sim.dist << endl;
+		}
 	}
 	puts("==================================");
 	fclose(mapping_file);
@@ -116,6 +94,21 @@ void print(Row tuple) {
 	for (auto field : tuple)
 		cout << field.str << "\t|";
 	cout << endl;
+}
+void GenerateContent(const vector<Similarity> &mapping_pairs) {
+	// Generate Content
+    for (unsigned i = 0; i < table1.size(); ++i) {
+        for (const auto &sim : mapping_pairs) {
+            if (sim.distType == ED)
+                table1[i][ sim.colx ].GenerateContent();
+        }
+    }
+    for (unsigned i = 0; i < table2.size(); ++i) {
+        for (const auto &sim : mapping_pairs) {
+            if (sim.distType == ED)
+                table2[i][ sim.coly ].GenerateContent();
+        }
+    }
 }
 void GenerateTokensOrGram(const vector<Similarity> &mapping_pairs) {
 	// GenerateTokens or GenerateGrams
@@ -137,13 +130,10 @@ void GenerateTokensOrGram(const vector<Similarity> &mapping_pairs) {
     }
 }
 int main(int argc, char **argv) {
+	google::SetUsageMessage(joinQueryFormat);
 	google::ParseCommandLineFlags(&argc, &argv, true);
-    cout << FLAGS_exp_version << endl;
 	if (argc > 4) {
-		print_debug("Usage : ./testTableJoin [mapping_file] [table_file1] [table_file2] > result");
-		showJoinQueryFormat();
-		// TODO : support search query format
-		// showSearchQueryFormat();
+		google::showUsageMessage();
 	}
 	string table1_file_name = "dataset/dblp.table";
 	string table2_file_name = "dataset/ref.table";
@@ -171,6 +161,9 @@ int main(int argc, char **argv) {
 	time = getTimeStamp();
 	GenerateTokensOrGram(mapping_pairs);
 	print_debug("GenerateTokensOrGram time: %.3fs\n", getTimeStamp() - time);
+	GenerateContent(mapping_pairs);
+	time = getTimeStamp();
+	print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
 	time = getTimeStamp();
 
     vector<pair<RowID, RowID>> sim_pairs;

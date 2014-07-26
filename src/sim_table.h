@@ -41,15 +41,17 @@ class SimTable {
 	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 
 	vector<PrefixIndex*> indexes_;
-	vector<TreeIndex*> treeIndexes_;
+	vector<TreeIndex*> treeIndexes_; // Multi index experiment
+	TreeIndex* treeIndex_; // Single index experiment
+
 	Similarity ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
-	Similarity ChooseBestIndexColumn1(Row &query_row, vector<Similarity> &sims);
+	TreeIndex* ChooseBestTreeIndex(Row &query_row);
 	void InitIndex(Table &table1, Table &table2, vector<Similarity> &sims);
 
 public:
 	SimTable();
 	~SimTable();
-	void Init(Table &table1, Table &table2);
+	void Init(Table &table1, Table &table2, const vector<Similarity> &sims);
 	vector<pair<RowID, RowID>> Join(Table &table1, Table &table2, vector<Similarity> &sims);
 	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
 };

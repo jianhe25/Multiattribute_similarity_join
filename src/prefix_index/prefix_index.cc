@@ -29,53 +29,55 @@ void PrefixIndex::build(vector<Field*> &fields1, vector<Field*> &fields2, Simila
 		sort(field->tokens.begin(), field->tokens.end(), CompareTokenByTF(*this));
 	}
 
+	indexSize_ = 0;
 	for (auto field : fields1) {
 		vector<int> &tokens = field->tokens;
 		int prefixlength = CalcPrefixLength(tokens.size(), *sim);
 		for (int i = 0; i < prefixlength; ++i)
 			index_[tokens[i]].push_back(field->id);
+		indexSize_ += prefixlength;
 	}
 
-		/*
-		 * Build recursive prefix index
-		 * 1) Sort list by list_length
-		 * 2) Select long list to split, and split by other attributes
-		 *      2.1) Select list that has less repeated tokens.
-		 *      2.2) number of new token after add list >= 0.7 * sum(list.size())
-		 *      2.3) list should be long enough to split, otherwise is meaningless
-		 */
-		int total = 0;
-		for (auto list : index_) {
-			total += list.second.size();
-		}
-		vector<pair<int, vector<int>>> sorted_lists;
-		for (auto list : index_) {
-			sorted_lists.push_back(make_pair(list.first, list.second));
-		}
-		// sort list by list size, from large to small
-		sort(sorted_lists.begin(), sorted_lists.end(), CompareList);
+	/*
+	 * Build recursive prefix index
+	 * 1) Sort list by list_length
+	 * 2) Select long list to split, and split by other attributes
+	 *      2.1) Select list that has less repeated tokens.
+	 *      2.2) number of new token after add list >= 0.7 * sum(list.size())
+	 *      2.3) list should be long enough to split, otherwise is meaningless
+	 */
+	//int total = 0;
+	//for (auto list : index_) {
+		//total += list.second.size();
+	//}
+	//vector<pair<int, vector<int>>> sorted_lists;
+	//for (auto list : index_) {
+		//sorted_lists.push_back(make_pair(list.first, list.second));
+	//}
+	//// sort list by list size, from large to small
+	//sort(sorted_lists.begin(), sorted_lists.end(), CompareList);
 
-		int num_large_list = 0;
-		int list_place = 0;
-		unordered_map<int, int> tokenMap;
-		for (const auto &list : sorted_lists) {
-			int num_new_token = 0;
-			for (int id : list.second) {
-				if (tokenMap.find(id) == tokenMap.end()) {
-					num_new_token++;
-				}
-			}
-			// Split list
-			if (num_new_token > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size())) {
-				for (int id : list.second) {
-					tokenMap[id]++;
-				}
-				num_large_list += list.second.size();
-				list_has_subtree.insert(list.first);
-			}
-			++list_place;
-		}
-		cout << "tokenMap.size() = " << tokenMap.size() << " num_large_list = " << num_large_list << endl;
+	//int num_large_list = 0;
+	//int list_place = 0;
+	//unordered_map<int, int> tokenMap;
+	//for (const auto &list : sorted_lists) {
+		//int num_new_token = 0;
+		//for (int id : list.second) {
+			//if (tokenMap.find(id) == tokenMap.end()) {
+				//num_new_token++;
+			//}
+		//}
+		//// Split list
+		//if (num_new_token > 0.5 * int(list.second.size()) && list_place < int(sorted_lists.size())) {
+			//for (int id : list.second) {
+				//tokenMap[id]++;
+			//}
+			//num_large_list += list.second.size();
+			//list_has_subtree.insert(list.first);
+		//}
+		//++list_place;
+	//}
+	//cout << "tokenMap.size() = " << tokenMap.size() << " num_large_list = " << num_large_list << endl;
 
     //freopen("inverted.txt","w", stdout);
     //cout << "tokenNum = " << sizeArray.size() << endl;
@@ -167,15 +169,17 @@ unordered_set<int> PrefixIndex::getPrefixList(Field &query) {
 int debugCandidatesNum = 0;
 int debugMatchidNum = 0;
 
-void PrefixIndex::search(Field &query, vector<int> *matchIDs) {
+vector<int> PrefixIndex::search(Field &query) {
     unordered_set<FieldID> candidates = std::move( getPrefixList(query) );
     double time = getTimeStamp();
+	vector<int> candidateIDs;
 	for (auto fieldid : candidates) {
 		if (verifier_.filter(query, *(*fields_)[fieldid], *sim_))
-			matchIDs->push_back(fieldid);
+			candidateIDs.push_back(fieldid);
 	}
     debugCandidatesNum += candidates.size();
-    debugMatchidNum += matchIDs->size();
+    debugMatchidNum += candidateIDs.size();
 	//print_debug("#candidates: %d %d %d %d\n", int(candidates.size()), int(matchIDs->size()), debugCandidatesNum, debugMatchidNum);
     verifyTime_ += getTimeStamp() - time;
+	return candidateIDs;
 }

@@ -82,11 +82,19 @@ bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim)
 	bool result = false;
 	if (sim.distType == ED)
 		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
-	else {
-		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
-		result = ((int)a.tokens.size() >= overlap && (int)b.tokens.size() >= overlap);
+	else if (sim.distType == JACCARD) {
+		result = (a.tokens.size() >= ceil(sim.dist * b.tokens.size())) &&
+				 (a.tokens.size() <= floor(b.tokens.size() / sim.dist));
+	} else if (sim.distType == COSINE) {
+		result = (a.tokens.size() >= ceil(sim.dist * sim.dist * b.tokens.size())) &&
+				 (a.tokens.size() <= floor(b.tokens.size() / sim.dist / sim.dist));
+	} else if (sim.distType == DICE) {
+		result = (a.tokens.size() >= ceil(sim.dist / (2-sim.dist) * b.tokens.size())) &&
+				 (a.tokens.size() <= floor((2-sim.dist) / sim.dist * b.tokens.size()));
+	} else {
+		print_debug("Unkown DIST_TYPE in LengthFilter");
 	}
-//	cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
+	//cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
 	return result;
 }
 
@@ -95,13 +103,36 @@ string ContentFilter::Type() {
 }
 bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool result = false;
-	if (sim.distType == ED)
-		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
-	else {
-		int overlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
-		result = ((int)a.tokens.size() >= overlap && (int)b.tokens.size() >= overlap);
+	if (sim.distType == ED) {
+		int positive = 0;
+		int negative = 0;
+		result = true;
+		for (auto apair : a.contentPairs_) {
+			char c = apair.first;
+			auto bpair = b.contentPairs_.find(c);
+			int numb = (bpair == b.contentPairs_.end())? 0 : bpair->second;
+			int delta = apair.second - numb;
+			if (delta > 0) {
+				positive += delta;
+				if (positive > sim.dist) {
+					result = false;
+					break;
+				}
+			}
+			else {
+				negative += -delta;
+				if (negative > sim.dist) {
+					result = false;
+					break;
+				}
+			}
+		}
+	} else
+	// Jaccard has no ContentFilter
+	{
+		result = true;
 	}
-//	cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
+	//print_debug("use ContentFilter %s %s result = %d\n",a.str.c_str(), b.str.c_str(), result);
 	return result;
 }
 
@@ -110,6 +141,7 @@ void initFilters() {
 	g_filters.clear();
 	registerFilter(new LengthFilter());
 	registerFilter(new Verifier());
+	registerFilter(new ContentFilter());
 }
 void registerFilter(Filter *filter) {
 	g_filters.push_back(filter);

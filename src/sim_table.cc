@@ -40,6 +40,7 @@ SimTable::SimTable() {
 SimTable::~SimTable() {
 }
 
+int total_prefix_index_size = 0;
 void SimTable::InitIndex(Table &table1, Table &table2, vector<Similarity> &sims) {
     double index_time = getTimeStamp();
 	// Install index plugin, default is prefix_index
@@ -48,30 +49,79 @@ void SimTable::InitIndex(Table &table1, Table &table2, vector<Similarity> &sims)
 			indexes_.push_back(new PrefixIndex());
 		for (auto &sim : sims) {
 			indexes_[sim.colx]->build(column_table1_[sim.colx], column_table2_[sim.coly], &sim);
+			total_prefix_index_size += indexes_[sim.colx]->indexSize_;
 		}
+		print_debug("total_prefix_index_size = %d\n", total_prefix_index_size);
 	}
 	//This is PREFIX_TREE_INDEX
-	else if (FLAGS_exp_version == 2) {
-		for (int i = 0; i < num_col_; ++i)
-			treeIndexes_.push_back(new TreeIndex());
-		for (int i = 0; i < int(sims.size()); ++i) {
-			vector<Similarity> tree_sims;
-			tree_sims.push_back(sims[i]);
-			if (i > 0)
-				tree_sims.push_back(sims[0]);
-			else
-				tree_sims.push_back(sims[1]);
-			treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
-		}
+	else if (FLAGS_index_version == 2) {
+		TreeIndex* tree_index = new TreeIndex(UNORDERED_JOIN_TREE);
+		vector<Similarity> tree_sims;
+		tree_sims.push_back(sims[0]);
+		tree_sims.push_back(sims[2]);
+		tree_sims.push_back(sims[1]);
+		tree_index->Build(table1, table2, tree_sims);
+		treeIndexes_.push_back(tree_index);
+
+		//tree_sims.clear();
+		//tree_sims.push_back(sims[0]);
+		//tree_sims.push_back(sims[1]);
+		//tree_sims.push_back(sims[2]);
+		//tree_index = new TreeIndex(UNORDERED_JOIN_TREE);
+		//tree_index->Build(table1, table2, tree_sims);
+		//treeIndexes_.push_back(tree_index);
+
+		//tree_sims.clear();
+		//tree_sims.push_back(sims[1]);
+		//tree_sims.push_back(sims[2]);
+		//tree_sims.push_back(sims[0]);
+		//treeIndexes_[1]->Build(table1, table2, tree_sims);
+		//
+		//tree_sims.clear();
+		//tree_sims.push_back(sims[2]);
+		//tree_sims.push_back(sims[1]);
+		//tree_sims.push_back(sims[0]);
+		//treeIndexes_[2]->Build(table1, table2, tree_sims);
+
+		//for (int i = 0; i < num_col_; ++i)
+			//treeIndexes_.push_back(new TreeIndex(UNORDERED_JOIN_TREE));
+		//for (int i = 0; i < int(sims.size()); ++i) {
+			//vector<Similarity> tree_sims;
+			//tree_sims.push_back(sims[i]);
+			////if (i > 0)
+			//for (int j = 0; j < int(sims.size()); ++j) {
+				//if (j != i)
+					//tree_sims.push_back(sims[j]);
+			//}
+				////else
+				////tree_sims.push_back(sims[1]);
+			//treeIndexes_[sims[i].colx]->Build(table1, table2, tree_sims);
+		//}
+	} else if (FLAGS_index_version == 3) {
+		treeIndex_ = new TreeIndex(ORDERED_JOIN_TREE);
+		treeIndex_->Build(table1, table2, sims);
+	} else if (FLAGS_index_version == 4) {
+		treeIndex_ = new TreeIndex(ORDERED_SEARCH_TREE);
+		treeIndex_->Build(table1, table2, sims);
 	}
 
 	// Debug and statistics
-    print_debug("Build Index time: %.3fs\n", getTimeStamp() - index_time);
+    print_debug("Build Index time: %fs\n", getTimeStamp() - index_time);
 	for (int c = 0; c < num_col_; ++c)
 		choosen_index_count[c] = 0;
 }
-void SimTable::Init(Table &table1, Table &table2) {
-    double tranpose_time = getTimeStamp();
+void SimTable::Init(Table &table1, Table &table2, const vector<Similarity> &sims) {
+	double time = getTimeStamp();
+	GenerateTokensOrGram(sims, table1, /*isColy=*/0);
+	GenerateTokensOrGram(sims, table2, /*isColy=*/1);
+	print_debug("GenerateTokensOrGram time: %.3fs\n", getTimeStamp() - time);
+
+	GenerateContent(sims, table1, /*isColy=*/0);
+	GenerateContent(sims, table2, /*isColy=*/1);
+	time = getTimeStamp();
+	print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
+
+	time = getTimeStamp();
 	initFilters();
     // TODO: currently no need for row matrix
     tablePtr_ = &table1;
@@ -79,12 +129,13 @@ void SimTable::Init(Table &table1, Table &table2) {
 	num_col_ = table1[0].size();
 	transpose(table1, &column_table1_);
 	transpose(table2, &column_table2_);
-    print_debug("Transpose time: %.3fs\n", getTimeStamp() - tranpose_time);
+    print_debug("Transpose time: %.3fs\n", getTimeStamp() - time);
 }
 
 vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<Similarity> &sims) {
-	Init(table1, table2);
+	Init(table1, table2, sims);
 	InitIndex(table1, table2, sims);
+
 	vector<pair<RowID, RowID>> simPairs;
 	startJoinTime_ = getTimeStamp();
 	for (unsigned i = 0; i < table2.size(); ++i) {
@@ -105,34 +156,30 @@ bool compareSimSize(const Similarity &a, const Similarity &b) {
 	return a.num_estimated_candidates < b.num_estimated_candidates;
 }
 
-Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
-	if (sims.empty()) {
-		cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!! No Similarity in ChooseBestIndexColumn" << endl;
-		return Similarity();
-	}
+TreeIndex* SimTable::ChooseBestTreeIndex(Row &query_row) {
 	int real_least = num_row_ + 1;
-	//int least_candidates_number = real_least, least_candidates_number1 = real_least;
-	Similarity least_sim;
-	for (auto &sim : sims) {
+	int best_tree_index_id = -1;
+	for (int i = 0; i < (int)treeIndexes_.size(); ++i) {
 		int num_estimated_candidates = 0;
-		num_estimated_candidates = treeIndexes_[sim.colx]->calcPrefixListSize(query_row);
+		num_estimated_candidates = treeIndexes_[i]->calcPrefixListSize(query_row);
 		if (num_estimated_candidates < real_least) {
 			real_least = num_estimated_candidates;
-			least_sim = sim;
+			best_tree_index_id = i;
 		}
-		sim.num_estimated_candidates = num_estimated_candidates;
 	}
 	//fprintf(fp,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, least_sim.colx,
 	//least_candidates_number1, least_candidates_number, least_candidates_number - least_candidates_number1);
-
-	if (query_row[0].id % 1000 == 0) {
-		print_debug("choose column %d\n", least_sim.colx);
-	}
-	choosen_index_count[ least_sim.colx ]++;
-	return least_sim;
+	//if (query_row[0].id % 1000 == 0) {
+		//for (const Similarity &sim : treeIndexes_[best_tree_index_id]->sims_) {
+			//print_debug("%d\n", sim.colx);
+		//}
+		//print_debug("best_tree_index_id = %d\n", best_tree_index_id);
+	//}
+	choosen_index_count[best_tree_index_id]++;
+	return treeIndexes_[best_tree_index_id];
 }
 
-Similarity SimTable::ChooseBestIndexColumn1(Row &query_row, vector<Similarity> &sims) {
+Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims) {
 	if (sims.empty()) {
 		cerr << "!!!!!!!!!!!!!!!!!!!!!!!!!!! No Similarity in ChooseBestIndexColumn" << endl;
 		return Similarity();
@@ -176,39 +223,33 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
     vector<int> candidateIDs;
     double time = getTimeStamp();
 
-#ifdef INTERSECT_PREFIX_LIST
-	for (auto &sim : sims)
-		sim.num_estimated_candidates = indexes_[sim.colx].calcPrefixListSize(query_row[sim.coly]);
-	sort(sims.begin(), sims.end(), compareSimSize);
-	unordered_set<int> new_candidates;
-	for (int i = 0; i < int(2); ++i) {
-		unordered_set<int> candidates = std::move(indexes_[sims[i].colx].getPrefixList(query_row[sims[i].coly]));
-		if (i == 0)
-			new_candidates = candidates;
-		else
-			new_candidates = intersect2Sets(new_candidates, candidates);
-	}
-	for (int id : new_candidates)
-		candidateIDs.push_back(id);
-#else
 	// Use old_set
-	unordered_set<int> candidateSet, candidateSet1;
+	unordered_set<int> candidateSet;
 	if (FLAGS_index_version == 0 || FLAGS_index_version == 1) {
-		Similarity index_column1 = ChooseBestIndexColumn1(query_row, sims);
-		candidateSet = std::move( indexes_[index_column1.colx]->getPrefixList(query_row[index_column1.coly]) );
-	} else {
 		Similarity index_column = ChooseBestIndexColumn(query_row, sims);
-		candidateSet = std::move( treeIndexes_[index_column.colx]->getPrefixList(query_row) );
+		candidateIDs = std::move( indexes_[index_column.colx]->search(query_row[index_column.coly]) );
+	} else if (FLAGS_index_version == 2) {
+		//TreeIndex *best_tree_index = ChooseBestTreeIndex(query_row);
+		TreeIndex *best_tree_index = treeIndexes_[0];
+		candidateIDs = std::move( best_tree_index->getPrefixList(query_row) );
+	} else if (FLAGS_index_version == 3 || FLAGS_index_version == 4) {
+		candidateIDs = std::move( treeIndex_->getPrefixList(query_row) );
+	}
+	if (candidateIDs.size() == 0) {
+		//print_debug("candidateIDs.size() = %lu\n",candidateIDs.size());
+		//for (const Field grid : query_row) {
+			//printf("%s ", grid.str.c_str());
+		//}
+		//puts("");
 	}
 
-	//fprintf(fp_candidateSet,"id: %d, col %d, num_candidates: index %d TreeIndex = %d, delta = %d\n",query_row[0].id, index_column.colx,
-	//candidateSet1.size(), candidateSet.size(), candidateSet.size() - candidateSet1.size());
-	//num_total += candidateSet.size();
-	//num_total1 += candidateSet1.size();
-
-	for (int id : candidateSet)
-		candidateIDs.push_back(id);
-#endif
+	if (candidateIDs.empty()) {
+		for (int id : candidateSet)
+			candidateIDs.push_back(id);
+	} else {
+		sort(candidateIDs.begin(), candidateIDs.end());
+		candidateIDs.erase(unique(candidateIDs.begin(), candidateIDs.end()), candidateIDs.end());
+	}
 
 	double index_filter_time = getTimeStamp() - time;
     total_index_filter_time += index_filter_time;
@@ -224,19 +265,9 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 	}
 	time = getTimeStamp();
 
-	/*
-	 * Move index_column to first Similarity
-	 * This operations is very slow: add 10s in 25s
-	 */
-	//vector<Similarity> new_sims;
-	//new_sims.push_back(*index_column);
-	//for (const Similarity &sim : sims) {
-		//if (sim.coly != index_column->coly)
-			//new_sims.push_back(sim);
-	//}
-	//sims = new_sims;
-
     vector<RowID> result;
+	if (candidateIDs.size() == 0)
+		return result;
 	if (FLAGS_exp_version == 0) {
         result = Search0_NoEstimate(query_row, sims, candidateIDs);
     } else if (FLAGS_exp_version == 1) {
