@@ -52,6 +52,7 @@ class TreeIndex {
 
     void CalcTF();
 
+	void Build(Table &table, const vector<Similarity> &sims);
     void Build(Table &table1,
 			   Table &table2,
 			   const vector<Similarity> &sims);
@@ -95,6 +96,7 @@ class TreeIndex {
 	double estimateSearchEntropy(const vector<int> &ids1,
 								 const Similarity &sim);
 
+	int memory();
 	int debug_count_leaf_;
 	int debug_save_;
 };

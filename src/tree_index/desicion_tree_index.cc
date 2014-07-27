@@ -121,6 +121,11 @@ bool compareBySplitedEntropy(const Similarity &sim1,
 	return sim1.splitedEntropy > sim2.splitedEntropy;
 }
 
+void TreeIndex::Build(Table &table,
+					  const vector<Similarity> &sims) {
+	print_debug("build Not implemented yet");
+}
+
 /*
  * This tree has two styles,
  *
@@ -407,5 +412,9 @@ void TreeIndex::TreeSearch(const Node *node, const Row &row, int depth, int calc
 					calcPrefixListSizeOnly);
 		}
 	}
+}
+
+int TreeIndex::memory() {
+	return 0;
 }
 

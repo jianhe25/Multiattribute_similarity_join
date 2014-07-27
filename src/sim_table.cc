@@ -7,6 +7,7 @@ using namespace std;
 
 DEFINE_int32(exp_version, 0, "experiment version");
 DEFINE_int32(index_version, 0, "index version, 0 means no index at all");
+DEFINE_int32(memory_limit, 100, "maximum memory, 100 means 100MB");
 
 // Following variable used for debugging and statistics
 int choosen_index_count[100];
@@ -295,6 +296,17 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 }
 
 void SimTable::InitTableForSearch(Table &table, const vector<Similarity> &sims) {
+	/*
+	 * Build one layer index
+	 */
+	for (int i = 0; i < int(sims.size()); ++i) {
+		vector<Similarity> temp_sims;
+		temp_sims.push_back(sims[i]);
+		TreeIndex* tree_index = new TreeIndex(ORDERED_SEARCH_TREE);
+		tree_index->Build(table, temp_sims);
+		treeIndexes_.push_back(tree_index);
+		FLAGS_memory_limit -= treeIndex_->memory();
+	}
 	print_debug("InitTableForSearch Not implemented yet\n");
 }
 
