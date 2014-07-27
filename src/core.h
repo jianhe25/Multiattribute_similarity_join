@@ -69,6 +69,12 @@ struct Similarity {
 	}
 };
 
+struct Query {
+	Row row;
+	vector<Similarity> sims;
+	int id;
+};
+
 void print(const Table &table);
 
 int CalcOverlap(int lenS, int lenR, const Similarity &sim);

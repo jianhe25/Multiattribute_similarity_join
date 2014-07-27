@@ -139,7 +139,7 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 	vector<pair<RowID, RowID>> simPairs;
 	startJoinTime_ = getTimeStamp();
 	for (unsigned i = 0; i < table2.size(); ++i) {
-		vector<RowID> results = Search(table2[i], sims);
+		vector<RowID> results = JoinSearch(table2[i], sims);
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
 	}
@@ -205,21 +205,7 @@ Similarity SimTable::ChooseBestIndexColumn(Row &query_row, vector<Similarity> &s
 	return least_sim;
 }
 
-unordered_set<int> intersect2Sets(unordered_set<int> setA, unordered_set<int> setB) {
-    unordered_set<int> inter_set;
-    if (setA.size() < setB.size()) {
-        for (int id : setA)
-            if (setB.find(id) != setB.end())
-                inter_set.insert(id);
-    } else {
-        for (int id : setB)
-            if (setA.find(id) != setA.end())
-                inter_set.insert(id);
-    }
-    return inter_set;
-}
-
-vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
+vector<RowID> SimTable::JoinSearch(Row &query_row, vector<Similarity> &sims) {
     vector<int> candidateIDs;
     double time = getTimeStamp();
 
@@ -303,3 +289,12 @@ Estimation SimTable::Estimate(const vector<Field*> &column,
 	double ratio = 1.0 - double(pass) / num_sample;
 	return Estimation(ratio, cost, filter, &sim);
 }
+
+vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
+	print_debug("Search Not implemented yet\n");
+}
+
+void SimTable::InitTableForSearch(Table &table, const vector<Similarity> &sims) {
+	print_debug("InitTableForSearch Not implemented yet\n");
+}
+

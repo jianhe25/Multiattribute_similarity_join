@@ -116,8 +116,7 @@ void outputPairs(const vector<pair<RowID, RowID>> &sim_pairs) {
 int main(int argc, char **argv) {
 	google::SetUsageMessage(joinUsageText);
 	google::ParseCommandLineFlags(&argc, &argv, true);
-	if (argc > 4) {
-	}
+
 	string table1_file_name = "dataset/dblp_204.table";
 	string table2_file_name = "dataset/ref.table";
 	string mapping_file_name = "dataset/mapping_rule";

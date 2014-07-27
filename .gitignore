@@ -4,3 +4,4 @@ dataset/*.xml
 *.o
 stat_file.csv
 test_sim_table
+*.swp

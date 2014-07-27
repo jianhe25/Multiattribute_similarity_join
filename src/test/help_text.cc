@@ -26,7 +26,7 @@ record10 | record11 | record12 | record13 | ....						\n\
 string searchFileFormat =
 "search_query_file format : 	 			    						\n\
 =========================================================				\n\
-#query 1																\n\
+#query 2																\n\
 record00 | record01 | record02 | record03 | ....						\n\
 ED 0 0 1 																\n\
 JACCARD 1 1 0.9 														\n\
@@ -34,7 +34,7 @@ JACCARD 1 1 0.9 														\n\
 record10 | record11 | record12 | record13 | ....						\n\
 ED 1 1 3 																\n\
 COS 2 2 0.5 														    \n\
-#query 3																\n\
+#query 2																\n\
 record20 | record21 | record22 | record23 | ....						\n\
 ED 0 0 1 																\n\
 DICE 1 1 0.9 															\n\

@@ -51,8 +51,10 @@ class SimTable {
 public:
 	SimTable();
 	~SimTable();
+	void InitTableForSearch(Table &table, const vector<Similarity> &sims);
 	void Init(Table &table1, Table &table2, const vector<Similarity> &sims);
 	vector<pair<RowID, RowID>> Join(Table &table1, Table &table2, vector<Similarity> &sims);
+	vector<RowID> JoinSearch(Row &query_row, vector<Similarity> &sims);
 	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
 };
 

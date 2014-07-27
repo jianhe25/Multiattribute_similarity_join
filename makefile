@@ -12,8 +12,10 @@ INDEX_OBJ=./src/prefix_index/prefix_index.o ./src/tree_index/tree_index.o
 COMMON_OBJ=$(SRC_OBJ) $(EXP_OBJ) $(INDEX_OBJ)
 TEST_OBJS=./src/test/filter_test.o
 JOIN_OBJ=./src/test/sim_table_join.o ./src/test/help_text.o
+SEARCH_OBJ=./src/test/sim_table_search.o ./src/test/help_text.o
 
 JOIN_ELF=./sim_table_join
+SEARCH_ELF=./sim_table_search
 
 TESTS=./src/test/filter_test
 
@@ -24,7 +26,10 @@ INDEX_VERSION=3
 # 3: ordered-join tree
 # 4: ordered-search tree
 JOIN_ARGS=./dataset/mapping_rule ./dataset/dblp_204.table ./dataset/dblp204_subset.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000 --index_version=$(INDEX_VERSION)
+SEARCH_ARGS=./dataset/rule_max_threshold ./dataset/dblp_204.table ./dataset/dblp.query --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000 --index_version=$(INDEX_VERSION)
 
+search: $(SEARCH_ELF)
+	$(SEARCH_ELF) $(SEARCH_ARGS)
 
 join: $(JOIN_ELF)
 	$(JOIN_ELF) $(JOIN_ARGS)
@@ -33,6 +38,9 @@ help: $(JOIN_ELF)
 	$(JOIN_ELF) --help
 
 $(JOIN_ELF) : $(COMMON_OBJ) $(JOIN_OBJ)
+	$(CXX) $(CXXFLAGS) $(DEFINES) $^ -o $@ -lgflags
+
+$(SEARCH_ELF) : $(COMMON_OBJ) $(SEARCH_OBJ)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $^ -o $@ -lgflags
 
 $(TESTS): $(COMMON_OBJ) ./src/test/filter_test.o gtest_main.a
