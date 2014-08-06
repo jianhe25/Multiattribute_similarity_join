@@ -14,14 +14,6 @@ const int MAX_LINE_LENGTH = 10000;
 DEFINE_int32(max_base_table_size, 1000, "max tuple number in table1");
 DEFINE_int32(max_query_table_size, 1000, "max tuple number in table2");
 
-DIST_TYPE getType(const string &operand) {
-	if (operand == "ED")
-		return ED;
-	if (operand == "JACCARD")
-		return JACCARD;
-	return NON_DEFINE;
-}
-
 int columnNum;
 Table table;
 vector<Query> queries;
@@ -29,13 +21,9 @@ vector<Query> queries;
 void PrintSims(const vector<Similarity> &sims) {
 	puts("==================================");
 	puts("Mapping rules:");
-	for (auto sim : sims) {
+	for (auto sim : mapping_pairs) {
 		string type;
-		if (sim.distType == ED) {
-			cout << "ED" << " (" << sim.colx << ", " << sim.coly << ") < " << sim.dist << endl;
-		} else {
-			cout << "JACCARD" << " (" << sim.colx << ", " << sim.coly << ") > " << sim.dist << endl;
-		}
+		cout << sim.toString() << endl;
 	}
 	puts("==================================");
 }
@@ -80,20 +68,22 @@ void loadQueries(string query_file_name, vector<Query> *queries, int read_limit)
 		throw "open FILE " + query_file_name + " error";
 	}
 	/* parse data */
-	int rowid = 0;
 	int col1, col2;
 	double dist;
 	char operand[100];
 	int num_sim;
+	int queryid;
 	while (fgets(line, MAX_LINE_LENGTH, query_file))
 	if (line[0] == '#') {
 		Query query;
 		vector<string> strs;
-		sscanf(line, "#query %d", &num_sim);
+		sscanf(line, "#query %d %d", &queryid, &num_sim);
+		queryid--;
 
 		/* read query row */
 		print_debug("num_sim = %d\n", num_sim);
-		fgets(line, MAX_LINE_LENGTH, query_file);
+		if (fgets(line, MAX_LINE_LENGTH, query_file) == NULL)
+			print_debug("error: fgets line");
 		print_debug("line = %s\n",line);
 		splitString(line, '|', strs);
 		int num_col = strs.size();
@@ -104,20 +94,20 @@ void loadQueries(string query_file_name, vector<Query> *queries, int read_limit)
 		}
 		for (auto &word : strs) {
 			stripString(word);
-			query.row.push_back(Field(word, rowid));
-			query.id = rowid;
+			query.row.push_back(Field(word, queryid));
+			query.id = queryid;
 		}
-		++rowid;
 
 		/* read Similarity */
 		for (int i = 0; i < num_sim; ++i) {
-			fgets(line, MAX_LINE_LENGTH, query_file);
+			if (fgets(line, MAX_LINE_LENGTH, query_file) == NULL)
+				print_debug("error: fgets line");
 			sscanf(line, "%s %d %d %lf", operand, &col1, &col2, &dist);
-			if (getType(operand) == NON_DEFINE) {
+			if (getSimType(operand) == NON_DEFINE) {
 				print_debug("NonExist Similarity Function %s\n", operand);
 				break;
 			}
-			query.sims.push_back( Similarity(col1, col2, dist, getType(operand)) );
+			query.sims.push_back( Similarity(col1, col2, dist, getSimType(operand)) );
 		}
 		PrintSims(query.sims);
 		queries->push_back(query);
@@ -139,33 +129,28 @@ vector<Similarity> loadMapping(string mapping_file_name) {
 	char operand[100];
 	mapping_pairs.clear();
 	while (fscanf(mapping_file, "%s %d %lf", operand, &col1, &dist) != EOF) {
-		if (getType(operand) == NON_DEFINE) {
+		if (getSimType(operand) == NON_DEFINE) {
 			print_debug("NonExist Similarity Function %s\n", operand);
 			break;
 		}
-		mapping_pairs.push_back(Similarity(col1, -1, dist, getType(operand)));
+		mapping_pairs.push_back(Similarity(col1, -1, dist, getSimType(operand)));
 	}
 	PrintSims(mapping_pairs);
 	fclose(mapping_file);
 	return mapping_pairs;
 }
 
-void PrintRow(Row tuple) {
-	for (auto field : tuple)
-		cout << field.str << "\t|";
-	cout << endl;
-}
 int main(int argc, char **argv) {
 	google::SetUsageMessage(searchUsageText);
 	google::ParseCommandLineFlags(&argc, &argv, true);
 
 	string table_file_name = "dataset/dblp.table";
 	string search_file_name = "dataset/dblp.query";
-	string max_threshold_file_name = "dataset/rule_max_threshold";
-	vector<Similarity> max_thresholds;;
+	string threshold_lowerbound_file_name = "dataset/rule_threshold_lowerbound";
+	vector<Similarity> thresholds_lowerbound;
 
 	if (argc >= 2)
-		max_threshold_file_name = argv[1];
+		threshold_lowerbound_file_name = argv[1];
 	if (argc >= 3)
 		table_file_name = argv[2];
 	if (argc >= 4)
@@ -173,7 +158,7 @@ int main(int argc, char **argv) {
 
 	double time = getTimeStamp();
 	try {
-		max_thresholds = loadMapping(max_threshold_file_name);
+		thresholds_lowerbound = loadMapping(threshold_lowerbound_file_name);
 		loadDataTable(table_file_name, &table, FLAGS_max_base_table_size);
 		loadQueries(search_file_name, &queries, FLAGS_max_query_table_size);
 	} catch (char *errorMsg) {
@@ -185,7 +170,7 @@ int main(int argc, char **argv) {
 
     vector<pair<RowID, RowID>> sim_pairs;
 	SimTable *sim_table = new SimTable();
-	sim_table->InitTableForSearch(table, max_thresholds);
+	sim_table->InitSearch(table, thresholds_lowerbound);
 	for (auto query : queries) {
 		vector<RowID> sim_ids = sim_table->Search(query.row, query.sims);
 		for (auto id : sim_ids)
@@ -198,11 +183,12 @@ int main(int argc, char **argv) {
 	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
 	//freopen("result","w",stdout);
 	for (auto pair : sim_pairs) {
-		auto tuple1 = table[pair.first];
-		auto tuple2 = queries[pair.second].row;
-		if (tuple1[0].str != tuple2[0].str) {
-			PrintRow(tuple1);
-			PrintRow(tuple2);
+		print_debug("pair = %d %d\n", pair.first, pair.second);
+		auto row1 = queries[pair.first].row;
+		auto row2 = table[pair.second];
+		if (row1[0].str != row2[0].str) {
+			printRow(row1);
+			printRow(row2);
 			puts("");
 		}
 	}

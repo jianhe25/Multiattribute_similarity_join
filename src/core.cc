@@ -1,6 +1,8 @@
 #include "core.h"
 #include <algorithm>
 #include <cassert>
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 unordered_map<string, int> g_string_map;
@@ -71,49 +73,75 @@ void print(const Table &table) {
 
 int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
 	//cout << "CalcOverlap " << lenS << " " << lenR << " " << int(ceil((lenS + lenR) * sim.dist / (1.0+sim.dist)));
+
+	double tau = sim.dist;
 	if (sim.distType == ED)
-		return max(lenS, lenR) - GRAM_LENGTH * int(sim.dist);
+		return max(lenS, lenR) - GRAM_LENGTH * int(tau);
 	else if (sim.distType == JACCARD)
-		return int(ceil((lenS + lenR) * sim.dist / (1.0 + sim.dist)));
-	else {
-		cerr << "Unkown DIST_TYPE in CalcOverlap" << endl;
+		return int(ceil((lenS + lenR) * tau / (1.0 + tau)));
+	else if (sim.distType == COSINE)
+		return int(ceil(sqrt(lenS * lenR) * tau));
+	else if (sim.distType == DICE) {
+		return int(ceil((lenS + lenR) * tau  / 2.0));
+	} else if (sim.distType == OLP) {
+		return int(ceil(tau));
+	} else {
+		print_debug("Error: Unkown DIST_TYPE in CalcOverlap");
 		return -1;
 	}
 }
-int CalcPrefixLength(int size, const Similarity& sim) {
+
+int numCount = 0;
+int CalcPrefixLength(int lenR, const Similarity& sim) {
 	double tau = sim.dist;
 	int common = -1;
+	/*
+	 * Overlap deduced in paper
+	 */
 	if (sim.distType == JACCARD)
-		common = size * tau / (1.0 + tau);
+		common = ceil(lenR * tau);
 	else if (sim.distType == COSINE)
-		common = sqrt(double(size)) * tau;
+		common = ceil(lenR * tau * tau);
 	else if (sim.distType == DICE)
-		common = size * tau / 2.0;
+		common = ceil(tau * lenR / (2.0 - tau));
+	else if (sim.distType == OLP)
+		common = ceil(tau);
 	else if (sim.distType == ED)
-		common = max(0, size - (int)(tau * GRAM_LENGTH));
+		common = max(0, lenR + 1 - GRAM_LENGTH - (int)(tau * GRAM_LENGTH));
 	else {
-        print_debug("Unkown DIST_TYPE in CalcPrefixLength %d\n", sim.distType);
+		print_debug("Error: Unkown DIST_TYPE in CalcPrefixLength %d\n", sim.distType);
 		assert(0);
 		return -1;
 	}
-	return size - max(common-1, 0);
-}
 
-// TODO: Precompute Bound
-pair<int,int> CalcLengthBound(int lenS, const Similarity &sim) {
-	if (sim.distType == ED) {
-		return make_pair(max(0, int(lenS - sim.dist)), int(lenS + sim.dist));
-	} else if (sim.distType == JACCARD) {
-		double c = sim.dist / (1.0 + sim.dist);
-		return make_pair(max(0, int(lenS * c / (1.0 - c))), int(lenS / c - lenS));
-	}
-	cerr << "Unkown DIST_TYPE in CalcLengthBound" << endl;
-	return make_pair(-1, -1);
+	//if (sim.distType == JACCARD && ++numCount % 10000 == 0) {
+	//print_debug("common: %d prefix_length: %d\n", common, lenR - max(common-1, 0));
+	//}
+	return lenR - max(common-1, 0);
+
+	/*
+	 * Overlap deduced by myself
+	 */
+	//if (sim.distType == JACCARD)
+		//common = lenR * tau / (1.0 + tau);
+	//else if (sim.distType == COSINE)
+		//common = sqrt(double(lenR)) * tau;
+	//else if (sim.distType == DICE)
+		//common = lenR * tau / 2.0;
+	//else if (sim.distType == OLP)
+		//common = tau;
+	//else if (sim.distType == ED)
+		//common = max(0, lenR - (int)(tau * GRAM_LENGTH));
+	//else {
+        //print_debug("Unkown DIST_TYPE in CalcPrefixLength %d\n", sim.distType);
+		//assert(0);
+		//return -1;
+	//}
 }
 
 void printRow(const vector<Field> &row) {
     for (auto field : row)
-        cout << field.str << " ";
+        cout << field.str << "| ";
     cout << endl;
 }
 void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy) {
@@ -140,3 +168,35 @@ void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isCo
         }
     }
 }
+
+DIST_TYPE getSimType(const string &operand) {
+	if (operand == "ED")
+		return ED;
+	if (operand == "JACCARD")
+		return JACCARD;
+	if (operand == "COSINE")
+		return COSINE;
+	if (operand == "DICE")
+		return DICE;
+	if (operand == "OLP")
+		return OLP;
+	return NON_DEFINE;
+}
+
+void PrintSims(const vector<Similarity> &sims) {
+	puts("==================================");
+	puts("Mapping rules:");
+	for (auto sim : sims) {
+		sim.echo();
+	}
+	puts("==================================");
+}
+
+void ExportTime(string message, double time) {
+	static ofstream stat_file;
+	if (!stat_file.is_open())
+		stat_file.open("time_stat", ios::out | ios::app);
+	stat_file << message << ": " << time << "\n";
+	stat_file.close();
+}
+

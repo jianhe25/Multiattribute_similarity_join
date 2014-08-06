@@ -14,13 +14,6 @@ const int MAX_LINE_LENGTH = 10000;
 DEFINE_int32(max_base_table_size, 1000, "max tuple number in table1");
 DEFINE_int32(max_query_table_size, 1000, "max tuple number in table2");
 
-DIST_TYPE getType(const string &operand) {
-	if (operand == "ED")
-		return ED;
-	if (operand == "JACCARD")
-		return JACCARD;
-	return NON_DEFINE;
-}
 
 int columnNum;
 Table table1;
@@ -70,23 +63,13 @@ void loadMapping(string mapping_file_name,
 	char operand[100];
 	mapping_pairs.clear();
 	while (fscanf(mapping_file, "%s %d %d %lf", operand, &col1, &col2, &dist) != EOF) {
-		if (getType(operand) == NON_DEFINE) {
+		if (getSimType(operand) == NON_DEFINE) {
 			cerr << "NonExist Similarity Function" << endl;
 			break;
 		}
-		mapping_pairs.push_back(Similarity(col1, col2, dist, getType(operand)));
+		mapping_pairs.push_back(Similarity(col1, col2, dist, getSimType(operand)));
 	}
-	puts("==================================");
-	puts("Mapping rules:");
-	for (auto sim : mapping_pairs) {
-		string type;
-		if (sim.distType == ED) {
-			cout << "ED" << " (" << sim.colx << ", " << sim.coly << ") < " << sim.dist << endl;
-		} else {
-			cout << "JACCARD" << " (" << sim.colx << ", " << sim.coly << ") > " << sim.dist << endl;
-		}
-	}
-	puts("==================================");
+	PrintSims(mapping_pairs);
 	fclose(mapping_file);
 }
 
@@ -141,13 +124,12 @@ int main(int argc, char **argv) {
 	}
 	print_debug("Load table time: %.3fs\n", getTimeStamp() - time);
 
+	time = getTimeStamp();
     vector<pair<RowID, RowID>> sim_pairs;
 	SimTable *sim_table = new SimTable();;
 	sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
-	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
 	outputPairs(sim_pairs);
-	FILE *stat_file = fopen("stat_file.csv","ap");
-	fprintf(stat_file, "exp_version %d : (%.2f, %d)\n", FLAGS_exp_version, getTimeStamp() - time, (int)sim_pairs.size());
+	ExportTime("total", getTimeStamp() - time);
 }
 
 

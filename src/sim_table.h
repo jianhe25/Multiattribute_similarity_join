@@ -19,6 +19,16 @@ struct Estimation {
 	bool operator > (const Estimation &other) const;
 	bool operator < (const Estimation &other) const;
 };
+class CompareTreeByEntropy
+{
+	public:
+	CompareTreeByEntropy() {
+	}
+	bool operator() (const TreeIndex *tree1, const TreeIndex *tree2) const
+	{
+		return tree1->treeEntropy_ > tree2->treeEntropy_;
+	}
+} ;
 class SimTable {
 	int num_col_;
 	int num_row_;
@@ -27,12 +37,13 @@ class SimTable {
 	vector<vector<Field*>> column_table2_;
     Verifier verifier_;
 
-	Estimation Estimate(const vector<Field*> &column,
+	Estimation Estimate(const Table &table,
             const Field& query,
             Similarity &sim,
             const vector<int> &ids,
             Filter *filter);
 	int startJoinTime_;
+	CompareTreeByEntropy compareTreeByEntropyObject;
 	/*
 	 * Following method are for experiment purpose, it's flexible component
 	 */
@@ -46,18 +57,19 @@ class SimTable {
 
 	Similarity ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
 	TreeIndex* ChooseBestTreeIndex(Row &query_row);
-	void InitIndex(Table &table1, Table &table2, vector<Similarity> &sims);
-
+	void InitJoinIndex(Table &table1, Table &table2, vector<Similarity> &sims);
+	void CopyColumnY(vector<Similarity> *treeSims, const vector<Similarity> &querySims);
+	vector<RowID> JoinSearch(Row &query_row, vector<Similarity> &sims);
+	void InitJoin(Table &table1, Table &table2, const vector<Similarity> &sims);
+	bool contain(const vector<Similarity> &fullSims, const vector<Similarity> &treeSims);
+	vector<int> Intersect2Lists(vector<int> &a, vector<int> &b);
+	TreeIndex* Concat2Trees(TreeIndex *tree1, TreeIndex *tree2);
 public:
 	SimTable();
 	~SimTable();
-	void InitTableForSearch(Table &table, const vector<Similarity> &sims);
-	void Init(Table &table1, Table &table2, const vector<Similarity> &sims);
 	vector<pair<RowID, RowID>> Join(Table &table1, Table &table2, vector<Similarity> &sims);
-	vector<RowID> JoinSearch(Row &query_row, vector<Similarity> &sims);
 	vector<RowID> Search(Row &query_row, vector<Similarity> &sims);
+	void InitSearch(Table &table, const vector<Similarity> &sims);
 };
-
-
 
 

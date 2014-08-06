@@ -12,11 +12,18 @@
 struct Node {
 	typedef unordered_map<int, Node*> Prefix2Node;
 	int id;
-	static int g_node_id;
     Prefix2Node children;
-	Node();
 	bool hasSubtree;
 	vector<int> leafIds;
+	vector<int> leafIds2;
+	long long cost_;
+
+	// For constructing OPTIMAL_JOIN_TREE
+	vector<int> list1;
+	vector<int> list2;
+
+	Node();
+	~Node();
 	/*vector<int> list; // TODO: to be deleted*/
 };
 
@@ -25,25 +32,27 @@ typedef enum {
 	ORDERED_JOIN_TREE,
 	ORDERED_SEARCH_TREE,
 	UNORDERED_SEARCH_TREE,
+	OPTIMAL_JOIN_TREE,
 	FULL_SPLIT_TREE
 } TreeType;
 
 class TreeIndex {
 	TreeType treeType_;
-	/*Table column_table_;*/
-	/*vector<bool> is_column1_searched_;*/
 	vector<int> candidates_; // TODO: Can use big array
 	Node *root_;
 	Verifier verifier_;
 	Table *tablePtr1_;
 	Table *tablePtr2_;
     unordered_map<int,int> token_counter_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
-    unordered_map<int,int> token_counter2_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
 	int numEstimatedCandidates_;
 	int treeListSize_;
 
-    public:
+	vector<Node*> nodePtrs_;
+	Node* newNode();
 
+	long long CalcTreeCost(Node *node);
+
+    public:
 	vector<Similarity> sims_;
 
 	TreeIndex();
@@ -52,10 +61,10 @@ class TreeIndex {
 
     void CalcTF();
 
-	void Build(Table &table, const vector<Similarity> &sims);
-    void Build(Table &table1,
-			   Table &table2,
-			   const vector<Similarity> &sims);
+	void BuildSearchTree(Table &table, const vector<Similarity> &sims);
+    void BuildJoinTree(Table &table1,
+				       Table &table2,
+					   const vector<Similarity> &sims);
 
     void BuildJoinIndex(Node *node,
 						const vector<int> &ids1,
@@ -69,7 +78,6 @@ class TreeIndex {
 	vector<int> getPrefixList(const Row &row);
 	void TreeSearch(const Node *node, const vector<Field> &row, int depth, int CalcPrefixListSizeOnly);
 	int calcPrefixListSize(const Row &row);
-	bool VerifyRow(Row a, Row b);
 
 	struct CompareTokenByTF {
         const unordered_map<int, int> &token_counter;
@@ -96,8 +104,20 @@ class TreeIndex {
 	double estimateSearchEntropy(const vector<int> &ids1,
 								 const Similarity &sim);
 
+	vector<int> Intersect2Lists(vector<int> &a, vector<int> &b);
+	bool contain(const vector<Similarity> &fullSims, const vector<Similarity> &treeSims);
 	int memory();
 	int debug_count_leaf_;
 	int debug_save_;
+	double treeEntropy_;
+	long long treeCost_;
 };
 
+class treeComparison
+{
+	public:
+	bool operator() (const TreeIndex *tree1, const TreeIndex *tree2) const
+	{
+		return tree1->treeEntropy_ > tree2->treeEntropy_;
+	}
+};

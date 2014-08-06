@@ -7,7 +7,7 @@ vector<RowID> SimTable::Search1_Estimate(const Row &query_row,
 										 vector<int> &candidateIDs) {
 	vector<Estimation> estimations;
 	for (auto &sim : sims) {
-		estimations.push_back(Estimate(column_table1_[sim.colx], query_row[sim.coly],
+		estimations.push_back(Estimate(*tablePtr_, query_row[sim.coly],
 			sim, candidateIDs, &verifier_));
 	}
 	sort(estimations.begin(), estimations.end());

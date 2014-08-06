@@ -33,7 +33,7 @@ i = imdb.IMDb('http')
 out_encoding = sys.stdout.encoding or sys.getdefaultencoding()
 keys = ['title', 'genres', 'director', 'writer', 'cast', 'runtime', 'country', 'language', 'rating', 'plot']
 f = open('imdb.table', 'a')
-for movieID in range(123810, numMovie):
+for movieID in range(403810, numMovie):
     try:
         # Get a Movie object with the data about the movie identified by
         # the given movieID.

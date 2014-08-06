@@ -36,7 +36,12 @@ typedef vector<Field> Column;
 typedef vector<Row> Table;
 
 typedef enum {
-	ED, JACCARD, COSINE, DICE, NON_DEFINE
+	ED,
+	JACCARD,
+	COSINE,
+	DICE,
+	OLP,
+	NON_DEFINE
 } DIST_TYPE;
 
 struct Similarity {
@@ -65,7 +70,16 @@ struct Similarity {
 			return "COSINE";
 		else if (distType == DICE)
 			return "DICE";
-		return "NON_DEFINE";
+		else if (distType == OLP)
+			return "OLP";
+		else
+			return "NON_DEFINE";
+	}
+	void echo() const {
+		if (distType == ED)
+			cout << type() << "(" << colx << ", " << coly << ") >= " << dist << endl;
+		else
+			cout << type() << "(" << colx << ", " << coly << ") <= " << dist << endl;
 	}
 };
 
@@ -75,19 +89,20 @@ struct Query {
 	int id;
 };
 
-void print(const Table &table);
+void printTable(const Table &table);
 
 int CalcOverlap(int lenS, int lenR, const Similarity &sim);
 
 int CalcPrefixLength(int len, const Similarity &sim);
 
-pair<int,int> CalcLengthBound(int lenS, const Similarity &sim);
-
-void printRow(const vector<Field> &row);
+void printRow(const Row &row);
 
 void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy);
 
 void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy);
 
+DIST_TYPE getSimType(const string &operand);
 
+void PrintSims(const vector<Similarity> &sims);
 
+void ExportTime(string message, double time);
