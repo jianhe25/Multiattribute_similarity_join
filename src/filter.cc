@@ -39,12 +39,11 @@ bool Verifier::VerifyEditDistance(const string &a, const string &b, int dist) {
 	edit_distance_ = dp[a.length()][b.length()];
 	return edit_distance_ <= dist;
 }
-// TODO : add early termination
 bool Verifier::VerifyOverlapToken(const vector<int> tokensA, const vector<int> tokensB, int needOverlap) {
 	overlap_ = 0;
 	int j = 0;
 	for (int i = 0; i < (int)tokensA.size(); ++i) {
-		while (j < (int)tokensB.size() && tokensA[i] > tokensB[j])
+		while (j < (int)tokensB.size() && tokensB[j] < tokensA[i])
 			++j;
 		if (j < (int)tokensB.size()) {
 			if (tokensA[i] == tokensB[j]) {
@@ -52,16 +51,20 @@ bool Verifier::VerifyOverlapToken(const vector<int> tokensA, const vector<int> t
 				++j;
 			}
 		}
+		// Early termination
+		if (int(tokensA.size()) - i - 1 + overlap_ < needOverlap || int(tokensB.size()) - j + overlap_ < needOverlap)
+			return false;
 	}
 	return overlap_ >= needOverlap;
 }
 
 bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool isMatch = false;
-	if (sim.distType == ED) {
-		isMatch = VerifyEditDistance(a.str, b.str, sim.dist);
+	if (sim.distType == ED || sim.distType == ES) {
+		int ed = sim.distType == ED? sim.dist : ceil((1 - sim.dist) * max(a.str.length(), b.str.length()));
+		isMatch = VerifyEditDistance(a.str, b.str, ed);
 		//if (a.id == b.id)
-			//cout << "VerifyED " << a.str << "----------" << b.str << " match=" << isMatch << " ED = " << edit_distance_ << endl;
+		//cout << "VerifyED " << a.str << "----------" << b.str << " match=" << isMatch << " ED = " << edit_distance_ << " tau = " << ed << endl;
 	} else if (sim.distType == JACCARD ||
 			   sim.distType == COSINE ||
 			   sim.distType == DICE ||
@@ -69,9 +72,9 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 		int needOverlap = CalcOverlap(a.tokens.size(), b.tokens.size(), sim);
 		isMatch = VerifyOverlapToken(a.tokens, b.tokens, needOverlap);
 		//if (a.id == b.id) {
-			//for (int id : a.tokens) cout << id << " "; cout << endl;
-			//for (int id : b.tokens) cout << id << " "; cout << endl;
-			//cout << "VerifyOverlap " << a.str << "----------" << b.str << " match=" << isMatch << " o = " << needOverlap << " " << a.tokens.size() << " " << b.tokens.size() << endl;
+		//for (int id : a.tokens) cout << id << " "; cout << endl;
+		//for (int id : b.tokens) cout << id << " "; cout << endl;
+		//cout << "VerifyOverlap " << a.str << "----------" << b.str << " match=" << isMatch << " o = " << needOverlap << " " << a.tokens.size() << " " << b.tokens.size() << endl;
 		//}
 	} else {
 		print_debug("Error: Non exist distType\n");
@@ -85,19 +88,27 @@ string LengthFilter::Type() {
 
 bool LengthFilter::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool result = false;
-	if (sim.distType == ED)
-		result = (abs(int(a.str.length() - b.str.length())) <= (int)sim.dist);
+	int lenA = a.tokens.size();
+	int lenB = b.tokens.size();
+	double tau = sim.dist;
+	if (sim.distType == ES) {
+		int ed = ceil((1 - tau) * max(a.str.length(), b.str.length()));
+		result = (abs(int(a.str.length() - b.str.length())) <= ed);
+	} else if (sim.distType == ED)
+		result = (abs(int(a.str.length() - b.str.length())) <= (int)tau);
 	else if (sim.distType == JACCARD) {
-		result = (a.tokens.size() >= ceil(sim.dist * b.tokens.size())) &&
-				 (a.tokens.size() <= floor(b.tokens.size() / sim.dist));
+		result = (lenA >= ceil(tau * lenB)) &&
+				 (lenA <= floor(lenB / tau));
 	} else if (sim.distType == COSINE) {
-		result = (a.tokens.size() >= ceil(sim.dist * sim.dist * b.tokens.size())) &&
-				 (a.tokens.size() <= floor(b.tokens.size() / sim.dist / sim.dist));
+		result = (lenA >= ceil(tau * tau * lenB)) &&
+				 (lenA <= floor(lenB / tau / tau));
 	} else if (sim.distType == DICE) {
-		result = (a.tokens.size() >= ceil(sim.dist / (2-sim.dist) * b.tokens.size())) &&
-				 (a.tokens.size() <= floor((2-sim.dist) / sim.dist * b.tokens.size()));
+		result = (lenA >= ceil(tau / (2-tau) * lenB)) &&
+				 (lenA <= floor((2-tau) / tau * lenB));
+	} else if (sim.distType == OLP) {
+		result = (lenA >= tau) && (lenB >= tau);
 	} else {
-		print_debug("Unkown DIST_TYPE in LengthFilter");
+		print_debug("Unkown DIST_TYPE in LengthFilter\n");
 	}
 	//cout << "LengthFilter " << a.str.length() << "---------------" << b.str.length() << " " << result << " " << sim.dist << endl;
 	return result;
@@ -108,7 +119,8 @@ string ContentFilter::Type() {
 }
 bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim) {
 	bool result = false;
-	if (sim.distType == ED) {
+	if (sim.distType == ED || sim.distType == ES) {
+		int ed = sim.distType == ED? sim.dist : ceil((1 - sim.dist) * max(a.str.length(), b.str.length()));
 		int positive = 0;
 		int negative = 0;
 		result = true;
@@ -119,14 +131,14 @@ bool ContentFilter::filter(const Field &a, const Field &b, const Similarity &sim
 			int delta = apair.second - numb;
 			if (delta > 0) {
 				positive += delta;
-				if (positive > sim.dist) {
+				if (positive > ed) {
 					result = false;
 					break;
 				}
 			}
 			else {
 				negative += -delta;
-				if (negative > sim.dist) {
+				if (negative > ed) {
 					result = false;
 					break;
 				}

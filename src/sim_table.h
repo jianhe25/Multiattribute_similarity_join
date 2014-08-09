@@ -36,6 +36,7 @@ class SimTable {
 	vector<vector<Field*>> column_table1_;
 	vector<vector<Field*>> column_table2_;
     Verifier verifier_;
+	long long numCandidatePairs_;
 
 	Estimation Estimate(const Table &table,
             const Field& query,

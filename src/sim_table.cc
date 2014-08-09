@@ -14,8 +14,8 @@ DEFINE_int32(memory_limit, 100, "maximum memory, 100 means 100MB");
 int choosen_index_count[100];
 double total_index_filter_time = 0.0;
 double total_verify_time = 0.0;
-FILE *fp = fopen("least_num_candidates.txt", "w");
-FILE *fp_candidateSet = fopen("least_candidates_set.txt","w");
+//FILE *fp = fopen("least_num_candidates.txt", "w");
+//FILE *fp_candidateSet = fopen("least_candidates_set.txt","w");
 int num_total = 0, num_total1 = 0;
 
 Estimation::Estimation(double _ratio, double _cost, Filter *_filter, Similarity *_sim) :
@@ -36,6 +36,7 @@ bool Estimation::operator < (const Estimation &other) const {
 }
 
 SimTable::SimTable() {
+	numCandidatePairs_ = 0;
 }
 
 SimTable::~SimTable() {
@@ -61,31 +62,11 @@ void SimTable::InitJoinIndex(Table &table1, Table &table2, vector<Similarity> &s
 		TreeIndex* tree_index = new TreeIndex(UNORDERED_JOIN_TREE);
 		vector<Similarity> tree_sims;
 		tree_sims.push_back(sims[0]);
-		tree_sims.push_back(sims[2]);
 		tree_sims.push_back(sims[1]);
+		tree_sims.push_back(sims[2]);
+		tree_sims.push_back(sims[3]);
 		tree_index->BuildJoinTree(table1, table2, tree_sims);
 		treeIndexes_.push_back(tree_index);
-
-		//tree_sims.clear();
-		//tree_sims.push_back(sims[0]);
-		//tree_sims.push_back(sims[1]);
-		//tree_sims.push_back(sims[2]);
-		//tree_index = new TreeIndex(UNORDERED_JOIN_TREE);
-		//tree_index->BuildJoinTree(table1, table2, tree_sims);
-		//treeIndexes_.push_back(tree_index);
-
-		//tree_sims.clear();
-		//tree_sims.push_back(sims[1]);
-		//tree_sims.push_back(sims[2]);
-		//tree_sims.push_back(sims[0]);
-		//treeIndexes_[1]->BuildJoinTree(table1, table2, tree_sims);
-		//
-		//tree_sims.clear();
-		//tree_sims.push_back(sims[2]);
-		//tree_sims.push_back(sims[1]);
-		//tree_sims.push_back(sims[0]);
-		//treeIndexes_[2]->BuildJoinTree(table1, table2, tree_sims);
-
 		//for (int i = 0; i < num_col_; ++i)
 			//treeIndexes_.push_back(new TreeIndex(UNORDERED_JOIN_TREE));
 		//for (int i = 0; i < int(sims.size()); ++i) {
@@ -150,6 +131,8 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 	ExportTime("Join", getTimeStamp() - startJoinTime_);
     print_debug("table size : %lu %lu\n", table1.size(), table2.size());
 
+	print_debug("numCandidatePairs : %lld\n", numCandidatePairs_);
+	ExportTime("numCandidatePairs", numCandidatePairs_);
 	//for (int c = 0; c < num_col_; ++c)
 	//print_debug("choose column %d as index %d times\n", c, choosen_index_count[c]);
 	return simPairs;
@@ -226,6 +209,7 @@ vector<RowID> SimTable::JoinSearch(Row &query_row, vector<Similarity> &sims) {
 	sort(candidateIDs.begin(), candidateIDs.end());
 	candidateIDs.erase(unique(candidateIDs.begin(), candidateIDs.end()), candidateIDs.end());
 
+	numCandidatePairs_ += candidateIDs.size();
 	double index_filter_time = getTimeStamp() - time;
     total_index_filter_time += index_filter_time;
 	int queryId = query_row[0].id;

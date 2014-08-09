@@ -41,6 +41,7 @@ typedef enum {
 	COSINE,
 	DICE,
 	OLP,
+	ES,
 	NON_DEFINE
 } DIST_TYPE;
 
@@ -54,12 +55,16 @@ struct Similarity {
 	double splitedEntropy;
 
 	Similarity(DIST_TYPE _distType, double _dist) :
-		colx(0), coly(0), dist(_dist), distType(_distType), isSearched(false) {}
+		colx(0), coly(0), dist(_dist), distType(_distType), isSearched(false) {
+		print_debug("Error: this constructor should never be called");
+	}
 
 	Similarity(int _colx, int _coly, double _dist, DIST_TYPE _distType) :
-		colx(_colx), coly(_coly), dist(_dist), distType(_distType), isSearched(false) {}
+		colx(_colx), coly(_coly), dist(_dist), distType(_distType), isSearched(false) {
+	}
 
-	Similarity() : isSearched(false) {}
+	Similarity() : isSearched(false) {
+	}
 
 	string type() const {
 		if (distType == ED)
@@ -72,6 +77,8 @@ struct Similarity {
 			return "DICE";
 		else if (distType == OLP)
 			return "OLP";
+		else if (distType == ES)
+			return "ES";
 		else
 			return "NON_DEFINE";
 	}

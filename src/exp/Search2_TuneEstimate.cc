@@ -29,9 +29,12 @@ vector<RowID> SimTable::Search2_TuneEstimate(const Row &query_row,
 
 	vector<int> result_ids;
 	for (int id : candidateIDs) {
+		//print_debug("id = %d\n", id);
 		bool is_same = true;
 		for (auto &estimation : estimations) {
 			const auto &sim = estimation.sim;
+			//print_debug("type = %s sim = %d pass = %d \n", estimation.filter->Type().c_str(), sim->colx,
+			//estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim));
 			if (!estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
 				is_same = false;
 				break;

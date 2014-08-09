@@ -1,0 +1,9 @@
+#query 1 2
+2	|Common Subexpression Identification in General Algebraic Systems.	|Technical Rep. UKSC 0060, IBM United Kingdom Scientific Centre	|Patrick A. V. Hall	|NULL	|NULL	|NULL	|1974
+ED 3 3 2
+JACCARD 2 2 0.5
+
+#query 2 2
+2	|Common Subexpression Identification in General Algebraic Systems.	|Technical Rep. UKSC 0060, IBM United Kingdom Scientific Centre	|Patrick A. V. Hall	|NULL	|NULL	|NULL	|1974
+ED 3 3 2
+JACCARD 2 2 0.5

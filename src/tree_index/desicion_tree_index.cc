@@ -240,7 +240,7 @@ void TreeIndex::BuildJoinTree(Table &table1,
 		}
 	}
 
-	treeCost_ = CalcTreeCost(root_);
+	//treeCost_ = CalcTreeCost(root_);
 	print_debug("tree_list_size: %d, #node: %ld, time: %fs, joinCost: %lld, old_tree_cost: %lld\n", treeListSize_, nodePtrs_.size(), getTimeStamp() - time, treeCost_, old_tree_cost);
 
     // Sort tokens again by their value instead of TF, so we can verify jaccard later
@@ -354,6 +354,8 @@ void TreeIndex::BuildJoinIndex(Node *node,
 		node->leafIds2 = ids2;
 		return;
 	}
+	//if (node->id % 1000000 == 0)
+		//print_debug("node = %d, depth = %d %lu %lu\n", node->id, depth, ids1.size(), ids2.size());
 
 	const Similarity &sim = sims_[depth];
 	unordered_map<int, vector<int>> index;
@@ -361,6 +363,8 @@ void TreeIndex::BuildJoinIndex(Node *node,
     for (int id : ids1) {
 		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
 		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		//if (prefixlength > 30)
+		//print_debug("prefixlength: %d %d\n",prefixlength, tokens.size());
 		if (prefixlength > 0) {
 			for (int i = 0; i < prefixlength; ++i) {
 				vector<int> &list = index[ tokens[i] ];
@@ -368,6 +372,7 @@ void TreeIndex::BuildJoinIndex(Node *node,
 					list.push_back(id);
 			}
 		} else {
+			assert(0);
 			index[-1].push_back(id);
 		}
 	}
@@ -383,6 +388,7 @@ void TreeIndex::BuildJoinIndex(Node *node,
 					list.push_back(id);
 			}
 		} else {
+			assert(0);
 			index2[-1].push_back(id);
 		}
 	}
@@ -395,30 +401,30 @@ void TreeIndex::BuildJoinIndex(Node *node,
 		splited_cost += (long long)list1_size * list2.second.size();
 	}
 
-	if (splited_cost == 0 && treeType_ != OPTIMAL_JOIN_TREE) {
+	if (splited_cost == 0) {
 		node->hasSubtree = false;
 		node->leafIds.clear();
 		node->leafIds2.clear();
-	} else {
-		if (splited_cost < unsplited_cost || treeType_ == OPTIMAL_JOIN_TREE) {
-			node->hasSubtree = true;
-			for (const auto &list2 : index2) {
-				int token = list2.first;
-				const auto it = index.find(token);
-				if (it != index.end()) {
-					Node *new_child = newNode();
-					node->children[token] = new_child;
-					const vector<int> *list1 = &(it->second);
-					BuildJoinIndex(new_child, *list1, list2.second, depth+1);
-				}
+		return;
+	}
+	if (splited_cost < unsplited_cost || treeType_ == OPTIMAL_JOIN_TREE) {
+		node->hasSubtree = true;
+		for (const auto &list2 : index2) {
+			int token = list2.first;
+			const auto it = index.find(token);
+			if (it != index.end()) {
+				Node *new_child = newNode();
+				node->children[token] = new_child;
+				const vector<int> *list1 = &(it->second);
+				BuildJoinIndex(new_child, *list1, list2.second, depth+1);
 			}
-		} else {
-			//print_debug("!!!!!!!!!splited_cost: %lld unsplited_cost: %lld, depth: %d\n", splited_cost, unsplited_cost, depth);
-			node->hasSubtree = false;
-			node->leafIds = ids1;
-			node->leafIds2 = ids2;
-			treeListSize_ += ids1.size();
 		}
+	} else {
+		//print_debug("!!!!!!!!!splited_cost: %lld unsplited_cost: %lld, depth: %d\n", splited_cost, unsplited_cost, depth);
+		node->hasSubtree = false;
+		node->leafIds = ids1;
+		node->leafIds2 = ids2;
+		treeListSize_ += ids1.size();
 	}
 }
 

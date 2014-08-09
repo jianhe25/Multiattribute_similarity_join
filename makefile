@@ -20,13 +20,13 @@ SEARCH_ELF=./sim_table_search
 TESTS=./src/test/filter_test
 
 EXP=2
-INDEX_VERSION=1
+INDEX_VERSION=3
 # 1: single index
 # 2: unordered-join tree
 # 3: ordered-join tree
 # 4: optimal-join tree
 MEMORY_LIMIT=100
-JOIN_ARGS=./dataset/mapping_rule ./dataset/dblp_80w.table ./dataset/dblp_70w.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000000 --index_version=$(INDEX_VERSION)
+JOIN_ARGS=./dataset/mapping_rule ./dataset/imdb/imdb_35w.table ./dataset/imdb/imdb_35w.table --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000000 --index_version=$(INDEX_VERSION)
 SEARCH_ARGS=./dataset/rule_threshold_lowerbound ./dataset/dblp_80w.table ./dataset/dblp.query --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000000 --index_version=$(INDEX_VERSION) --memory_limit=$(MEMORY_LIMIT)
 
 join: $(JOIN_ELF)

@@ -16,7 +16,6 @@ int HashCode(const string &word) {
 }
 
 Field::Field() {
-	//cout << "Construct empty Field " << endl;
 }
 Field::Field(const string &_str, int _id) : str(_str), id(_id) {
 }
@@ -76,15 +75,18 @@ int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
 
 	double tau = sim.dist;
 	if (sim.distType == ED)
-		return max(lenS, lenR) - GRAM_LENGTH * int(tau);
+		return max(0, max(lenS, lenR) + 1 - GRAM_LENGTH * int(tau + 1));
 	else if (sim.distType == JACCARD)
 		return int(ceil((lenS + lenR) * tau / (1.0 + tau)));
 	else if (sim.distType == COSINE)
 		return int(ceil(sqrt(lenS * lenR) * tau));
-	else if (sim.distType == DICE) {
+	else if (sim.distType == DICE)
 		return int(ceil((lenS + lenR) * tau  / 2.0));
-	} else if (sim.distType == OLP) {
+	else if (sim.distType == OLP)
 		return int(ceil(tau));
+	else if (sim.distType == ES) {
+		int ed = ceil((1-tau) * max(lenR, lenS));
+		return max(0, max(lenS, lenR) + 1 - GRAM_LENGTH * int(ed + 1));
 	} else {
 		print_debug("Error: Unkown DIST_TYPE in CalcOverlap");
 		return -1;
@@ -108,8 +110,11 @@ int CalcPrefixLength(int lenR, const Similarity& sim) {
 		common = ceil(tau);
 	else if (sim.distType == ED)
 		common = max(0, lenR + 1 - GRAM_LENGTH - (int)(tau * GRAM_LENGTH));
+	else if (sim.distType == ES)
+		common = max(0, int(ceil(lenR + 1 - ((1-tau) * lenR + 1) * GRAM_LENGTH)));
 	else {
-		print_debug("Error: Unkown DIST_TYPE in CalcPrefixLength %d\n", sim.distType);
+		print_debug("Error: Unkown DIST_TYPE in CalcPrefixLength ");
+		cout << sim.type() << endl;
 		assert(0);
 		return -1;
 	}
@@ -117,7 +122,7 @@ int CalcPrefixLength(int lenR, const Similarity& sim) {
 	//if (sim.distType == JACCARD && ++numCount % 10000 == 0) {
 	//print_debug("common: %d prefix_length: %d\n", common, lenR - max(common-1, 0));
 	//}
-	return lenR - max(common-1, 0);
+	return max(0, lenR - max(common-1, 0));
 
 	/*
 	 * Overlap deduced by myself
@@ -149,7 +154,7 @@ void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy) {
 	for (const auto &sim : sims) {
 		int col = isColy? sim.coly : sim.colx;
 		for (unsigned i = 0; i < table.size(); ++i) {
-            if (sim.distType == ED) {
+            if (sim.distType == ED || sim.distType == ES) {
 				table[i][col].GenerateContent();
 			}
         }
@@ -180,6 +185,8 @@ DIST_TYPE getSimType(const string &operand) {
 		return DICE;
 	if (operand == "OLP")
 		return OLP;
+	if (operand == "ES")
+		return ES;
 	return NON_DEFINE;
 }
 
@@ -196,7 +203,9 @@ void ExportTime(string message, double time) {
 	static ofstream stat_file;
 	if (!stat_file.is_open())
 		stat_file.open("time_stat", ios::out | ios::app);
-	stat_file << message << ": " << time << "\n";
+	stat_file << message << ": " << time << " ";
+	if (message == "total")
+		stat_file << "\n";
 	stat_file.close();
 }
 

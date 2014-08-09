@@ -11,8 +11,8 @@ using namespace std;
 
 const int MAX_LINE_LENGTH = 10000;
 
-DEFINE_int32(max_base_table_size, 1000, "max tuple number in table1");
-DEFINE_int32(max_query_table_size, 1000, "max tuple number in table2");
+DEFINE_int32(max_base_table_size, 1000000, "max tuple number in table1");
+DEFINE_int32(max_query_table_size, 1000000, "max tuple number in table2");
 
 
 int columnNum;
@@ -80,21 +80,21 @@ void print(Row tuple) {
 }
 
 void outputPairs(const vector<pair<RowID, RowID>> &sim_pairs) {
+	int counter = 0;
 	/*
 	 *	Output sim_pairs
 	 */
-	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
-	freopen("result","w",stdout);
-	for (auto pair : sim_pairs) {
-		auto tuple1 = table1[pair.first];
-		auto tuple2 = table2[pair.second];
-		if (tuple1[0].str != tuple2[0].str) {
-			print(tuple1);
-			print(tuple2);
-			puts("");
-		}
-	}
-	freopen("/dev/stdout", "w", stdout);
+	//freopen("result","w",stdout);
+	//for (auto pair : sim_pairs) {
+		//auto tuple1 = table1[pair.first];
+		//auto tuple2 = table2[pair.second];
+		//if (tuple1[0].id != tuple2[0].id && ++counter < 10) {
+			//print(tuple1);
+			//print(tuple2);
+			//puts("");
+		//}
+	//}
+	//freopen("/dev/stdout", "w", stdout);
 }
 int main(int argc, char **argv) {
 	google::SetUsageMessage(joinUsageText);
@@ -128,6 +128,7 @@ int main(int argc, char **argv) {
     vector<pair<RowID, RowID>> sim_pairs;
 	SimTable *sim_table = new SimTable();;
 	sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
+	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
 	outputPairs(sim_pairs);
 	ExportTime("total", getTimeStamp() - time);
 }
