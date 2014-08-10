@@ -201,9 +201,18 @@ void PrintSims(const vector<Similarity> &sims) {
 
 void ExportTime(string message, double time) {
 	static ofstream stat_file;
+	static ofstream formated_stat_file;
 	if (!stat_file.is_open())
 		stat_file.open("time_stat", ios::out | ios::app);
-	stat_file << message << ": " << time << " ";
+	if (!formated_stat_file.is_open())
+		formated_stat_file.open("formated_stat_file", ios::out | ios::app);
+	if (message == "numCandidatePairs") {
+		stat_file << message << ": " << (long long)time << " ";
+		formated_stat_file << (long long)time << " ";
+	} else {
+		stat_file << message << ": " << time << " ";
+		formated_stat_file << time << " ";
+	}
 	if (message == "total")
 		stat_file << "\n";
 	stat_file.close();

@@ -16,7 +16,6 @@ double total_index_filter_time = 0.0;
 double total_verify_time = 0.0;
 //FILE *fp = fopen("least_num_candidates.txt", "w");
 //FILE *fp_candidateSet = fopen("least_candidates_set.txt","w");
-int num_total = 0, num_total1 = 0;
 
 Estimation::Estimation(double _ratio, double _cost, Filter *_filter, Similarity *_sim) :
 	ratio(_ratio), cost(_cost), filter(_filter), sim(_sim) {
@@ -105,7 +104,6 @@ void SimTable::InitJoin(Table &table1, Table &table2, const vector<Similarity> &
 	GenerateContent(sims, table1, /*isColy=*/0);
 	GenerateContent(sims, table2, /*isColy=*/1);
 	print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
-	ExportTime("GenerateTokenAndContent", getTimeStamp() - startTime);
 
 	time = getTimeStamp();
 	initFilters();
@@ -126,15 +124,17 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
 	}
-	print_debug("num_total = %d num_total1 = %d ratio = %f\n", num_total, num_total1, num_total * 1.0 / num_total1);
     print_debug("Join time %.3fs\n", getTimeStamp() - startJoinTime_);
-	ExportTime("Join", getTimeStamp() - startJoinTime_);
     print_debug("table size : %lu %lu\n", table1.size(), table2.size());
 
 	print_debug("numCandidatePairs : %lld\n", numCandidatePairs_);
+	print_debug("numRepeatCandidatePairs : %lld\n", numRepeatCandidatePairs_);
+	print_debug("filter_time: %f, verify_time: %f\n", total_index_filter_time, total_verify_time);
 	ExportTime("numCandidatePairs", numCandidatePairs_);
-	//for (int c = 0; c < num_col_; ++c)
-	//print_debug("choose column %d as index %d times\n", c, choosen_index_count[c]);
+	ExportTime("Filter", total_index_filter_time);
+	ExportTime("Verify", total_verify_time);
+	for (int c = 0; c < num_col_; ++c)
+		print_debug("choose column %d as index %d times\n", c, choosen_index_count[c]);
 	return simPairs;
 }
 
@@ -197,7 +197,7 @@ vector<RowID> SimTable::JoinSearch(Row &query_row, vector<Similarity> &sims) {
 
 	if (FLAGS_index_version == 0 || FLAGS_index_version == 1) {
 		Similarity index_column = ChooseBestIndexColumn(query_row, sims);
-		candidateIDs = std::move( indexes_[index_column.colx]->search(query_row[index_column.coly]) );
+		candidateIDs = std::move( indexes_[index_column.colx]->getPrefixList(query_row[index_column.coly]) );
 	} else if (FLAGS_index_version == 2) {
 		//TreeIndex *best_tree_index = ChooseBestTreeIndex(query_row);
 		TreeIndex *best_tree_index = treeIndexes_[0];
@@ -206,6 +206,7 @@ vector<RowID> SimTable::JoinSearch(Row &query_row, vector<Similarity> &sims) {
 		candidateIDs = std::move( treeIndex_->getPrefixList(query_row) );
 	}
 
+	numRepeatCandidatePairs_ += candidateIDs.size();
 	sort(candidateIDs.begin(), candidateIDs.end());
 	candidateIDs.erase(unique(candidateIDs.begin(), candidateIDs.end()), candidateIDs.end());
 
@@ -464,29 +465,3 @@ void SimTable::InitSearch(Table &table, const vector<Similarity> &sims) {
 	print_debug("End building search index, takes %fs\n", getTimeStamp() - time);
 }
 
-// Heap based method, not works
-//std::priority_queue<TreeIndex*, vector<TreeIndex*>, CompareTreeByEntropy> tree_heap(treeIndexes_.begin(), treeIndexes_.end());
-//vector<TreeIndex*> temp_tree_indexes;
-//while (tree_heap.size() > 1 && FLAGS_memory_limit > 0) {
-	//TreeIndex *tree1 = tree_heap.top();
-	//tree_heap.pop();
-	//TreeIndex *tree2 = tree_heap.top();
-	//tree_heap.pop();
-	//temp_tree_indexes.push_back(tree1);
-	//temp_tree_indexes.push_back(tree2);
-
-	//vector<Similarity> temp_sims = tree1->sims_;
-	//temp_sims.insert(temp_sims.end(), tree2->sims_.begin(), tree2->sims_.end());
-	//TreeIndex* tree_index = new TreeIndex(ORDERED_SEARCH_TREE);
-	//tree_index->BuildSearchTree(table, temp_sims);
-	//tree_heap.push(tree_index);
-	//FLAGS_memory_limit -= tree_index->memory();
-
-	//print_debug("entropy : %f\n", tree_index->treeEntropy_);
-	//for (const auto &sim : temp_sims) printf("%d ",sim.colx); puts("");
-//}
-//while (!tree_heap.empty()) {
-	//temp_tree_indexes.push_back(tree_heap.top());
-	//tree_heap.pop();
-//}
-//treeIndexes_ = temp_tree_indexes;

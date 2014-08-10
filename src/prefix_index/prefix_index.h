@@ -45,7 +45,7 @@ public:
 	};
 	void build(vector<Field*> &fields1, vector<Field*> &fields2, Similarity *sim);
 
-    unordered_set<int> getPrefixList(Field &query);
+    vector<int> getPrefixList(Field &query);
 	int calcPrefixListSize(Field &query);
 
 	vector<int> search(Field &query);

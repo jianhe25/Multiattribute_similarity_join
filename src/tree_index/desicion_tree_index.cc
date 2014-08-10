@@ -331,8 +331,8 @@ void TreeIndex::BuildSearchIndex(Node *node,
 
 Node* TreeIndex::newNode() {
 	Node* node = new Node();
-	nodePtrs_.push_back(node);
-	node->id = nodePtrs_.size();
+	//nodePtrs_.push_back(node);
+	//node->id = nodePtrs_.size();
 	return node;
 }
 
@@ -347,11 +347,11 @@ void TreeIndex::BuildJoinIndex(Node *node,
 	}
 
 	long long unsplited_cost = (long long)ids1.size() * ids2.size();
-	if (depth == int(sims_.size()) || unsplited_cost < 10) {
+	if (depth == int(sims_.size()) || unsplited_cost < 1000) {
 		node->hasSubtree = false;
 		treeListSize_ += ids1.size();
 		node->leafIds = ids1;
-		node->leafIds2 = ids2;
+		//node->leafIds2 = ids2;
 		return;
 	}
 	//if (node->id % 1000000 == 0)
@@ -363,17 +363,10 @@ void TreeIndex::BuildJoinIndex(Node *node,
     for (int id : ids1) {
 		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
 		int prefixlength = CalcPrefixLength(tokens.size(), sim);
-		//if (prefixlength > 30)
-		//print_debug("prefixlength: %d %d\n",prefixlength, tokens.size());
-		if (prefixlength > 0) {
-			for (int i = 0; i < prefixlength; ++i) {
-				vector<int> &list = index[ tokens[i] ];
-				if (list.empty() || list.back() != id)
-					list.push_back(id);
-			}
-		} else {
-			assert(0);
-			index[-1].push_back(id);
+		for (int i = 0; i < prefixlength; ++i) {
+			vector<int> &list = index[ tokens[i] ];
+			if (list.empty() || list.back() != id)
+				list.push_back(id);
 		}
 	}
 
@@ -381,15 +374,10 @@ void TreeIndex::BuildJoinIndex(Node *node,
 	for (int id : ids2) {
 		const vector<int> &tokens = (*tablePtr2_)[id][sim.coly].tokens;
 		int prefixlength = CalcPrefixLength(tokens.size(), sim);
-		if (prefixlength > 0) {
-			for (int i = 0; i < prefixlength; ++i) {
-				vector<int> &list = index2[ tokens[i] ];
-				if (list.empty() || list.back() != id)
-					list.push_back(id);
-			}
-		} else {
-			assert(0);
-			index2[-1].push_back(id);
+		for (int i = 0; i < prefixlength; ++i) {
+			vector<int> &list = index2[ tokens[i] ];
+			if (list.empty() || list.back() != id)
+				list.push_back(id);
 		}
 	}
 
@@ -404,26 +392,28 @@ void TreeIndex::BuildJoinIndex(Node *node,
 	if (splited_cost == 0) {
 		node->hasSubtree = false;
 		node->leafIds.clear();
-		node->leafIds2.clear();
+		//node->leafIds2.clear();
 		return;
 	}
 	if (splited_cost < unsplited_cost || treeType_ == OPTIMAL_JOIN_TREE) {
 		node->hasSubtree = true;
-		for (const auto &list2 : index2) {
+		for (auto &list2 : index2) {
 			int token = list2.first;
 			const auto it = index.find(token);
 			if (it != index.end()) {
 				Node *new_child = newNode();
 				node->children[token] = new_child;
-				const vector<int> *list1 = &(it->second);
+				vector<int> *list1 = &(it->second);
 				BuildJoinIndex(new_child, *list1, list2.second, depth+1);
+				FreeContainer(*list1);
 			}
+			FreeContainer(list2.second);
 		}
 	} else {
 		//print_debug("!!!!!!!!!splited_cost: %lld unsplited_cost: %lld, depth: %d\n", splited_cost, unsplited_cost, depth);
 		node->hasSubtree = false;
 		node->leafIds = ids1;
-		node->leafIds2 = ids2;
+		//node->leafIds2 = ids2;
 		treeListSize_ += ids1.size();
 	}
 }

@@ -130,6 +130,7 @@ int main(int argc, char **argv) {
 	sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
 	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
 	outputPairs(sim_pairs);
+	print_debug("total_time : %f\n", getTimeStamp() - time);
 	ExportTime("total", getTimeStamp() - time);
 }
 

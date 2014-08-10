@@ -111,11 +111,11 @@ int PrefixIndex::calcPrefixListSize(Field &query) {
 	}
 }
 
-unordered_set<int> PrefixIndex::getPrefixList(Field &query) {
+vector<int> PrefixIndex::getPrefixList(Field &query) {
 	vector<int> &tokens = query.tokens;
 	sort(tokens.begin(), tokens.end(), CompareTokenByTF(*this));
 	int prefixlength = CalcPrefixLength(tokens.size(), *sim_);
-	unordered_set<FieldID> candidates;
+	vector<int> candidates;
 	/*
 	 * prefixlength == 0 means no prefix can be used to filter candidates
 	 */
@@ -127,17 +127,17 @@ unordered_set<int> PrefixIndex::getPrefixList(Field &query) {
     int num_large_index_candidates_scanned = 0;
     if (prefixlength == 0) {
 		for (int fieldid = 0; fieldid < int(fields_->size()); ++fieldid)
-			candidates.insert(fieldid);
+			candidates.push_back(fieldid);
 	} else {
 		for (int i = 0; i < prefixlength; ++i) {
 			if (index_.find(tokens[i]) != index_.end()) {
 				for (int fieldid: index_[ tokens[i] ]) {
-					candidates.insert(fieldid);
+					candidates.push_back(fieldid);
 				}
-				num_candidates_scanned += index_[ tokens[i] ].size();
-				if (list_has_subtree.find(tokens[i]) != list_has_subtree.end()) {
-					num_large_index_candidates_scanned += index_[tokens[i]].size();
-				}
+				//num_candidates_scanned += index_[ tokens[i] ].size();
+				//if (list_has_subtree.find(tokens[i]) != list_has_subtree.end()) {
+				//num_large_index_candidates_scanned += index_[tokens[i]].size();
+				//}
 			}
 		}
 	}
@@ -170,7 +170,9 @@ int debugCandidatesNum = 0;
 int debugMatchidNum = 0;
 
 vector<int> PrefixIndex::search(Field &query) {
-    unordered_set<FieldID> candidates = std::move( getPrefixList(query) );
+    vector<FieldID> candidates = std::move( getPrefixList(query) );
+	sort(candidates.begin(), candidates.end());
+	candidates.erase(unique(candidates.begin(), candidates.end()), candidates.end());
     double time = getTimeStamp();
 	vector<int> candidateIDs;
 	for (auto fieldid : candidates) {
