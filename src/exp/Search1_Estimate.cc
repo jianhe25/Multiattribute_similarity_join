@@ -23,10 +23,19 @@ vector<RowID> SimTable::Search1_Estimate(const Row &query_row,
 		bool is_same = true;
 		for (auto &estimation : estimations) {
 			const auto &sim = estimation.sim;
-			if (!estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
-				is_same = false;
-				break;
+			for (auto filter : g_filters) {
+				if (sim->distType != ED && filter->Type() == "ContentFilter")
+					continue;
+				if (!filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
+					is_same = false;
+					break;
+				}
 			}
+			if (!is_same) break;
+			//if (!estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
+			//is_same = false;
+			//break;
+			//}
 		}
 		if (is_same)
 			result_ids.push_back(id);

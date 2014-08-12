@@ -19,17 +19,23 @@ SEARCH_ELF=./sim_table_search
 
 TESTS=./src/test/filter_test
 
-EXP=2
-INDEX_VERSION=1
+VERIFY_EXP_VERSION=2
+INDEX_VERSION=3
 # 1: single index
 # 2: unordered-join tree
-# 3: ordered-join tree
+# 3: ordered-join tree, greedy tree
 # 4: optimal-join tree
-MEMORY_LIMIT=100
-TABLE1=./dataset/dblp_100w.table
-TABLE2=./dataset/dblp_100w.table
-JOIN_ARGS=./dataset/mapping_rule $(TABLE1) $(TABLE2) --exp_version=$(EXP) --max_base_table_size=5000000 --max_query_table_size=5000000 --index_version=$(INDEX_VERSION)
-SEARCH_ARGS=./dataset/rule_threshold_lowerbound ./dataset/dblp_80w.table ./dataset/dblp.query --exp_version=$(EXP) --max_base_table_size=1000000 --max_query_table_size=1000000 --index_version=$(INDEX_VERSION) --memory_limit=$(MEMORY_LIMIT)
+MEMORY_CONTROL=1
+TABLE1=./dataset/imdb/imdb_38w.table
+TABLE2=./dataset/imdb/imdb_38w.table
+SEARCH_EXP=dynamic_search
+# dynamic_search
+# verify_directly
+# intersect_only
+
+JOIN_ARGS=./dataset/mapping_rule $(TABLE1) $(TABLE2) --verify_exp_version=$(VERIFY_EXP_VERSION) --max_base_table_size=5000000 --max_query_table_size=5000000 --index_version=$(INDEX_VERSION)
+
+SEARCH_ARGS=./dataset/dblp_threshold_lowerbound ./dataset/dblp_204.table ./dataset/query/dblp_10w.query --verify_exp_version=$(VERIFY_EXP_VERSION) --max_base_table_size=1000000 --max_query_table_size=1000000 --index_version=$(INDEX_VERSION) --memory_control=$(MEMORY_CONTROL) --search_exp=$(SEARCH_EXP)
 
 join: $(JOIN_ELF)
 	$(JOIN_ELF) $(JOIN_ARGS)

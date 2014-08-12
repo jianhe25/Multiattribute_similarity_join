@@ -96,3 +96,32 @@ if exp_version == 4:
         with open('formated_stat_file', 'a') as formated_stat_file:
             formated_stat_file.write('\n')
 
+# compare verification DBLP
+if exp_version == 5:
+    for exp in range(1, 6):
+        tau = 1.0 - exp * 0.05;
+        f = open('dataset/mapping_rule', 'w')
+        f.write('COSINE 1 1 ' + str(tau) + '\n')
+        f.write('JACCARD 2 2 ' + str(tau) + '\n')
+        f.write('ES 3 3 ' + str(tau) + '\n')
+        f.write('ES 7 7 ' + str(tau) + '\n')
+        f.close()
+        call(["make", "TABLE1=./dataset/dblp_100w_join.table", "TABLE2=./dataset/dblp_100w_join.table", "VERIFY_EXP_VERSION=2"])
+        call(["make", "TABLE1=./dataset/dblp_100w_join.table", "TABLE2=./dataset/dblp_100w_join.table", "VERIFY_EXP_VERSION=1"])
+        with open('formated_stat_file', 'a') as formated_stat_file:
+            formated_stat_file.write('\n')
+
+# compare verification IMDB
+if exp_version == 6:
+    for exp in range(1, 6):
+        tau = 1.0 - exp * 0.05;
+        f = open('dataset/mapping_rule', 'w')
+        f.write('COSINE 0 0 ' + str(tau) + '\n')
+        f.write('JACCARD 1 1 ' + str(tau) + '\n')
+        f.write('ES 2 2 ' + str(tau) + '\n')
+        f.write('ES 3 3 ' + str(tau) + '\n')
+        f.close()
+        call(["make", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/imdb/imdb_38w.table", "VERIFY_EXP_VERSION=2"])
+        call(["make", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/imdb/imdb_38w.table", "VERIFY_EXP_VERSION=1"])
+        with open('formated_stat_file', 'a') as formated_stat_file:
+            formated_stat_file.write('\n')

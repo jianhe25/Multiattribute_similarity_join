@@ -6,6 +6,7 @@
 #include "../sim_table.h"
 #include "../tree_index/tree_index.h"
 #include "help_text.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -17,16 +18,6 @@ DEFINE_int32(max_query_table_size, 1000, "max tuple number in table2");
 int columnNum;
 Table table;
 vector<Query> queries;
-
-void PrintSims(const vector<Similarity> &sims) {
-	puts("==================================");
-	puts("Mapping rules:");
-	for (auto sim : mapping_pairs) {
-		string type;
-		cout << sim.toString() << endl;
-	}
-	puts("==================================");
-}
 
 void loadDataTable(string table_file_name, Table *table, int read_limit) {
 	char line[MAX_LINE_LENGTH];
@@ -81,10 +72,10 @@ void loadQueries(string query_file_name, vector<Query> *queries, int read_limit)
 		queryid--;
 
 		/* read query row */
-		print_debug("num_sim = %d\n", num_sim);
+		//print_debug("num_sim = %d\n", num_sim);
 		if (fgets(line, MAX_LINE_LENGTH, query_file) == NULL)
 			print_debug("error: fgets line");
-		print_debug("line = %s\n",line);
+		//print_debug("line = %s\n",line);
 		splitString(line, '|', strs);
 		int num_col = strs.size();
 		// Validate column_number
@@ -98,6 +89,7 @@ void loadQueries(string query_file_name, vector<Query> *queries, int read_limit)
 			query.id = queryid;
 		}
 
+		bool has_error = false;
 		/* read Similarity */
 		for (int i = 0; i < num_sim; ++i) {
 			if (fgets(line, MAX_LINE_LENGTH, query_file) == NULL)
@@ -105,12 +97,15 @@ void loadQueries(string query_file_name, vector<Query> *queries, int read_limit)
 			sscanf(line, "%s %d %d %lf", operand, &col1, &col2, &dist);
 			if (getSimType(operand) == NON_DEFINE) {
 				print_debug("NonExist Similarity Function %s\n", operand);
+				print_debug("dist = %f %d\n", dist, queryid);
+				has_error = true;
 				break;
 			}
 			query.sims.push_back( Similarity(col1, col2, dist, getSimType(operand)) );
 		}
-		PrintSims(query.sims);
-		queries->push_back(query);
+		//PrintSims(query.sims);
+		if (!has_error)
+			queries->push_back(query);
 		if ((int)queries->size() >= read_limit)
 			break;
 	}
@@ -171,37 +166,68 @@ int main(int argc, char **argv) {
     vector<pair<RowID, RowID>> sim_pairs;
 	SimTable *sim_table = new SimTable();
 	sim_table->InitSearch(table, thresholds_lowerbound);
-	for (auto query : queries) {
-		vector<RowID> sim_ids = sim_table->Search(query.row, query.sims);
-		for (auto id : sim_ids)
-			sim_pairs.push_back(make_pair(query.id, id));
+	for (Query &query : queries) {
+		for (const auto &sim : query.sims) {
+			if (sim.distType == ED || sim.distType == ES) {
+				query.row[sim.coly].GenerateGrams();
+			} else {
+				query.row[sim.coly].GenerateTokens();
+			}
+			vector<int> &tokens = query.row[sim.coly].tokens;
+			const unordered_map<int,int> &id_map = g_id_map[sim.colx];
+			for (int i = 0; i < tokens.size(); ++i) {
+				const auto it = id_map.find(tokens[i]);
+				if (it == id_map.end())
+					tokens[i] = -1;
+				else
+					tokens[i] = it->second;
+			}
+			sort(tokens.begin(), tokens.end());
+		}
 	}
+
+	int queryid = 0;
+	//for (int exp = 1; exp <= 5; ++exp) {
+	//double tau = 1 - exp * 0.05;
+		double start_search_time = getTimeStamp();
+		FLAGS_total_filter_time = 0.0;
+		for (auto query : queries) {
+			//for (Similarity &sim : query.sims) {
+				//sim.dist = tau;
+			//}
+			vector<RowID> sim_ids = sim_table->Search(query.row, query.sims);
+			for (auto id : sim_ids)
+				sim_pairs.push_back(make_pair(query.id, id));
+			//if (sim_ids.size() > 1000) {
+				//PrintSims(query.sims);
+				//print_debug("result size = %d\n", sim_ids.size());
+			//}
+			if (++queryid % 10000 == 0) {
+				print_debug("queryid %d, sim_size %d time %f\n",queryid, sim_pairs.size(), getTimeStamp() - start_search_time);
+			}
+		}
+		double total_time = getTimeStamp() - start_search_time;
+		print_debug("filter_time: %f, verify: %f, total_time : %f\n", FLAGS_total_filter_time, total_time - FLAGS_total_filter_time, total_time);
+		ExportTime("filter", FLAGS_total_filter_time);
+		ExportTime("total", getTimeStamp() - start_search_time);
+		//}
 
 	/*
 	 *	Output sim_pairs
 	 */
 	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
 	//freopen("result","w",stdout);
-	for (auto pair : sim_pairs) {
-		print_debug("pair = %d %d\n", pair.first, pair.second);
-		auto row1 = queries[pair.first].row;
-		auto row2 = table[pair.second];
-		if (row1[0].str != row2[0].str) {
-			printRow(row1);
-			printRow(row2);
-			puts("");
-		}
-	}
+	//for (auto pair : sim_pairs) {
+		//print_debug("pair = %d %d\n", pair.first, pair.second);
+		//auto row1 = queries[pair.first].row;
+		//auto row2 = table[pair.second];
+		//if (row1[0].str != row2[0].str) {
+			//printRow(row1);
+			//printRow(row2);
+			//puts("");
+		//}
+	//}
 	//freopen("/dev/stdout", "w", stdout);
-
-	double delta = getTimeStamp() - time;
-	try {
-		FILE *stat_file = fopen("stat_file.csv","ap");
-        fprintf(stat_file, "exp_version %d : (%.2f, %d)\n", FLAGS_exp_version, delta, (int)sim_pairs.size());
-	} catch (char *errorMsg) {
-		cerr << errorMsg << endl;
-		return -1;
-	}
 }
 
 

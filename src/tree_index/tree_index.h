@@ -4,6 +4,10 @@
 #include <queue>
 #include <unordered_set>
 #include "../filter.h"
+#include <gflags/gflags.h>
+
+/*DECLARE_int32(smallest_leaf_in_search_tree);*/
+/*DECLARE_int32(smallest_cost_in_join_tree);*/
 
 // This structure may use subtree token set,
 // but currently we use map<string, Node*>
@@ -43,11 +47,14 @@ class TreeIndex {
 	Verifier verifier_;
 	Table *tablePtr1_;
 	Table *tablePtr2_;
-    unordered_map<int,int> token_counter_[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 50
+
+
 	int numEstimatedCandidates_;
-	int treeListSize_;
+	long long treeListSize_;
+	long long treeNodeNum_;
 
 	vector<Node*> nodePtrs_;
+	vector<Node*> leafPtrs_;
 	Node* newNode();
 
 	long long CalcTreeCost(Node *node);
@@ -58,8 +65,6 @@ class TreeIndex {
 	TreeIndex();
 	TreeIndex(TreeType treeType);
     ~TreeIndex();
-
-    void CalcTF();
 
 	void BuildSearchTree(Table &table, const vector<Similarity> &sims);
     void BuildJoinTree(Table &table1,
@@ -104,13 +109,19 @@ class TreeIndex {
 	double estimateSearchEntropy(const vector<int> &ids1,
 								 const Similarity &sim);
 
+	pair<double,double> EstimateBenifitAndCost(const Similarity &sim);
+
 	vector<int> Intersect2Lists(vector<int> &a, vector<int> &b);
 	bool contain(const vector<Similarity> &fullSims, const vector<Similarity> &treeSims);
+	// unit : MB
 	int memory();
+	long long size();
 	int debug_count_leaf_;
 	int debug_save_;
 	double treeEntropy_;
 	long long treeCost_;
+
+	static long long SingleBufferSize;
 };
 
 class treeComparison

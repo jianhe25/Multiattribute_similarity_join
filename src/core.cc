@@ -7,6 +7,8 @@ using namespace std;
 
 unordered_map<string, int> g_string_map;
 int g_string_max_length;
+unordered_map<int,int> g_token_counter[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 10
+unordered_map<int,int> g_id_map[MAX_COLUMN_NUM]; // MAX COLUMN NUMBER = 10
 
 int HashCode(const string &word) {
 	if (g_string_map.find(word) == g_string_map.end()) {
@@ -29,9 +31,10 @@ void Field::GenerateTokens() {
 		tokens.push_back(HashCode(word));
 	}
 	// TODO: to sort by TF in the future
-	sort(tokens.begin(), tokens.end());
+	//sort(tokens.begin(), tokens.end());
     g_string_max_length = max(g_string_max_length, (int)tokens.size());
 }
+
 void Field::GenerateGrams() {
 	tokens.clear();
 	for (int i = 0; i <= int(str.length() - GRAM_LENGTH); ++i) {
@@ -41,9 +44,23 @@ void Field::GenerateGrams() {
 	if (str.length() < GRAM_LENGTH)
 		tokens.push_back(HashCode(str));
 	// TODO: to sort by TF in the future
-	sort(tokens.begin(), tokens.end());
+	//sort(tokens.begin(), tokens.end());
     g_string_max_length = max(g_string_max_length, (int)tokens.size());
 }
+
+//void Field::GeneratePositionGrams() {
+	//positionedTokens.clear();
+	//for (int i = 0; i <= int(str.length() - GRAM_LENGTH); ++i) {
+		//int t = HashCode(str.substr(i, GRAM_LENGTH));
+		//positionedTokens.push_back(make_pair(t, i));
+	//}
+	//if (str.length() < GRAM_LENGTH)
+		//positionedTokens.push_back(HashCode(str));
+	//// TODO: to sort by TF in the future
+	//sort(positionedTokens.begin(), positionedTokens.end());
+    //g_string_max_length = max(g_string_max_length, (int)tokens.size());
+//}
+
 void Field::GenerateContent() {
 	contentPairs_.clear();
 	for (int i = 0; i < int(str.length()); ++i) {
@@ -160,6 +177,10 @@ void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy) {
         }
     }
 }
+
+bool CompareTokenByTF(const pair<int,int> &a, const pair<int,int> &b) {
+	return a.second < b.second;
+}
 void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy) {
 	// GenerateTokens or GenerateGrams
 	for (const auto &sim : sims) {
@@ -171,7 +192,36 @@ void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isCo
 				table[i][col].GenerateGrams();
 			}
         }
-    }
+		unordered_map<int,int> &token_counter = g_token_counter[col];
+		unordered_map<int,int> &id_map = g_id_map[col];
+		if (!isColy) {
+			for (unsigned i = 0; i < table.size(); ++i) {
+				const vector<int> &tokens = table[i][col].tokens;
+				for (int token : tokens)
+					token_counter[token]++;
+				//sort(tokens.begin(), tokens.end());
+			}
+
+			vector<pair<int,int>> packs;
+			for (auto kv : token_counter)
+				packs.push_back(make_pair(kv.first, kv.second));
+			sort(packs.begin(), packs.end(), CompareTokenByTF);
+
+			for (int i = 0; i < packs.size(); ++i)
+				id_map.insert(make_pair(packs[i].first, i));
+		}
+		for (unsigned i = 0; i < table.size(); ++i) {
+			vector<int> &tokens = table[i][col].tokens;
+			for (int i = 0; i < tokens.size(); ++i) {
+				const auto it = id_map.find( tokens[i] );
+				if (it == id_map.end())
+					tokens[i] = -1;
+				else
+					tokens[i] = it->second;
+			}
+			sort(tokens.begin(), tokens.end());
+		}
+	}
 }
 
 DIST_TYPE getSimType(const string &operand) {

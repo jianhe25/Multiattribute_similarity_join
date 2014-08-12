@@ -10,11 +10,13 @@ using namespace std;
 #define GRAM_LENGTH 3
 #define SAMPLE_RATIO 0.005
 
-const int MAX_COLUMN_NUM = 50;
+const int MAX_COLUMN_NUM = 10;
 
 typedef int RowID;
 extern unordered_map<string, int> g_string_map;
 extern int g_string_max_length;
+extern unordered_map<int, int> g_token_counter[MAX_COLUMN_NUM];
+extern unordered_map<int, int> g_id_map[MAX_COLUMN_NUM];
 
 int HashCode(const string &word);
 
@@ -22,6 +24,7 @@ struct Field {
 	string str;
 	int id;
 	vector<int> tokens;
+	vector<pair<int, int>> positionedTokens;
 	unordered_map<char, int> contentPairs_;
 	Field();
     ~Field();

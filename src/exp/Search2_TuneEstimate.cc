@@ -5,6 +5,7 @@ using namespace std;
 vector<RowID> SimTable::Search2_TuneEstimate(const Row &query_row,
 										     vector<Similarity> &sims,
 										     vector<int> &candidateIDs) {
+
 	vector<Estimation> estimations;
 	for (auto &sim : sims) {
 		if (sim.isSearched) continue;
@@ -12,7 +13,7 @@ vector<RowID> SimTable::Search2_TuneEstimate(const Row &query_row,
 			if (sim.distType != ED && filter->Type() == "ContentFilter")
 				continue;
 			estimations.push_back(Estimate(*tablePtr_, query_row[sim.coly],
-										   sim, candidateIDs, filter));
+						sim, candidateIDs, filter));
 		}
 	}
 	sort(estimations.begin(), estimations.end());
@@ -34,7 +35,7 @@ vector<RowID> SimTable::Search2_TuneEstimate(const Row &query_row,
 		for (auto &estimation : estimations) {
 			const auto &sim = estimation.sim;
 			//print_debug("type = %s sim = %d pass = %d \n", estimation.filter->Type().c_str(), sim->colx,
-			//estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim));
+					//estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim));
 			if (!estimation.filter->filter((*tablePtr_)[id][sim->colx], query_row[sim->coly], *sim)) {
 				is_same = false;
 				break;

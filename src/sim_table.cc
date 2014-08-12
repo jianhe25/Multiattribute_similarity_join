@@ -4,11 +4,14 @@
 #include <unordered_set>
 #include <algorithm>
 #include <queue>
+#include <set>
 using namespace std;
 
-DEFINE_int32(exp_version, 0, "experiment version");
+DEFINE_int32(verify_exp_version, 0, "verify_experiment version");
 DEFINE_int32(index_version, 0, "index version, 0 means no index at all");
-DEFINE_int32(memory_limit, 100, "maximum memory, 100 means 100MB");
+DEFINE_double(memory_control, 1, "allocate memory_control * single_buffer_size for multi-trees");
+DEFINE_string(search_exp, "dynamic_search", "3 different exps: dynamic_search, verify_directly, intersect_only");
+DEFINE_double(total_filter_time, 0, "time for filtering");
 
 // Following variable used for debugging and statistics
 int choosen_index_count[100];
@@ -95,15 +98,14 @@ void SimTable::InitJoinIndex(Table &table1, Table &table2, vector<Similarity> &s
 }
 void SimTable::InitJoin(Table &table1, Table &table2, const vector<Similarity> &sims) {
 	double time = getTimeStamp();
-	double startTime = getTimeStamp();
 	GenerateTokensOrGram(sims, table1, /*isColy=*/0);
 	GenerateTokensOrGram(sims, table2, /*isColy=*/1);
 	print_debug("GenerateTokensOrGram time: %.3fs\n", getTimeStamp() - time);
 
-	time = getTimeStamp();
-	GenerateContent(sims, table1, /*isColy=*/0);
-	GenerateContent(sims, table2, /*isColy=*/1);
-	print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
+	//time = getTimeStamp();
+	//GenerateContent(sims, table1, /*isColy=*/0);
+	//GenerateContent(sims, table2, /*isColy=*/1);
+	//print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
 
 	time = getTimeStamp();
 	initFilters();
@@ -114,16 +116,19 @@ void SimTable::InitJoin(Table &table1, Table &table2, const vector<Similarity> &
 }
 
 vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<Similarity> &sims) {
+
 	InitJoin(table1, table2, sims);
 	InitJoinIndex(table1, table2, sims);
 
 	vector<pair<RowID, RowID>> simPairs;
 	startJoinTime_ = getTimeStamp();
+
 	for (unsigned i = 0; i < table2.size(); ++i) {
 		vector<RowID> results = JoinSearch(table2[i], sims);
 		for (int id : results)
 			simPairs.push_back(make_pair(id, i));
 	}
+
     print_debug("Join time %.3fs\n", getTimeStamp() - startJoinTime_);
     print_debug("table size : %lu %lu\n", table1.size(), table2.size());
 
@@ -228,20 +233,20 @@ vector<RowID> SimTable::JoinSearch(Row &query_row, vector<Similarity> &sims) {
     vector<RowID> result;
 	if (candidateIDs.size() == 0)
 		return result;
-	if (FLAGS_exp_version == 0) {
+	if (FLAGS_verify_exp_version == 0) {
         result = Search0_NoEstimate(query_row, sims, candidateIDs);
-    } else if (FLAGS_exp_version == 1) {
+    } else if (FLAGS_verify_exp_version == 1) {
         result = Search1_Estimate(query_row, sims, candidateIDs);
-    } else if (FLAGS_exp_version == 2) {
+    } else if (FLAGS_verify_exp_version == 2) {
         result = Search2_TuneEstimate(query_row, sims, candidateIDs);
     } else {
-        print_debug("Error: NonExist exp_version, exp_version is in [0,2]");
+        print_debug("Error: NonExist verify_exp_version, verify_exp_version is in [0,2]");
         result = vector<RowID>(0);
 	}
 	double verify_time = getTimeStamp() - time;
     total_verify_time += verify_time;
-	//if (queryId % 100000 == 0)
-	//print_debug("Verify time: %.5fs %.5fs Join time: %.5fs\n", verify_time, total_verify_time / queryId, getTimeStamp() - startJoinTime_);
+	if (queryId % 100000 == 0)
+		print_debug("Verify time: %.5fs %.5fs Join time: %.5fs\n", verify_time, total_verify_time / queryId, getTimeStamp() - startJoinTime_);
 	return result;
 }
 
@@ -280,6 +285,13 @@ vector<int> SimTable::Intersect2Lists(vector<int> &a, vector<int> &b) {
 	return intersection;
 }
 
+bool SimTable::contain(const vector<Similarity> &treeSims, const Similarity &sim) {
+	for (const Similarity &treesim : treeSims)
+		if (treesim.colx == sim.colx) {
+			return true;
+		}
+	return false;
+}
 bool SimTable::contain(const vector<Similarity> &querySims, const vector<Similarity> &treeSims) {
 	for (const Similarity &sim1 : treeSims) {
 		bool found = false;
@@ -310,11 +322,12 @@ vector<Similarity> union2sims(const vector<Similarity> &sims1, const vector<Simi
 	return union_sims;
 }
 
-void SimTable::CopyColumnY(vector<Similarity> *treeSims, const vector<Similarity> &querySims) {
+void SimTable::CopySimToTreeSim(vector<Similarity> *treeSims, const vector<Similarity> &querySims) {
 	for (Similarity &sim1 : *treeSims) {
 		for (const Similarity &sim2 : querySims) {
 			if (sim1.colx == sim2.colx) {
 				sim1.coly = sim2.coly;
+				sim1.dist = sim2.dist;
 				break;
 			}
 		}
@@ -322,58 +335,88 @@ void SimTable::CopyColumnY(vector<Similarity> *treeSims, const vector<Similarity
 }
 
 vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
+	int estimate_verify_cost = 0;
 	for (const Similarity &sim : sims) {
-		if (sim.distType == ED) {
-			query_row[sim.coly].GenerateContent();
-			query_row[sim.coly].GenerateGrams();
-		} else {
-			query_row[sim.coly].GenerateTokens();
-		}
+		estimate_verify_cost += query_row[sim.coly].tokens.size();
 	}
-
-	// TODO: use estimation later
-	const int AVERAGE_VERIFY_COST = 5;
 
 	vector<RowID> candidateIDs;
 	vector<Similarity> union_sims;
-	for (int i = 0; i < (int)treeIndexes_.size(); ++i) {
-		if (contain(sims, treeIndexes_[i]->sims_) && !contain(union_sims, treeIndexes_[i]->sims_)) {
-			CopyColumnY(&treeIndexes_[i]->sims_, sims);
-			int list_size = treeIndexes_[i]->calcPrefixListSize(query_row);
-			if (!candidateIDs.empty() &&
-				list_size > int(candidateIDs.size()) * AVERAGE_VERIFY_COST) {
-				return candidateIDs;
+
+	double time = getTimeStamp();
+	int round = 0;
+	while (true) {
+		TreeIndex *best_tree = NULL;
+		int min_list_size = tablePtr_->size();
+		for (int i = 0; i < (int)treeIndexes_.size(); ++i) {
+			if (contain(sims, treeIndexes_[i]->sims_) && !contain(union_sims, treeIndexes_[i]->sims_)) {
+				CopySimToTreeSim(&treeIndexes_[i]->sims_, sims);
+				int list_size = treeIndexes_[i]->calcPrefixListSize(query_row);
+				if (list_size < min_list_size) {
+					min_list_size = list_size;
+					best_tree = treeIndexes_[i];
+				}
 			}
-			vector<int> list = treeIndexes_[i]->getPrefixList(query_row);
-			if (candidateIDs.empty())
-				candidateIDs = list;
-			else
-				candidateIDs = std::move( Intersect2Lists(candidateIDs, list) );
-			union_sims = std::move( union2sims(union_sims, treeIndexes_[i]->sims_) );
-			print_debug("candidateIDs.size() = %lu %lu\n",candidateIDs.size(), list.size());
 		}
+		if (best_tree == NULL)
+			break;
+		if (round > 0) {
+			if (FLAGS_search_exp == "dynamic_search") {
+				long long cost1 = candidateIDs.size() * estimate_verify_cost;
+				long long cost2  = min_list_size  + candidateIDs.size() + min(min_list_size, int(candidateIDs.size())) * 0.0001 * estimate_verify_cost;
+				if (cost2 > cost1)
+					break;
+			} else if (FLAGS_search_exp == "verify_directly") {
+				//print_debug("verify_directly\n");
+				break;
+			} else if (FLAGS_search_exp == "intersect_only") {
+				//print_debug("intersect_only\n");
+				// donothing, always intersect 2 lists
+			} else {
+				print_debug("Error: NonExist search exp: %s", FLAGS_search_exp.c_str());
+			}
+		}
+		vector<int> list = best_tree->getPrefixList(query_row);
+		if (round == 0)
+			candidateIDs = list;
+		else
+			candidateIDs = std::move( Intersect2Lists(candidateIDs, list) );
+		//print_debug("sim: ");
+		//for (const auto &sim : best_tree->sims_)
+			//printf("%d ",sim.colx);
+		//printf(" candidateIDs.size() = %lu %lu\n", candidateIDs.size(), list.size());
+		if (candidateIDs.empty())
+			break;
+		union_sims = std::move( union2sims(union_sims, best_tree->sims_) );
+		++round;
 	}
 
 	sort(candidateIDs.begin(), candidateIDs.end());
 	candidateIDs.erase(unique(candidateIDs.begin(), candidateIDs.end()), candidateIDs.end());
-	for (int id : candidateIDs)
-		printf("%d ",id);
-	puts("");
+	//print_debug("candidateIDs.size() : %ld\n", candidateIDs.size());
+	//for (int id : candidateIDs)
+	//printf("%d ",id);
+	//puts("");
+	FLAGS_total_filter_time += getTimeStamp() - time;
+	//return vector<RowID>(0);
 
+	for (int i = 0; i < query_row.size(); ++i) query_row[i].id = 2;
     vector<RowID> result;
 	if (candidateIDs.size() == 0)
 		return result;
-	if (FLAGS_exp_version == 0) {
+	if (FLAGS_verify_exp_version == 0) {
         result = Search0_NoEstimate(query_row, sims, candidateIDs);
-    } else if (FLAGS_exp_version == 1) {
+    } else if (FLAGS_verify_exp_version == 1) {
         result = Search1_Estimate(query_row, sims, candidateIDs);
-    } else if (FLAGS_exp_version == 2) {
+    } else if (FLAGS_verify_exp_version == 2) {
         result = Search2_TuneEstimate(query_row, sims, candidateIDs);
     } else {
         print_debug("Error: NonExist exp_version, exp_version is in [0, 2]");
         result = vector<RowID>(0);
 	}
 
+	//print_debug("result.size(): %d\n", result.size());
+	//puts("");
 	return result;
 }
 
@@ -384,15 +427,9 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 //return tree1->treeEntropy_ > tree2->treeEntropy_;
 //}
 
-TreeIndex *SimTable::Concat2Trees(TreeIndex *tree1, TreeIndex *tree2) {
-	vector<Similarity> temp_sims;
-	if (tree1->treeEntropy_ > tree2->treeEntropy_) {
-		temp_sims = tree1->sims_;
-		temp_sims.insert(temp_sims.end(), tree2->sims_.begin(), tree2->sims_.end());
-	} else {
-		temp_sims = tree2->sims_;
-		temp_sims.insert(temp_sims.end(), tree1->sims_.begin(), tree1->sims_.end());
-	}
+TreeIndex *SimTable::ConcatTreeSim(const TreeIndex *tree1, const Similarity &sim) {
+	vector<Similarity> temp_sims = tree1->sims_;
+	temp_sims.push_back(sim);
 	TreeIndex* newtree = new TreeIndex(UNORDERED_SEARCH_TREE);
 	newtree->BuildSearchTree(*tablePtr_, temp_sims);
 	return newtree;
@@ -407,18 +444,19 @@ void SimTable::InitSearch(Table &table, const vector<Similarity> &sims) {
 	GenerateTokensOrGram(sims, table, /*isColy=*/0);
 	print_debug("GenerateTokensOrGram time: %.3fs\n", getTimeStamp() - time);
 
-	GenerateContent(sims, table, /*isColy=*/0);
-	time = getTimeStamp();
-	print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
+	//GenerateContent(sims, table, /*isColy=*/0);
+	//time = getTimeStamp();
+	//print_debug("GenerateContent time: %.3fs\n", getTimeStamp() - time);
 
 	time = getTimeStamp();
 	initFilters();
-    // TODO: add memory control later
     tablePtr_ = &table;
-	num_row_ = table.size();
-	num_col_ = table[0].size();
 
 	print_debug("Start building search index...\n");
+
+	long long single_buffer_size = 0;
+
+	set<int> sim_bit_set;
 	/*
 	 * Build one layer index
 	 */
@@ -428,40 +466,76 @@ void SimTable::InitSearch(Table &table, const vector<Similarity> &sims) {
 		TreeIndex* tree_index = new TreeIndex(UNORDERED_SEARCH_TREE);
 		tree_index->BuildSearchTree(table, temp_sims);
 		treeIndexes_.push_back(tree_index);
-		FLAGS_memory_limit -= treeIndex_->memory();
+		single_buffer_size += tree_index->size();
+		int sim_bit = 1 << sims[i].colx;
+		sim_bit_set.insert(sim_bit);
+	}
+	long long multi_buffer_size = single_buffer_size * (FLAGS_memory_control - 1);
+
+	for (int i = 0; i < treeIndexes_.size(); ++i) {
+		print_debug("tree with sim %d, size : %f\n", treeIndexes_[i]->sims_[0].colx, double(treeIndexes_[i]->size()) / single_buffer_size);
 	}
 
-	sort(treeIndexes_.begin(), treeIndexes_.end(), compareTreeByEntropyObject);
-	reverse(treeIndexes_.begin(), treeIndexes_.end());
-
-	int num_tree = treeIndexes_.size();
-	for (int depth = 2; depth <= sims.size(); ++depth) {
-		vector<pair<TreeIndex*, TreeIndex*>> tree_pairs;
-		for (int i = 0; i < int(treeIndexes_.size()); ++i)
-			for (int j = i+1; j < int(treeIndexes_.size()); ++j)
-			if (treeIndexes_[i]->sims_.size() + treeIndexes_[j]->sims_.size() == depth &&
-				!contain(treeIndexes_[i]->sims_, treeIndexes_[j]->sims_) &&
-				!contain(treeIndexes_[j]->sims_, treeIndexes_[i]->sims_)) {
-				tree_pairs.push_back(make_pair(treeIndexes_[i], treeIndexes_[j]));
+	TreeIndex::SingleBufferSize = single_buffer_size;
+	/*
+	 * Select (tree,sim) with max benefit / cost among all combinations, use heap for dynamic update
+	 */
+	priority_queue<TreeSimPair> treeSimPairHeap;
+	for (int i = 0; i < treeIndexes_.size(); ++i) {
+		for (int j = 0; j < sims.size(); ++j) {
+			if (!contain(treeIndexes_[i]->sims_, sims[j])) {
+				pair<double,double> benefit_and_cost = treeIndexes_[i]->EstimateBenifitAndCost(sims[j]);
+				if (benefit_and_cost.first > 0.0 && benefit_and_cost.second > 0.0)
+					treeSimPairHeap.push(TreeSimPair(i, j, benefit_and_cost.first, benefit_and_cost.second));
 			}
-		sort(tree_pairs.begin(), tree_pairs.end(), compareByPairEntropy);
-		for (const auto tree_pair : tree_pairs) {
-			TreeIndex *newtree = Concat2Trees(tree_pair.first, tree_pair.second);
-			treeIndexes_.push_back(newtree);
-			FLAGS_memory_limit -= newtree->memory();
-			if (++num_tree > 10) break;
-			if (FLAGS_memory_limit < 0)
-				break;
 		}
-		if (num_tree > 10) break;
-		if (FLAGS_memory_limit < 0)
-			break;
 	}
+
+	while (multi_buffer_size > 0 && !treeSimPairHeap.empty()) {
+		TreeSimPair treesim = treeSimPairHeap.top();
+		treeSimPairHeap.pop();
+		const TreeIndex *tree = treeIndexes_[ treesim.treeid ];
+		const Similarity &sim = sims[treesim.simid];
+
+		int sim_bit = 1 << sim.colx;
+		for (const auto &sim : tree->sims_)
+			sim_bit |= 1 << sim.colx;
+		if (sim_bit_set.find(sim_bit) != sim_bit_set.end()) {
+			continue;
+		}
+
+		TreeIndex *newtree = ConcatTreeSim(tree, sim);
+		treeIndexes_.push_back(newtree);
+		multi_buffer_size -= newtree->size();
+
+		sim_bit = 0;
+		for (const auto &sim : newtree->sims_)
+			sim_bit |= 1 << sim.colx;
+		sim_bit_set.insert(sim_bit);
+		print_debug("select %d %d %f %f %f\n", treesim.treeid, treesim.simid, treesim.benefit, treesim.cost / single_buffer_size, double(newtree->size()) / single_buffer_size);
+		if (multi_buffer_size <= 0) {
+			break;
+		}
+		for (int i = 0; i < tree->sims_.size(); ++i) {
+		}
+
+		int newtree_id = treeIndexes_.size() - 1;
+		for (int j = 0; j < sims.size(); ++j) {
+			if (!contain(newtree->sims_, sims[j])) {
+				pair<double,double> benefit_and_cost = newtree->EstimateBenifitAndCost(sims[j]);
+				if (benefit_and_cost.first > 0.0 && benefit_and_cost.second > 0.0)
+					treeSimPairHeap.push(TreeSimPair(newtree_id, j, benefit_and_cost.first, benefit_and_cost.second));
+			}
+		}
+	}
+
 	sort(treeIndexes_.begin(), treeIndexes_.end(), compareTreeByEntropyObject);
 	for (const auto &tree : treeIndexes_) {
-		print_debug("tree.depth %d entropy : %f\n", tree->sims_.size(), tree->treeEntropy_);
+		print_debug("tree.depth %d  entropy : %f, sims: ", tree->sims_.size(), tree->treeEntropy_);
+		for (const auto sim : tree->sims_)
+			printf("%d ", sim.colx);
+		puts("");
 	}
-	//sort(treeIndexes_.begin(), treeIndexes_.end(), CompareTreeByEntropy);
 	print_debug("End building search index, takes %fs\n", getTimeStamp() - time);
 }
 

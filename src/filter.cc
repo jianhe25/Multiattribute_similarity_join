@@ -15,6 +15,7 @@ int Verifier::overlap() {
 	return overlap_;
 }
 bool Verifier::VerifyEditDistance(const string &a, const string &b, int dist) {
+	edit_distance_ = 0;
 	int LIMIT = dist + 1;
     //cout << "a = " << a << endl;
     //cout << "b = " << b << endl;
@@ -74,7 +75,7 @@ bool Verifier::filter(const Field &a, const Field &b, const Similarity &sim) {
 		//if (a.id == b.id) {
 		//for (int id : a.tokens) cout << id << " "; cout << endl;
 		//for (int id : b.tokens) cout << id << " "; cout << endl;
-		//cout << "VerifyOverlap " << a.str << "----------" << b.str << " match=" << isMatch << " o = " << needOverlap << " " << a.tokens.size() << " " << b.tokens.size() << endl;
+		//cout << "VerifyOverlap " << a.str << "----------" << b.str << " match=" << isMatch << " needOverlap = " << needOverlap << " overlap= " << overlap_ << " length = " << a.tokens.size() << " " << b.tokens.size() << endl;
 		//}
 	} else {
 		print_debug("Error: Non exist distType\n");
@@ -157,8 +158,8 @@ vector<Filter*> g_filters;
 void initFilters() {
 	g_filters.clear();
 	registerFilter(new LengthFilter());
+	//registerFilter(new ContentFilter());
 	registerFilter(new Verifier());
-	registerFilter(new ContentFilter());
 }
 void registerFilter(Filter *filter) {
 	g_filters.push_back(filter);

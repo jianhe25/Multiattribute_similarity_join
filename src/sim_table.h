@@ -8,7 +8,8 @@
 #include "tree_index/tree_index.h"
 
 using namespace std;
-DECLARE_int32(exp_version);
+DECLARE_int32(verify_exp_version);
+DECLARE_double(total_filter_time);
 
 struct Estimation {
 	double ratio;
@@ -60,12 +61,13 @@ class SimTable {
 	Similarity ChooseBestIndexColumn(Row &query_row, vector<Similarity> &sims);
 	TreeIndex* ChooseBestTreeIndex(Row &query_row);
 	void InitJoinIndex(Table &table1, Table &table2, vector<Similarity> &sims);
-	void CopyColumnY(vector<Similarity> *treeSims, const vector<Similarity> &querySims);
+	void CopySimToTreeSim(vector<Similarity> *treeSims, const vector<Similarity> &querySims);
 	vector<RowID> JoinSearch(Row &query_row, vector<Similarity> &sims);
 	void InitJoin(Table &table1, Table &table2, const vector<Similarity> &sims);
 	bool contain(const vector<Similarity> &fullSims, const vector<Similarity> &treeSims);
+	bool contain(const vector<Similarity> &treeSims, const Similarity &sim);
 	vector<int> Intersect2Lists(vector<int> &a, vector<int> &b);
-	TreeIndex* Concat2Trees(TreeIndex *tree1, TreeIndex *tree2);
+	TreeIndex* ConcatTreeSim(const TreeIndex *tree1, const Similarity &sim);
 public:
 	SimTable();
 	~SimTable();
@@ -74,4 +76,30 @@ public:
 	void InitSearch(Table &table, const vector<Similarity> &sims);
 };
 
+struct TreeSimPair {
+	int treeid;
+	int simid;
+	double benefit;
+	double cost;
+	TreeSimPair(int _treeid, int _simid, double _benefit, double _cost) :
+		treeid(_treeid), simid(_simid), benefit(_benefit), cost(_cost) {}
 
+	bool operator < (const TreeSimPair &other) const {
+		if (this->cost == 0.0 && other.cost == 0.0) {
+			assert(this->benefit == 0.0);
+			assert(other.benefit == 0.0);
+			return false;
+		}
+		if (this->cost == 0.0) {
+			assert(this->benefit == 0.0);
+			return true;
+		}
+		if (other.cost == 0.0) {
+			assert(other.benefit == 0.0);
+			return false;
+		}
+		/*assert(this->cost != 0);*/
+		/*assert(other.cost != 0);*/
+		return this->benefit / this->cost < other.benefit / other.cost;
+	}
+};
