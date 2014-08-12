@@ -30,9 +30,16 @@ void Field::GenerateTokens() {
 		stripString(word);
 		tokens.push_back(HashCode(word));
 	}
-	// TODO: to sort by TF in the future
-	//sort(tokens.begin(), tokens.end());
-    g_string_max_length = max(g_string_max_length, (int)tokens.size());
+}
+
+void Field::GeneratePositionTokens() {
+	vector<string> words;
+	splitString(str.c_str(), ' ', words);
+	positionedTokens.clear();
+	for (int i = 0; i < words.size(); ++i) {
+		stripString(words[i]);
+		positionedTokens.push_back(make_pair(HashCode(words[i]), i));
+	}
 }
 
 void Field::GenerateGrams() {
@@ -43,23 +50,17 @@ void Field::GenerateGrams() {
 	}
 	if (str.length() < GRAM_LENGTH)
 		tokens.push_back(HashCode(str));
-	// TODO: to sort by TF in the future
-	//sort(tokens.begin(), tokens.end());
-    g_string_max_length = max(g_string_max_length, (int)tokens.size());
 }
 
-//void Field::GeneratePositionGrams() {
-	//positionedTokens.clear();
-	//for (int i = 0; i <= int(str.length() - GRAM_LENGTH); ++i) {
-		//int t = HashCode(str.substr(i, GRAM_LENGTH));
-		//positionedTokens.push_back(make_pair(t, i));
-	//}
-	//if (str.length() < GRAM_LENGTH)
-		//positionedTokens.push_back(HashCode(str));
-	//// TODO: to sort by TF in the future
-	//sort(positionedTokens.begin(), positionedTokens.end());
-    //g_string_max_length = max(g_string_max_length, (int)tokens.size());
-//}
+void Field::GeneratePositionGrams() {
+	positionedTokens.clear();
+	for (int i = 0; i <= int(str.length() - GRAM_LENGTH); ++i) {
+		int t = HashCode(str.substr(i, GRAM_LENGTH));
+		positionedTokens.push_back(make_pair(t, i));
+	}
+	if (str.length() < GRAM_LENGTH)
+		positionedTokens.push_back(make_pair(HashCode(str), 0));
+}
 
 void Field::GenerateContent() {
 	contentPairs_.clear();
@@ -110,8 +111,41 @@ int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
 	}
 }
 
+int edjoin_prefix_length(const vector<pair<int, int>> &positionedTokens, const Similarity &sim)
+{
+	int threshold = sim.distType == ED? sim.dist : ceil((1 - sim.dist) * (positionedTokens.size()+GRAM_LENGTH-1));
+	int low = threshold + 1;
+	int high = GRAM_LENGTH * threshold + 1;
+	// binary search minimum gram length
+	while (low < high)
+	{
+		int mid = (low + high) / 2;
+		int errors = 0, location = 0;
+		vector<pair<int, int>> duplicate(positionedTokens.begin(), positionedTokens.begin() + mid);
+		sort(duplicate.begin(), duplicate.end(), [](const pair<int, int> &p1, const pair<int, int> &p2) {
+				return p1.second < p2.second;
+				});
+		for (int k = 0; k < mid; k++)
+		{
+			if (duplicate[k].second >= location)
+			{
+				errors++;
+				location = duplicate[k].second + GRAM_LENGTH;
+			}
+		}
+		if (errors <= threshold)
+		{
+			low = mid + 1;
+		} else {
+			high = mid;
+		}
+	}
+	return low;
+}
+
 int numCount = 0;
-int CalcPrefixLength(int lenR, const Similarity& sim) {
+int CalcPrefixLength(const Field &field, const Similarity& sim) {
+	int lenR = field.tokens.size();
 	double tau = sim.dist;
 	int common = -1;
 	/*
@@ -125,10 +159,19 @@ int CalcPrefixLength(int lenR, const Similarity& sim) {
 		common = ceil(tau * lenR / (2.0 - tau));
 	else if (sim.distType == OLP)
 		common = ceil(tau);
-	else if (sim.distType == ED)
+	else if (sim.distType == ED) {
+		if (FLAGS_baseline_exp == "edjoin") {
+			return edjoin_prefix_length(field.positionedTokens, sim);
+		}
 		common = max(0, lenR + 1 - GRAM_LENGTH - (int)(tau * GRAM_LENGTH));
-	else if (sim.distType == ES)
+	}
+	else if (sim.distType == ES) {
 		common = max(0, int(ceil(lenR + 1 - ((1-tau) * lenR + 1) * GRAM_LENGTH)));
+		if (FLAGS_baseline_exp == "edjoin") {
+			//print_debug("fileld.positionedTokens = %d\n", field.positionedTokens.size());
+			return edjoin_prefix_length(field.positionedTokens, sim);
+		}
+	}
 	else {
 		print_debug("Error: Unkown DIST_TYPE in CalcPrefixLength ");
 		cout << sim.type() << endl;
@@ -136,9 +179,6 @@ int CalcPrefixLength(int lenR, const Similarity& sim) {
 		return -1;
 	}
 
-	//if (sim.distType == JACCARD && ++numCount % 10000 == 0) {
-	//print_debug("common: %d prefix_length: %d\n", common, lenR - max(common-1, 0));
-	//}
 	return max(0, lenR - max(common-1, 0));
 
 	/*
@@ -181,7 +221,57 @@ void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy) {
 bool CompareTokenByTF(const pair<int,int> &a, const pair<int,int> &b) {
 	return a.second < b.second;
 }
+
+void GeneratePositionTokenOrGram(const vector<Similarity> &sims, Table &table, int isColy) {
+	// GenerateTokens or GenerateGrams
+	for (const auto &sim : sims) {
+		int col = isColy? sim.coly : sim.colx;
+		for (unsigned i = 0; i < table.size(); ++i) {
+            if (sim.distType == JACCARD) {
+				table[i][col].GeneratePositionTokens();
+			} else {
+				table[i][col].GeneratePositionGrams();
+			}
+        }
+		unordered_map<int,int> &token_counter = g_token_counter[col];
+		unordered_map<int,int> &id_map = g_id_map[col];
+		if (!isColy) {
+			for (unsigned i = 0; i < table.size(); ++i) {
+				const vector<pair<int,int>> &positionedTokens = table[i][col].positionedTokens;
+				for (pair<int,int> token_pos : positionedTokens)
+					token_counter[token_pos.first]++;
+				//sort(tokens.begin(), tokens.end());
+			}
+
+			vector<pair<int,int>> packs;
+			for (auto kv : token_counter)
+				packs.push_back(make_pair(kv.first, kv.second));
+			sort(packs.begin(), packs.end(), CompareTokenByTF);
+
+			for (int i = 0; i < packs.size(); ++i)
+				id_map.insert(make_pair(packs[i].first, i));
+		}
+		for (unsigned i = 0; i < table.size(); ++i) {
+			vector<pair<int,int>> &positionedTokens = table[i][col].positionedTokens;
+			for (int i = 0; i < positionedTokens.size(); ++i) {
+				const auto it = id_map.find( positionedTokens[i].first );
+				if (it == id_map.end())
+					positionedTokens[i].first = -1;
+				else
+					positionedTokens[i].first = it->second;
+			}
+			sort(positionedTokens.begin(), positionedTokens.end());
+			for (const pair<int,int> &token_pos : positionedTokens)
+				table[i][col].tokens.push_back(token_pos.first);
+		}
+	}
+}
+
 void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy) {
+	if (FLAGS_baseline_exp == "edjoin") {
+		GeneratePositionTokenOrGram(sims, table, isColy);
+		return;
+	}
 	// GenerateTokens or GenerateGrams
 	for (const auto &sim : sims) {
 		int col = isColy? sim.coly : sim.colx;
@@ -222,6 +312,15 @@ void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isCo
 			sort(tokens.begin(), tokens.end());
 		}
 	}
+}
+
+pair<int,int> ComputeLengthBound(const Field &query, const Similarity &sim) {
+	if (sim.distType == ED || sim.distType == ES) {
+		int ed = sim.distType == ED? sim.dist : ceil((1 - sim.dist) * query.str.length());
+		return make_pair(query.tokens.size() - ed, query.tokens.size() + ed);
+	}
+	// default don't know
+	return make_pair(-1, -1);
 }
 
 DIST_TYPE getSimType(const string &operand) {

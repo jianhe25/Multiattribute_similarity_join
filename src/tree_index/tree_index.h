@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include "../filter.h"
 #include <gflags/gflags.h>
+DECLARE_string(baseline_exp);
 
 /*DECLARE_int32(smallest_leaf_in_search_tree);*/
 /*DECLARE_int32(smallest_cost_in_join_tree);*/

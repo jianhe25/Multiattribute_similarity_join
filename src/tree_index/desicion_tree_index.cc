@@ -48,8 +48,9 @@ long long TreeIndex::estimateJoinCost(const vector<int> &ids1,
 	unordered_map<int, int> index1;
 	unordered_map<int, int> index2;
     for (int id : ids1) {
-		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		const Field &field = (*tablePtr1_)[id][sim.colx];
+		const vector<int> &tokens = field.tokens;
+		int prefixlength = CalcPrefixLength(field, sim);
 		if (prefixlength > 0) {
 			for (int i = 0; i < prefixlength; ++i) {
 				index1[ tokens[i] ]++;
@@ -60,8 +61,9 @@ long long TreeIndex::estimateJoinCost(const vector<int> &ids1,
 	}
 
 	for (int id : ids2) {
-		const vector<int> &tokens = (*tablePtr2_)[id][sim.coly].tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		const Field &field = (*tablePtr2_)[id][sim.coly];
+		const vector<int> &tokens = field.tokens;
+		int prefixlength = CalcPrefixLength(field, sim);
 		if (prefixlength > 0) {
 			for (int i = 0; i < prefixlength; ++i) {
 				index2[ tokens[i] ]++;
@@ -90,29 +92,31 @@ long long TreeIndex::estimateJoinCost(const vector<int> &ids1,
 // Cannot use
 double TreeIndex::estimateSearchEntropy(const vector<int> &ids1,
 									  	const Similarity &sim) {
-	unordered_map<int, int> index;
-	long long total_prefixlength = 0;
-    for (int id : ids1) {
-		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
-		if (prefixlength > 0) {
-			for (int i = 0; i < prefixlength; ++i) {
-				index[ tokens[i] ]++;
-			}
-		} else {
-			index[-1]++;
-		}
-		total_prefixlength += prefixlength;
-	}
-	print_debug("total_prefixlength = %lld, colx = %d\n", total_prefixlength, sim.colx);
-	double splited_entropy = 0.0;
-	for (const auto &list_size : index) {
-		double p = (double)list_size.second / ids1.size();
-		splited_entropy += -p * log(p);
-	}
-	double avg_prefixlength = double(total_prefixlength) / ids1.size();
-	return splited_entropy - avg_prefixlength;
+	return 0.0;
+	//unordered_map<int, int> index;
+	//long long total_prefixlength = 0;
+    //for (int id : ids1) {
+		//const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
+		//int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		//if (prefixlength > 0) {
+			//for (int i = 0; i < prefixlength; ++i) {
+				//index[ tokens[i] ]++;
+			//}
+		//} else {
+			//index[-1]++;
+		//}
+		//total_prefixlength += prefixlength;
+	//}
+	//print_debug("total_prefixlength = %lld, colx = %d\n", total_prefixlength, sim.colx);
+	//double splited_entropy = 0.0;
+	//for (const auto &list_size : index) {
+		//double p = (double)list_size.second / ids1.size();
+		//splited_entropy += -p * log(p);
+	//}
+	//double avg_prefixlength = double(total_prefixlength) / ids1.size();
+	//return splited_entropy - avg_prefixlength;
 }
+
 bool compareBySplitedCost(const Similarity &sim1,
 						  const Similarity &sim2) {
 	return sim1.splitedCost < sim2.splitedCost;
@@ -133,7 +137,7 @@ void TreeIndex::BuildSearchTree(Table &table,
 		// not initialize average prefix length
 		if (GlobalAveragePrefixLength[colx] == 0) {
 			for (unsigned i = 0; i < table.size(); ++i) {
-				GlobalAveragePrefixLength[colx] += CalcPrefixLength(table[i][colx].tokens.size(), sims[j]);
+				GlobalAveragePrefixLength[colx] += CalcPrefixLength(table[i][colx], sims[j]);
 			}
 			GlobalAveragePrefixLength[colx] /= table.size();
 			print_debug("average %d : %f\n", colx, GlobalAveragePrefixLength[colx]);
@@ -257,8 +261,9 @@ void TreeIndex::BuildSearchIndex(Node *node,
 	const Similarity &sim = sims_[depth];
 	unordered_map<int, vector<int>> index;
     for (int id : ids1) {
-		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		const Field &field = (*tablePtr1_)[id][sim.colx];
+		const vector<int> &tokens = field.tokens;
+		int prefixlength = CalcPrefixLength(field, sim);
 		if (prefixlength > 0) {
 			for (int i = 0; i < prefixlength; ++i) {
 				vector<int> &list = index[ tokens[i] ];
@@ -353,8 +358,9 @@ void TreeIndex::BuildJoinIndex(Node *node,
 	unordered_map<int, vector<int>> index;
 	unordered_map<int, vector<int>> index2;
     for (int id : ids1) {
-		const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		const Field &field = (*tablePtr1_)[id][sim.colx];
+		const vector<int> &tokens = field.tokens;
+		int prefixlength = CalcPrefixLength(field, sim);
 		for (int i = 0; i < prefixlength; ++i) {
 			vector<int> &list = index[ tokens[i] ];
 			if (list.empty() || list.back() != id)
@@ -364,8 +370,9 @@ void TreeIndex::BuildJoinIndex(Node *node,
 
 	long long splited_cost = 0;
 	for (int id : ids2) {
-		const vector<int> &tokens = (*tablePtr2_)[id][sim.coly].tokens;
-		int prefixlength = CalcPrefixLength(tokens.size(), sim);
+		const Field &field = (*tablePtr2_)[id][sim.coly];
+		const vector<int> &tokens = field.tokens;
+		int prefixlength = CalcPrefixLength(field, sim);
 		for (int i = 0; i < prefixlength; ++i) {
 			vector<int> &list = index2[ tokens[i] ];
 			if (list.empty() || list.back() != id)
@@ -447,8 +454,7 @@ void TreeIndex::TreeSearch(const Node *node, const Row &row, int depth, int calc
 
     const auto &sim = sims_[depth];
 	vector<int> tokens = row[sim.coly].tokens;
-	//std::sort(tokens.begin(), tokens.end(), CompareTokenByTF(token_counter_[sim.colx]));
-	int prefix_length = CalcPrefixLength(tokens.size(), sims_[depth]);
+	int prefix_length = CalcPrefixLength(row[sim.coly], sims_[depth]);
 
 	for (int i = 0; i < prefix_length; ++i) {
 		const auto it = node->children.find( tokens[i] );
@@ -521,8 +527,9 @@ pair<double,double> TreeIndex::EstimateBenifitAndCost(const Similarity &sim) {
 			long long total_prefixlength = 0;
 			unordered_map<int, vector<int>> index;
 			for (int id : ids1) {
-				const vector<int> &tokens = (*tablePtr1_)[id][sim.colx].tokens;
-				int prefixlength = CalcPrefixLength(tokens.size(), sim);
+				const Field &field = (*tablePtr1_)[id][sim.colx];
+				const vector<int> &tokens = field.tokens;
+				int prefixlength = CalcPrefixLength(field, sim);
 				if (prefixlength > 0) {
 					for (int i = 0; i < prefixlength; ++i) {
 						vector<int> &list = index[ tokens[i] ];

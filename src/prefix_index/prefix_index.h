@@ -15,7 +15,7 @@ public:
 	typedef int Token;
 	typedef int FieldID;
 	unordered_map<int, int> token_counter_;
-	unordered_map<int, vector<FieldID> > index_;
+	unordered_map<int, unordered_map<int, vector<FieldID> > > index_;
     Verifier verifier_;
 
 	Similarity *sim_;

@@ -5,10 +5,13 @@
 #include <unordered_map>
 #include <iostream>
 #include <math.h>
+#include <gflags/gflags.h>
 using namespace std;
 
 #define GRAM_LENGTH 3
 #define SAMPLE_RATIO 0.005
+
+DECLARE_string(baseline_exp);
 
 const int MAX_COLUMN_NUM = 10;
 
@@ -32,6 +35,8 @@ struct Field {
 	void GenerateGrams();
     void GenerateTokens();
 	void GenerateContent();
+	void GeneratePositionGrams();
+	void GeneratePositionTokens();
 };
 
 typedef vector<Field> Row;
@@ -103,7 +108,7 @@ void printTable(const Table &table);
 
 int CalcOverlap(int lenS, int lenR, const Similarity &sim);
 
-int CalcPrefixLength(int len, const Similarity &sim);
+int CalcPrefixLength(const Field &field, const Similarity &sim);
 
 void printRow(const Row &row);
 
@@ -111,8 +116,14 @@ void GenerateContent(const vector<Similarity> &sims, Table &table, int isColy);
 
 void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy);
 
+void GeneratePositionTokenOrGram(const vector<Similarity> &sims, Table &table, int isColy);
+
 DIST_TYPE getSimType(const string &operand);
 
 void PrintSims(const vector<Similarity> &sims);
 
 void ExportTime(string message, double time);
+
+int edjoin_prefix_length(const vector<pair<int, int>> &positionedTokens, const Similarity &sim);
+
+pair<int,int> ComputeLengthBound(const Field &query, const Similarity &sim);

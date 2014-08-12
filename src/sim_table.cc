@@ -12,6 +12,7 @@ DEFINE_int32(index_version, 0, "index version, 0 means no index at all");
 DEFINE_double(memory_control, 1, "allocate memory_control * single_buffer_size for multi-trees");
 DEFINE_string(search_exp, "dynamic_search", "3 different exps: dynamic_search, verify_directly, intersect_only");
 DEFINE_double(total_filter_time, 0, "time for filtering");
+DEFINE_string(baseline_exp, "prefixjoin", "[edjoin, ppjoin]");
 
 // Following variable used for debugging and statistics
 int choosen_index_count[100];
@@ -47,6 +48,23 @@ SimTable::~SimTable() {
 int total_prefix_index_size = 0;
 void SimTable::InitJoinIndex(Table &table1, Table &table2, vector<Similarity> &sims) {
     double index_time = getTimeStamp();
+
+	//if (FLAGS_baseline_exp == "edjoin") {
+		//transpose(table1, &column_table1_);
+		//transpose(table2, &column_table2_);
+		//for (auto &sim : sims) {
+			//if (sim.distType == ES || sim.distType == ED) {
+				//index_ = new PrefixIndex();
+				//index_->build(column_table1_[sim.colx], column_table2_[sim.coly], &sim);
+				//indexSim_ = sim;
+				//break;
+			//}
+		//}
+		//print_debug("Build Index time: %fs\n", getTimeStamp() - index_time);
+		//ExportTime("Indexing", getTimeStamp() - index_time);
+		//return;
+	//}
+
 	// Install index plugin, default is prefix_index
 	if (FLAGS_index_version == 1) {
 		transpose(table1, &column_table1_);
@@ -69,20 +87,6 @@ void SimTable::InitJoinIndex(Table &table1, Table &table2, vector<Similarity> &s
 		tree_sims.push_back(sims[3]);
 		tree_index->BuildJoinTree(table1, table2, tree_sims);
 		treeIndexes_.push_back(tree_index);
-		//for (int i = 0; i < num_col_; ++i)
-			//treeIndexes_.push_back(new TreeIndex(UNORDERED_JOIN_TREE));
-		//for (int i = 0; i < int(sims.size()); ++i) {
-			//vector<Similarity> tree_sims;
-			//tree_sims.push_back(sims[i]);
-			////if (i > 0)
-			//for (int j = 0; j < int(sims.size()); ++j) {
-				//if (j != i)
-					//tree_sims.push_back(sims[j]);
-			//}
-				////else
-				////tree_sims.push_back(sims[1]);
-			//treeIndexes_[sims[i].colx]->BuildJoinTree(table1, table2, tree_sims);
-		//}
 	} else if (FLAGS_index_version == 3) {
 		treeIndex_ = new TreeIndex(ORDERED_JOIN_TREE);
 		treeIndex_->BuildJoinTree(table1, table2, sims);
@@ -116,7 +120,6 @@ void SimTable::InitJoin(Table &table1, Table &table2, const vector<Similarity> &
 }
 
 vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<Similarity> &sims) {
-
 	InitJoin(table1, table2, sims);
 	InitJoinIndex(table1, table2, sims);
 
@@ -246,7 +249,7 @@ vector<RowID> SimTable::JoinSearch(Row &query_row, vector<Similarity> &sims) {
 	double verify_time = getTimeStamp() - time;
     total_verify_time += verify_time;
 	if (queryId % 100000 == 0)
-		print_debug("Verify time: %.5fs %.5fs Join time: %.5fs\n", verify_time, total_verify_time / queryId, getTimeStamp() - startJoinTime_);
+		print_debug("%d Verify time: %.5fs Join time: %.5fs\n", queryId, total_verify_time, getTimeStamp() - startJoinTime_);
 	return result;
 }
 

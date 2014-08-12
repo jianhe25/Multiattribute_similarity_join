@@ -125,3 +125,17 @@ if exp_version == 6:
         call(["make", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/imdb/imdb_38w.table", "VERIFY_EXP_VERSION=1"])
         with open('formated_stat_file', 'a') as formated_stat_file:
             formated_stat_file.write('\n')
+
+# compare edjoin- IMDB
+if exp_version == 7:
+    for exp in range(1, 6):
+        tau = 1.0 - exp * 0.05;
+        f = open('dataset/mapping_rule', 'w')
+        f.write('COSINE 0 0 ' + str(tau) + '\n')
+        f.write('JACCARD 1 1 ' + str(tau) + '\n')
+        f.write('ES 2 2 ' + str(tau) + '\n')
+        f.write('ES 3 3 ' + str(tau) + '\n')
+        f.close()
+        call(["make", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/imdb/imdb_38w.table", "BASELINE_EXP=edjoin", "INDEX_VERSION=1"])
+        with open('formated_stat_file', 'a') as formated_stat_file:
+            formated_stat_file.write('\n')

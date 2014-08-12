@@ -54,6 +54,8 @@ class SimTable {
 	vector<RowID> Search1_Estimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 	vector<RowID> Search2_TuneEstimate(const Row &query_row, vector<Similarity> &sims, vector<int> &candidateIDs);
 
+	PrefixIndex* index_;
+	Similarity indexSim_;
 	vector<PrefixIndex*> indexes_;
 	vector<TreeIndex*> treeIndexes_; // Multi index experiment
 	TreeIndex* treeIndex_; // Single index experiment
