@@ -10,6 +10,7 @@
 using namespace std;
 DECLARE_int32(verify_exp_version);
 DECLARE_double(total_filter_time);
+DECLARE_int32(estimate_filter_period);
 
 struct Estimation {
 	double ratio;
@@ -34,6 +35,7 @@ class SimTable {
 	int num_col_;
 	int num_row_;
 	Table *tablePtr_; // table_ means rowTable
+	Table *tablePtr2_;
 	vector<vector<Field*>> column_table1_;
 	vector<vector<Field*>> column_table2_;
     Verifier verifier_;
@@ -70,6 +72,9 @@ class SimTable {
 	bool contain(const vector<Similarity> &treeSims, const Similarity &sim);
 	vector<int> Intersect2Lists(vector<int> &a, vector<int> &b);
 	TreeIndex* ConcatTreeSim(const TreeIndex *tree1, const Similarity &sim);
+
+	vector<Estimation> estimations_;
+	int verifyRound_;
 public:
 	SimTable();
 	~SimTable();

@@ -1,7 +1,7 @@
 import random
 import sys
 data_file = open("./dblp_204.table")
-rule_file = open("./rule_threshold_lowerbound")
+rule_file = open("./dblp_threshold_lowerbound")
 
 rules = []
 for line in rule_file:
@@ -24,12 +24,12 @@ queryid = 1
 for line in lines:
     if queryid < 100000:
         query_rule = []
-        while len(query_rule) <= 1:
+        while len(query_rule) != 1:
             query_rule = []
             for i in range(0, len(rules)):
                 if random.random() < prob[i]:
                     query_rule.append(rules[i])
-        assert len(query_rule) > 1 and len(query_rule) <= 4
+        #assert len(query_rule) > 1 and len(query_rule) <= 4
         #if len(query_rule) == 1 and query_rule[0][1] == "7":
             #query_rule.append(rules[random.randint(0, 2)])
 

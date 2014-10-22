@@ -38,6 +38,7 @@ typedef enum {
 	ORDERED_SEARCH_TREE,
 	UNORDERED_SEARCH_TREE,
 	OPTIMAL_JOIN_TREE,
+	ITERATIVE_ORDERED_JOIN_TREE,
 	FULL_SPLIT_TREE
 } TreeType;
 
@@ -81,9 +82,9 @@ class TreeIndex {
 					      const vector<int> &ids1,
 						  int depth);
 
-	vector<int> getPrefixList(const Row &row);
-	void TreeSearch(const Node *node, const vector<Field> &row, int depth, int CalcPrefixListSizeOnly);
-	int calcPrefixListSize(const Row &row);
+	vector<int> getPrefixList(Row &row);
+	void TreeSearch(const Node *node, Row &row, int depth, int CalcPrefixListSizeOnly);
+	int calcPrefixListSize(Row &row);
 
 	struct CompareTokenByTF {
         const unordered_map<int, int> &token_counter;

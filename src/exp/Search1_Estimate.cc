@@ -5,12 +5,15 @@ using namespace std;
 vector<RowID> SimTable::Search1_Estimate(const Row &query_row,
 										 vector<Similarity> &sims,
 										 vector<int> &candidateIDs) {
-	vector<Estimation> estimations;
-	for (auto &sim : sims) {
-		estimations.push_back(Estimate(*tablePtr_, query_row[sim.coly],
-			sim, candidateIDs, &verifier_));
+
+	if (++verifyRound_ % FLAGS_estimate_filter_period == 0) {
+		estimations_.clear();
+		for (auto &sim : sims) {
+			estimations_.push_back(Estimate(*tablePtr_, query_row[sim.coly],
+				sim, candidateIDs, &verifier_));
+		}
+		sort(estimations_.begin(), estimations_.end());
 	}
-	sort(estimations.begin(), estimations.end());
 	/*
 	 * First round filter
 	 */
@@ -21,7 +24,7 @@ vector<RowID> SimTable::Search1_Estimate(const Row &query_row,
 	vector<int> result_ids;
 	for (int id : candidateIDs) {
 		bool is_same = true;
-		for (auto &estimation : estimations) {
+		for (auto &estimation : estimations_) {
 			const auto &sim = estimation.sim;
 			for (auto filter : g_filters) {
 				if (sim->distType != ED && filter->Type() == "ContentFilter")

@@ -48,7 +48,7 @@ long long TreeIndex::estimateJoinCost(const vector<int> &ids1,
 	unordered_map<int, int> index1;
 	unordered_map<int, int> index2;
     for (int id : ids1) {
-		const Field &field = (*tablePtr1_)[id][sim.colx];
+		Field &field = (*tablePtr1_)[id][sim.colx];
 		const vector<int> &tokens = field.tokens;
 		int prefixlength = CalcPrefixLength(field, sim);
 		if (prefixlength > 0) {
@@ -61,7 +61,7 @@ long long TreeIndex::estimateJoinCost(const vector<int> &ids1,
 	}
 
 	for (int id : ids2) {
-		const Field &field = (*tablePtr2_)[id][sim.coly];
+		Field &field = (*tablePtr2_)[id][sim.coly];
 		const vector<int> &tokens = field.tokens;
 		int prefixlength = CalcPrefixLength(field, sim);
 		if (prefixlength > 0) {
@@ -197,7 +197,7 @@ void TreeIndex::BuildJoinTree(Table &table1,
 		}
 	}
 
-	if (treeType_ == ORDERED_JOIN_TREE || treeType_ == UNORDERED_JOIN_TREE || treeType_ == OPTIMAL_JOIN_TREE) {
+	if (treeType_ == ORDERED_JOIN_TREE || treeType_ == UNORDERED_JOIN_TREE || treeType_ == OPTIMAL_JOIN_TREE || treeType_ == ITERATIVE_ORDERED_JOIN_TREE) {
 		BuildJoinIndex(root_,
 					   row_ids1,
 					   row_ids2,
@@ -261,7 +261,7 @@ void TreeIndex::BuildSearchIndex(Node *node,
 	const Similarity &sim = sims_[depth];
 	unordered_map<int, vector<int>> index;
     for (int id : ids1) {
-		const Field &field = (*tablePtr1_)[id][sim.colx];
+		Field &field = (*tablePtr1_)[id][sim.colx];
 		const vector<int> &tokens = field.tokens;
 		int prefixlength = CalcPrefixLength(field, sim);
 		if (prefixlength > 0) {
@@ -358,7 +358,7 @@ void TreeIndex::BuildJoinIndex(Node *node,
 	unordered_map<int, vector<int>> index;
 	unordered_map<int, vector<int>> index2;
     for (int id : ids1) {
-		const Field &field = (*tablePtr1_)[id][sim.colx];
+		Field &field = (*tablePtr1_)[id][sim.colx];
 		const vector<int> &tokens = field.tokens;
 		int prefixlength = CalcPrefixLength(field, sim);
 		for (int i = 0; i < prefixlength; ++i) {
@@ -370,7 +370,7 @@ void TreeIndex::BuildJoinIndex(Node *node,
 
 	long long splited_cost = 0;
 	for (int id : ids2) {
-		const Field &field = (*tablePtr2_)[id][sim.coly];
+		Field &field = (*tablePtr2_)[id][sim.coly];
 		const vector<int> &tokens = field.tokens;
 		int prefixlength = CalcPrefixLength(field, sim);
 		for (int i = 0; i < prefixlength; ++i) {
@@ -417,7 +417,7 @@ void TreeIndex::BuildJoinIndex(Node *node,
 	}
 }
 
-vector<int> TreeIndex::getPrefixList(const Row &row) {
+vector<int> TreeIndex::getPrefixList(Row &row) {
 	// Would change vector elements
 	candidates_.clear();
     debug_count_leaf_ = 0;
@@ -427,7 +427,7 @@ vector<int> TreeIndex::getPrefixList(const Row &row) {
 	return candidates_;
 }
 
-int TreeIndex::calcPrefixListSize(const Row &row) {
+int TreeIndex::calcPrefixListSize(Row &row) {
 	numEstimatedCandidates_ = 0;
     debug_count_leaf_ = 0;
     debug_save_ = 0;
@@ -435,7 +435,7 @@ int TreeIndex::calcPrefixListSize(const Row &row) {
 	return numEstimatedCandidates_;
 }
 
-void TreeIndex::TreeSearch(const Node *node, const Row &row, int depth, int calcPrefixListSizeOnly) {
+void TreeIndex::TreeSearch(const Node *node, Row &row, int depth, int calcPrefixListSizeOnly) {
 	//print_debug("depth = %d, node = %d, hasSubtree: %d\n",depth, node->id, node->hasSubtree);
 	if (!node->hasSubtree) {
 		debug_count_leaf_ += node->leafIds.size();
@@ -527,7 +527,7 @@ pair<double,double> TreeIndex::EstimateBenifitAndCost(const Similarity &sim) {
 			long long total_prefixlength = 0;
 			unordered_map<int, vector<int>> index;
 			for (int id : ids1) {
-				const Field &field = (*tablePtr1_)[id][sim.colx];
+				Field &field = (*tablePtr1_)[id][sim.colx];
 				const vector<int> &tokens = field.tokens;
 				int prefixlength = CalcPrefixLength(field, sim);
 				if (prefixlength > 0) {

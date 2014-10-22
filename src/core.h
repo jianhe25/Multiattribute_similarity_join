@@ -29,6 +29,7 @@ struct Field {
 	vector<int> tokens;
 	vector<pair<int, int>> positionedTokens;
 	unordered_map<char, int> contentPairs_;
+	int prefixLength;
 	Field();
     ~Field();
 	Field(const string &_str, int id=0);
@@ -57,21 +58,24 @@ struct Similarity {
 	int colx, coly;
 	double dist;
 	DIST_TYPE distType;
-	bool isSearched;
 	int num_estimated_candidates;
 	long long splitedCost;
 	double splitedEntropy;
 
 	Similarity(DIST_TYPE _distType, double _dist) :
-		colx(0), coly(0), dist(_dist), distType(_distType), isSearched(false) {
+		colx(0), coly(0), dist(_dist), distType(_distType) {
 		print_debug("Error: this constructor should never be called");
 	}
 
 	Similarity(int _colx, int _coly, double _dist, DIST_TYPE _distType) :
-		colx(_colx), coly(_coly), dist(_dist), distType(_distType), isSearched(false) {
+		colx(_colx), coly(_coly), dist(_dist), distType(_distType) {
 	}
 
-	Similarity() : isSearched(false) {
+	Similarity() {
+	}
+
+	bool isSetSim() const {
+		return distType == JACCARD || distType == COSINE || distType == DICE || distType == OLP;
 	}
 
 	string type() const {
@@ -108,7 +112,7 @@ void printTable(const Table &table);
 
 int CalcOverlap(int lenS, int lenR, const Similarity &sim);
 
-int CalcPrefixLength(const Field &field, const Similarity &sim);
+int CalcPrefixLength(Field &field, const Similarity &sim);
 
 void printRow(const Row &row);
 

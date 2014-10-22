@@ -15,10 +15,19 @@ vector<RowID> SimTable::Search0_NoEstimate(const Row &query_row,
     for (int id : candidateIDs) {
         bool isMatch = true;
         for (auto sim : sims) {
-			if (!verifier_.filter((*tablePtr_)[id][sim.colx], query_row[sim.coly], sim)) {
-                isMatch = false;
-                break;
-            }
+			for (auto filter : g_filters) {
+				if (sim.distType != ED && filter->Type() == "ContentFilter")
+					continue;
+				if (!filter->filter((*tablePtr_)[id][sim.colx], query_row[sim.coly], sim)) {
+					isMatch = false;
+					break;
+				}
+			}
+			//if (!verifier_.filter((*tablePtr_)[id][sim.colx], query_row[sim.coly], sim)) {
+			//isMatch = false;
+			//break;
+			//}
+			if (!isMatch) break;
         }
         if (isMatch)
             matchIDs.push_back(id);

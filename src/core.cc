@@ -18,8 +18,14 @@ int HashCode(const string &word) {
 }
 
 Field::Field() {
+	this->prefixLength = -1;
 }
 Field::Field(const string &_str, int _id) : str(_str), id(_id) {
+	for (int i = 0; i < str.size(); ++i) {
+		if (str[i] <= 'Z' && str[i] >= 'A')
+			str[i] = str[i] - 'A' + 'a';
+	}
+	this->prefixLength = -1;
 }
 
 void Field::GenerateTokens() {
@@ -92,25 +98,28 @@ int CalcOverlap(int lenS, int lenR, const Similarity &sim) {
 	//cout << "CalcOverlap " << lenS << " " << lenR << " " << int(ceil((lenS + lenR) * sim.dist / (1.0+sim.dist)));
 
 	double tau = sim.dist;
+	int overlap = -1;
 	if (sim.distType == ED)
-		return max(0, max(lenS, lenR) + 1 - GRAM_LENGTH * int(tau + 1));
+		overlap = max(0, max(lenS, lenR) + 1 - GRAM_LENGTH * int(tau + 1));
 	else if (sim.distType == JACCARD)
-		return int(ceil((lenS + lenR) * tau / (1.0 + tau)));
+		overlap = int(ceil((lenS + lenR) * tau / (1.0 + tau)));
 	else if (sim.distType == COSINE)
-		return int(ceil(sqrt(lenS * lenR) * tau));
+		overlap = int(ceil(sqrt(lenS * lenR) * tau));
 	else if (sim.distType == DICE)
-		return int(ceil((lenS + lenR) * tau  / 2.0));
+		overlap = int(ceil((lenS + lenR) * tau  / 2.0));
 	else if (sim.distType == OLP)
-		return int(ceil(tau));
+		overlap = int(ceil(tau));
 	else if (sim.distType == ES) {
 		int ed = ceil((1-tau) * max(lenR, lenS));
-		return max(0, max(lenS, lenR) + 1 - GRAM_LENGTH * int(ed + 1));
+		overlap = max(0, max(lenS, lenR) + 1 - GRAM_LENGTH * int(ed + 1));
 	} else {
 		print_debug("Error: Unkown DIST_TYPE in CalcOverlap");
 		return -1;
 	}
+	return overlap;
 }
 
+Field debug_field;
 int edjoin_prefix_length(const vector<pair<int, int>> &positionedTokens, const Similarity &sim)
 {
 	int threshold = sim.distType == ED? sim.dist : ceil((1 - sim.dist) * (positionedTokens.size()+GRAM_LENGTH-1));
@@ -121,30 +130,39 @@ int edjoin_prefix_length(const vector<pair<int, int>> &positionedTokens, const S
 	{
 		int mid = (low + high) / 2;
 		int errors = 0, location = 0;
-		vector<pair<int, int>> duplicate(positionedTokens.begin(), positionedTokens.begin() + mid);
-		sort(duplicate.begin(), duplicate.end(), [](const pair<int, int> &p1, const pair<int, int> &p2) {
+		try {
+			print_debug("positionedTokens size %d\n", positionedTokens.size());
+			vector<pair<int, int>> duplicate(positionedTokens.begin(), positionedTokens.begin() + mid);
+			sort(duplicate.begin(), duplicate.end(), [](const pair<int, int> &p1, const pair<int, int> &p2) {
 				return p1.second < p2.second;
 				});
-		for (int k = 0; k < mid; k++)
-		{
-			if (duplicate[k].second >= location)
+			for (int k = 0; k < mid; k++)
 			{
-				errors++;
-				location = duplicate[k].second + GRAM_LENGTH;
+				if (duplicate[k].second >= location)
+				{
+					errors++;
+					location = duplicate[k].second + GRAM_LENGTH;
+				}
 			}
-		}
-		if (errors <= threshold)
-		{
-			low = mid + 1;
-		} else {
-			high = mid;
+			if (errors <= threshold)
+			{
+				low = mid + 1;
+			} else {
+				high = mid;
+			}
+		} catch (std::exception& e) {
+			print_debug("debug %d\n", debug_field.id);
 		}
 	}
 	return low;
 }
 
 int numCount = 0;
-int CalcPrefixLength(const Field &field, const Similarity& sim) {
+int CalcPrefixLength(Field &field, const Similarity& sim) {
+	debug_field = field;
+	if (field.prefixLength != -1)
+		return field.prefixLength;
+
 	int lenR = field.tokens.size();
 	double tau = sim.dist;
 	int common = -1;
@@ -160,26 +178,28 @@ int CalcPrefixLength(const Field &field, const Similarity& sim) {
 	else if (sim.distType == OLP)
 		common = ceil(tau);
 	else if (sim.distType == ED) {
-		if (FLAGS_baseline_exp == "edjoin") {
-			return edjoin_prefix_length(field.positionedTokens, sim);
+		if (FLAGS_baseline_exp == "edjoin+ppjoin") {
+			field.prefixLength = edjoin_prefix_length(field.positionedTokens, sim);
+			return field.prefixLength;
 		}
 		common = max(0, lenR + 1 - GRAM_LENGTH - (int)(tau * GRAM_LENGTH));
 	}
 	else if (sim.distType == ES) {
 		common = max(0, int(ceil(lenR + 1 - ((1-tau) * lenR + 1) * GRAM_LENGTH)));
-		if (FLAGS_baseline_exp == "edjoin") {
-			//print_debug("fileld.positionedTokens = %d\n", field.positionedTokens.size());
-			return edjoin_prefix_length(field.positionedTokens, sim);
+		if (FLAGS_baseline_exp == "edjoin+ppjoin") {
+			field.prefixLength = edjoin_prefix_length(field.positionedTokens, sim);
+			return field.prefixLength;
 		}
 	}
 	else {
-		print_debug("Error: Unkown DIST_TYPE in CalcPrefixLength ");
+		print_debug("Error: Unkown DIST_TYPE in CalcPrefixLength %d", sim.distType);
 		cout << sim.type() << endl;
 		assert(0);
 		return -1;
 	}
 
-	return max(0, lenR - max(common-1, 0));
+	field.prefixLength = max(0, lenR - max(common-1, 0));
+	return field.prefixLength;
 
 	/*
 	 * Overlap deduced by myself
@@ -227,7 +247,7 @@ void GeneratePositionTokenOrGram(const vector<Similarity> &sims, Table &table, i
 	for (const auto &sim : sims) {
 		int col = isColy? sim.coly : sim.colx;
 		for (unsigned i = 0; i < table.size(); ++i) {
-            if (sim.distType == JACCARD) {
+            if (sim.isSetSim()) {
 				table[i][col].GeneratePositionTokens();
 			} else {
 				table[i][col].GeneratePositionGrams();
@@ -261,6 +281,11 @@ void GeneratePositionTokenOrGram(const vector<Similarity> &sims, Table &table, i
 					positionedTokens[i].first = it->second;
 			}
 			sort(positionedTokens.begin(), positionedTokens.end());
+
+			/*
+			 * For ppjoin, positionedTokens[i].second not used
+			 * For edjoin, positionedTokens[i].second is the position of gram in original string
+			 */
 			for (const pair<int,int> &token_pos : positionedTokens)
 				table[i][col].tokens.push_back(token_pos.first);
 		}
@@ -268,7 +293,7 @@ void GeneratePositionTokenOrGram(const vector<Similarity> &sims, Table &table, i
 }
 
 void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isColy) {
-	if (FLAGS_baseline_exp == "edjoin") {
+	if (FLAGS_baseline_exp == "edjoin+ppjoin") {
 		GeneratePositionTokenOrGram(sims, table, isColy);
 		return;
 	}
@@ -276,7 +301,7 @@ void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isCo
 	for (const auto &sim : sims) {
 		int col = isColy? sim.coly : sim.colx;
 		for (unsigned i = 0; i < table.size(); ++i) {
-            if (sim.distType == JACCARD) {
+            if (sim.isSetSim()) {
 				table[i][col].GenerateTokens();
 			} else {
 				table[i][col].GenerateGrams();
@@ -315,11 +340,22 @@ void GenerateTokensOrGram(const vector<Similarity> &sims, Table &table, int isCo
 }
 
 pair<int,int> ComputeLengthBound(const Field &query, const Similarity &sim) {
+	int len = query.tokens.size();
+	double tau = sim.dist;
 	if (sim.distType == ED || sim.distType == ES) {
-		int ed = sim.distType == ED? sim.dist : ceil((1 - sim.dist) * query.str.length());
-		return make_pair(query.tokens.size() - ed, query.tokens.size() + ed);
+		int ed = sim.distType == ED? tau : ceil((1 - tau) * query.str.length());
+		return make_pair(len - ed, len + ed);
+	} else if (sim.distType == JACCARD) {
+		return make_pair(floor(len * tau), ceil(len / tau));
+	} else if (sim.distType == COSINE) {
+		return make_pair(floor(len * tau * tau), ceil(len / tau / tau));
+	} else if (sim.distType == DICE) {
+		return make_pair(floor(tau / (2-tau) * len), ceil((2-tau) / tau * len));
+	} else if (sim.distType == OLP) {
+		return make_pair(len - tau, len + tau);
+	} else {
+		print_debug("Error: Unkown DIST_TYPE in ComputeLengthBound\n");
 	}
-	// default don't know
 	return make_pair(-1, -1);
 }
 

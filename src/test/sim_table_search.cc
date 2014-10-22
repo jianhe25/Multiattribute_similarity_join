@@ -128,7 +128,7 @@ vector<Similarity> loadMapping(string mapping_file_name) {
 			print_debug("NonExist Similarity Function %s\n", operand);
 			break;
 		}
-		mapping_pairs.push_back(Similarity(col1, -1, dist, getSimType(operand)));
+		mapping_pairs.push_back(Similarity(col1, col1, dist, getSimType(operand)));
 	}
 	PrintSims(mapping_pairs);
 	fclose(mapping_file);
@@ -187,14 +187,14 @@ int main(int argc, char **argv) {
 	}
 
 	int queryid = 0;
-	//for (int exp = 1; exp <= 5; ++exp) {
-	//double tau = 1 - exp * 0.05;
+	for (int exp = 4; exp <= 4; ++exp) {
+		double tau = 1 - exp * 0.05;
 		double start_search_time = getTimeStamp();
 		FLAGS_total_filter_time = 0.0;
 		for (auto query : queries) {
-			//for (Similarity &sim : query.sims) {
-				//sim.dist = tau;
-			//}
+			for (Similarity &sim : query.sims) {
+				sim.dist = tau;
+			}
 			vector<RowID> sim_ids = sim_table->Search(query.row, query.sims);
 			for (auto id : sim_ids)
 				sim_pairs.push_back(make_pair(query.id, id));
@@ -210,7 +210,7 @@ int main(int argc, char **argv) {
 		print_debug("filter_time: %f, verify: %f, total_time : %f\n", FLAGS_total_filter_time, total_time - FLAGS_total_filter_time, total_time);
 		ExportTime("filter", FLAGS_total_filter_time);
 		ExportTime("total", getTimeStamp() - start_search_time);
-		//}
+	}
 
 	/*
 	 *	Output sim_pairs
