@@ -84,17 +84,15 @@ void outputPairs(const vector<pair<RowID, RowID>> &sim_pairs) {
 	/*
 	 *	Output sim_pairs
 	 */
-	//freopen("result","w",stdout);
-	//for (auto pair : sim_pairs) {
-		//auto tuple1 = table1[pair.first];
-		//auto tuple2 = table2[pair.second];
-		//if (tuple1[0].id != tuple2[0].id && ++counter < 10) {
-			//print(tuple1);
-			//print(tuple2);
-			//puts("");
-		//}
-	//}
-	//freopen("/dev/stdout", "w", stdout);
+	for (auto pair : sim_pairs) {
+		auto tuple1 = table1[pair.first];
+		auto tuple2 = table2[pair.second];
+		if (tuple1[0].id != tuple2[0].id && ++counter < 10) {
+			print(tuple1);
+			print(tuple2);
+			puts("");
+		}
+	}
 }
 int main(int argc, char **argv) {
 	google::SetUsageMessage(joinUsageText);
@@ -129,7 +127,7 @@ int main(int argc, char **argv) {
 	SimTable *sim_table = new SimTable();;
 	sim_pairs = sim_table->Join(table1, table2, mapping_pairs);
 	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
-	outputPairs(sim_pairs);
+	//outputPairs(sim_pairs);
 	print_debug("total_time : %f\n", getTimeStamp() - time);
 	ExportTime("total", getTimeStamp() - time);
 }

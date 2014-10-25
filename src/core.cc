@@ -131,7 +131,6 @@ int edjoin_prefix_length(const vector<pair<int, int>> &positionedTokens, const S
 		int mid = (low + high) / 2;
 		int errors = 0, location = 0;
 		try {
-			print_debug("positionedTokens size %d\n", positionedTokens.size());
 			vector<pair<int, int>> duplicate(positionedTokens.begin(), positionedTokens.begin() + mid);
 			sort(duplicate.begin(), duplicate.end(), [](const pair<int, int> &p1, const pair<int, int> &p2) {
 				return p1.second < p2.second;

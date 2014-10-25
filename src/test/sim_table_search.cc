@@ -72,10 +72,8 @@ void loadQueries(string query_file_name, vector<Query> *queries, int read_limit)
 		queryid--;
 
 		/* read query row */
-		//print_debug("num_sim = %d\n", num_sim);
 		if (fgets(line, MAX_LINE_LENGTH, query_file) == NULL)
 			print_debug("error: fgets line");
-		//print_debug("line = %s\n",line);
 		splitString(line, '|', strs);
 		int num_col = strs.size();
 		// Validate column_number
@@ -198,17 +196,9 @@ int main(int argc, char **argv) {
 			vector<RowID> sim_ids = sim_table->Search(query.row, query.sims);
 			for (auto id : sim_ids)
 				sim_pairs.push_back(make_pair(query.id, id));
-			//if (sim_ids.size() > 1000) {
-				//PrintSims(query.sims);
-				//print_debug("result size = %d\n", sim_ids.size());
-			//}
-			if (++queryid % 10000 == 0) {
-				print_debug("queryid %d, sim_size %d time %f\n",queryid, sim_pairs.size(), getTimeStamp() - start_search_time);
-			}
 		}
 		double total_time = getTimeStamp() - start_search_time;
-		print_debug("filter_time: %f, verify: %f, total_time : %f\n", FLAGS_total_filter_time, total_time - FLAGS_total_filter_time, total_time);
-		ExportTime("filter", FLAGS_total_filter_time);
+		print_debug("total_time : %.3f\n", total_time);
 		ExportTime("total", getTimeStamp() - start_search_time);
 	}
 
@@ -216,18 +206,6 @@ int main(int argc, char **argv) {
 	 *	Output sim_pairs
 	 */
 	print_debug("sim_pairs.size() = %d\n", int(sim_pairs.size()));
-	//freopen("result","w",stdout);
-	//for (auto pair : sim_pairs) {
-		//print_debug("pair = %d %d\n", pair.first, pair.second);
-		//auto row1 = queries[pair.first].row;
-		//auto row2 = table[pair.second];
-		//if (row1[0].str != row2[0].str) {
-			//printRow(row1);
-			//printRow(row2);
-			//puts("");
-		//}
-	//}
-	//freopen("/dev/stdout", "w", stdout);
 }
 
 

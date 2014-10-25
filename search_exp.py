@@ -14,15 +14,33 @@ def rewrite_query_file(tau):
             else:
                 new_query_f.write(line)
 
-if exp_version == 1:
-    for exp in range(4, 6):
-        mem_control = 1 + exp * 0.5
-        call(["make", "MEMORY_CONTROL="+str(mem_control)])
+def generate_dblp_lowerbound(tau):
+    f = open('dataset/threshold_lowerbound', 'w')
+    f.write('JACCARD 1 ' + str(tau) + '\n')
+    f.write('JACCARD 2 ' + str(tau) + '\n')
+    f.write('ES 3 ' + str(tau) + '\n')
+    f.write('ES 7 ' + str(tau) + '\n')
+    f.close()
 
-# compare edjoin- IMDB - attrno
-if exp_version == 2:
-    call(["make", "search", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/query/imdb_10w.query", "BASELINE_EXP=edjoin+ppjoin", "INDEX_VERSION=1"])
-    call(["make", "search", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/query/imdb_10w.query", "BASELINE_EXP=edjoin+ppjoin", "INDEX_VERSION=5"])
-    #call(["make", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/imdb/imdb_38w.table", "BASELINE_EXP=edjoin+ppjoin", "INDEX_VERSION=5", "VERIFY_EXP_VERSION=0"])
+def generate_imdb_lowerbound(tau):
+    f = open('dataset/threshold_lowerbound', 'w')
+    f.write('COSINE 0 ' + str(tau) + '\n')
+    f.write('JACCARD 1 ' + str(tau) + '\n')
+    f.write('ES 2 ' + str(tau) + '\n')
+    f.write('ES 3 ' + str(tau) + '\n')
+    f.close()
+
+# compare DBLP 
+if exp_version == 1:
+    generate_dblp_lowerbound(0.7);
+    call(["make", "search", "TABLE1=./dataset/dblp_100w_join.table", "TABLE2=./dataset/query/dblp_10w.query", "BASELINE_EXP=na", "INDEX_VERSION=6", "TABLE1_SIZE=1000000"])
     with open('formated_stat_file', 'a') as formated_stat_file:
         formated_stat_file.write('\n')
+
+# compare IMDB 
+if exp_version == 2:
+    generate_imdb_lowerbound(0.7);
+    call(["make", "search", "TABLE1=./dataset/imdb/imdb_38w.table", "TABLE2=./dataset/query/imdb_10w.query", "BASELINE_EXP=na", "INDEX_VERSION=6", "TABLE1_SIZE=400000"])
+    with open('formated_stat_file', 'a') as formated_stat_file:
+        formated_stat_file.write('\n')
+
