@@ -106,8 +106,9 @@ vector<pair<RowID, RowID>> SimTable::Join(Table &table1, Table &table2, vector<S
 	for (unsigned i = 0; i < table2.size(); ++i) {
 		vector<RowID> results = JoinSearch(table2[i], sims);
 		for (int id : results)
-			simPairs.push_back(make_pair(id, i));
+			simPairs.emplace_back(id, i);
 	}
+
 	for (int c = 0; c < num_col_; ++c)
 		print_debug("choose column %d as index %d times\n", c, choosen_index_count[c]);
 	ExportTime("numCandidatePairs", numCandidatePairs_);
@@ -313,8 +314,9 @@ void SimTable::CopySimToTreeSim(vector<Similarity> *treeSims, const vector<Simil
 vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 	vector<RowID> candidateIDs;
 	double time = getTimeStamp();
-	if (FLAGS_index_version == 1 || FLAGS_index_version == 5 || FLAGS_index_version == 6)
-		JoinSearch(query_row, sims);
+	if (FLAGS_index_version == 1 || FLAGS_index_version == 5 || FLAGS_index_version == 6) {
+        JoinSearch(query_row, sims);
+    }
 	if (FLAGS_index_version == 3) {
 		int estimate_verify_cost = 0;
 		for (const Similarity &sim : sims) {
@@ -324,7 +326,7 @@ vector<RowID> SimTable::Search(Row &query_row, vector<Similarity> &sims) {
 		int round = 0;
 		while (true) {
 			TreeIndex *best_tree = NULL;
-			int min_list_size = tablePtr_->size();
+			int min_list_size = (int) tablePtr_->size();
 			for (int i = 0; i < (int)treeIndexes_.size(); ++i) {
 				if (contain(sims, treeIndexes_[i]->sims_) && !contain(union_sims, treeIndexes_[i]->sims_)) {
 					CopySimToTreeSim(&treeIndexes_[i]->sims_, sims);

@@ -47,7 +47,7 @@ class SimTable {
             Similarity &sim,
             const vector<int> &ids,
             Filter *filter);
-	int startJoinTime_;
+	double startJoinTime_;
 	CompareTreeByEntropy compareTreeByEntropyObject;
 	/*
 	 * Following method are for experiment purpose, it's flexible component

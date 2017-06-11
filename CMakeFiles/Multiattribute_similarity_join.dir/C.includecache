@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/hejian/work/tsinghua/github/Multiattribute_similarity_join/dataset/imdb/imdbpy/imdb/parser/sql/cutils.c
+Python.h
+-
+

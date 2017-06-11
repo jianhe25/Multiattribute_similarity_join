@@ -9,6 +9,8 @@
 #include <iostream>
 #include <cstdarg>
 #include <map>
+#include <libgen.h>
+
 using namespace std;
 
 #include "utils.h"
@@ -31,7 +33,7 @@ void __print_debug__(const char *file, const char *func, int line, const char *f
 		color = (color + 1) % 5;
 	}
 
-	char *fbase = basename(strdupa(file));
+	char *fbase = basename(strdup(file));
 	c_fprintf(colormap[line].c_str(), stderr, "[%s@%s:%d] ", func, fbase, line);
 
 	va_list ap;

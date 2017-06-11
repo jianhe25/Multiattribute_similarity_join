@@ -268,7 +268,7 @@ void GeneratePositionTokenOrGram(const vector<Similarity> &sims, Table &table, i
 			sort(packs.begin(), packs.end(), CompareTokenByTF);
 
 			for (int i = 0; i < packs.size(); ++i)
-				id_map.insert(make_pair(packs[i].first, i));
+				id_map.emplace(make_pair(packs[i].first, i));
 		}
 		for (unsigned i = 0; i < table.size(); ++i) {
 			vector<pair<int,int>> &positionedTokens = table[i][col].positionedTokens;

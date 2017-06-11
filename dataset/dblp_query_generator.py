@@ -1,6 +1,6 @@
 import random
 import sys
-data_file = open("./dblp_204.table")
+data_file = open("./dblp_1k.table")
 rule_file = open("./dblp_threshold_lowerbound")
 
 rules = []
@@ -9,10 +9,10 @@ for line in rule_file:
     rules.append(rule)
 
 line_no = 0
-prob = [0.8,  #Jaccard 1 1 
+prob = [0.8,  #Jaccard 1 1
         0.5,  #Jaccard 2 2
         0.3,  #ES 3 3
-        0.1]  #ES 7 7 
+        0.1]  #ES 7 7
 
 lines = []
 for line in data_file:

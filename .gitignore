@@ -1,7 +1,9 @@
-dataset/*.table
 dataset/*.xml
 .DS_Store
 *.o
 stat_file.csv
 test_sim_table
 *.swp
+.idea/
+formated_stat_file
+time_stat

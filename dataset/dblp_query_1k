@@ -1,0 +1,4000 @@
+#query 1 1
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|G�nther Heinemann	|NULL	|409-421	|16	|2012
+JACCARD 1 1 0.8
+
+#query 2 1
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|G�nther Heinemann	|NULL	|409-421	|16	|2012
+JACCARD 1 1 0.8
+
+#query 3 1
+17	|Analysis of projected hydrological behavior of catchments based on signature indices	|Hydrology and Earth System Sciences	|G�nther Heinemann	|NULL	|409-421	|16	|2012
+JACCARD 1 1 0.8
+
+#query 4 1
+69	|Mod-p Decision Diagrams: A Data Structure for Multiple-Valued Functions.	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Elena Dubrova	|NULL	|NULL	|99-27	|1999
+ES 7 7 0.8
+
+#query 5 1
+69	|Mod-q Decision Diagrams: A Data Structure for Multiple-Valued Functions.	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Elena Dubrova	|NULL	|NULL	|99-27	|1999
+JACCARD 1 1 0.8
+
+#query 6 1
+69	|Mod-q Decision Diagrams: A Data Structure for Multiple-Valued Functions.	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Elena Dubrova	|NULL	|NULL	|99-27	|1999
+JACCARD 1 1 0.8
+
+#query 7 1
+139	|Ordered Binary Decision Diagrams and Their Significance in Computer-Aided Design of VLSI Circuits	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Thorsten Theobald	|NULL	|NULL	|98-01	|1998
+JACCARD 1 1 0.8
+
+#query 8 1
+171	|On the Complexity of One Branching Graphs	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Klaus Jansen	|NULL	|NULL	|92-12	|1992
+JACCARD 2 2 0.8
+
+#query 9 1
+187	|Mod-2-OBDD's: A Generalization of OBDD's and EXOR-Sum-of-Products	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Christoph Meinel	|NULL	|NULL	|93-21	|1993
+JACCARD 1 1 0.8
+
+#query 10 1
+205	|One Step Further: Integrating Electronic Submission and the Reviewing Process	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Christoph Meinel	|NULL	|NULL	|99-16	|1999
+JACCARD 1 1 0.8
+
+#query 11 1
+209	|A Note on M�bius Functions and the Communication Complexity of the Graph-Accessability-Problem	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Christoph Meinel	|NULL	|NULL	|92-05	|1992
+JACCARD 2 2 0.8
+
+#query 12 1
+214	|Language Support for Synchronous Parallel Critical Sections	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Helmut Seidl	|NULL	|NULL	|95-23	|1995
+ES 3 3 0.8
+
+#query 13 1
+227	|Function Decomposition and Synthesis Using Linear Sifting	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Christoph Meinel	|NULL	|NULL	|97-14	|1997
+JACCARD 1 1 0.8
+
+#query 14 1
+274	|Utility Function Programs and Optimization over the Efficient Set in Multiple Objective Decision Making	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Nguyen V. Thoai	|NULL	|NULL	|96-03	|1996
+ES 3 3 0.8
+
+#query 15 1
+309	|Finding Scientific Papers with HPSearch and MOPS	|Universit�t Trier, Mathematik/Informatik, Forschungsbericht	|Gerd Hoff	|NULL	|NULL	|99-26	|1999
+JACCARD 1 1 0.8
+
+#query 16 1
+335	|Zur Behandlung komplexer Objekte in LILOG	|LILOG-Memo	|Brigitte Bartsch-Sp�rl	|NULL	|NULL	|4	|1987
+JACCARD 1 1 0.8
+
+#query 17 1
+343	|Ein Beispiel zur wissensbasierten Produktionsplanung mit PROTOS-L.	|IWBS Report	|Holger M. Wittmann	|NULL	|NULL	|170	|1991
+JACCARD 1 1 0.8
+
+#query 18 1
+366	|Mathematical Logic and Artificial Intelligence	|LILOG-Report	|Peter H. Schmitt	|NULL	|NULL	|6	|1987
+JACCARD 1 1 0.8
+
+#query 19 1
+376	|+-trees	|IWBS Report	|Eric Mays	|NULL	|NULL	|135	|1990
+JACCARD 1 1 0.8
+
+#query 20 1
+399	|Multiword Lexemes: A Monolingual and Contrastive Typology for NLP and MT	|IWBS Report	|Angelika Storrer	|NULL	|NULL	|232	|1992
+JACCARD 1 1 0.8
+
+#query 21 1
+446	|Ein Lernverfahren f�r den automatischen Erwerb von Kontrollwissen	|IWBS Report	|Karin Neuhold	|NULL	|NULL	|207	|1992
+JACCARD 1 1 0.8
+
+#query 22 1
+491	|LILOG - Linguistische und logische Methoden f�r das maschinelle Verstehen des Deutschen - Projektbeschreibung	|LILOG-Report	|Siegfried Kanngie�er	|NULL	|NULL	|1	|1986
+JACCARD 2 2 0.8
+
+#query 23 1
+495	|AP.	|IWBS Report	|Bernhard Beckert	|NULL	|NULL	|227	|1992
+JACCARD 1 1 0.8
+
+#query 24 1
+531	|A Combined Symbolic-Empirical Apprach for the Automatic Translation of Compounds	|IWBS Report	|Ulrike Rackow	|NULL	|NULL	|225	|1992
+JACCARD 1 1 0.8
+
+#query 25 1
+540	|Elsa�-Wanderung f�r Linguisten: Exemplarische Analyse und Repr�sentation eines Satzes aus einer Reisebeschreibung	|LILOG-Memo	|Mohammed Nadjib Khenkhar	|NULL	|NULL	|8	|1988
+JACCARD 1 1 0.8
+
+#query 26 1
+6776	|Introduction.	|LDV Forum	|Stefanie Geldbach	|1	|1-3	|21	|2006
+JACCARD 2 2 0.8
+
+#query 27 1
+6831	|Query von Multiebenenannotierten XML-Dokumenten mit Prolog.	|LDV Forum	|Daniela Goecke	|1/2	|391-405	|18	|2003
+JACCARD 1 1 0.8
+
+#query 28 1
+6855	|Development of a Multilingual Information Retrieval and Check System Based on Database Semantic.	|LDV Forum	|Yun-Pyo Hong	|1/2	|81-99	|16	|1999
+JACCARD 1 1 0.8
+
+#query 29 1
+6902	|Ontology-Based Lexicon of Bulgarian.	|JLCL	|Kiril Simov	|2	|40-55	|24	|2009
+JACCARD 2 2 0.8
+
+#query 30 1
+6928	|The Annotation of Morphology, Syntax and Information Structure in a Multilayered Diachronic Corpus.	|JLCL	|Kristine Gunn Eide	|2	|13-24	|26	|2011
+JACCARD 2 2 0.8
+
+#query 31 1
+6938	|More, Faster: Accelerated Corpus Annotation with Statistical Taggers.	|JLCL	|Arne Skj�rholt	|2	|151-163	|26	|2011
+ES 3 3 0.8
+
+#query 32 1
+6955	|A Three-Step Model of Language Detection in Multilingual Ancient Texts.	|JLCL	|Maria Sukhareva	|2	|165-177	|26	|2011
+JACCARD 1 1 0.8
+
+#query 33 1
+6961	|Manually vs. Automatically Labelled Data in Discourse Relation Classification: Effects of Example and Feature Selection.	|LDV Forum	|Caroline Sporleder	|1	|1-20	|22	|2007
+JACCARD 1 1 0.8
+
+#query 34 1
+6962	|Ausblick.	|LDV Forum	|Uta Seewald-Heeg	|1/2	|118-121	|16	|1999
+JACCARD 1 1 0.8
+
+#query 35 1
+7009	|Simple Signals for Complex Rhetorics: On Rhetorical Analysis with Rich-Feature Support Vector Models.	|LDV Forum	|David Reitter	|1/2	|38-52	|18	|2003
+JACCARD 2 2 0.8
+
+#query 36 1
+7027	|The Evolution of Genre in Wikipedia.	|JLCL	|Patrik O'Brian Holt	|1	|1-22	|24	|2009
+JACCARD 2 2 0.8
+
+#query 37 1
+7056	|Markteffizienz durch Translation Memory Systeme? Intelligente �bersetzungstechnologien zur Reduktion von Transaktionskosten international agierender Unternehmen.	|JLCL	|Vanessa Kollmann	|1	|41-56	|25	|2010
+JACCARD 1 1 0.8
+
+#query 38 1
+7064	|Report of the Results of an IMS Learning Design Expert Workshop.	|iJET	|Francis Brouns	|1	|58-72	|5	|2010
+JACCARD 1 1 0.8
+
+#query 39 1
+7102	|Enhancing the Digital Backchannel Backstage on the Basis of a Formative User Study.	|iJET	|Alexander Pohl	|1	|33-41	|7	|2012
+JACCARD 2 2 0.8
+
+#query 40 1
+7104	|Second Life: A Virtual Learning Center for the Study of Sharks.	|iJET	|Tryfonas Papadamou	|2	|19-25	|6	|2011
+JACCARD 1 1 0.8
+
+#query 41 1
+7135	|Bayesian Model for Optimization Adaptive e-Learning Process.	|iJET	|Enrique Rubio Royo	|2	|38-52	|3	|2008
+JACCARD 1 1 0.8
+
+#query 42 1
+7139	|Attitudinal Disposition of Nigerian University Students toward Social Networking Sites.	|iJET	|Suleiman Alhaji Ahmad	|1	|62-66	|7	|2012
+JACCARD 1 1 0.8
+
+#query 43 1
+7158	|Linking R&D Activities with Teaching: Water Quality Monitoring in Aquaculture as a Remote Laboratory Proxy for Environmental Studies.	|iJET	|Joaquim Gabriel Mendes	|VU 2009	|6-10	|6	|2011
+JACCARD 1 1 0.8
+
+#query 44 1
+7176	|Sharing and Adaptation of Educational Documents in E-Learning.	|iJET	|Khaldi Mohamed	|1	|50-53	|7	|2012
+JACCARD 1 1 0.8
+
+#query 45 1
+7178	|Proposal of convergence of e-Learning Systems for t-Learning.	|iJET	|Barbara De Franco	|1	|NULL	|3	|2008
+JACCARD 1 1 0.8
+
+#query 46 1
+7188	|Transatlantic Online Community of Practice.	|iJET	|Ronald Barendsen	|3	|50-53	|7	|2012
+JACCARD 1 1 0.8
+
+#query 47 1
+7193	|Microblogging Practices of Scientists in E-Learning: A Qualitative Approach.	|iJET	|Barbara Kieslinger	|4	|31-39	|6	|2011
+JACCARD 1 1 0.8
+
+#query 48 1
+7222	|Social Software for Lifelong Competence Development: Challenges and Infrastructure.	|iJET	|Elena Demidova	|S1	|18-23	|3	|2008
+ES 3 3 0.8
+
+#query 49 1
+7250	|GE3D: A Virtual Campus for Technology-Enhanced Distance Learning.	|iJET	|Jean Grieu	|3	|12-17	|5	|2010
+JACCARD 1 1 0.8
+
+#query 50 1
+7260	|The Horse Before the Cart! The English Language Learners Experience of Using E-learning System.	|iJET	|Azidah Abu Ziden	|2	|4-12	|7	|2012
+JACCARD 1 1 0.8
+
+#query 51 1
+7276	|Implementation of E-Portfolio in the First Academic Year at the University of Teacher Education St. Gallen.	|iJET	|Andrea Christen	|1	|NULL	|3	|2008
+JACCARD 2 2 0.8
+
+#query 52 1
+7302	|Elearning Systems Based on the Semantic Web.	|iJET	|George Nicola Sammour	|1	|NULL	|1	|2006
+JACCARD 1 1 0.8
+
+#query 53 1
+7312	|Computers in Education of Children with Intellectual and Related Developmental Disorders.	|iJET	|Valentina Kirinic	|SI2	|12-16	|5	|2010
+JACCARD 1 1 0.8
+
+#query 54 1
+7345	|Multiple Language, User-Friendly Sign Language Chat.	|iJET	|Sebastian J. F. Fudickar	|4	|NULL	|2	|2007
+JACCARD 1 1 0.8
+
+#query 55 1
+7349	|A Virtual Laboratory Structure for Developing Programming Labs.	|iJET	|Ana-Elena Guerrero-Rold�n	|S1	|47-52	|4	|2009
+JACCARD 1 1 0.8
+
+#query 56 1
+7379	|Bayesian Statistics as an Alternative to Gradient Descent in Sequence Learning.	|iJET	|Rainer Spiegel	|3	|NULL	|2	|2007
+JACCARD 1 1 0.8
+
+#query 57 1
+7389	|Mobile Game Development for Multiple Devices in Education.	|iJET	|Pablo Moreno-Ger	|2	|19-26	|4	|2009
+JACCARD 1 1 0.8
+
+#query 58 1
+7421	|Employing Collaborative Learning Strategies in Online Conflict Resolution.	|iJET	|Miguel Angel Garcia-Ruiz	|4	|NULL	|2	|2007
+JACCARD 2 2 0.8
+
+#query 59 1
+7461	|Toward an Adaptive Learning System Framework: Using Bayesian Network to Manage Learner Model.	|iJET	|Viet Anh Nguyen	|4	|38-47	|7	|2012
+JACCARD 1 1 0.8
+
+#query 60 1
+7466	|The Effects of Handwritten Feedback on Paper and Tablet PC in Learning Japanese Writing.	|iJET	|Kanji Akahori	|4	|NULL	|2	|2007
+JACCARD 2 2 0.8
+
+#query 61 1
+7469	|Towards Systems That Care: A Conceptual Framework based on Motivation, Metacognition and Affect.	|I. J. Artificial Intelligence in Education	|Katerina Avramides	|3	|197-229	|20	|2010
+JACCARD 1 1 0.8
+
+#query 62 1
+7483	|The Andes Physics Tutoring System: Lessons Learned.	|I. J. Artificial Intelligence in Education	|Collin Lynch	|3	|147-204	|15	|2005
+JACCARD 2 2 0.8
+
+#query 63 1
+7508	|Responding to Student Uncertainty in Spoken Tutorial Dialogue Systems.	|I. J. Artificial Intelligence in Education	|Stanley Peters	|2	|171-194	|16	|2006
+JACCARD 1 1 0.8
+
+#query 64 1
+7541	|Student Models that Invite the Learner In: The SMILI: () Open Learner Modelling Framework.	|I. J. Artificial Intelligence in Education	|Susan Bull	|2	|89-120	|17	|2007
+JACCARD 1 1 0.8
+
+#query 65 1
+7573	|The Difficulty Factors Approach to the Design of Lessons in Intelligent Tutor Curricula.	|I. J. Artificial Intelligence in Education	|Ryan Shaun Joazeiro de Baker	|4	|341-369	|17	|2007
+JACCARD 1 1 0.8
+
+#query 66 1
+7589	|The Careful Double Vision of Self.	|I. J. Artificial Intelligence in Education	|Judy Kay	|1	|11-18	|13	|2003
+ES 3 3 0.8
+
+#query 67 1
+7604	|A Robust Method to Detect Hidden Data from Digital Images.	|J. Information Security	|A. A. Mohammed	|2	|91-95	|3	|2012
+JACCARD 1 1 0.8
+
+#query 68 1
+7605	|Extending the Strand Space Method with Timestamps: Part I the Theory.	|J. Information Security	|Yongjian Li	|2	|45-55	|1	|2010
+ES 3 3 0.8
+
+#query 69 1
+7611	|Effect of Network Traffic on IPS Performance.	|J. Information Security	|Mojtaba Khaghani	|2	|162-168	|3	|2012
+JACCARD 1 1 0.8
+
+#query 70 1
+7625	|State of the Art for String Analysis and Pattern Search Using CPU and GPU Based Programming.	|J. Information Security	|Miguel Vargas-Lombardo	|4	|314-318	|3	|2012
+ES 3 3 0.8
+
+#query 71 1
+7636	|Comparative Evaluation of Semi Fragile Watermarking Algorithms for Image Authentication.	|J. Information Security	|Manisha Sharma	|3	|189-195	|3	|2012
+JACCARD 1 1 0.8
+
+#query 72 1
+7643	|SPCS: Secure and Privacy-Preserving Charging-Station Searching using VANET.	|J. Information Security	|Jeanno Chin Long Cheung	|1	|59-67	|3	|2012
+JACCARD 2 2 0.8
+
+#query 73 1
+7650	|A Distributed Secure Mechanism for Resource Protection in a Digital Ecosystem Environment.	|J. Information Security	|Geoff Skinner	|1	|25-38	|3	|2012
+JACCARD 1 1 0.8
+
+#query 74 1
+7669	|A Concise Equation of State for Aqueous Solutions of Electrolytes Incorporating Thermodynamic Laws and Entropy.	|Entropy	|Raji Heyrovsk�	|1	|128-132	|6	|2004
+JACCARD 2 2 0.8
+
+#query 75 1
+7670	|Principle of Minimum Discrimination Information and Replica Dynamics.	|Entropy	|Georgy P. Karev	|7	|1673-1695	|12	|2010
+JACCARD 1 1 0.8
+
+#query 76 1
+7719	|Generalised Entropy of Curves for the Analysis and Classification of Dynamical Systems.	|Entropy	|Emanuele Crisostomi	|2	|249-270	|11	|2009
+JACCARD 1 1 0.8
+
+#query 77 1
+7732	|The Quantum-Classical Transition as an Information Flow.	|Entropy	|Luciano Zunino	|1	|148-160	|12	|2010
+JACCARD 1 1 0.8
+
+#query 78 1
+7769	|Hawking and Unruh Effects of a 5-Dimensional Minimal Gauged Supergravity Black Hole by a Global Embedding Approach.	|Entropy	|Hui-Hua Zhao	|3	|1057-1068	|15	|2013
+JACCARD 1 1 0.8
+
+#query 79 1
+7772	|Capacity Bounds and Mapping Design for Binary Symmetric Relay Channels.	|Entropy	|Mikael Skoglund	|12	|2589-2610	|14	|2012
+JACCARD 1 1 0.8
+
+#query 80 1
+7792	|Using Exergy to Understand and Improve the Efficiency of Electrical Power Technologies.	|Entropy	|Cornelia A. Bulucea	|4	|820-835	|11	|2009
+JACCARD 1 1 0.8
+
+#query 81 1
+7832	|Microcanonical Description of (Micro) Black Holes.	|Entropy	|Benjamin Harms	|2	|502-517	|13	|2011
+JACCARD 1 1 0.8
+
+#query 82 1
+7874	|Fitting Ranked Linguistic Data with Two-Parameter Functions.	|Entropy	|Germinal Cocho	|7	|1743-1764	|12	|2010
+JACCARD 2 2 0.8
+
+#query 83 1
+7891	|Multi-Scale Analysis Based Ball Bearing Defect Diagnostics Using Mahalanobis Distance and Support Vector Machine.	|Entropy	|Shuen-De Wu	|2	|416-433	|15	|2013
+JACCARD 2 2 0.8
+
+#query 84 1
+7932	|Information Theory Estimators for the First-Order Spatial Autoregressive Model.	|Entropy	|Evgeniy V. Perevodchikov	|7	|1165-1185	|14	|2012
+JACCARD 1 1 0.8
+
+#query 85 1
+7959	|Decimative Multiplication of Entropy Arrays, with Application to Influenza.	|Entropy	|William A. Thompson	|3	|351-359	|11	|2009
+JACCARD 1 1 0.8
+
+#query 86 1
+7991	|Towards an Information Entropy Model of Job Approval Rating: The Clinton Presidency.	|Entropy	|Rajendra Kulkarni	|3	|37-49	|1	|1999
+ES 3 3 0.8
+
+#query 87 1
+8028	|Urban Ecosystem Health Assessment and Its Application in Management: A Multi-Scale Perspective.	|Entropy	|Yan Zhang	|1	|1-9	|15	|2013
+JACCARD 1 1 0.8
+
+#query 88 1
+8038	|Measurement Back-Action in Quantum Point-Contact Charge Sensing.	|Entropy	|Silke Sch�n	|7	|1721-1732	|12	|2010
+JACCARD 1 1 0.8
+
+#query 89 1
+8062	|Association of Finite-Dimension Thermodynamics and a Bond-Graph Approach for Modeling an Irreversible Heat Engine.	|Entropy	|Georges Descombes	|7	|1234-1258	|14	|2012
+JACCARD 1 1 0.8
+
+#query 90 1
+8092	|Analysis of the Magnetic Field Effect on Entropy Generation at Thermosolutal Convection in a Square Cavity.	|Entropy	|Nejib Hidouri	|5	|1034-1054	|13	|2011
+JACCARD 1 1 0.8
+
+#query 91 1
+8114	|Information Theory in Scientific Visualization.	|Entropy	|Chaoli Wang	|1	|254-273	|13	|2011
+JACCARD 1 1 0.8
+
+#query 92 1
+8120	|Experimental Assessment of a 2-D Entropy-Based Model for Velocity Distribution in Open Channel Flow.	|Entropy	|Gustavo Marini	|3	|988-998	|15	|2013
+JACCARD 1 1 0.8
+
+#query 93 1
+8123	|13, 554-569.	|Entropy	|Theo Kurt�n	|4	|915-923	|13	|2011
+ES 3 3 0.8
+
+#query 94 1
+8148	|A Law of Word Meaning in Dolphin Whistle Types.	|Entropy	|Ramon Ferrer-i-Cancho	|4	|688-701	|11	|2009
+JACCARD 1 1 0.8
+
+#query 95 1
+8169	|The Entropy of Progressively Censored Samples.	|Entropy	|Zaher A. Abo-Eleneen	|2	|437-449	|13	|2011
+JACCARD 2 2 0.8
+
+#query 96 1
+8221	|A Survey on Interference Networks: Interference Alignment and Neutralization.	|Entropy	|Sang-Woon Jeon	|10	|1842-1863	|14	|2012
+JACCARD 1 1 0.8
+
+#query 97 1
+8228	|Temperature Effects, Frieden-Hawkins' Order-Measure, and Wehrl Entropy.	|Entropy	|Angelo Plastino	|11	|2081-2099	|14	|2012
+ES 3 3 0.8
+
+#query 98 1
+8272	|Phase-Controlled Atom-Photon Entanglement in a Three-Level V-Type Atomic System via Spontaneously Generated Coherence.	|Entropy	|Mohammad Mahmoudi	|9	|1541-1554	|13	|2011
+JACCARD 1 1 0.8
+
+#query 99 1
+8301	|Wavelet-Based Analysis on the Complexity of Hydrologic Series Data under Multi-Temporal Scales.	|Entropy	|Ling Wang	|1	|195-210	|13	|2011
+JACCARD 1 1 0.8
+
+#query 100 1
+8332	|Symmetry in Science: An Introduction to the General Theory.	|Entropy	|Shu-Kun Lin	|3	|53-54	|1	|1999
+JACCARD 1 1 0.8
+
+#query 101 1
+8360	|Optimal Design of ORC Systems with a Low-Temperature Heat Source.	|Entropy	|Mohammed Khennich	|2	|370-389	|14	|2012
+JACCARD 1 1 0.8
+
+#query 102 1
+8377	|Registration of three-dimensional face scans with average face models.	|J. Electronic Imaging	|Albert Ali Salah	|1	|011006	|17	|2008
+JACCARD 1 1 0.8
+
+#query 103 1
+8414	|Adaptive denoising and lossy compression of images in transform domain.	|J. Electronic Imaging	|Karen O. Egiazarian	|3	|233-245	|8	|1999
+JACCARD 1 1 0.8
+
+#query 104 1
+8417	|Polygonal scanners for television and high-definition television laser projectors: spatial and temporal tolerances versus resolution.	|J. Electronic Imaging	|Mehrdad Ketabchi	|3	|318-327	|3	|1994
+JACCARD 1 1 0.8
+
+#query 105 1
+8429	|Transform domain approaches for image denoising.	|J. Electronic Imaging	|Leonid P. Yaroslavsky	|2	|149-156	|11	|2002
+ES 3 3 0.8
+
+#query 106 1
+8449	|Predicting the image quality of color overhead transparencies using a color-appearance model.	|J. Electronic Imaging	|Roy S. Berns	|2	|154-165	|6	|1997
+JACCARD 1 1 0.8
+
+#query 107 1
+8481	|New automatic defect classification algorithm based on a classification-after-segmentation framework.	|J. Electronic Imaging	|Sang-Hak Lee	|2	|020502	|19	|2010
+JACCARD 1 1 0.8
+
+#query 108 1
+8495	|Processing of audio and visual speech for telecommunication systems.	|J. Electronic Imaging	|Druti Shah	|3	|263-269	|8	|1999
+JACCARD 1 1 0.8
+
+#query 109 1
+8515	|Simulations of large telecommunication networks based on probabilistic modeling.	|J. Electronic Imaging	|Hery Rakotoarisoa	|1	|68-77	|6	|1997
+ES 3 3 0.8
+
+#query 110 1
+8549	|Study of the imaging conditions and processing for the aspect control of specular surfaces.	|J. Electronic Imaging	|Bernard Lamalle	|1	|196-202	|10	|2001
+JACCARD 1 1 0.8
+
+#query 111 1
+8568	|Document page classification algorithms in low-end copy pipeline.	|J. Electronic Imaging	|Charles A. Bouman	|4	|043011	|17	|2008
+JACCARD 1 1 0.8
+
+#query 112 1
+8599	|Localization and text sequence restoration using noise pixels in binary document image watermarking.	|J. Electronic Imaging	|Niladri B. Puhan	|2	|023012	|18	|2009
+JACCARD 1 1 0.8
+
+#query 113 1
+8621	|Measurement-based evaluation of a printer dot model for halftone algorithm tone correction.	|J. Electronic Imaging	|Charles J. Rosenberg	|3	|205-212	|2	|1993
+JACCARD 2 2 0.8
+
+#query 114 1
+8637	|Guest Editorial: Special Section on Biometrics: Advances in Security, Usability, and Interoperability.	|J. Electronic Imaging	|Berrin A. Yanikoglu	|1	|011001	|17	|2008
+JACCARD 1 1 0.8
+
+#query 115 1
+8664	|Polygonal approximation of contours based on the turning angle function.	|J. Electronic Imaging	|S�rgio A. Santiago	|2	|023016	|17	|2008
+JACCARD 1 1 0.8
+
+#query 116 1
+8667	|Numerical simulation of toner jet method for nonimpact printing.	|J. Electronic Imaging	|Harunobu Izawa	|1	|98-102	|3	|1994
+JACCARD 1 1 0.8
+
+#query 117 1
+8671	|Morphological skeleton decomposition interframe interpolation method.	|J. Electronic Imaging	|Simona Halunga	|2	|023018	|19	|2010
+JACCARD 1 1 0.8
+
+#query 118 1
+8678	|400 - to 1000 - nm imaging spectrometer based on acousto-optic tunable filters.	|J. Electronic Imaging	|Javier Calpe-Maravilla	|2	|023001	|15	|2006
+ES 3 3 0.8
+
+#query 119 1
+8696	|Digital Color Management Encoding Solutions, Second Edition.	|J. Electronic Imaging	|Bruce H. Pillman	|4	|049901	|18	|2009
+JACCARD 1 1 0.8
+
+#query 120 1
+8717	|Color image watermarking in the Karhunen-Loeve transform domain.	|J. Electronic Imaging	|Alessandro Piva	|1	|87-95	|11	|2002
+JACCARD 1 1 0.8
+
+#query 121 1
+8733	|Adaptive neighborhood mean and median image filtering.	|J. Electronic Imaging	|William M. Morrow	|4	|360-367	|3	|1994
+JACCARD 1 1 0.8
+
+#query 122 1
+8766	|Preferred skin color reproduction on the display.	|J. Electronic Imaging	|Hyun Wook Ok	|4	|041203	|15	|2006
+JACCARD 1 1 0.8
+
+#query 123 1
+8768	|Reversible watermarking using a perceptual model.	|J. Electronic Imaging	|Mohammad Awrangjeb	|1	|013014	|14	|2005
+JACCARD 2 2 0.8
+
+#query 124 1
+8783	|Video denoising by fuzzy motion and detail adaptive averaging.	|J. Electronic Imaging	|Aleksandra Pizurica	|4	|043005	|17	|2008
+JACCARD 1 1 0.8
+
+#query 125 1
+8805	|Secure multimedia watermarking authentication in wavelet domain.	|J. Electronic Imaging	|Zhen Ren	|3	|033010	|17	|2008
+JACCARD 1 1 0.8
+
+#query 126 1
+8816	|Multiresolution Bayesian design of binary filters.	|J. Electronic Imaging	|Vishnu G. Kamat	|3	|283-295	|9	|2000
+JACCARD 1 1 0.8
+
+#query 127 1
+8850	|Preserving the curve evolution property for the binary level set method.	|J. Electronic Imaging	|Changhong Wang	|2	|020502	|16	|2007
+JACCARD 1 1 0.8
+
+#query 128 1
+8876	|Optimal unsharp mask for image sharpening and noise removal.	|J. Electronic Imaging	|Sang Ho Kim	|2	|023005	|14	|2005
+JACCARD 2 2 0.8
+
+#query 129 1
+8894	|On the standard deviation in charge-coupled device cameras: A variogram-based technique for nonuniform images.	|J. Electronic Imaging	|Luis Miguel Sanchez-Brea	|2	|121-126	|11	|2002
+JACCARD 1 1 0.8
+
+#query 130 1
+8927	|Design of a handprint recognition system.	|J. Electronic Imaging	|Stanley A. Janet	|2	|231-243	|6	|1997
+JACCARD 1 1 0.8
+
+#query 131 1
+8944	|Comparison of a CMOS-based and a CCD-based digital x-ray imaging system: Observer studies.	|J. Electronic Imaging	|Xizeng Wu	|2	|023002	|14	|2005
+JACCARD 1 1 0.8
+
+#query 132 1
+8968	|Resolution improvement and detail enhancement for computed tomography scout images.	|J. Electronic Imaging	|Adel Said Elmaghraby	|1	|013003	|14	|2005
+ES 3 3 0.8
+
+#query 133 1
+8987	|Sequential scalar quantization of color images.	|J. Electronic Imaging	|Charles A. Bouman	|1	|45-59	|3	|1994
+JACCARD 1 1 0.8
+
+#query 134 1
+9001	|Representation of human vision in the brain: How does human perception recognize images?	|J. Electronic Imaging	|Michela Azzariti	|1	|123-151	|10	|2001
+JACCARD 2 2 0.8
+
+#query 135 1
+9037	|Temporal video segmentation using unsupervised clustering and semantic object tracking.	|J. Electronic Imaging	|A. M�fit Ferman	|3	|592-604	|7	|1998
+JACCARD 2 2 0.8
+
+#query 136 1
+9039	|Fast algorithms for histogram matching: Application to texture synthesis.	|J. Electronic Imaging	|V. Vo	|1	|39-45	|9	|2000
+JACCARD 1 1 0.8
+
+#query 137 1
+9040	|Region-based image fusion method using bidimensional empirical mode decomposition.	|J. Electronic Imaging	|Youzhi Zheng	|1	|013008	|18	|2009
+JACCARD 1 1 0.8
+
+#query 138 1
+9080	|Color image segmentation using Laplacian eigenmaps.	|J. Electronic Imaging	|Ioannis Tziakos	|2	|023004	|18	|2009
+JACCARD 1 1 0.8
+
+#query 139 1
+9083	|Block-matching algorithm based on dynamic adjustment of search window for low bit-rate video coding.	|J. Electronic Imaging	|Heung-Kyu Lee	|3	|571-577	|7	|1998
+JACCARD 1 1 0.8
+
+#query 140 1
+9094	|Analysis of tristimulus interdifference and contextual color correction.	|J. Electronic Imaging	|Davide Gadia	|4	|041202	|15	|2006
+JACCARD 1 1 0.8
+
+#query 141 1
+9125	|Automatic design of morphological operators.	|J. Electronic Imaging	|Edward R. Dougherty	|3	|486-491	|13	|2004
+JACCARD 1 1 0.8
+
+#query 142 1
+9162	|Three-dimensional histogram visualization in different color spaces and applications.	|J. Electronic Imaging	|Gabriel Marcu	|4	|330-346	|4	|1995
+JACCARD 2 2 0.8
+
+#query 143 1
+9171	|Psychophysical experiments on the PicHunter image retrieval system.	|J. Electronic Imaging	|Peter N. Yianilos	|1	|170-180	|10	|2001
+JACCARD 1 1 0.8
+
+#query 144 1
+9184	|Threshold modulation in error diffusion.	|J. Electronic Imaging	|Reiner Eschbach	|3	|185-192	|2	|1993
+JACCARD 1 1 0.8
+
+#query 145 1
+9187	|Measurement of gaseous hydrocarbon distribution by a near-infrared absorption tomography system.	|J. Electronic Imaging	|Francis P. Hindle	|3	|593-600	|10	|2001
+JACCARD 1 1 0.8
+
+#query 146 1
+9196	|From invariant line features clustering to line matching: theory and applications.	|J. Electronic Imaging	|X.-W. Tu	|2	|185-195	|8	|1999
+JACCARD 2 2 0.8
+
+#query 147 1
+9211	|Red/white projections and rod/long-wave cone color: an annotated bibliography.	|J. Electronic Imaging	|John J. McCann	|1	|8-14	|13	|2004
+JACCARD 1 1 0.8
+
+#query 148 1
+9213	|Fast color processor with programmable interpolation by small memory (PRISM).	|J. Electronic Imaging	|Katsuhiro Kanamori	|3	|213-224	|2	|1993
+JACCARD 1 1 0.8
+
+#query 149 1
+9244	|Polynomial modeling and optimization for colorimetric characterization of scanners.	|J. Electronic Imaging	|Leonardo Vanneschi	|4	|043002	|17	|2008
+JACCARD 1 1 0.8
+
+#query 150 1
+9274	|Novel quality-effective zooming algorithm for color filter array.	|J. Electronic Imaging	|Jun-Hong Yu	|1	|013005	|19	|2010
+JACCARD 1 1 0.8
+
+#query 151 1
+9274	|Novel quality-effective zooming algorithm for color filter array.	|J. Electronic Imaging	|Wen-Ming Yan	|1	|013005	|19	|2010
+JACCARD 1 1 0.8
+
+#query 152 1
+9281	|Learning object models from graph templates.	|J. Electronic Imaging	|Ali Reza Mirhosseini	|3	|294-302	|6	|1997
+JACCARD 2 2 0.8
+
+#query 153 1
+9294	|Influence of adaptation on the perception of distortions in natural images.	|J. Electronic Imaging	|Otto H. MacLin	|1	|100-109	|10	|2001
+JACCARD 1 1 0.8
+
+#query 154 1
+9315	|Progressive transmission of color-mapped images.	|J. Electronic Imaging	|Lap-Ming Kwong	|3	|033013	|14	|2005
+JACCARD 2 2 0.8
+
+#query 155 1
+9317	|Image encryption method using a class of fractals.	|J. Electronic Imaging	|Nikolaos G. Bourbakis	|3	|251-259	|4	|1995
+JACCARD 1 1 0.8
+
+#query 156 1
+9339	|Validation of a human vision model for image quality evaluation of fast interventional magnetic resonance imaging.	|J. Electronic Imaging	|Jeffrey L. Duerk	|2	|224-235	|11	|2002
+JACCARD 2 2 0.8
+
+#query 157 1
+9368	|Analysis of the H.264 advanced video coding standard and an associated rate control scheme.	|J. Electronic Imaging	|Xiaokang Yang	|4	|043023	|17	|2008
+JACCARD 1 1 0.8
+
+#query 158 1
+9380	|Stereo image coding via digital watermarking.	|J. Electronic Imaging	|Gaurav Bhatnagar	|3	|033012	|18	|2009
+ES 3 3 0.8
+
+#query 159 1
+9404	|Efficient rotation- and scale-invariant texture classification method based on Gabor wavelets.	|J. Electronic Imaging	|Xudong Xie	|4	|043026	|17	|2008
+JACCARD 1 1 0.8
+
+#query 160 1
+9443	|Analysis of area-based image matching under perspective distortion for a planar object model.	|J. Electronic Imaging	|W. Bryan Bell	|1	|112-125	|8	|1999
+JACCARD 1 1 0.8
+
+#query 161 1
+9463	|Two-layer video coding and cell-loss concealment using pyramid structures.	|J. Electronic Imaging	|Seung Hoon Hong	|3	|548-557	|7	|1998
+JACCARD 1 1 0.8
+
+#query 162 1
+9496	|Human perception of trademark images: Implications for retrieval system design.	|J. Electronic Imaging	|John P. Eakins	|4	|564-575	|9	|2000
+JACCARD 1 1 0.8
+
+#query 163 1
+9507	|Two improved codebook search methods of vector quantization based on orthogonal checking and fixed range search.	|J. Electronic Imaging	|Chin-Chen Chang	|2	|357-366	|7	|1998
+JACCARD 1 1 0.8
+
+#query 164 1
+9546	|Context-based lossless halftone image compression.	|J. Electronic Imaging	|Peter De Neve	|4	|404-414	|8	|1999
+JACCARD 1 1 0.8
+
+#query 165 1
+9579	|Variational approaches to super-resolution with contrast enhancement and anisotropic diffusion.	|J. Electronic Imaging	|Hyunwoo Kim	|2	|244-251	|12	|2003
+JACCARD 1 1 0.8
+
+#query 166 1
+9580	|Multiscale corner detection of contour images using wavelet transform.	|J. Electronic Imaging	|Farook Sattar	|4	|040502	|14	|2005
+JACCARD 1 1 0.8
+
+#query 167 1
+9593	|Motion-blurred image restoration using modified inverse all-pole filters.	|J. Electronic Imaging	|Norman S. Kopeika	|2	|257-263	|13	|2004
+JACCARD 1 1 0.8
+
+#query 168 1
+9609	|Iterative method for blind deconvolution.	|J. Electronic Imaging	|Raman B. Paranjape	|3	|245-250	|3	|1994
+JACCARD 1 1 0.8
+
+#query 169 1
+9623	|Adaptive contrast enhancement based on highly overlapped interpolation.	|J. Electronic Imaging	|Zhi Qing Wu	|3	|033006	|14	|2005
+JACCARD 1 1 0.8
+
+#query 170 1
+9647	|Graphical processing unit-based machine vision system for simultaneous measurement of shrinkage and soil release in fabrics.	|J. Electronic Imaging	|Sridharan Kamalakannan	|2	|023009	|19	|2010
+JACCARD 1 1 0.8
+
+#query 171 1
+9647	|Graphical processing unit-based machine vision system for simultaneous measurement of shrinkage and soil release in fabrics.	|J. Electronic Imaging	|Eric F. Hequet	|2	|023009	|19	|2010
+JACCARD 1 1 0.8
+
+#query 172 1
+9653	|Sea Ice Deformation State From Synthetic Aperture Radar Imagery - Part II: Effects of Spatial Resolution and Noise Level.	|IEEE T. Geoscience and Remote Sensing	|Wolfgang Dierking	|8	|2197-2207	|46	|2008
+JACCARD 1 1 0.8
+
+#query 173 1
+9683	|DEM Control in Arctic Alaska With ICESat Laser Altimetry.	|IEEE T. Geoscience and Remote Sensing	|Jeffrey T. Freymueller	|11-2	|3710-3720	|45	|2007
+ES 3 3 0.8
+
+#query 174 1
+9685	|Assessment of Cloud Screening With Apparent Surface Reflectance in Support of the ICESat-2 Mission.	|IEEE T. Geoscience and Remote Sensing	|Yuekui Yang	|2	|1037-1045	|51	|2013
+JACCARD 1 1 0.8
+
+#query 175 1
+9689	|Inversion of Phaseless Total Field Data Using a Two-Step Strategy Based on the Iterative Multiscaling Approach.	|IEEE T. Geoscience and Remote Sensing	|Gabriele Franceschini	|12	|3527-3539	|44	|2006
+JACCARD 1 1 0.8
+
+#query 176 1
+9689	|Inversion of Phaseless Total Field Data Using a Two-Step Strategy Based on the Iterative Multiscaling Approach.	|IEEE T. Geoscience and Remote Sensing	|Massimo Donelli	|12	|3527-3539	|44	|2006
+JACCARD 2 2 0.8
+
+#query 177 1
+9702	|Video observations and model predictions of depth-induced wave dissipation.	|IEEE T. Geoscience and Remote Sensing	|Stefan G. J. Aarninkhof	|11	|2612-2622	|42	|2004
+JACCARD 1 1 0.8
+
+#query 178 1
+9719	|Soil moisture mapping using ESTAR under dry conditions from the Southern Great Plains Experiment (SGP99).	|IEEE T. Geoscience and Remote Sensing	|Michael H. Cosh	|10	|2392-2397	|41	|2003
+JACCARD 1 1 0.8
+
+#query 179 1
+9733	|Extracting contour lines from common-conditioned topographic maps.	|IEEE T. Geoscience and Remote Sensing	|Yang Chen	|4	|1048-1057	|44	|2006
+JACCARD 1 1 0.8
+
+#query 180 1
+9753	|Comparison of Ground-Based Millimeter-Wave Observations and Simulations in the Arctic Winter.	|IEEE T. Geoscience and Remote Sensing	|Maria P. Cadeddu	|9	|3098-3106	|47	|2009
+JACCARD 1 1 0.8
+
+#query 181 1
+9777	|Soil Moisture Retrieval Using GNSS-R Techniques: Experimental Results Over a Bare Soil Field.	|IEEE T. Geoscience and Remote Sensing	|Nereida Rodriguez-Alvarez	|11	|3616-3624	|47	|2009
+JACCARD 1 1 0.8
+
+#query 182 1
+9795	|Multipath Model and Exploitation in Through-the-Wall and Urban Radar Sensing.	|IEEE T. Geoscience and Remote Sensing	|Fauzia Ahmad	|10	|4021-4034	|49	|2011
+JACCARD 1 1 0.8
+
+#query 183 1
+9798	|Retrievals of column water vapor using millimeter-wave radiometric measurements.	|IEEE T. Geoscience and Remote Sensing	|Paul Racette	|6	|1220-1229	|40	|2002
+JACCARD 1 1 0.8
+
+#query 184 1
+9807	|Data Fusion for Reconstruction of a DTM, Under a Woodland Canopy, From Airborne L-band InSAR.	|IEEE T. Geoscience and Remote Sensing	|Clare S. Rowland	|5-1	|1154-1163	|45	|2007
+JACCARD 1 1 0.8
+
+#query 185 1
+9816	|A Comparison of Signal Deconvolution Algorithms Based on Small-Footprint LiDAR Waveform Simulation.	|IEEE T. Geoscience and Remote Sensing	|Gregory Asner	|6-2	|2402-2414	|49	|2011
+JACCARD 1 1 0.8
+
+#query 186 1
+9821	|Multisensor approach to automated classification of sea ice image data.	|IEEE T. Geoscience and Remote Sensing	|Vitaly Y. Alexandrov	|7	|1648-1664	|43	|2005
+JACCARD 1 1 0.8
+
+#query 187 1
+9826	|Detection and extraction of buildings from interferometric SAR data.	|IEEE T. Geoscience and Remote Sensing	|Matteo Saccani	|1	|611-617	|38	|2000
+JACCARD 1 1 0.8
+
+#query 188 1
+9827	|The Global Rain Forest Mapping Project JERS-1 radar mosaic of tropical Africa: development and product characterization aspects.	|IEEE T. Geoscience and Remote Sensing	|M. Simard	|5	|2218-2233	|38	|2000
+JACCARD 2 2 0.8
+
+#query 189 1
+9838	|Multivariate statistical integration of Satellite infrared and microwave radiometric measurements for rainfall retrieval at the geostationary scale.	|IEEE T. Geoscience and Remote Sensing	|Domenico Cimini	|5	|1018-1032	|42	|2004
+JACCARD 1 1 0.8
+
+#query 190 1
+9860	|Spatial and Temporal Varying Thresholds for Cloud Detection in GOES Imagery.	|IEEE T. Geoscience and Remote Sensing	|Gary Jedlovec	|6	|1705-1717	|46	|2008
+JACCARD 1 1 0.8
+
+#query 191 1
+9881	|Ground-based multifrequency microwave radiometry for rainfall remote sensing.	|IEEE T. Geoscience and Remote Sensing	|Ermanno Fionda	|4	|742-759	|40	|2002
+JACCARD 1 1 0.8
+
+#query 192 1
+9893	|Improvement of Target Detection Methods by Multiway Filtering.	|IEEE T. Geoscience and Remote Sensing	|Nadine Renard	|8	|2407-2417	|46	|2008
+JACCARD 1 1 0.8
+
+#query 193 1
+9902	|Improved MODIS Aerosol Retrieval Using Modified VIS/SWIR Surface Albedo Ratio Over Urban Scenes.	|IEEE T. Geoscience and Remote Sensing	|Samir Ahmed	|3-1	|983-1000	|48	|2010
+JACCARD 1 1 0.8
+
+#query 194 1
+9925	|GeoIRIS: Geospatial Information Retrieval and Indexing System - Content Mining, Semantics Modeling, and Complex Queries.	|IEEE T. Geoscience and Remote Sensing	|Adrian S. Barb	|4	|839-852	|45	|2007
+JACCARD 1 1 0.8
+
+#query 195 1
+9951	|Optimization of DC resistivity data acquisition: real-time experimental design and a new multielectrode system.	|IEEE T. Geoscience and Remote Sensing	|Alan G. Green	|12	|2727-2735	|40	|2002
+JACCARD 1 1 0.8
+
+#query 196 1
+9973	|Validation of SMOS Data Over Agricultural and Boreal Forest Areas in Canada.	|IEEE T. Geoscience and Remote Sensing	|Imen Gherboudj	|5-1	|1623-1635	|50	|2012
+JACCARD 2 2 0.8
+
+#query 197 1
+9974	|Estimation of raindrop size distribution from spaceborne Radar observations.	|IEEE T. Geoscience and Remote Sensing	|Venkatachalam Chandrasekar	|5	|1078-1086	|43	|2005
+JACCARD 1 1 0.8
+
+#query 198 1
+9988	|Focusing Parallel Bistatic SAR Data Using the Analytic Transfer Function in the Wavenumber Domain.	|IEEE T. Geoscience and Remote Sensing	|Zheng Bao	|11-2	|3633-3645	|45	|2007
+JACCARD 2 2 0.8
+
+#query 199 1
+9993	|Surface Reflectance Estimation Using Prior Spatial and Spectral Information.	|IEEE T. Geoscience and Remote Sensing	|David H. Staelin	|9	|2928-2939	|45	|2007
+JACCARD 1 1 0.8
+
+#query 200 1
+10016	|Processing the Azimuth-Variant Bistatic SAR Data by Using Monostatic Imaging Algorithms Based on Two-Dimensional Principle of Stationary Phase.	|IEEE T. Geoscience and Remote Sensing	|Thomas Espeter	|10	|3504-3520	|49	|2011
+JACCARD 2 2 0.8
+
+#query 201 1
+10019	|A multichannel temporally adaptive system for continuous cloud classification from satellite imagery.	|IEEE T. Geoscience and Remote Sensing	|Donald L. Reinke	|5	|1098-1104	|41	|2003
+JACCARD 1 1 0.8
+
+#query 202 1
+10022	|Multitemporal Image Change Detection Using Undecimated Discrete Wavelet Transform and Active Contours.	|IEEE T. Geoscience and Remote Sensing	|Kai-Kuang Ma	|2	|706-716	|49	|2011
+JACCARD 1 1 0.8
+
+#query 203 1
+10036	|Combining Airborne Photographs and Spaceborne SAR Data to Monitor Temperate Glaciers: Potentials and Limits.	|IEEE T. Geoscience and Remote Sensing	|Michel Gay	|4	|905-924	|45	|2007
+JACCARD 1 1 0.8
+
+#query 204 1
+10049	|Bayesian Hyperspectral Image Segmentation With Discriminative Class Learning.	|IEEE T. Geoscience and Remote Sensing	|Andr� R. S. Mar�al	|6-1	|2151-2164	|49	|2011
+JACCARD 1 1 0.8
+
+#query 205 1
+10051	|Relationship Between PALSAR Backscatter and Surface-Roughness Parameters From Iron Laterites in Caraj�s, Amazon Region.	|IEEE T. Geoscience and Remote Sensing	|Cleber Gonzales de Oliveira	|12-1	|4027-4031	|47	|2009
+JACCARD 1 1 0.8
+
+#query 206 1
+10062	|Development of a Network-Based Method for Unmixing of Hyperspectral Data.	|IEEE T. Geoscience and Remote Sensing	|Konstantinos N. Topouzelis	|3	|839-849	|50	|2012
+ES 3 3 0.8
+
+#query 207 1
+10069	|Inundation discriminated using sun glint.	|IEEE T. Geoscience and Remote Sensing	|Jean-Yves Balois	|6	|1279-1287	|40	|2002
+JACCARD 1 1 0.8
+
+#query 208 1
+10075	|First water vapor measurements at 183 GHz from the high alpine station Jungfraujoch.	|IEEE T. Geoscience and Remote Sensing	|Andreas Siegenthaler	|9	|2084-2086	|39	|2001
+ES 3 3 0.8
+
+#query 209 1
+10080	|Retrieving 3-D Topography by Using a Single-Antenna Squint-Mode Airborne SAR.	|IEEE T. Geoscience and Remote Sensing	|Ievgeniia V. Dukhopelnykova	|11-1	|3574-3582	|45	|2007
+JACCARD 1 1 0.8
+
+#query 210 1
+10097	|A telegrapher equation for electric - telemetering in drill strings.	|IEEE T. Geoscience and Remote Sensing	|Jos� M. Carcione	|5	|1047-1053	|40	|2002
+ES 7 7 0.8
+
+#query 211 1
+10113	|Effects of stand size on the accuracy of remote sensing-based forest inventory.	|IEEE T. Geoscience and Remote Sensing	|Juha Hyypp�	|12	|2613-2621	|39	|2001
+JACCARD 1 1 0.8
+
+#query 212 1
+10141	|Cloud Properties Derived From GOME/ERS-2 Backscatter Data for Trace Gas Retrieval.	|IEEE T. Geoscience and Remote Sensing	|Peter Albert	|9	|2747-2758	|45	|2007
+ES 3 3 0.8
+
+#query 213 1
+10154	|Ocean surface wind fields estimated from satellite active and passive microwave instruments.	|IEEE T. Geoscience and Remote Sensing	|Abderrahim Bentamy	|5	|2469-2486	|37	|1999
+JACCARD 2 2 0.8
+
+#query 214 1
+10154	|Ocean surface wind fields estimated from satellite active and passive microwave instruments.	|IEEE T. Geoscience and Remote Sensing	|Pierre Queffeulou	|5	|2469-2486	|37	|1999
+JACCARD 1 1 0.8
+
+#query 215 1
+10173	|Measurement of canopy geometry characteristics using LiDAR laser altimetry: a feasibility study.	|IEEE T. Geoscience and Remote Sensing	|Caroline J. Houldcroft	|10	|2270-2282	|43	|2005
+JACCARD 2 2 0.8
+
+#query 216 1
+10179	|Polarimetric scanning radiometer C- and X-band microwave observations during SMEX03.	|IEEE T. Geoscience and Remote Sensing	|Thomas J. Jackson	|11	|2418-2430	|43	|2005
+JACCARD 1 1 0.8
+
+#query 217 1
+10187	|Linear Spectral Mixture Analysis Based Approaches to Estimation of Virtual Dimensionality in Hyperspectral Imagery.	|IEEE T. Geoscience and Remote Sensing	|Wei Xiong	|11	|3960-3979	|48	|2010
+ES 3 3 0.8
+
+#query 218 1
+10213	|Radar Response of Firn Exposed to Seasonal Percolation, Validation Using Cores and FDTD Modeling.	|IEEE T. Geoscience and Remote Sensing	|Svein-Erik Hamran	|8-2	|2773-2786	|47	|2009
+JACCARD 1 1 0.8
+
+#query 219 1
+10222	|A Hybrid Conditional Random Field for Estimating the Underlying Ground Surface From Airborne LiDAR Data.	|IEEE T. Geoscience and Remote Sensing	|James J. Little	|8-2	|2913-2922	|47	|2009
+JACCARD 1 1 0.8
+
+#query 220 1
+10245	|Foliage Clumping Index Over China's Landmass Retrieved From the MODIS BRDF Parameters Product.	|IEEE T. Geoscience and Remote Sensing	|Weimin Ju	|6	|2122-2137	|50	|2012
+JACCARD 1 1 0.8
+
+#query 221 1
+10257	|Evaluation of radargrammetric DEM from RADARSAT images in high relief areas.	|IEEE T. Geoscience and Remote Sensing	|Thierry Toutin	|2	|782-789	|38	|2000
+JACCARD 1 1 0.8
+
+#query 222 1
+10276	|Foreword.	|IEEE T. Geoscience and Remote Sensing	|Richard Bamler	|5	|2071	|38	|2000
+JACCARD 2 2 0.8
+
+#query 223 1
+10293	|Validation and Calibration of ASCAT Using CMOD5.n.	|IEEE T. Geoscience and Remote Sensing	|Ad Stoffelen	|1-2	|386-395	|48	|2010
+JACCARD 1 1 0.8
+
+#query 224 1
+10316	|A Variable-Resolution Probabilistic Three-Dimensional Model for Change Detection.	|IEEE T. Geoscience and Remote Sensing	|Gabriel Taubin	|2	|489-500	|50	|2012
+ES 3 3 0.8
+
+#query 225 1
+10335	|Hyperion Image Optimization in Coastal Waters.	|IEEE T. Geoscience and Remote Sensing	|Xiurui Geng	|2	|1025-1036	|51	|2013
+JACCARD 1 1 0.8
+
+#query 226 1
+10356	|Thermal Land Surface Emissivity Retrieved From SEVIRI/Meteosat.	|IEEE T. Geoscience and Remote Sensing	|Leonardo F. Peres	|2	|307-315	|46	|2008
+JACCARD 2 2 0.8
+
+#query 227 1
+10366	|Using novel fluorescent polymers as sensory materials for above-ground sensing of chemical signature compounds emanating from buried landmines.	|IEEE T. Geoscience and Remote Sensing	|Marcus J. la Grone	|6	|1119-1128	|39	|2001
+JACCARD 1 1 0.8
+
+#query 228 1
+10393	|Enhanced Precise Point Positioning for GNSS Users.	|IEEE T. Geoscience and Remote Sensing	|Jaume Sanz Subirana	|10	|4213-4222	|50	|2012
+JACCARD 1 1 0.8
+
+#query 229 1
+10400	|Interband calibration over clouds for POLDER space sensor.	|IEEE T. Geoscience and Remote Sensing	|Olivier Hagolle	|1	|131-142	|40	|2002
+JACCARD 1 1 0.8
+
+#query 230 1
+10402	|Target Detection and Texture Segmentation in Polarimetric SAR Images Using a Wavelet Frame: Theoretical Aspects.	|IEEE T. Geoscience and Remote Sensing	|Jong-Sen Lee	|11-1	|3437-3453	|45	|2007
+JACCARD 2 2 0.8
+
+#query 231 1
+10407	|Filtering of multichannel SAR images.	|IEEE T. Geoscience and Remote Sensing	|Jiong Jiong Yu	|11	|2373-2379	|39	|2001
+JACCARD 2 2 0.8
+
+#query 232 1
+10410	|Passive active L- and S-band (PALS) microwave sensor for ocean salinity and soil moisture measurements.	|IEEE T. Geoscience and Remote Sensing	|Seth L. Chazanoff	|5	|1039-1048	|39	|2001
+JACCARD 1 1 0.8
+
+#query 233 1
+10414	|A Spatial-Contextual Support Vector Machine for Remotely Sensed Image Classification.	|IEEE T. Geoscience and Remote Sensing	|Cheng-Hsuan Li	|3	|784-799	|50	|2012
+JACCARD 1 1 0.8
+
+#query 234 1
+10436	|FORMOSAT-3/COSMIC Constellation Spacecraft System Performance: After One Year in Orbit.	|IEEE T. Geoscience and Remote Sensing	|Shao-Shing Chen	|11	|3380-3394	|46	|2008
+JACCARD 1 1 0.8
+
+#query 235 1
+10454	|View Generation for Multiview Maximum Disagreement Based Active Learning for Hyperspectral Image Classification.	|IEEE T. Geoscience and Remote Sensing	|Melba M. Crawford	|5-2	|1942-1954	|50	|2012
+JACCARD 1 1 0.8
+
+#query 236 1
+10471	|A ground-based parasitic SAR experiment.	|IEEE T. Geoscience and Remote Sensing	|Lisa Cazzani	|5	|2132-2141	|38	|2000
+JACCARD 2 2 0.8
+
+#query 237 1
+10471	|A ground-based parasitic SAR experiment.	|IEEE T. Geoscience and Remote Sensing	|Dario Tarchi	|5	|2132-2141	|38	|2000
+ES 3 3 0.8
+
+#query 238 1
+10477	|Microwave Signatures of Snow on Sea Ice: Observations.	|IEEE T. Geoscience and Remote Sensing	|Dylan C. Powell	|11-1	|3081-3090	|44	|2006
+JACCARD 1 1 0.8
+
+#query 239 1
+10492	|On the Use of GNSS-R Data to Correct L-Band Brightness Temperatures for Sea-State Effects: Results of the ALBATROSS Field Experiments.	|IEEE T. Geoscience and Remote Sensing	|Adriano Camps	|9	|3225-3235	|49	|2011
+JACCARD 1 1 0.8
+
+#query 240 1
+10495	|Development of target null theory.	|IEEE T. Geoscience and Remote Sensing	|Jian Yang	|2	|330-338	|39	|2001
+JACCARD 1 1 0.8
+
+#query 241 1
+10511	|A pixel shape index coupled with spectral information for classification of high spatial resolution remotely sensed imagery.	|IEEE T. Geoscience and Remote Sensing	|Xin Huang	|10-2	|2950-2961	|44	|2006
+JACCARD 1 1 0.8
+
+#query 242 1
+10535	|A novel multifractal estimation method and its application to remote image segmentation.	|IEEE T. Geoscience and Remote Sensing	|Gan Du	|4	|980-982	|40	|2002
+JACCARD 2 2 0.8
+
+#query 243 1
+10537	|In-Situ Transfer Standard and Coincident-View Intercomparisons for Sensor Cross-Calibration.	|IEEE T. Geoscience and Remote Sensing	|Joel McCorkel	|3-1	|1088-1097	|51	|2013
+JACCARD 1 1 0.8
+
+#query 244 1
+10546	|The near-surface current velocity determined from image sequences of the sea surface.	|IEEE T. Geoscience and Remote Sensing	|Christian M. Senet	|3	|492-505	|39	|2001
+JACCARD 1 1 0.8
+
+#query 245 1
+10555	|On the assimilation of Ku-band scatterometer winds for weather analysis and forecasting.	|IEEE T. Geoscience and Remote Sensing	|Ad Stoffelen	|4	|1893-1902	|38	|2000
+JACCARD 2 2 0.8
+
+#query 246 1
+10576	|Calibration of End-to-End Phase Imbalance of Polarimetric Radiometers.	|IEEE T. Geoscience and Remote Sensing	|Jani Kettunen	|10-1	|2635-2641	|44	|2006
+JACCARD 1 1 0.8
+
+#query 247 1
+10601	|Interferometric SAR Phase Filtering in the Wavelet Domain Using Simultaneous Detection and Estimation.	|IEEE T. Geoscience and Remote Sensing	|Bryan Mercer	|4	|1396-1416	|49	|2011
+JACCARD 1 1 0.8
+
+#query 248 1
+10616	|Information Content of Millimeter-Wave Observations for Hydrometeor Properties in Mid-Latitudes.	|IEEE T. Geoscience and Remote Sensing	|Ingo Meirold-Mautner	|7-2	|2287-2299	|45	|2007
+JACCARD 1 1 0.8
+
+#query 249 1
+10622	|Ozone monitoring instrument calibration.	|IEEE T. Geoscience and Remote Sensing	|W. Dierssen	|5	|1209-1238	|44	|2006
+JACCARD 1 1 0.8
+
+#query 250 1
+10640	|Retrieval of land surface parameters using passive microwave measurements at 6-18 GHz.	|IEEE T. Geoscience and Remote Sensing	|Li Li	|1	|79-93	|37	|1999
+JACCARD 1 1 0.8
+
+#query 251 1
+10643	|Physically and Mineralogically Based Spectroscopic Dielectric Model for Moist Soils.	|IEEE T. Geoscience and Remote Sensing	|Valery L. Mironov	|7-1	|2059-2070	|47	|2009
+JACCARD 1 1 0.8
+
+#query 252 1
+10663	|Extreme Compression of Weather Radar Data.	|IEEE T. Geoscience and Remote Sensing	|Vishnu Makkapati	|11-2	|3773-3783	|45	|2007
+JACCARD 1 1 0.8
+
+#query 253 1
+10677	|Forward model and Jacobians for Tropospheric Emission Spectrometer retrievals.	|IEEE T. Geoscience and Remote Sensing	|Shepard A. Clough	|5	|1308-1323	|44	|2006
+JACCARD 1 1 0.8
+
+#query 254 1
+10681	|Foreword to the Special Issue on Remote Sensing and Modeling of Surface Properties.	|IEEE T. Geoscience and Remote Sensing	|Fuzhong Weng	|4	|1175-1176	|49	|2011
+JACCARD 2 2 0.8
+
+#query 255 1
+10700	|Focus FMCW SAR Data Using the Wavenumber Domain Algorithm.	|IEEE T. Geoscience and Remote Sensing	|Otmar Loffeld	|4-2	|2109-2118	|48	|2010
+JACCARD 1 1 0.8
+
+#query 256 1
+10707	|Suitability and Limitations of ENVISAT ASAR for Monitoring Small Reservoirs in a Semiarid Area.	|IEEE T. Geoscience and Remote Sensing	|Jens R. Liebe	|5	|1536-1547	|47	|2009
+JACCARD 1 1 0.8
+
+#query 257 1
+10711	|N-parameter retrievals from L-band microwave observations acquired over a variety of crop fields.	|IEEE T. Geoscience and Remote Sensing	|Sten S. S�bj�rg	|6	|1168-1178	|42	|2004
+JACCARD 2 2 0.8
+
+#query 258 1
+10738	|Spatial scales of tropical precipitation inferred from TRMM microwave imager data.	|IEEE T. Geoscience and Remote Sensing	|Albin J. Gasiewski	|7	|1542-1551	|43	|2005
+JACCARD 1 1 0.8
+
+#query 259 1
+10751	|Coherence estimation from multilook incoherent SAR imagery.	|IEEE T. Geoscience and Remote Sensing	|Stefano Baronti	|11	|2531-2539	|41	|2003
+JACCARD 2 2 0.8
+
+#query 260 1
+10762	|Multifrequency and multipolarization radar backscattering from mangrove forests.	|IEEE T. Geoscience and Remote Sensing	|J. L. Betoulle	|1	|94-102	|37	|1999
+JACCARD 1 1 0.8
+
+#query 261 1
+10769	|Introduction of sensor spectral response into image fusion methods. Application to wavelet-based methods.	|IEEE T. Geoscience and Remote Sensing	|Xavier Otazu	|10	|2376-2385	|43	|2005
+JACCARD 1 1 0.8
+
+#query 262 1
+10771	|High-stability L-band radiometer measurements of saltwater.	|IEEE T. Geoscience and Remote Sensing	|Fuk K. Li	|9	|1829-1835	|42	|2004
+JACCARD 1 1 0.8
+
+#query 263 1
+10773	|Extended boundary condition method for scattering and emission from natural surfaces modeled by fractals.	|IEEE T. Geoscience and Remote Sensing	|Antonio Iodice	|5	|1115-1125	|43	|2005
+JACCARD 1 1 0.8
+
+#query 264 1
+10789	|Discriminant Absorption-Feature Learning for Material Classification.	|IEEE T. Geoscience and Remote Sensing	|Antonio Robles-Kelly	|5	|1536-1556	|49	|2011
+JACCARD 2 2 0.8
+
+#query 265 1
+10792	|Cloud shadow detection under arbitrary viewing and illumination conditions.	|IEEE T. Geoscience and Remote Sensing	|James J. Simpson	|2	|972-976	|38	|2000
+JACCARD 2 2 0.8
+
+#query 266 1
+10811	|Comparison of the ASI Ice Concentration Algorithm With Landsat-7 ETM+ and SAR Imagery.	|IEEE T. Geoscience and Remote Sensing	|Thorsten Markus	|9	|3008-3015	|47	|2009
+ES 3 3 0.8
+
+#query 267 1
+10823	|Dimensionality Reduction Based on Clonal Selection for Hyperspectral Imagery.	|IEEE T. Geoscience and Remote Sensing	|Yanfei Zhong	|12-2	|4172-4186	|45	|2007
+JACCARD 1 1 0.8
+
+#query 268 1
+10846	|Local analysis of MISR surface BRF and albedo over GSFC and mongu AERONET sites.	|IEEE T. Geoscience and Remote Sensing	|Brent Holben	|7-1	|1707-1718	|44	|2006
+JACCARD 1 1 0.8
+
+#query 269 1
+10860	|A Quantitative Analysis of Virtual Endmembers' Increased Impact on the Collinearity Effect in Spectral Unmixing.	|IEEE T. Geoscience and Remote Sensing	|Pol Coppin	|8	|2945-2956	|49	|2011
+JACCARD 1 1 0.8
+
+#query 270 1
+10882	|Principal-components-based display strategy for spectral imagery.	|IEEE T. Geoscience and Remote Sensing	|David I. Diersen	|3	|708-718	|41	|2003
+JACCARD 1 1 0.8
+
+#query 271 1
+10912	|An Improved Soil Moisture Retrieval Algorithm for ERS and METOP Scatterometer Observations.	|IEEE T. Geoscience and Remote Sensing	|Stefan Hasenauer	|7-1	|1999-2013	|47	|2009
+ES 3 3 0.8
+
+#query 272 1
+10918	|Spectral-Spatial Classification of Hyperspectral Imagery Based on Partitional Clustering Techniques.	|IEEE T. Geoscience and Remote Sensing	|Yuliya Tarabalka	|8-2	|2973-2987	|47	|2009
+JACCARD 1 1 0.8
+
+#query 273 1
+10919	|GEOSAT Follow-On Water Vapor Radiometer: Performance With a Shared Active/Passive Antenna.	|IEEE T. Geoscience and Remote Sensing	|April M. Warnock	|4	|970-977	|45	|2007
+JACCARD 2 2 0.8
+
+#query 274 1
+10926	|Detection of Unexploded Ordnance via Efficient Semisupervised and Active Learning.	|IEEE T. Geoscience and Remote Sensing	|Qiuhua Liu	|9	|2558-2567	|46	|2008
+JACCARD 1 1 0.8
+
+#query 275 1
+10936	|Representative Multiple Kernel Learning for Classification in Hyperspectral Imagery.	|IEEE T. Geoscience and Remote Sensing	|Chen Wang	|7	|2852-2865	|50	|2012
+JACCARD 1 1 0.8
+
+#query 276 1
+10956	|High-Frequency EM Characterization of Through-Wall Building Imaging.	|IEEE T. Geoscience and Remote Sensing	|Paul C. Chang	|5	|1375-1387	|47	|2009
+JACCARD 2 2 0.8
+
+#query 277 1
+10981	|MISR stereoscopic image matchers: techniques and results.	|IEEE T. Geoscience and Remote Sensing	|Roger Davies	|7	|1547-1559	|40	|2002
+JACCARD 1 1 0.8
+
+#query 278 1
+11008	|High-Resolution ASCAT Scatterometer Winds Near the Coast.	|IEEE T. Geoscience and Remote Sensing	|Anton Verhoef	|7	|2481-2487	|50	|2012
+JACCARD 1 1 0.8
+
+#query 279 1
+11018	|Evaluation of a Near-Field Monostatic-to-Bistatic Equivalence Theorem.	|IEEE T. Geoscience and Remote Sensing	|Christopher J. Bradley	|2	|449-457	|46	|2008
+ES 3 3 0.8
+
+#query 280 1
+11040	|MODIS land cover and LAI collection 4 product quality across nine sites in the western hemisphere.	|IEEE T. Geoscience and Remote Sensing	|Marcos Costa	|7-1	|1843-1857	|44	|2006
+JACCARD 1 1 0.8
+
+#query 281 1
+11053	|Retrieval of atmospheric liquid and ice characteristics using dual-wavelength radar observations.	|IEEE T. Geoscience and Remote Sensing	|Marcia K. Politovich	|5	|2325-2334	|37	|1999
+JACCARD 1 1 0.8
+
+#query 282 1
+11066	|Low-grazing-angle scattering from 3-D breaking water wave crests.	|IEEE T. Geoscience and Remote Sensing	|Yanzhong Li	|8	|2093-2101	|44	|2006
+JACCARD 1 1 0.8
+
+#query 283 1
+11070	|A cloud-removal algorithm for SSM/I data.	|IEEE T. Geoscience and Remote Sensing	|David G. Long	|1	|54-62	|37	|1999
+JACCARD 2 2 0.8
+
+#query 284 1
+11087	|The role of canopy structure in the spectral variation of transmission and absorption of solar radiation in vegetation canopies.	|IEEE T. Geoscience and Remote Sensing	|Karl G. Schnitzler	|2	|241-253	|39	|2001
+JACCARD 2 2 0.8
+
+#query 285 1
+11098	|A Forest Geometric Description of a Maritime Pine Forest Suitable for Discrete Microwave Models.	|IEEE T. Geoscience and Remote Sensing	|Jean-Pierre Wigneron	|9	|2024-2035	|43	|2005
+JACCARD 1 1 0.8
+
+#query 286 1
+11103	|Localization of Interfaces Embedded in a Half-Space by a Linear Inverse Scattering Algorithm.	|IEEE T. Geoscience and Remote Sensing	|Rocco Pierri	|11-2	|3661-3671	|45	|2007
+JACCARD 1 1 0.8
+
+#query 287 1
+11117	|Model-Based Estimation of Forest Canopy Height in Red and Austrian Pine Stands Using Shuttle Radar Topography Mission and Ancillary Data: A Proof-of-Concept Study.	|IEEE T. Geoscience and Remote Sensing	|Charles G. Brown	|3-1	|1105-1118	|48	|2010
+JACCARD 2 2 0.8
+
+#query 288 1
+11136	|Scattering Model for a Pine Tree Employing VIE With a Broadband MLFMA and Comparison to ICA.	|IEEE T. Geoscience and Remote Sensing	|Jaan Praks	|3-1	|1119-1127	|48	|2010
+JACCARD 1 1 0.8
+
+#query 289 1
+11159	|Assessment of Glacier Volume Change Using ASTER-Based Surface Matching of Historical Photography.	|IEEE T. Geoscience and Remote Sensing	|Timothy D. James	|7-1	|1971-1979	|47	|2009
+JACCARD 1 1 0.8
+
+#query 290 1
+11170	|Classification of landmine-like metal targets using wideband electromagnetic induction.	|IEEE T. Geoscience and Remote Sensing	|Lawrence Carin	|3	|1352-1361	|38	|2000
+JACCARD 1 1 0.8
+
+#query 291 1
+11195	|Geometric Integration of Heterogeneous Models for Multisatellite Image Positioning.	|IEEE T. Geoscience and Remote Sensing	|Liang-Chien Chen	|7	|2802-2809	|50	|2012
+JACCARD 1 1 0.8
+
+#query 292 1
+11202	|GRS-S Awards Presented at IGARSS 2009.	|IEEE T. Geoscience and Remote Sensing	|Roger Lang	|1-1	|6-13	|49	|2011
+JACCARD 1 1 0.8
+
+#query 293 1
+11211	|Continuous Monitoring of Canopy Level Sun-Induced Chlorophyll Fluorescence During the Growth of a Sorghum Field.	|IEEE T. Geoscience and Remote Sensing	|S�bastien Champagne	|11	|4292-4300	|50	|2012
+ES 3 3 0.8
+
+#query 294 1
+11225	|Sensitivity to soil moisture by active and passive microwave sensors.	|IEEE T. Geoscience and Remote Sensing	|Fawwaz T. Ulaby	|1	|105-114	|38	|2000
+JACCARD 1 1 0.8
+
+#query 295 1
+11251	|Fast and Accurate Radiative Transfer in the Microwave With Optimum Spectral Sampling.	|IEEE T. Geoscience and Remote Sensing	|Gennady Uymin	|7-1	|1909-1917	|47	|2009
+JACCARD 1 1 0.8
+
+#query 296 1
+11260	|A Null-Space Method for the Phase Unwrapping of Multitemporal SAR Interferometric Stacks.	|IEEE T. Geoscience and Remote Sensing	|Diego Reale	|6-2	|2323-2334	|49	|2011
+JACCARD 1 1 0.8
+
+#query 297 1
+11270	|A New Maximum Simplex Volume Method Based on Householder Transformation for Endmember Extraction.	|IEEE T. Geoscience and Remote Sensing	|Junmin Liu	|1	|104-118	|50	|2012
+JACCARD 1 1 0.8
+
+#query 298 1
+11277	|Calibration of PRISM and AVNIR-2 Onboard ALOS "Daichi".	|IEEE T. Geoscience and Remote Sensing	|Hiroshi Murakami	|12-1	|4042-4050	|47	|2009
+JACCARD 1 1 0.8
+
+#query 299 1
+11281	|On the Usage of GRECOSAR, an Orbital Polarimetric SAR Simulator of Complex Targets, to Vessel Classification Studies.	|IEEE T. Geoscience and Remote Sensing	|Gerard Margarit	|12	|3517-3526	|44	|2006
+JACCARD 1 1 0.8
+
+#query 300 1
+11301	|Helsinki University of Technology L-Band Airborne Synthetic Aperture Radiometer.	|IEEE T. Geoscience and Remote Sensing	|Jani Kettunen	|3	|717-726	|46	|2008
+JACCARD 1 1 0.8
+
+#query 301 1
+11314	|The SMOS Soil Moisture Retrieval Algorithm.	|IEEE T. Geoscience and Remote Sensing	|Claire Gruhier	|5-1	|1384-1403	|50	|2012
+JACCARD 2 2 0.8
+
+#query 302 1
+11322	|Classification and feature extraction for remote sensing images from urban areas based on morphological transformations.	|IEEE T. Geoscience and Remote Sensing	|Kolbeinn Amason	|9	|1940-1949	|41	|2003
+JACCARD 1 1 0.8
+
+#query 303 1
+11338	|Exploiting Class Hierarchies for Knowledge Transfer in Hyperspectral Data.	|IEEE T. Geoscience and Remote Sensing	|Suju Rajan	|11-2	|3408-3417	|44	|2006
+JACCARD 2 2 0.8
+
+#query 304 1
+11354	|The Two-Scale BPM Scattering Model for Sea Biogenic Slicks Contrast.	|IEEE T. Geoscience and Remote Sensing	|Piotr Sobieski	|7-1	|1949-1956	|47	|2009
+JACCARD 2 2 0.8
+
+#query 305 1
+11374	|Long-Term Consecutive DInSAR for Volume Change Estimation of Land Deformation.	|IEEE T. Geoscience and Remote Sensing	|Pierre-Phillippe Mathieu	|1	|259-270	|50	|2012
+JACCARD 1 1 0.8
+
+#query 306 1
+11397	|Application of neural algorithms for a real-time estimation of ozone profiles from GOME measurements.	|IEEE T. Geoscience and Remote Sensing	|Alessandro Ortenzi	|10	|2263-2270	|40	|2002
+JACCARD 1 1 0.8
+
+#query 307 1
+11412	|Sea surface velocity vector retrieval using dual-beam interferometry: first demonstration.	|IEEE T. Geoscience and Remote Sensing	|Dragana Perkovic	|11	|2494-2502	|43	|2005
+JACCARD 1 1 0.8
+
+#query 308 1
+11415	|Context-Based Hierarchical Unequal Merging for SAR Image Segmentation.	|IEEE T. Geoscience and Remote Sensing	|Xiangrong Zhang	|2	|995-1009	|51	|2013
+JACCARD 1 1 0.8
+
+#query 309 1
+11438	|A finite-difference model to study the elastic-wave interactions with buried land mines.	|IEEE T. Geoscience and Remote Sensing	|Christoph T. Schr�der	|4	|1505-1512	|38	|2000
+JACCARD 2 2 0.8
+
+#query 310 1
+11445	|Intersensor Calibration Between F-13 SSM/I and F-17 SSMIS Near-Real-Time Sea Ice Estimates.	|IEEE T. Geoscience and Remote Sensing	|Walter N. Meier	|9	|3343-3349	|49	|2011
+JACCARD 1 1 0.8
+
+#query 311 1
+11448	|Conceptual Case for Assimilating Interferometric Synthetic Aperture Radar Data Into the HAZUS-MH Earthquake Module.	|IEEE T. Geoscience and Remote Sensing	|David M. Tralli	|6-1	|1595-1604	|45	|2007
+JACCARD 2 2 0.8
+
+#query 312 1
+11461	|Foreword.	|IEEE T. Geoscience and Remote Sensing	|J. A. Richards	|10	|2103	|40	|2002
+JACCARD 2 2 0.8
+
+#query 313 1
+11465	|Extraction of Illumination Efficiency by Solely Radiometric Measurements for Improved Brightness-Temperature Characterization of Microwave Blackbody Target.	|IEEE T. Geoscience and Remote Sensing	|James Randa	|11	|4575-4583	|50	|2012
+JACCARD 1 1 0.8
+
+#query 314 1
+11470	|SAR image denoising via Bayesian wavelet shrinkage based on heavy-tailed modeling.	|IEEE T. Geoscience and Remote Sensing	|Panagiotis Tsakalides	|8	|1773-1784	|41	|2003
+JACCARD 1 1 0.8
+
+#query 315 1
+11475	|MODIS Onboard Blackbody Function and Performance.	|IEEE T. Geoscience and Remote Sensing	|William Barnes	|12-2	|4210-4222	|47	|2009
+JACCARD 1 1 0.8
+
+#query 316 1
+11486	|Discrimination mode processing for EMI and GPR sensors for hand-held land mine detection.	|IEEE T. Geoscience and Remote Sensing	|Dominic K. C. Ho	|1	|249-263	|42	|2004
+JACCARD 1 1 0.8
+
+#query 317 1
+11507	|Soil Moisture Retrieval Using a Two-Dimensional L-Band Synthetic Aperture Radiometer in a Semiarid Environment.	|IEEE T. Geoscience and Remote Sensing	|Dongryeol Ryu	|12	|4273-4284	|48	|2010
+JACCARD 1 1 0.8
+
+#query 318 1
+11530	|Phased Array Radar Polarimetry for Weather Sensing: A Theoretical Formulation for Bias Corrections.	|IEEE T. Geoscience and Remote Sensing	|David Staiman	|11	|3679-3689	|47	|2009
+JACCARD 1 1 0.8
+
+#query 319 1
+11554	|Landsat-5 TM reflective-band absolute radiometric calibration.	|IEEE T. Geoscience and Remote Sensing	|Gyanesh Chander	|12	|2747-2760	|42	|2004
+JACCARD 2 2 0.8
+
+#query 320 1
+11568	|A New Sea-Ice Concentration Algorithm Based on Microwave Surface Emissivities - Application to AMSU Measurements.	|IEEE T. Geoscience and Remote Sensing	|Ralph Ferraro	|1-1	|175-189	|49	|2011
+JACCARD 2 2 0.8
+
+#query 321 1
+11574	|Rigorous modeling of ultrawideband VHF scattering from tree trunks over flat and. sloped terrain.	|IEEE T. Geoscience and Remote Sensing	|Lam H. Nguyen	|10	|2182-2193	|39	|2001
+JACCARD 2 2 0.8
+
+#query 322 1
+11597	|Retrieval of biomass in boreal forests from multitemporal ERS-1 and JERS-1 SAR images.	|IEEE T. Geoscience and Remote Sensing	|Martti Hallikainen	|1	|198-205	|37	|1999
+JACCARD 2 2 0.8
+
+#query 323 1
+11625	|Overview of the EOS aura mission.	|IEEE T. Geoscience and Remote Sensing	|Phil DeCola	|5	|1066-1074	|44	|2006
+JACCARD 1 1 0.8
+
+#query 324 1
+11630	|2, a Study in Hong Kong and the Pearl River Delta Region.	|IEEE T. Geoscience and Remote Sensing	|Man Sing Wong	|8	|3318-3327	|48	|2010
+JACCARD 1 1 0.8
+
+#query 325 1
+11636	|Global Analysis of Envisat RA-2 Burst Mode Echo Sequences.	|IEEE T. Geoscience and Remote Sensing	|Jennifer A. Freeman	|9	|2869-2874	|45	|2007
+JACCARD 1 1 0.8
+
+#query 326 1
+11651	|2 from the aura ozone monitoring instrument (OMI).	|IEEE T. Geoscience and Remote Sensing	|Simon A. Carn	|5	|1259-1266	|44	|2006
+JACCARD 1 1 0.8
+
+#query 327 1
+11676	|Georegistration of Landsat data via robust matching of multiresolution features.	|IEEE T. Geoscience and Remote Sensing	|Jeffrey G. Masek	|7	|1586-1600	|42	|2004
+JACCARD 1 1 0.8
+
+#query 328 1
+11678	|Assessing Noise Amplitude in Remotely Sensed Images Using Bit-Plane and Scatterplot Approaches.	|IEEE T. Geoscience and Remote Sensing	|Donatella Guzzi	|8	|2665-2675	|45	|2007
+JACCARD 1 1 0.8
+
+#query 329 1
+11702	|Monitoring Subglacial Volcanic Eruption Using Ground-Based C-Band Radar Imagery.	|IEEE T. Geoscience and Remote Sensing	|Stefano Barbieri	|1-2	|403-414	|48	|2010
+JACCARD 1 1 0.8
+
+#query 330 1
+11704	|A Backscatter Modeling for River Ice: Analysis and Numerical Results.	|IEEE T. Geoscience and Remote Sensing	|Imen Gherboudj	|4-1	|1788-1798	|48	|2010
+JACCARD 1 1 0.8
+
+#query 331 1
+11726	|Estimation of Sahelian-Grassland Parameters Using a Coherent Scattering Model and a Genetic Algorithm.	|IEEE T. Geoscience and Remote Sensing	|Isabelle Chenerie	|4	|999-1011	|47	|2009
+JACCARD 1 1 0.8
+
+#query 332 1
+11729	|The Earth observing system microwave limb sounder (EOS MLS) on the aura Satellite.	|IEEE T. Geoscience and Remote Sensing	|Gun-Shing Chen	|5	|1075-1092	|44	|2006
+JACCARD 1 1 0.8
+
+#query 333 1
+11747	|Geometrical SAR image registration.	|IEEE T. Geoscience and Remote Sensing	|Gianfranco Fornaro	|10-2	|2861-2870	|44	|2006
+JACCARD 1 1 0.8
+
+#query 334 1
+11766	|Differences Between Collection 4 and 5 MODIS Ice Cloud Optical/Microphysical Products and Their Impact on Radiative Forcing Simulations.	|IEEE T. Geoscience and Remote Sensing	|Michael D. King	|9	|2886-2899	|45	|2007
+JACCARD 2 2 0.8
+
+#query 335 1
+11793	|Optimization of L-Band Sea Surface Emissivity Models Deduced From SMOS Data.	|IEEE T. Geoscience and Remote Sensing	|Jacqueline Boutin	|5-1	|1414-1426	|50	|2012
+JACCARD 2 2 0.8
+
+#query 336 1
+11815	|SBAS-Based Satellite Orbit Correction for the Generation of DInSAR Time-Series: Application to RADARSAT-1 Data.	|IEEE T. Geoscience and Remote Sensing	|Antonio Pepe	|12	|5150-5165	|49	|2011
+JACCARD 1 1 0.8
+
+#query 337 1
+11829	|Landmine detection with ground penetrating radar using hidden Markov models.	|IEEE T. Geoscience and Remote Sensing	|Miroslaw Mystkowski	|6	|1231-1244	|39	|2001
+JACCARD 1 1 0.8
+
+#query 338 1
+11855	|Ground Moving Target Indication via Multichannel Airborne SAR.	|IEEE T. Geoscience and Remote Sensing	|Duc Vu	|10	|3753-3764	|49	|2011
+JACCARD 1 1 0.8
+
+#query 339 1
+11867	|Multiscale Classification of Remote Sensing Images.	|IEEE T. Geoscience and Remote Sensing	|Jefersson Alex dos Santos	|10	|3764-3775	|50	|2012
+JACCARD 1 1 0.8
+
+#query 340 1
+11879	|Evaluation of remote sensing based terrestrial productivity from MODIS using regional tower eddy flux network observations.	|IEEE T. Geoscience and Remote Sensing	|Kenneth J. Davis	|7-1	|1908-1925	|44	|2006
+JACCARD 1 1 0.8
+
+#query 341 1
+11898	|Rigorous Photogrammetric Processing of HiRISE Stereo Imagery for Mars Topographic Mapping.	|IEEE T. Geoscience and Remote Sensing	|Yunhang Chen	|7	|2558-2572	|49	|2011
+JACCARD 1 1 0.8
+
+#query 342 1
+11917	|A numerical study of ocean polarimetric thermal emission.	|IEEE T. Geoscience and Remote Sensing	|Kyung Pak	|1	|8-20	|37	|1999
+JACCARD 1 1 0.8
+
+#query 343 1
+11940	|Intercomparison of microwave radiative transfer models for precipitating clouds.	|IEEE T. Geoscience and Remote Sensing	|Alberto Mugnai	|3	|541-549	|40	|2002
+JACCARD 1 1 0.8
+
+#query 344 1
+11942	|Water quality retrievals from combined Landsat TM data and ERS-2 SAR data in the Gulf of Finland.	|IEEE T. Geoscience and Remote Sensing	|Martti T. Hallikainen	|3	|622-629	|41	|2003
+JACCARD 1 1 0.8
+
+#query 345 1
+11969	|Cross-Calibration of the Total Ozone Unit (TOU) With the Ozone Monitoring Instrument (OMI) and SBUV/2 for Environmental Applications.	|IEEE T. Geoscience and Remote Sensing	|Yongmei Wang	|12	|4943-4955	|50	|2012
+JACCARD 1 1 0.8
+
+#query 346 1
+11972	|High-Resolution SAR Interferometry: Estimation of Local Frequencies in the Context of Alpine Glaciers.	|IEEE T. Geoscience and Remote Sensing	|Pierre Grussenmeyer	|4	|1079-1090	|46	|2008
+JACCARD 1 1 0.8
+
+#query 347 1
+11977	|Synthetic Signatures of Volcanic Ash Cloud Particles From X-Band Dual-Polarization Radar.	|IEEE T. Geoscience and Remote Sensing	|Frank Silvio Marzano	|1	|193-211	|50	|2012
+JACCARD 1 1 0.8
+
+#query 348 1
+11982	|A digital-analog hybrid technique for low range sidelobe pulse compression.	|IEEE T. Geoscience and Remote Sensing	|Hiroaki Horie	|7	|1612-1615	|39	|2001
+JACCARD 1 1 0.8
+
+#query 349 1
+11993	|Thermal analysis of buried land mines over a diurnal cycle.	|IEEE T. Geoscience and Remote Sensing	|Kambiz Vafai	|2	|461-473	|40	|2002
+JACCARD 1 1 0.8
+
+#query 350 1
+12010	|Sensitivity analysis of airborne microwave retrieval of stratiform precipitation to the melting layer parameterization.	|IEEE T. Geoscience and Remote Sensing	|Frank Silvio Marzano	|1	|75-91	|39	|2001
+JACCARD 1 1 0.8
+
+#query 351 1
+12037	|A new measurement technique for obtaining the complex relative permittivity of terrain surfaces.	|IEEE T. Geoscience and Remote Sensing	|Heung-Soo Kim	|5	|1190-1194	|40	|2002
+JACCARD 1 1 0.8
+
+#query 352 1
+12052	|A Technique For Removing Second-Order Light Effects From Hyperspectral Imaging Data.	|IEEE T. Geoscience and Remote Sensing	|Rong-Rong Li	|3	|824-830	|50	|2012
+ES 3 3 0.8
+
+#query 353 1
+12072	|Calibration of the ocean color and temperature scanner.	|IEEE T. Geoscience and Remote Sensing	|Yasushi Mitomi	|3	|1484-1495	|37	|1999
+JACCARD 1 1 0.8
+
+#query 354 1
+12075	|Disaggregation of SMOS Soil Moisture in Southeastern Australia.	|IEEE T. Geoscience and Remote Sensing	|Philippe Richaume	|5-1	|1556-1571	|50	|2012
+JACCARD 1 1 0.8
+
+#query 355 1
+12083	|Aerosol Lidar Intercomparison in the Framework of SPALINET - The Spanish Lidar Network: Methodology and Results.	|IEEE T. Geoscience and Remote Sensing	|Alberto Requena	|10	|3547-3559	|47	|2009
+JACCARD 1 1 0.8
+
+#query 356 1
+12093	|Progressive Discrimination: An Automatic Method for Mapping Individual Targets in Hyperspectral Imagery.	|IEEE T. Geoscience and Remote Sensing	|T. B. Minor	|7	|2674-2685	|49	|2011
+JACCARD 1 1 0.8
+
+#query 357 1
+12104	|Retrieval of Wind Wave Elevation Spectra From Sunglint Data.	|IEEE T. Geoscience and Remote Sensing	|Brendan T. McGann	|9	|2829-2836	|45	|2007
+JACCARD 1 1 0.8
+
+#query 358 1
+12124	|Modeling Rough-Surface and Granular Scattering at Terahertz Frequencies Using the Finite-Difference Time-Domain Method.	|IEEE T. Geoscience and Remote Sensing	|Lisa M. Zurk	|10	|3709-3719	|48	|2010
+JACCARD 2 2 0.8
+
+#query 359 1
+12129	|Landsat ETM+ and SAR image fusion based on generalized intensity Modulation.	|IEEE T. Geoscience and Remote Sensing	|Luciano Alparone	|12	|2832-2839	|42	|2004
+JACCARD 1 1 0.8
+
+#query 360 1
+12147	|Constellation Deployment for the FORMOSAT-3/COSMIC Mission.	|IEEE T. Geoscience and Remote Sensing	|Ying-Hwa Kuo	|11	|3367-3379	|46	|2008
+ES 3 3 0.8
+
+#query 361 1
+12172	|Retrieving soil moisture from simulated brightness temperatures by a neural network.	|IEEE T. Geoscience and Remote Sensing	|Wen-June Wang	|8	|1662-1672	|39	|2001
+JACCARD 1 1 0.8
+
+#query 362 1
+12190	|An improved Bayesian decision theoretic approach for land mine detection.	|IEEE T. Geoscience and Remote Sensing	|Ping Gao	|2	|811-819	|37	|1999
+JACCARD 1 1 0.8
+
+#query 363 1
+12202	|Ground-Based GPS for Validation of Climate Models: The Impact of Satellite Antenna Phase Center Variations.	|IEEE T. Geoscience and Remote Sensing	|Ragne Emardson	|10	|3847-3854	|48	|2010
+JACCARD 1 1 0.8
+
+#query 364 1
+12205	|Relevance Criteria for Spatial Information Retrieval Using Error-Tolerant Graph Matching.	|IEEE T. Geoscience and Remote Sensing	|Rik Bellens	|4	|810-817	|45	|2007
+JACCARD 1 1 0.8
+
+#query 365 1
+12218	|Analysis and optimization of the MODIS leaf area index algorithm retrievals over broadleaf forests.	|IEEE T. Geoscience and Remote Sensing	|Yosio Edemir Shimabukuro	|8	|1855-1865	|43	|2005
+JACCARD 1 1 0.8
+
+#query 366 1
+12237	|Quantitative Restoration for MODIS Band 6 on Aqua.	|IEEE T. Geoscience and Remote Sensing	|George Bonev	|6	|2409-2416	|50	|2012
+JACCARD 1 1 0.8
+
+#query 367 1
+12256	|Application of the MR-CSI Method for Three-Dimensional Imaging of the Triaxial Induction Measurements.	|IEEE T. Geoscience and Remote Sensing	|Aria Abubakar	|6	|2613-2619	|48	|2010
+JACCARD 1 1 0.8
+
+#query 368 1
+12257	|Atmospheric Components Determination From Ground-Level Measurements During the Spectra Barax Campaigns (SPARC) Field Campaigns.	|IEEE T. Geoscience and Remote Sensing	|Luis Guanter	|9	|2778-2793	|45	|2007
+JACCARD 1 1 0.8
+
+#query 369 1
+12285	|MISR Aerosol Product Attributes and Statistical Comparisons With MODIS.	|IEEE T. Geoscience and Remote Sensing	|David J. Diner	|12-2	|4095-4114	|47	|2009
+JACCARD 2 2 0.8
+
+#query 370 1
+12299	|Application of a Simple Adaptive Estimator for an Atmospheric Doppler Radar.	|IEEE T. Geoscience and Remote Sensing	|Tobias Otto	|1-1	|115-127	|49	|2011
+JACCARD 1 1 0.8
+
+#query 371 1
+12313	|On the Role of Phase Stability in SAR Multibaseline Applications.	|IEEE T. Geoscience and Remote Sensing	|Andrea Monti Guarnieri	|7	|2953-2966	|48	|2010
+JACCARD 1 1 0.8
+
+#query 372 1
+12318	|A cognitive pyramid for contextual classification of remote sensing images.	|IEEE T. Geoscience and Remote Sensing	|Monica Pepe	|12	|2906-2922	|41	|2003
+JACCARD 2 2 0.8
+
+#query 373 1
+12344	|Improved Geolocation and Earth Incidence Angle Information for a Fundamental Climate Data Record of the SSM/I Sensors.	|IEEE T. Geoscience and Remote Sensing	|Christian D. Kummerow	|3-1	|1504-1513	|51	|2013
+JACCARD 2 2 0.8
+
+#query 374 1
+12365	|The Electronically Steerable Flash Lidar: A Full Waveform Scanning System for Topographic and Ecosystem Structure Applications.	|IEEE T. Geoscience and Remote Sensing	|Tanya Ramond	|11	|4809-4820	|50	|2012
+JACCARD 2 2 0.8
+
+#query 375 1
+12376	|Finite-Difference Methods and Validity of a Thermal Model for Landmine Detection With Soil Property Estimation.	|IEEE T. Geoscience and Remote Sensing	|Dinh Nho Hao	|3	|656-674	|45	|2007
+JACCARD 1 1 0.8
+
+#query 376 1
+12397	|SMOS Calibration.	|IEEE T. Geoscience and Remote Sensing	|Francesc Torres	|3	|646-658	|46	|2008
+JACCARD 1 1 0.8
+
+#query 377 1
+12401	|A Method of Obtaining Ice Concentration and Floe Size From Shipboard Oblique Sea Ice Images.	|IEEE T. Geoscience and Remote Sensing	|Zhijun Li	|7	|2771-2780	|48	|2010
+JACCARD 1 1 0.8
+
+#query 378 1
+12426	|Cassini RADAR Sequence Planning and Instrument Performance.	|IEEE T. Geoscience and Remote Sensing	|Richard D. West	|6	|1777-1795	|47	|2009
+JACCARD 1 1 0.8
+
+#query 379 1
+12428	|A Case Study of Using a Multilayered Thermodynamical Snow Model for Radiance Assimilation.	|IEEE T. Geoscience and Remote Sensing	|Steven A. Margulis	|8	|2828-2837	|49	|2011
+JACCARD 1 1 0.8
+
+#query 380 1
+12442	|Observing and Modeling Multifrequency Scattering of Maize During the Whole Growth Cycle.	|IEEE T. Geoscience and Remote Sensing	|Luca Ninivaggi	|11	|3709-3718	|46	|2008
+JACCARD 1 1 0.8
+
+#query 381 1
+12465	|FOSMEX: Forest Soil Moisture Experiments With Microwave Radiometry.	|IEEE T. Geoscience and Remote Sensing	|Massimo Guglielmetti	|3	|727-735	|46	|2008
+JACCARD 1 1 0.8
+
+#query 382 1
+12469	|Comparison of Pansharpening Algorithms: Outcome of the 2006 GRS-S Data-Fusion Contest.	|IEEE T. Geoscience and Remote Sensing	|Luciano Alparone	|10	|3012-3021	|45	|2007
+JACCARD 1 1 0.8
+
+#query 383 1
+12472	|Automated removal of ghost noise from SAR images using wavelet packet transform.	|IEEE T. Geoscience and Remote Sensing	|Bin Wang	|10	|2409-2414	|41	|2003
+JACCARD 1 1 0.8
+
+#query 384 1
+12473	|Determination of Bathymetric and Current Maps by the Method DiSC Based on the Analysis of Nautical X-Band Radar Image Sequences of the Sea Surface (November 2007).	|IEEE T. Geoscience and Remote Sensing	|Friedwart Ziemer	|8	|2267-2279	|46	|2008
+JACCARD 1 1 0.8
+
+#query 385 1
+12475	|Efficient Simulation of hybrid stripmap/spotlight SAR raw signals from extended scenes.	|IEEE T. Geoscience and Remote Sensing	|Daniele Riccio	|11	|2385-2396	|42	|2004
+JACCARD 1 1 0.8
+
+#query 386 1
+12489	|Application of the correlation theory of thermal regime and thermal radio emission for atmosphere.	|IEEE T. Geoscience and Remote Sensing	|Konstantin P. Gaikovich	|12	|2754-2759	|41	|2003
+JACCARD 1 1 0.8
+
+#query 387 1
+12490	|Numerical Simulations and Analysis of Wide-Band Range-Resolved HF Backscatter From Evolving Ocean-Like Surfaces.	|IEEE T. Geoscience and Remote Sensing	|Jakov V. Toporkov	|8	|2986-3003	|50	|2012
+JACCARD 1 1 0.8
+
+#query 388 1
+12513	|A new maximum-likelihood joint segmentation technique for multitemporal SAR and multiband optical images.	|IEEE T. Geoscience and Remote Sensing	|Marco Meloni	|11	|2500-2518	|41	|2003
+ES 3 3 0.8
+
+#query 389 1
+12526	|AIRS near-real-time products and algorithms in support of operational numerical weather prediction.	|IEEE T. Geoscience and Remote Sensing	|Larry M. McMillin	|2	|379-389	|41	|2003
+JACCARD 1 1 0.8
+
+#query 390 1
+12529	|Estimation of crown and stem water content and biomass of boreal forest using polarimetric SAR imagery.	|IEEE T. Geoscience and Remote Sensing	|Mahta Moghaddam	|2	|697-709	|38	|2000
+JACCARD 1 1 0.8
+
+#query 391 1
+12540	|Structured Gaussian Components for Hyperspectral Image Classification.	|IEEE T. Geoscience and Remote Sensing	|Anne H. Schistad Solberg	|11-2	|3386-3396	|44	|2006
+JACCARD 1 1 0.8
+
+#query 392 1
+12546	|An alternative method to compute the component fractions in the geometrical optical model: visual computing method.	|IEEE T. Geoscience and Remote Sensing	|Zhao-Liang Li	|3	|719-724	|41	|2003
+ES 3 3 0.8
+
+#query 393 1
+12559	|Haze detection and removal in high resolution satellite image with wavelet analysis.	|IEEE T. Geoscience and Remote Sensing	|Yong Du	|1	|210-217	|40	|2002
+JACCARD 2 2 0.8
+
+#query 394 1
+12583	|Influence of geometrical factors on crop backscattering at C-band.	|IEEE T. Geoscience and Remote Sensing	|Leila Guerriero	|4	|778-790	|44	|2006
+JACCARD 1 1 0.8
+
+#query 395 1
+12583	|Influence of geometrical factors on crop backscattering at C-band.	|IEEE T. Geoscience and Remote Sensing	|Pierre Defourny	|4	|778-790	|44	|2006
+JACCARD 1 1 0.8
+
+#query 396 1
+12598	|Effect of Target Moisture on Laser Scanner Intensity.	|IEEE T. Geoscience and Remote Sensing	|Anssi Krooks	|4-2	|2128-2136	|48	|2010
+JACCARD 1 1 0.8
+
+#query 397 1
+12614	|Potential of 229-GHz Channel for Ice-Cloud Screening.	|IEEE T. Geoscience and Remote Sensing	|T. R. Sreerekha	|5	|2183-2188	|48	|2010
+JACCARD 2 2 0.8
+
+#query 398 1
+12636	|A Method for Estimating the Sampling Error Applied to CM-SAF Monthly Mean Cloud Fractional Cover Data Retrieved From MSG SEVIRI.	|IEEE T. Geoscience and Remote Sensing	|Rainer Hollmann	|6	|2469-2481	|48	|2010
+JACCARD 1 1 0.8
+
+#query 399 1
+12648	|Study of Microwave Backscattering From Two-Dimensional Nonlinear Surfaces of Finite-Depth Seas.	|IEEE T. Geoscience and Remote Sensing	|Ding Nie	|11	|4349-4357	|50	|2012
+JACCARD 1 1 0.8
+
+#query 400 1
+12648	|Study of Microwave Backscattering From Two-Dimensional Nonlinear Surfaces of Finite-Depth Seas.	|IEEE T. Geoscience and Remote Sensing	|Chao Wang	|11	|4349-4357	|50	|2012
+JACCARD 2 2 0.8
+
+#query 401 1
+12665	|The "Myth" of the minimum SAR antenna area constraint.	|IEEE T. Geoscience and Remote Sensing	|Scott Hensley	|1	|320-324	|38	|2000
+JACCARD 1 1 0.8
+
+#query 402 1
+12678	|A standoff, focused-beam land mine radar.	|IEEE T. Geoscience and Remote Sensing	|Jennifer I. Halman	|1	|507-514	|38	|2000
+JACCARD 1 1 0.8
+
+#query 403 1
+12691	|Numerical Backscattering Analysis for Rough Surfaces Including a Cloddy Structure.	|IEEE T. Geoscience and Remote Sensing	|Monique Dechambre	|5	|2367-2374	|48	|2010
+JACCARD 1 1 0.8
+
+#query 404 1
+12702	|Microwave tomographic inversion technique based on stochastic approach for rainfall fields monitoring.	|IEEE T. Geoscience and Remote Sensing	|Simone Tanelli	|5	|2536-2555	|37	|1999
+JACCARD 1 1 0.8
+
+#query 405 1
+12722	|A Nonlinear Iterative Reconstruction and Analysis Approach to Shape-Based Approximate Electromagnetic Tomography.	|IEEE T. Geoscience and Remote Sensing	|Hichem Sahli	|5	|1558-1574	|46	|2008
+JACCARD 1 1 0.8
+
+#query 406 1
+12733	|The Intercalibration of Geostationary Visible Imagers Using Operational Hyperspectral SCIAMACHY Radiances.	|IEEE T. Geoscience and Remote Sensing	|Constantine Lukashin	|3-1	|1245-1254	|51	|2013
+JACCARD 1 1 0.8
+
+#query 407 1
+12755	|Modeling temporal evolution of junco marshes radar signatures.	|IEEE T. Geoscience and Remote Sensing	|Patricia Kandus	|10	|2238-2245	|43	|2005
+JACCARD 1 1 0.8
+
+#query 408 1
+12774	|Multitemporal repeat pass SAR interferometry of boreal forests.	|IEEE T. Geoscience and Remote Sensing	|Jan I. H. Askne	|6	|1219-1228	|43	|2005
+JACCARD 1 1 0.8
+
+#query 409 1
+12779	|An ultrafast wide-band millimeter-wave (MMW) polarimetric radar for remote sensing applications.	|IEEE T. Geoscience and Remote Sensing	|Fawwaz T. Ulaby	|8	|1777-1786	|40	|2002
+JACCARD 1 1 0.8
+
+#query 410 1
+12782	|Striping Noise Detection and Correction of Remote Sensing Images.	|IEEE T. Geoscience and Remote Sensing	|Walter W. Chen	|12	|4122-4131	|46	|2008
+JACCARD 1 1 0.8
+
+#query 411 1
+12788	|A small-baseline approach for investigating deformations on full-resolution differential SAR interferograms.	|IEEE T. Geoscience and Remote Sensing	|Michele Manunta	|7	|1377-1386	|42	|2004
+JACCARD 1 1 0.8
+
+#query 412 1
+12805	|Potential Use of Surface-Sensitive Microwave Observations Over Land in Numerical Weather Prediction.	|IEEE T. Geoscience and Remote Sensing	|Florence Rabier	|4	|1251-1262	|49	|2011
+JACCARD 1 1 0.8
+
+#query 413 1
+12824	|Automatic Parameter Optimization for Support Vector Regression for Land and Sea Surface Temperature Estimation From Remote Sensing Data.	|IEEE T. Geoscience and Remote Sensing	|Sebastiano B. Serpico	|3	|909-921	|47	|2009
+JACCARD 1 1 0.8
+
+#query 414 1
+12845	|Nonparametric weighted feature extraction for classification.	|IEEE T. Geoscience and Remote Sensing	|Bor-Chen Kuo	|5	|1096-1105	|42	|2004
+JACCARD 1 1 0.8
+
+#query 415 1
+12849	|CERES Edition-2 Cloud Property Retrievals Using TRMM VIRS and Terra and Aqua MODIS Data - Part I: Algorithms.	|IEEE T. Geoscience and Remote Sensing	|Kirk Ayers	|11	|4374-4400	|49	|2011
+JACCARD 1 1 0.8
+
+#query 416 1
+12868	|Rain field and reflectivity vertical profile reconstruction from C-band Radar volumetric data.	|IEEE T. Geoscience and Remote Sensing	|Gianfranco Vulpiani	|5	|1033-1046	|42	|2004
+JACCARD 1 1 0.8
+
+#query 417 1
+12879	|Extraction and Three-Dimensional Reconstruction of Isolated Buildings in Urban Scenes From High-Resolution Optical and SAR Spaceborne Images.	|IEEE T. Geoscience and Remote Sensing	|L�onard Denise	|10	|3932-3946	|49	|2011
+JACCARD 1 1 0.8
+
+#query 418 1
+12907	|Classifying Multilevel Imagery From SAR and Optical Sensors by Decision Fusion.	|IEEE T. Geoscience and Remote Sensing	|Bj�rn Waske	|5	|1457-1466	|46	|2008
+JACCARD 1 1 0.8
+
+#query 419 1
+12919	|Validation of GOES-R Satellite Land Surface Temperature Algorithm Using SURFRAD Ground Measurements and Statistical Estimates of Error Properties.	|IEEE T. Geoscience and Remote Sensing	|Ming Chen	|3	|704-713	|50	|2012
+JACCARD 1 1 0.8
+
+#query 420 1
+12933	|Multispectral bathymetry using a simple physically based algorithm.	|IEEE T. Geoscience and Remote Sensing	|Fred J. Tanis	|8	|2251-2259	|44	|2006
+JACCARD 1 1 0.8
+
+#query 421 1
+12962	|Canadian Experiment for Soil Moisture in 2010 (CanEx-SM10): Overview and Preliminary Results.	|IEEE T. Geoscience and Remote Sensing	|Thomas J. Jackson	|1	|347-363	|51	|2013
+JACCARD 1 1 0.8
+
+#query 422 1
+12964	|Algorithm to Retrieve Aerosol Optical Properties From High-Spectral-Resolution Lidar and Polarization Mie-Scattering Lidar Measurements.	|IEEE T. Geoscience and Remote Sensing	|Boyan Tatarov	|12	|4094-4103	|46	|2008
+JACCARD 1 1 0.8
+
+#query 423 1
+12977	|Automated Determination of Snow Water Equivalent by Acoustic Reflectometry.	|IEEE T. Geoscience and Remote Sensing	|Nicholas J. Kinar	|9	|3161-3167	|47	|2009
+JACCARD 1 1 0.8
+
+#query 424 1
+13006	|A First-Order Radiative Transfer Model for Microwave Radiometry of Forest Canopies at L-Band.	|IEEE T. Geoscience and Remote Sensing	|Michael H. Cosh	|9	|3167-3179	|49	|2011
+JACCARD 1 1 0.8
+
+#query 425 1
+13018	|First results of the POLDER "Earth Radiation Budget and Clouds" operational algorithm.	|IEEE T. Geoscience and Remote Sensing	|Philippe Goloub	|3	|1597-1612	|37	|1999
+JACCARD 1 1 0.8
+
+#query 426 1
+13040	|Analysis and Characterization of the SSMIS Upper Atmosphere Sounding Channel Measurements.	|IEEE T. Geoscience and Remote Sensing	|Thierry Leblanc	|4	|962-983	|46	|2008
+JACCARD 1 1 0.8
+
+#query 427 1
+13047	|The normalized radar cross section of the sea at 10� incidence.	|IEEE T. Geoscience and Remote Sensing	|William C. Keller	|1	|64-72	|38	|2000
+JACCARD 1 1 0.8
+
+#query 428 1
+13051	|Unsupervised Spatiotemporal Mining of Satellite Image Time Series Using Grouped Frequent Sequential Patterns.	|IEEE T. Geoscience and Remote Sensing	|Nicolas M�ger	|4	|1417-1430	|49	|2011
+JACCARD 2 2 0.8
+
+#query 429 1
+13057	|Dual-Satellite Cloud Product Generation Using Temporally Updated Canonical Coordinate Features.	|IEEE T. Geoscience and Remote Sensing	|J. Adam Kankiewicz	|4	|1046-1060	|45	|2007
+JACCARD 1 1 0.8
+
+#query 430 1
+13063	|Image Autocoregistration and Interferogram Estimation Using Extended COMET-EXIP Method.	|IEEE T. Geoscience and Remote Sensing	|Sen Zhang	|12	|4204-4218	|48	|2010
+JACCARD 2 2 0.8
+
+#query 431 1
+13067	|Land Surface Albedo Derived on a Daily Basis From Meteosat Second Generation Observations.	|IEEE T. Geoscience and Remote Sensing	|Jean-Louis Roujean	|11	|3841-3856	|46	|2008
+JACCARD 2 2 0.8
+
+#query 432 1
+13084	|Preflight and In-Flight Calibration of the Spectral Profiler on Board SELENE (Kaguya).	|IEEE T. Geoscience and Remote Sensing	|Ryosuke Nakamura	|11	|4660-4676	|49	|2011
+JACCARD 1 1 0.8
+
+#query 433 1
+13098	|A Geostationary Optical Seismometer, Proof of Concept.	|IEEE T. Geoscience and Remote Sensing	|N. Lapusta	|1	|695-703	|51	|2013
+JACCARD 1 1 0.8
+
+#query 434 1
+13124	|Synthetic Aperture Radar Processing of Kaguya Lunar Radar Sounder Data for Lunar Subsurface Imaging.	|IEEE T. Geoscience and Remote Sensing	|Atsushi Kumamoto	|6	|2161-2174	|50	|2012
+JACCARD 1 1 0.8
+
+#query 435 1
+13142	|Frequency dependence of scattering by dense media of small particles based on Monte Carlo simulation of Maxwell equations.	|IEEE T. Geoscience and Remote Sensing	|Chi-Te Chen	|1	|153-161	|40	|2002
+JACCARD 1 1 0.8
+
+#query 436 1
+13151	|Detection of storm-damaged forested areas using airborne CARABAS-II VHF SAR image data.	|IEEE T. Geoscience and Remote Sensing	|Kristina Blennow	|10	|2170-2175	|40	|2002
+JACCARD 1 1 0.8
+
+#query 437 1
+13179	|Model-Based Polarimetric SAR Speckle Filter.	|IEEE T. Geoscience and Remote Sensing	|Xavier F�bregas	|11	|3894-3907	|46	|2008
+JACCARD 1 1 0.8
+
+#query 438 1
+13194	|Simulations of GPR in dispersive media using a frequency-dependent PSTD algorithm.	|IEEE T. Geoscience and Remote Sensing	|Qing Huo Liu	|5	|2317-2324	|37	|1999
+JACCARD 1 1 0.8
+
+#query 439 1
+13215	|The hybrid extended Born approximation and CG-FFT method for electromagnetic induction problems.	|IEEE T. Geoscience and Remote Sensing	|Xue Min Xu	|2	|347-355	|39	|2001
+JACCARD 1 1 0.8
+
+#query 440 1
+13239	|Eigenmethod for Feature Matching of Pre- and Postevent Images Exploiting Adjacency.	|IEEE T. Geoscience and Remote Sensing	|Fabio Dell'Acqua	|7	|2890-2898	|48	|2010
+JACCARD 1 1 0.8
+
+#query 441 1
+13253	|Use of fiducials and unsurveyed landmarks as geolocation tools in vehicular-based landmine search.	|IEEE T. Geoscience and Remote Sensing	|Gerald Cook	|6	|1432-1439	|43	|2005
+JACCARD 1 1 0.8
+
+#query 442 1
+13269	|Estimation of the Backscatter Vertical Profile of a Pine Forest Using Single Baseline P-Band (Pol-)InSAR Data.	|IEEE T. Geoscience and Remote Sensing	|Franck Garestier	|9	|3340-3348	|48	|2010
+JACCARD 1 1 0.8
+
+#query 443 1
+13278	|Enhanced SAR-Based Snow-Covered Area Estimation Method for Boreal Forest Zone.	|IEEE T. Geoscience and Remote Sensing	|Kari Luojus	|3	|922-935	|47	|2009
+JACCARD 1 1 0.8
+
+#query 444 1
+13301	|InSAR for estimation of changes in snow water equivalent of dry snow.	|IEEE T. Geoscience and Remote Sensing	|Inge Lauknes	|10	|2101-2108	|39	|2001
+JACCARD 1 1 0.8
+
+#query 445 1
+13324	|Numerical Modeling of Multicomponent Induction Well-Logging Tools in the Cylindrically Stratified Anisotropic Media.	|IEEE T. Geoscience and Remote Sensing	|Hongnian Wang	|4	|1134-1147	|46	|2008
+JACCARD 1 1 0.8
+
+#query 446 1
+13328	|Effect of Continuum Removal on Hyperspectral Coastal Vegetation Classification Using a Fuzzy Learning Vector Quantizer.	|IEEE T. Geoscience and Remote Sensing	|John R. Jensen	|6-2	|1857-1869	|45	|2007
+JACCARD 1 1 0.8
+
+#query 447 1
+13331	|The characteristic polarization states and the equi-power curves.	|IEEE T. Geoscience and Remote Sensing	|Jian Yang	|2	|305-313	|40	|2002
+JACCARD 2 2 0.8
+
+#query 448 1
+13351	|AMSR/AMSR-E level 2 and 3 algorithm developments and data validation plans of NASDA.	|IEEE T. Geoscience and Remote Sensing	|Toshio Koike	|2	|195-203	|41	|2003
+JACCARD 1 1 0.8
+
+#query 449 1
+13372	|Potentials and Limitations of Moon-Borne SAR Imaging.	|IEEE T. Geoscience and Remote Sensing	|Fabrizio Lombardini	|7	|3009-3019	|48	|2010
+JACCARD 1 1 0.8
+
+#query 450 1
+13384	|Electromagnetic cave-to-surface mapping system.	|IEEE T. Geoscience and Remote Sensing	|John Sogade	|4	|754-763	|42	|2004
+JACCARD 1 1 0.8
+
+#query 451 1
+13399	|A progressive morphological filter for removing nonground measurements from airborne LIDAR data.	|IEEE T. Geoscience and Remote Sensing	|Keqi Zhang	|4	|872-882	|41	|2003
+JACCARD 1 1 0.8
+
+#query 452 1
+13429	|Comparison of regularized inversion methods in synthetic aperture imaging radiometry.	|IEEE T. Geoscience and Remote Sensing	|Bruno Picard	|2	|218-224	|43	|2005
+JACCARD 1 1 0.8
+
+#query 453 1
+13447	|Linearized vegetation indices based on a formal statistical framework.	|IEEE T. Geoscience and Remote Sensing	|Kim L. Boyer	|7	|1575-1585	|42	|2004
+JACCARD 1 1 0.8
+
+#query 454 1
+13453	|Estimation of snow water equivalence using SIR-C/X-SAR. I. Inferring snow density and subsurface properties.	|IEEE T. Geoscience and Remote Sensing	|Jiancheng Shi	|6	|2465-2474	|38	|2000
+ES 3 3 0.8
+
+#query 455 1
+13471	|The K&C PALSAR Mosaic of the African Continent: Processing Issues and First Thematic Results.	|IEEE T. Geoscience and Remote Sensing	|Masanobu Shimada	|10	|3593-3610	|49	|2011
+JACCARD 1 1 0.8
+
+#query 456 1
+13488	|A Comparison of Airborne Microwave Brightness Temperatures and Snowpack Properties Across the Boreal Forests of Finland and Western Canada.	|IEEE T. Geoscience and Remote Sensing	|Chris Derksen	|3	|965-978	|47	|2009
+JACCARD 1 1 0.8
+
+#query 457 1
+13509	|Polarization Rotation Correction in Radiometry: An Error Analysis.	|IEEE T. Geoscience and Remote Sensing	|David G. Long	|10	|3212-3223	|45	|2007
+JACCARD 1 1 0.8
+
+#query 458 1
+13510	|On the Use of Doppler Shift for Sea Surface Wind Retrieval From SAR.	|IEEE T. Geoscience and Remote Sensing	|Gilles Guitton	|7	|2901-2909	|50	|2012
+JACCARD 2 2 0.8
+
+#query 459 1
+13515	|High-Resolution ISAR Imaging With Sparse Stepped-Frequency Waveforms.	|IEEE T. Geoscience and Remote Sensing	|Yachao Li	|11	|4630-4651	|49	|2011
+JACCARD 1 1 0.8
+
+#query 460 1
+13533	|Comparison of MM5 integrated water vapor with microwave radiometer, GPS, and radiosonde measurements.	|IEEE T. Geoscience and Remote Sensing	|Tiziana Paolucci	|5	|1050-1058	|43	|2005
+JACCARD 2 2 0.8
+
+#query 461 1
+13544	|Cloud Statistics Measured With the Infrared Cloud Imager (ICI).	|IEEE T. Geoscience and Remote Sensing	|Brentha Thurairajah	|9	|2000-2007	|43	|2005
+JACCARD 1 1 0.8
+
+#query 462 1
+13550	|Sensitivity of Support Vector Machines to Random Feature Selection in Classification of Hyperspectral Data.	|IEEE T. Geoscience and Remote Sensing	|Patrick Hostert	|7	|2880-2889	|48	|2010
+ES 3 3 0.8
+
+#query 463 1
+13577	|Hyperion, a space-based imaging spectrometer.	|IEEE T. Geoscience and Remote Sensing	|Debra Beiso	|6	|1160-1173	|41	|2003
+JACCARD 1 1 0.8
+
+#query 464 1
+13580	|A Nonlinear Harmonic Model for Fitting Satellite Image Time Series: Analysis and Prediction of Land Cover Dynamics.	|IEEE T. Geoscience and Remote Sensing	|Paulo Gonalves	|4-2	|1919-1930	|48	|2010
+JACCARD 2 2 0.8
+
+#query 465 1
+13592	|A reappraisal of the validity of the IEM model for backscattering from rough surfaces.	|IEEE T. Geoscience and Remote Sensing	|Tzong-Dar Wu	|4	|743-753	|42	|2004
+JACCARD 1 1 0.8
+
+#query 466 1
+13614	|The PALSAR Polarimetric Mode for Sea Oil Slick Observation.	|IEEE T. Geoscience and Remote Sensing	|Ferdinando Nunziata	|12-1	|4032-4041	|47	|2009
+JACCARD 1 1 0.8
+
+#query 467 1
+13635	|Atmospheric correction of Landsat ETM+ land surface imagery. II. Validation and applications.	|IEEE T. Geoscience and Remote Sensing	|Shunlin Liang	|12	|2736-2746	|40	|2002
+JACCARD 1 1 0.8
+
+#query 468 1
+13650	|Global Precipitation Map Using Satellite-Borne Microwave Radiometers by the GSMaP Project: Production and Validation.	|IEEE T. Geoscience and Remote Sensing	|Koyuru Iwanami	|7-2	|2259-2275	|45	|2007
+JACCARD 1 1 0.8
+
+#query 469 1
+13651	|Foreword to the Special Issue on Pattern Recognition in Remote Sensing.	|IEEE T. Geoscience and Remote Sensing	|Selim Aksoy	|12-1	|3855-3856	|45	|2007
+JACCARD 1 1 0.8
+
+#query 470 1
+13663	|0 and Biophysical Parameters.	|IEEE T. Geoscience and Remote Sensing	|Takeo Tadono	|11-1	|3154-3165	|44	|2006
+JACCARD 1 1 0.8
+
+#query 471 1
+13685	|Retrieving atmospheric temperature profiles by microwave radiometry using a priori information on atmospheric spatial-temporal evolution.	|IEEE T. Geoscience and Remote Sensing	|Frank S. Marzano	|9	|1896-1905	|39	|2001
+JACCARD 2 2 0.8
+
+#query 472 1
+13710	|An End-to-End Error Model for Classification Methods Based on Temporal Change or Polarization Ratio of SAR Intensities.	|IEEE T. Geoscience and Remote Sensing	|Thuy Le Toan	|9	|3521-3538	|48	|2010
+JACCARD 1 1 0.8
+
+#query 473 1
+13715	|TerraSAR-X Data for Burn Severity Evaluation in Mediterranean Forests on Sloped Terrain.	|IEEE T. Geoscience and Remote Sensing	|Fernando Perez-Cabello	|2	|917-929	|48	|2010
+JACCARD 1 1 0.8
+
+#query 474 1
+13717	|Vicarious Calibration of the GOSAT Sensors Using the Railroad Valley Desert Playa.	|IEEE T. Geoscience and Remote Sensing	|Thomas E. Taylor	|5	|1781-1795	|49	|2011
+JACCARD 1 1 0.8
+
+#query 475 1
+13732	|Three-Dimensional ISAR Imaging Based on Antenna Array.	|IEEE T. Geoscience and Remote Sensing	|Changzheng Ma	|2	|504-515	|46	|2008
+JACCARD 1 1 0.8
+
+#query 476 1
+13733	|Effect of orbital drift and sensor changes on the time series of AVHRR vegetation index data.	|IEEE T. Geoscience and Remote Sensing	|Liming Zhou	|6	|2584-2597	|38	|2000
+JACCARD 2 2 0.8
+
+#query 477 1
+13749	|Ionospheric Artifacts in Simultaneous L-Band InSAR and GPS Observations.	|IEEE T. Geoscience and Remote Sensing	|Howard A. Zebker	|4	|1227-1239	|50	|2012
+JACCARD 1 1 0.8
+
+#query 478 1
+13761	|Super-resolution target identification from remotely sensed images using a Hopfield neural network.	|IEEE T. Geoscience and Remote Sensing	|Hugh G. Lewis	|4	|781-796	|39	|2001
+JACCARD 2 2 0.8
+
+#query 479 1
+13775	|Analysis of low frequency scattering from penetrable scatterers.	|IEEE T. Geoscience and Remote Sensing	|Jiming Song	|4	|726-735	|39	|2001
+JACCARD 1 1 0.8
+
+#query 480 1
+13791	|Short-wave ocean wave slope models for use in remote sensing data analysis.	|IEEE T. Geoscience and Remote Sensing	|Kelvin J. Michael	|7-2	|1962-1973	|44	|2006
+JACCARD 1 1 0.8
+
+#query 481 1
+13792	|Foreword to the Special Issue on Advances in Techniques for Analysis of Remotely Sensed Data.	|IEEE T. Geoscience and Remote Sensing	|John P. Kerkes	|3	|411-413	|43	|2005
+ES 3 3 0.8
+
+#query 482 1
+13794	|Fore and Aft Channel Reconstruction in the TerraSAR-X Dual Receive Antenna Mode.	|IEEE T. Geoscience and Remote Sensing	|Ulrich Steinbrecher	|2	|795-806	|48	|2010
+JACCARD 2 2 0.8
+
+#query 483 1
+13802	|Real-time VLBI system using ATM network.	|IEEE T. Geoscience and Remote Sensing	|Takashi Yamamoto	|3	|1290-1297	|38	|2000
+ES 3 3 0.8
+
+#query 484 1
+13831	|Land cover classification using fuzzy rules and aggregation of contextual information through evidence theory.	|IEEE T. Geoscience and Remote Sensing	|Arijit Laha	|6	|1633-1641	|44	|2006
+ES 7 7 0.8
+
+#query 485 1
+13847	|Directional effects in a daily AVHRR land surface temperature dataset over Africa.	|IEEE T. Geoscience and Remote Sensing	|Ana C. T. Pinheiro	|9	|1941-1954	|42	|2004
+JACCARD 2 2 0.8
+
+#query 486 1
+13852	|Possibilistic Versus Belief Function Fusion for Antipersonnel Mine Detection.	|IEEE T. Geoscience and Remote Sensing	|Nada Milisavljevic	|5	|1488-1498	|46	|2008
+JACCARD 2 2 0.8
+
+#query 487 1
+13861	|Observations of East Coast upwelling conditions in synthetic aperture radar imagery.	|IEEE T. Geoscience and Remote Sensing	|Pablo Clemente-Colon	|5	|2239-2248	|37	|1999
+JACCARD 1 1 0.8
+
+#query 488 1
+13887	|AIRS/AMSU/HSB on the Aqua mission: design, science objectives, data products, and processing systems.	|IEEE T. Geoscience and Remote Sensing	|Moustafa T. Chahine	|2	|253-264	|41	|2003
+JACCARD 1 1 0.8
+
+#query 489 1
+13899	|Georegistration of airborne hyperspectral image data.	|IEEE T. Geoscience and Remote Sensing	|C. Lee	|7	|1347-1351	|39	|2001
+JACCARD 2 2 0.8
+
+#query 490 1
+13921	|A prototype AMSR-E global snow area and snow depth algorithm.	|IEEE T. Geoscience and Remote Sensing	|Alfred T. C. Chang	|2	|230-242	|41	|2003
+JACCARD 1 1 0.8
+
+#query 491 1
+13934	|ASCAT Surface State Flag (SSF): Extracting Information on Surface Freeze/Thaw Conditions From Backscatter Data Using an Empirical Threshold-Analysis Algorithm.	|IEEE T. Geoscience and Remote Sensing	|Kirsten Elger	|7	|2566-2582	|50	|2012
+JACCARD 1 1 0.8
+
+#query 492 1
+13958	|Space-Frequency Ultrawideband Time-Reversal Imaging.	|IEEE T. Geoscience and Remote Sensing	|Mehmet Emre Yavuz	|4	|1115-1124	|46	|2008
+JACCARD 2 2 0.8
+
+#query 493 1
+13971	|Early phase analysis of OCTS radiance data for aerosol remote sensing.	|IEEE T. Geoscience and Remote Sensing	|Teruyuki Nakajima	|3	|1575-1585	|37	|1999
+JACCARD 1 1 0.8
+
+#query 494 1
+13978	|Revised Landsat-5 TM radiometric calibration procedures and postcalibration dynamic ranges.	|IEEE T. Geoscience and Remote Sensing	|Gyanesh Chander	|11	|2674-2677	|41	|2003
+JACCARD 1 1 0.8
+
+#query 495 1
+13999	|ARKTOS: an intelligent system for SAR sea ice image classification.	|IEEE T. Geoscience and Remote Sensing	|Denise Gineris	|1	|229-248	|42	|2004
+ES 3 3 0.8
+
+#query 496 1
+14023	|Improvement of AVNIR-2 Radiometric Calibration by Comparison of Cross-Calibration and Onboard Lamp Calibration.	|IEEE T. Geoscience and Remote Sensing	|Takeo Tadono	|12-1	|4051-4059	|47	|2009
+ES 3 3 0.8
+
+#query 497 1
+14033	|A Critical Look at Deriving Monthly Aerosol Optical Depth From Satellite Data.	|IEEE T. Geoscience and Remote Sensing	|Arun Gopalan	|8-2	|2942-2956	|47	|2009
+JACCARD 1 1 0.8
+
+#query 498 1
+14049	|Unified Optical-Thermal Four-Stream Radiative Transfer Theory for Homogeneous Vegetation Canopies.	|IEEE T. Geoscience and Remote Sensing	|Z. Su	|6-2	|1808-1822	|45	|2007
+JACCARD 2 2 0.8
+
+#query 499 1
+14052	|Long-term climate patterns in Alaskan surface temperature and precipitation and their biological consequences.	|IEEE T. Geoscience and Remote Sensing	|JustinB. Ashton	|5	|1164-1184	|40	|2002
+JACCARD 2 2 0.8
+
+#query 500 1
+14056	|A Method for Soil Moisture Estimation in Western Africa Based on the ERS Scatterometer.	|IEEE T. Geoscience and Remote Sensing	|C. Andre	|2	|438-448	|46	|2008
+JACCARD 2 2 0.8
+
+#query 501 1
+14085	|The Accurate Focusing and Resolution Analysis Method in Geosynchronous SAR.	|IEEE T. Geoscience and Remote Sensing	|Feifeng Liu	|10	|3548-3563	|49	|2011
+JACCARD 1 1 0.8
+
+#query 502 1
+14094	|A Comparison of Recent Elevation Change Estimates of the Devon Ice Cap as Measured by the ICESat and EnviSAT Satellite Altimeters.	|IEEE T. Geoscience and Remote Sensing	|Andrew Shepherd	|6-1	|1902-1910	|49	|2011
+JACCARD 1 1 0.8
+
+#query 503 1
+14112	|Measurement of concrete highway rough surface parameters by an X-band scatterometer.	|IEEE T. Geoscience and Remote Sensing	|Ce Richard Liu	|6	|1188-1196	|42	|2004
+JACCARD 1 1 0.8
+
+#query 504 1
+14132	|Hyperspectral Microwave Atmospheric Sounding.	|IEEE T. Geoscience and Remote Sensing	|Jenna E. Samra	|1-1	|128-142	|49	|2011
+JACCARD 2 2 0.8
+
+#query 505 1
+14144	|Blind cross-spectral image registration using prefiltering and Fourier-based translation detection.	|IEEE T. Geoscience and Remote Sensing	|Harold S. Stone	|3	|637-650	|40	|2002
+ES 3 3 0.8
+
+#query 506 1
+14158	|Empirical Interferometric Phase Variance Formulas for Bathymetric Applications.	|IEEE T. Geoscience and Remote Sensing	|Gerard Llort-Pujol	|6	|2079-2097	|50	|2012
+JACCARD 1 1 0.8
+
+#query 507 1
+14179	|The First-Order Symplectic Euler Method for Simulation of GPR Wave Propagation in Pavement Structure.	|IEEE T. Geoscience and Remote Sensing	|Ruili Zhang	|1	|93-98	|51	|2013
+JACCARD 1 1 0.8
+
+#query 508 1
+14205	|Improved Image Reconstruction Algorithms for Aperture Synthesis Radiometers.	|IEEE T. Geoscience and Remote Sensing	|Nuria Duffo	|1	|146-158	|46	|2008
+JACCARD 2 2 0.8
+
+#query 509 1
+14219	|Advances in mathematical morphology applied to geoscience and remote sensing.	|IEEE T. Geoscience and Remote Sensing	|Pierre Soille	|9	|2042-2055	|40	|2002
+ES 3 3 0.8
+
+#query 510 1
+14237	|Eight Times Acceleration of Geospatial Data Archiving and Distribution on the Grids.	|IEEE T. Geoscience and Remote Sensing	|Jon Crowcroft	|5	|1444-1453	|47	|2009
+JACCARD 1 1 0.8
+
+#query 511 1
+14248	|2 vertical column retrieval from the ozone monitoring instrument.	|IEEE T. Geoscience and Remote Sensing	|K. Folkert Boersma	|5	|1245-1258	|44	|2006
+JACCARD 2 2 0.8
+
+#query 512 1
+14266	|An Automatic Image Registration for Applications in Remote Sensing.	|IEEE T. Geoscience and Remote Sensing	|Nasreddine Taleb	|9	|2127-2137	|43	|2005
+JACCARD 2 2 0.8
+
+#query 513 1
+14280	|Aerosol optical characteristics from a summer campaign in an urban coastal Mediterranean area.	|IEEE T. Geoscience and Remote Sensing	|Roberto Pedr�s	|7	|1573-1585	|39	|2001
+JACCARD 1 1 0.8
+
+#query 514 1
+14281	|The TropiSAR Airborne Campaign in French Guiana: Objectives, Description, and Observed Temporal Behavior of the Backscatter Signal.	|IEEE T. Geoscience and Remote Sensing	|Lilian Blanc	|8	|3228-3241	|50	|2012
+JACCARD 2 2 0.8
+
+#query 515 1
+14305	|Ground-based radar interferometry for landslides monitoring: atmospheric and instrumental decorrelation sources on experimental data.	|IEEE T. Geoscience and Remote Sensing	|Fabio Moia	|11	|2454-2466	|42	|2004
+JACCARD 1 1 0.8
+
+#query 516 1
+14323	|Thermodynamic Atmospheric Profiling During the 2010 Winter Olympics Using Ground-Based Microwave Radiometry.	|IEEE T. Geoscience and Remote Sensing	|Edwin Campos	|12	|4959-4969	|49	|2011
+JACCARD 1 1 0.8
+
+#query 517 1
+14337	|A new approach for the morphological segmentation of high-resolution satellite imagery.	|IEEE T. Geoscience and Remote Sensing	|Jon Atli Benediktsson	|2	|309-320	|39	|2001
+JACCARD 1 1 0.8
+
+#query 518 1
+14353	|Three-Dimensional Motion Estimation of Atmospheric Layers From Image Sequences.	|IEEE T. Geoscience and Remote Sensing	|Patrick H�as	|8	|2385-2396	|46	|2008
+JACCARD 1 1 0.8
+
+#query 519 1
+14370	|Optimizing receiver configurations for resolution of equivalent dipole polarizabilities in situ.	|IEEE T. Geoscience and Remote Sensing	|H. Frank Morrison	|7	|1490-1498	|43	|2005
+ES 3 3 0.8
+
+#query 520 1
+14386	|Current measurements by SAR along-track interferometry from a Space Shuttle.	|IEEE T. Geoscience and Remote Sensing	|Jur Vogelzang	|10	|2315-2324	|43	|2005
+JACCARD 1 1 0.8
+
+#query 521 1
+14399	|Rectangular building extraction from stereoscopic airborne Radar images.	|IEEE T. Geoscience and Remote Sensing	|H�l�ne Oriot	|10	|2386-2395	|43	|2005
+JACCARD 1 1 0.8
+
+#query 522 1
+14418	|Surface Emissivity of the Arctic Sea Ice at AMSR-E Frequencies.	|IEEE T. Geoscience and Remote Sensing	|Georg Heygster	|12-2	|4115-4124	|47	|2009
+JACCARD 1 1 0.8
+
+#query 523 1
+14433	|Toward an Intercalibrated Fundamental Climate Data Record of the SSM/I Sensors.	|IEEE T. Geoscience and Remote Sensing	|Darren McKague	|3-1	|1492-1503	|51	|2013
+JACCARD 1 1 0.8
+
+#query 524 1
+14445	|Decision Fusion of GA Self-Organizing Neuro-Fuzzy Multilayered Classifiers for Land Cover Classification Using Textural and Spectral Features.	|IEEE T. Geoscience and Remote Sensing	|Thomas K. Alexandridis	|7	|2137-2152	|46	|2008
+JACCARD 1 1 0.8
+
+#query 525 1
+14458	|Supervised image classification by contextual AdaBoost based on posteriors in neighborhoods.	|IEEE T. Geoscience and Remote Sensing	|Ryuei Nishii	|11	|2547-2554	|43	|2005
+JACCARD 1 1 0.8
+
+#query 526 1
+14464	|Comparison of AMSU Millimeter-Wave Satellite Observations, MM5/TBSCAT Predicted Radiances, and Electromagnetic Models for Hydrometeors.	|IEEE T. Geoscience and Remote Sensing	|David H. Staelin	|10-1	|2667-2678	|44	|2006
+JACCARD 1 1 0.8
+
+#query 527 1
+14483	|Satellite-based columnar water vapor retrieval with the multi-spectral thermal imager (MTI).	|IEEE T. Geoscience and Remote Sensing	|Paul A. Pope	|12	|2767-2770	|41	|2003
+ES 3 3 0.8
+
+#query 528 1
+14516	|Delta Lenses over Inductive Types.	|ECEASST	|Hugo Pacheco	|NULL	|NULL	|49	|2012
+JACCARD 2 2 0.8
+
+#query 529 1
+14532	|Flowstream Architectures.	|ECEASST	|Mark Handley	|NULL	|NULL	|17	|2009
+JACCARD 1 1 0.8
+
+#query 530 1
+14566	|Executing Underspecified OCL Operation Contracts with a SAT Solver.	|ECEASST	|Matthias P. Krieger	|NULL	|NULL	|15	|2008
+JACCARD 1 1 0.8
+
+#query 531 1
+14599	|The Role of User Guidance in the Industrial Adoption of MDE Approach.	|ECEASST	|Outi Laitinen	|NULL	|NULL	|34	|2010
+JACCARD 2 2 0.8
+
+#query 532 1
+14627	|Concurrent Design of Embedded Control Software.	|ECEASST	|Marcel A. Groothuis	|NULL	|NULL	|21	|2009
+JACCARD 1 1 0.8
+
+#query 533 1
+14643	|On formalising interactive number entry on infusion pumps.	|ECEASST	|Paolo Masci	|NULL	|NULL	|45	|2011
+JACCARD 1 1 0.8
+
+#query 534 1
+14679	|Refactoring of Model Transformations.	|ECEASST	|Karsten Ehrig	|NULL	|NULL	|18	|2009
+JACCARD 1 1 0.8
+
+#query 535 1
+14698	|Open Source Verification under a Cloud.	|ECEASST	|Peter T. Breuer	|NULL	|NULL	|33	|2010
+ES 3 3 0.8
+
+#query 536 1
+14710	|Ambient Contracts.	|ECEASST	|Christophe Scholliers	|NULL	|NULL	|28	|2010
+JACCARD 1 1 0.8
+
+#query 537 1
+14730	|The ParMol Package for Frequent Subgraph Mining.	|ECEASST	|Marc W�rlein	|NULL	|NULL	|1	|2006
+JACCARD 1 1 0.8
+
+#query 538 1
+14744	|Using Resources as Synchronizers to Manage Mobile Process Adaption.	|ECEASST	|Paolo Bottoni	|NULL	|NULL	|12	|2008
+ES 7 7 0.8
+
+#query 539 1
+14744	|Using Resources as Synchronizers to Manage Mobile Process Adaption.	|ECEASST	|Fabio De Rosa	|NULL	|NULL	|12	|2008
+JACCARD 1 1 0.8
+
+#query 540 1
+14755	|Checking Consistency Between Message Choreographies And Their Implementation Models.	|ECEASST	|Wei Wei	|NULL	|NULL	|35	|2010
+JACCARD 1 1 0.8
+
+#query 541 1
+14788	|Preface of the Proceedings of the Second International Workshop on Layout of (Software) Engineering Diagrams (LED 2008).	|ECEASST	|Andrew Fish	|NULL	|NULL	|13	|2008
+JACCARD 1 1 0.8
+
+#query 542 1
+14810	|Modelling Feedback Control Loops for Self-Adaptive Systems.	|ECEASST	|Russel Nzekwa	|NULL	|NULL	|28	|2010
+ES 3 3 0.8
+
+#query 543 1
+14817	|Package Evolvability and its Relationship with Refactoring.	|ECEASST	|Asma Mubarak	|NULL	|NULL	|8	|2007
+JACCARD 1 1 0.8
+
+#query 544 1
+14820	|Imposing Hierarchy on a Graph.	|ECEASST	|Brendan Sheehan	|NULL	|NULL	|6	|2007
+JACCARD 1 1 0.8
+
+#query 545 1
+14847	|Provisioning and Operation of Virtual Networks.	|ECEASST	|Wolfgang Kellerer	|NULL	|NULL	|37	|2011
+ES 3 3 0.8
+
+#query 546 1
+14867	|Preface.	|ECEASST	|Gabor Karsai	|NULL	|NULL	|21	|2009
+JACCARD 1 1 0.8
+
+#query 547 1
+14882	|Reachability Analysis on Timed Graph Transformation Systems.	|ECEASST	|Julian Suck	|NULL	|NULL	|32	|2010
+JACCARD 1 1 0.8
+
+#query 548 1
+14894	|Verification of safety requirements for program code using data abstraction.	|ECEASST	|Frank P. M. Stappers	|NULL	|NULL	|23	|2009
+JACCARD 1 1 0.8
+
+#query 549 1
+14927	|Visual Design and Reasoning with the Use of Hypergraph Transformations.	|ECEASST	|Grazyna Maria Slusarczyk	|NULL	|NULL	|10	|2008
+JACCARD 1 1 0.8
+
+#query 550 1
+14934	|Algebraic Model Checking.	|ECEASST	|Peter Padawitz	|NULL	|NULL	|26	|2010
+JACCARD 1 1 0.8
+
+#query 551 1
+14935	|Sharing OCL Constraints by Using Web Rules.	|ECEASST	|Vladan Devedzic	|NULL	|NULL	|9	|2008
+ES 3 3 0.8
+
+#query 552 1
+14938	|From C++ Refactorings to Graph Transformations.	|ECEASST	|Rudolf Ferenc	|NULL	|NULL	|3	|2006
+JACCARD 1 1 0.8
+
+#query 553 1
+14966	|Preface.	|ECEASST	|Kurt Geihs	|NULL	|NULL	|17	|2009
+JACCARD 1 1 0.8
+
+#query 554 1
+14979	|An Approach to Invariant-based Program Refactoring.	|ECEASST	|Rohit Gheyi	|NULL	|NULL	|3	|2006
+JACCARD 1 1 0.8
+
+#query 555 1
+15007	|A visual language for temporal specifications based on Spider diagrams.	|ECEASST	|Andrew Fish	|NULL	|NULL	|41	|2011
+JACCARD 1 1 0.8
+
+#query 556 1
+15031	|Semi-automatic Proofs about Object Graphs in Separation Logic.	|ECEASST	|Holger Gast	|NULL	|NULL	|53	|2012
+JACCARD 1 1 0.8
+
+#query 557 1
+15039	|A workbench for preprocessor design and evaluation: toward benchmarks for parity games.	|ECEASST	|Michael Huth	|NULL	|NULL	|23	|2009
+JACCARD 2 2 0.8
+
+#query 558 1
+15056	|Application Conditions for Reactive Systems with Applications to Bisimulation Theory.	|ECEASST	|Mathias H�lsbusch	|NULL	|NULL	|38	|2011
+JACCARD 1 1 0.8
+
+#query 559 1
+15073	|A generic in-place transformation-based approach to structured model co-evolution.	|ECEASST	|Jonathan Sprinkle	|NULL	|NULL	|42	|2011
+JACCARD 1 1 0.8
+
+#query 560 1
+15091	|Completeness and Correctness of Model Transformations based on Triple Graph Grammars with Negative Application Conditions.	|ECEASST	|Hartmut Ehrig	|NULL	|NULL	|18	|2009
+JACCARD 1 1 0.8
+
+#query 561 1
+15129	|Points with Large Quadrant Depth.	|JoCG	|Tillmann Miltzow	|1	|128-143	|2	|2011
+JACCARD 2 2 0.8
+
+#query 562 1
+15140	|Gaining insight into unfamiliar contexts: A design toolbox as input for using role-play techniques.	|Interacting with Computers	|J. Rodr�guez	|5	|956-976	|18	|2006
+JACCARD 1 1 0.8
+
+#query 563 1
+15157	|Designing physical and social intergenerational family entertainment.	|Interacting with Computers	|Adrian David Cheok	|1-2	|76-87	|21	|2009
+ES 3 3 0.8
+
+#query 564 1
+15196	|Multimodal messages: the pen and voice opportunity.	|Interacting with Computers	|Andrew F. Monk	|1	|1-25	|9	|1997
+ES 3 3 0.8
+
+#query 565 1
+15225	|Intelligent graphical user interface design utilizing multiple fuzzy agents.	|Interacting with Computers	|Arvin Agah	|5	|529-542	|12	|2000
+ES 3 3 0.8
+
+#query 566 1
+15228	|N-fingers: a finger-based interaction technique for wearable computers.	|Interacting with Computers	|Mika R�ykkee	|5	|601-625	|13	|2001
+JACCARD 1 1 0.8
+
+#query 567 1
+15246	|From the body to the tools and back: A general framework for presence in mediated interactions.	|Interacting with Computers	|Giuseppe Riva	|4	|203-210	|24	|2012
+JACCARD 1 1 0.8
+
+#query 568 1
+15287	|Does locality make a difference? Assessing the effectiveness of location-aware narratives.	|Interacting with Computers	|Mary Barreto	|4	|273-279	|24	|2012
+JACCARD 1 1 0.8
+
+#query 569 1
+15291	|UX Curve: A method for evaluating long-term user experience.	|Interacting with Computers	|Virpi Roto	|5	|473-483	|23	|2011
+JACCARD 1 1 0.8
+
+#query 570 1
+15315	|Goal-based structuring in recommender systems.	|Interacting with Computers	|Anton Nijholt	|3	|432-456	|18	|2006
+JACCARD 1 1 0.8
+
+#query 571 1
+15339	|Formal Framework and Necessary Properties of the Fusion of Input Modes in User Interfaces.	|Interacting with Computers	|Thomas Rist	|2	|134-161	|8	|1996
+JACCARD 1 1 0.8
+
+#query 572 1
+15361	|Using a touch screen computer to support relationships between people with dementia and caregivers.	|Interacting with Computers	|Richard Dye	|4	|267-275	|22	|2010
+JACCARD 1 1 0.8
+
+#query 573 1
+15367	|Runtime transformations for modal independent user interface migration.	|Interacting with Computers	|Karin Coninx	|3	|329-347	|15	|2003
+JACCARD 1 1 0.8
+
+#query 574 1
+15374	|High-resolution gaming: Interfaces, notifications, and the user experience.	|Interacting with Computers	|Alain Fabian	|2	|151-166	|19	|2007
+JACCARD 2 2 0.8
+
+#query 575 1
+15400	|Using peer tutoring in evaluating the usability of a physically interactive computer game with children.	|Interacting with Computers	|Perttu H�m�l�inen	|2	|203-225	|15	|2003
+JACCARD 1 1 0.8
+
+#query 576 1
+15405	|Time and representational devices in Rapid Application Development.	|Interacting with Computers	|Roger Slack	|4	|447-466	|13	|2001
+JACCARD 1 1 0.8
+
+#query 577 1
+15433	|Socio-technical systems: From design methods to systems engineering.	|Interacting with Computers	|Ian Sommerville	|1	|4-17	|23	|2011
+JACCARD 1 1 0.8
+
+#query 578 1
+15460	|An interactive 3D movement path manipulation method in an augmented reality environment.	|Interacting with Computers	|Mark Billinghurst	|1	|10-24	|24	|2012
+JACCARD 1 1 0.8
+
+#query 579 1
+15490	|The Usability Metric for User Experience.	|Interacting with Computers	|Kraig Finstad	|5	|323-327	|22	|2010
+JACCARD 1 1 0.8
+
+#query 580 1
+15502	|Moving face-to-face communication to Web-based systems.	|Interacting with Computers	|Nayna Patel	|1	|1-6	|19	|2007
+JACCARD 1 1 0.8
+
+#query 581 1
+15524	|Lean Cuisine: A Low-Fat Notation for Menus.	|Interacting with Computers	|Mark D. Apperley	|1	|43-68	|1	|1989
+JACCARD 1 1 0.8
+
+#query 582 1
+15549	|Desktop virtual environments: a study of navigation and age.	|Interacting with Computers	|H. M. Sayers	|5	|939-956	|16	|2004
+JACCARD 1 1 0.8
+
+#query 583 1
+15569	|Influence, Discretion and Time Available: A Case Study of HCI Practice in Software Development.	|Interacting with Computers	|Nick P. Rousseau	|4	|397-411	|5	|1993
+JACCARD 1 1 0.8
+
+#query 584 1
+15609	|Why usability gets lost or usability in in-house software development.	|Interacting with Computers	|Mats L�fberg	|4	|623-639	|15	|2003
+JACCARD 1 1 0.8
+
+#query 585 1
+15610	|Understanding visual influence in graph design through temporal and spatial eye movement characteristics.	|Interacting with Computers	|James A. Renshaw	|3	|557-578	|16	|2004
+JACCARD 1 1 0.8
+
+#query 586 1
+15633	|A web-based programming learning environment to support cognitive development.	|Interacting with Computers	|Gwo-Jen Hwang	|6	|524-534	|20	|2008
+JACCARD 1 1 0.8
+
+#query 587 1
+15647	|Older adults' perceptions and experiences of online social support.	|Interacting with Computers	|Panayiotis Zaphiris	|3	|159-172	|21	|2009
+JACCARD 1 1 0.8
+
+#query 588 1
+15648	|The effects of password length and reference profile size on the performance of a multivariate text-dependent typist verification system.	|Interacting with Computers	|Renee Napier	|4	|375-383	|10	|1998
+JACCARD 1 1 0.8
+
+#query 589 1
+15668	|Formal Reasoning about Dialogue Properties with Automatic Support.	|Interacting with Computers	|Fabio Patern�	|2	|173-196	|9	|1997
+JACCARD 1 1 0.8
+
+#query 590 1
+15696	|The emerging roles of performance within HCI and interaction design.	|Interacting with Computers	|Giulio Jacucci	|5	|942-955	|18	|2006
+ES 7 7 0.8
+
+#query 591 1
+15717	|An HCI method to improve the human performance reduced by local-lag mechanism.	|Interacting with Computers	|Zhi-Geng Pan	|2	|215-224	|19	|2007
+JACCARD 1 1 0.8
+
+#query 592 1
+15749	|Introduction to the Special Issue on Temporal Aspects of Usability.	|Interacting with Computers	|Alan J. Dix	|1	|1-7	|11	|1998
+JACCARD 1 1 0.8
+
+#query 593 1
+15781	|Measuring web usability using item response theory: Principles, features and opportunities.	|Interacting with Computers	|Antonio Cezar Bornia	|2	|167-175	|23	|2011
+ES 3 3 0.8
+
+#query 594 1
+15799	|Evaluation of information-seeking performance in hypermedia digital libraries.	|Interacting with Computers	|John Tait	|3	|269-284	|10	|1998
+ES 3 3 0.8
+
+#query 595 1
+15839	|A framework for engineering metaphor at the user interface.	|Interacting with Computers	|Ben Anderson	|2	|301-322	|13	|2000
+JACCARD 1 1 0.8
+
+#query 596 1
+15880	|Improving reviews of conceptual models by extended traceability to captured system usage.	|Interacting with Computers	|Matthias Jarke	|1	|77-95	|13	|2000
+JACCARD 1 1 0.8
+
+#query 597 1
+15904	|Enhancing online forms: Use format specifications for fields with format restrictions to help respondents.	|Interacting with Computers	|Klaus Opwis	|1	|33-39	|23	|2011
+JACCARD 1 1 0.8
+
+#query 598 1
+15908	|Human factors in requirements engineering: A survey of human sciences literature relevant to the improvement of dependable systems development processes.	|Interacting with Computers	|Stephen Viller	|6	|665-698	|11	|1999
+ES 7 7 0.8
+
+#query 599 1
+15910	|Technology for supporting web information search and learning in Sign Language.	|Interacting with Computers	|Inmaculada Fajardo	|4	|243-256	|21	|2009
+JACCARD 1 1 0.8
+
+#query 600 1
+15929	|A co-operative scenario based approach to acquisition and validation of system requirements: How exceptions can help!	|Interacting with Computers	|Neil A. M. Maiden	|6	|645-664	|11	|1999
+JACCARD 1 1 0.8
+
+#query 601 1
+15934	|Improving the prediction accuracy of recommendation algorithms: Approaches anchored on human factors.	|Interacting with Computers	|George Lekakos	|3	|410-431	|18	|2006
+ES 3 3 0.8
+
+#query 602 1
+15944	|Cursor type and response conflict in graphical user interfaces.	|Interacting with Computers	|James W. Meehan	|1	|113-120	|19	|2007
+JACCARD 1 1 0.8
+
+#query 603 1
+15970	|Subjective and behavioral presence measurement and interactivity in the collaborative augmented reality game TimeWarp.	|Interacting with Computers	|Roderick McCall	|4	|317-325	|24	|2012
+ES 3 3 0.8
+
+#query 604 1
+15971	|User-friendly locations of error messages in web forms: Put them on the right side of the erroneous input field.	|Interacting with Computers	|Alexandre N. Tuch	|3	|107-118	|24	|2012
+JACCARD 1 1 0.8
+
+#query 605 1
+16001	|Cultural cognition in usability evaluation.	|Interacting with Computers	|Pradeep Yammiyavar	|3	|212-220	|21	|2009
+JACCARD 1 1 0.8
+
+#query 606 1
+16007	|Bimanual text entry using game controllers: Relying on users' spatial familiarity with QWERTY.	|Interacting with Computers	|Andre Aubert	|2	|140-150	|19	|2007
+ES 3 3 0.8
+
+#query 607 1
+16014	|PARNEU: general-purpose partial tree computer.	|Microprocessors and Microsystems - Embedded Hardware Design	|Pasi Kolinummi	|1	|23-42	|24	|2000
+JACCARD 1 1 0.8
+
+#query 608 1
+16034	|Fault-tolerant nanoscale architecture based on linear threshold gates with redundancy.	|Microprocessors and Microsystems - Embedded Hardware Design	|Antonio Rubio	|5	|420-426	|36	|2012
+JACCARD 1 1 0.8
+
+#query 609 1
+16049	|Rapid generation of custom instructions using predefined dataflow structures.	|Microprocessors and Microsystems	|Siew Kei Lam	|6	|355-366	|30	|2006
+JACCARD 1 1 0.8
+
+#query 610 1
+16077	|Performance modelling of pipelined circuit switching in hypercubes with hot spot traffic.	|Microprocessors and Microsystems - Embedded Hardware Design	|Mahmood Fathy	|1	|10-22	|32	|2008
+JACCARD 1 1 0.8
+
+#query 611 1
+16086	|A programmable carrier phase independent symbol timing recovery circuit for QPSK/OQPSK signals.	|Microprocessors and Microsystems - Embedded Hardware Design	|Pasquale Corsonello	|8	|437-446	|32	|2008
+JACCARD 1 1 0.8
+
+#query 612 1
+16101	|Hardware description of multi-layer perceptrons with different abstraction levels.	|Microprocessors and Microsystems	|Pilar Mart�nez Ortigosa	|7	|435-444	|30	|2006
+JACCARD 2 2 0.8
+
+#query 613 1
+16108	|Adding synchronous and LSSD modes to asynchronous circuits.	|Microprocessors and Microsystems	|Frank te Beest	|9	|461-471	|27	|2003
+JACCARD 1 1 0.8
+
+#query 614 1
+16122	|Coordinated concurrent memory accesses on a reconfigurable multimedia accelerator.	|Microprocessors and Microsystems - Embedded Hardware Design	|Samar Yazdani	|1	|13-23	|33	|2009
+JACCARD 1 1 0.8
+
+#query 615 1
+16148	|Microprocessor controlled exhaust gas lambda sensor.	|Microprocessors and Microsystems - Embedded Hardware Design	|A. Polyhroniadis	|3	|121-127	|24	|2000
+ES 3 3 0.8
+
+#query 616 1
+16163	|Microarchitectural design space exploration made fast.	|Microprocessors and Microsystems - Embedded Hardware Design	|Weiwu Hu	|1	|41-51	|37	|2013
+JACCARD 1 1 0.8
+
+#query 617 1
+16191	|Lowering power in an experimental RISC processor.	|Microprocessors and Microsystems	|Wei Shao	|5	|360-368	|31	|2007
+JACCARD 1 1 0.8
+
+#query 618 1
+16193	|A low power and high resolution data logger for submarine seismic monitoring.	|Microprocessors and Microsystems - Embedded Hardware Design	|Gioacchino Fertitta	|2-4	|63-72	|34	|2010
+JACCARD 1 1 0.8
+
+#query 619 1
+16197	|DRAM simulator for design and analysis of digital systems.	|Microprocessors and Microsystems	|Juha Alakarhu	|4	|189-198	|26	|2002
+JACCARD 1 1 0.8
+
+#query 620 1
+16210	|A pipelined processor architecture for regular expression string matching.	|Microprocessors and Microsystems - Embedded Hardware Design	|Jie Li	|6	|520-526	|36	|2012
+JACCARD 1 1 0.8
+
+#query 621 1
+16234	|Exploiting new technology for education: teaching signal integrity in computer science curricula.	|Microprocessors and Microsystems - Embedded Hardware Design	|Dante Del Corso	|5	|265-279	|23	|1999
+JACCARD 1 1 0.8
+
+#query 622 1
+16264	|A wire delay-tolerant reconfigurable unit for a clustered programmable-reconfigurable processor.	|Microprocessors and Microsystems	|Jeffrey J. Cook	|2	|146-159	|31	|2007
+JACCARD 1 1 0.8
+
+#query 623 1
+16288	|Design and off-line programming of a dual robot workcell for garment manufacture.	|Microprocessors and Microsystems - Embedded Hardware Design	|C. A. Czarnecki	|4	|225-234	|23	|1999
+JACCARD 1 1 0.8
+
+#query 624 1
+16290	|FPGA-aware techniques for rapid generation of profitable custom instructions.	|Microprocessors and Microsystems - Embedded Hardware Design	|Siew Kei Lam	|3	|259-269	|37	|2013
+JACCARD 2 2 0.8
+
+#query 625 1
+16299	|A hybrid flash translation layer design for SLC-MLC flash memory based multibank solid state disk.	|Microprocessors and Microsystems - Embedded Hardware Design	|Seung-Ho Park	|1	|48-59	|35	|2011
+JACCARD 1 1 0.8
+
+#query 626 1
+16325	|Special Issue on "High Performance Real-time Computing".	|Microprocessors and Microsystems - Embedded Hardware Design	|Mohammad Osman Tokhi	|6	|307	|23	|1999
+JACCARD 1 1 0.8
+
+#query 627 1
+16326	|LL-MAC: A low latency MAC protocol for wireless self-organised networks.	|Microprocessors and Microsystems - Embedded Hardware Design	|Itziar Mar�n	|4	|197-209	|32	|2008
+JACCARD 1 1 0.8
+
+#query 628 1
+16326	|LL-MAC: A low latency MAC protocol for wireless self-organised networks.	|Microprocessors and Microsystems - Embedded Hardware Design	|Jagoba Arias	|4	|197-209	|32	|2008
+JACCARD 1 1 0.8
+
+#query 629 1
+16352	|Asymmetric digital subscriber line access multiplexer - architecture design and implementation.	|Microprocessors and Microsystems	|Kou-Tan Wu	|7	|315-326	|27	|2003
+JACCARD 1 1 0.8
+
+#query 630 1
+16382	|Design and performance evaluation of a Programmable Packet Processing Engine (PPE) suitable for high-speed network processors units.	|Microprocessors and Microsystems	|Kyriakos Vlachos	|3	|188-199	|31	|2007
+JACCARD 1 1 0.8
+
+#query 631 1
+16410	|Design and measurement of a variable-rate Viterbi decoder in 130-nm digital CMOS.	|Microprocessors and Microsystems - Embedded Hardware Design	|Matthias Kamuf	|5	|129-137	|34	|2010
+ES 3 3 0.8
+
+#query 632 1
+16435	|Component oriented control architecture: the COCA project.	|Microprocessors and Microsystems - Embedded Hardware Design	|Raymond Boissier	|2	|95-102	|23	|1999
+JACCARD 1 1 0.8
+
+#query 633 1
+16457	|TTCAN: a new time-triggered controller area network.	|Microprocessors and Microsystems	|Donal Heffernan	|2	|77-94	|26	|2002
+ES 3 3 0.8
+
+#query 634 1
+16474	|An FPGA implementation of the SMG-SLAM algorithm.	|Microprocessors and Microsystems - Embedded Hardware Design	|Loukas Petrou	|3	|190-204	|36	|2012
+JACCARD 2 2 0.8
+
+#query 635 1
+16499	|Multifunctional and autonomous, high performance architecture: application to a wheelchair for disabled people that integrates different control and guidance strategies.	|Microprocessors and Microsystems - Embedded Hardware Design	|Manuel Mazo	|1	|1-6	|23	|1999
+JACCARD 1 1 0.8
+
+#query 636 1
+16525	|Design and modeling of a low-power multi-channel integrated circuit for infrared gas recognition.	|Microprocessors and Microsystems - Embedded Hardware Design	|Stepan Sutula	|5	|355-364	|36	|2012
+JACCARD 1 1 0.8
+
+#query 637 1
+16536	|Exploiting dynamic micro-architecture usage in gate sizing.	|Microprocessors and Microsystems - Embedded Hardware Design	|Koushik Chakraborty	|4	|417-425	|35	|2011
+JACCARD 1 1 0.8
+
+#query 638 1
+16568	|Executing large algorithms on low-capacity FPGAs using flowpath partitioning and runtime reconfiguration.	|Microprocessors and Microsystems	|Darrin M. Hanna	|5	|302-312	|31	|2007
+JACCARD 1 1 0.8
+
+#query 639 1
+16580	|Recursive FIR filter structures on FPGA.	|Microprocessors and Microsystems - Embedded Hardware Design	|Raija Lehto	|7	|595-602	|35	|2011
+JACCARD 1 1 0.8
+
+#query 640 1
+16608	|Medical robotics at UPC.	|Microprocessors and Microsystems - Embedded Hardware Design	|Alicia Casals	|2	|69-74	|23	|1999
+JACCARD 1 1 0.8
+
+#query 641 1
+16637	|An automated, FPGA-based reconfigurable, low-power RFID tag.	|Microprocessors and Microsystems	|Swapna R. Dontharaju	|2	|116-134	|31	|2007
+JACCARD 1 1 0.8
+
+#query 642 1
+16653	|Service based communication for MPSoC platform-SegBus.	|Microprocessors and Microsystems - Embedded Hardware Design	|Hannu Tenhunen	|7	|643-655	|35	|2011
+ES 7 7 0.8
+
+#query 643 1
+16682	|Performance comparison of parallel architectures for real-time control.	|Microprocessors and Microsystems - Embedded Hardware Design	|Helder Amadeu Daniel	|6	|325-336	|23	|1999
+JACCARD 1 1 0.8
+
+#query 644 1
+16699	|Flow control scheduling.	|Microprocessors and Microsystems	|Ferdinand Gramsamer	|5-6	|233-241	|27	|2003
+JACCARD 1 1 0.8
+
+#query 645 1
+16704	|FPGA-based performance analysis of stream ciphers ZUC, Snow3g, Grain V1, Mickey V2, Trivium and E0.	|Microprocessors and Microsystems - Embedded Hardware Design	|Nicolas Sklavos	|2	|235-245	|37	|2013
+JACCARD 1 1 0.8
+
+#query 646 1
+16732	|Bayesian analysis of robust Poisson geometric process model using heavy-tailed distributions.	|Computational Statistics & Data Analysis	|Wai-Yin Wan	|1	|687-702	|55	|2011
+JACCARD 1 1 0.8
+
+#query 647 1
+16753	|A new fusion formula and its application to continuous-time linear systems with multisensor environment.	|Computational Statistics & Data Analysis	|Vladimir Shin	|2	|840-854	|52	|2007
+JACCARD 1 1 0.8
+
+#query 648 1
+16778	|Analysis of the risk difference of marginal and conditional probabilities in an incomplete correlated 2�2 table.	|Computational Statistics & Data Analysis	|Shun-Fang Wang	|6	|1597-1614	|50	|2006
+JACCARD 1 1 0.8
+
+#query 649 1
+16800	|Optimal control of nonlinear dynamic econometric models: An algorithm and an application.	|Computational Statistics & Data Analysis	|R. Neck	|11	|3230-3240	|56	|2012
+JACCARD 2 2 0.8
+
+#query 650 1
+16825	|Frequency estimation of undamped exponential signals using genetic algorithms.	|Computational Statistics & Data Analysis	|Debasis Kundu	|3	|1965-1985	|51	|2006
+JACCARD 1 1 0.8
+
+#query 651 1
+16844	|Computation of the ARL for CUSUM-S.	|Computational Statistics & Data Analysis	|Sven Knoth	|2	|499-512	|51	|2006
+JACCARD 2 2 0.8
+
+#query 652 1
+16846	|Penalized cluster analysis with applications to family data.	|Computational Statistics & Data Analysis	|Yixin Fang	|6	|2128-2136	|55	|2011
+JACCARD 1 1 0.8
+
+#query 653 1
+16858	|A hybrid EM approach to spatial clustering.	|Computational Statistics & Data Analysis	|Sam Yuan Sung	|5	|1188-1205	|50	|2006
+JACCARD 1 1 0.8
+
+#query 654 1
+16893	|Diagnostics for regression dependence in tables re-ordered by the dominant correspondence analysis solution.	|Computational Statistics & Data Analysis	|Matthijs J. Warrens	|8	|3139-3144	|53	|2009
+ES 3 3 0.8
+
+#query 655 1
+16930	|Inferences and power analysis concerning two negative binomial distributions with an application to MRI lesion counts data.	|Computational Statistics & Data Analysis	|Inmaculada B. Aban	|3	|820-833	|53	|2009
+JACCARD 2 2 0.8
+
+#query 656 1
+16951	|Point and interval estimation for the two-parameter Birnbaum-Saunders distribution based on Type-II censored samples.	|Computational Statistics & Data Analysis	|Debasis Kundu	|11	|3222-3242	|50	|2006
+JACCARD 1 1 0.8
+
+#query 657 1
+16981	|Influence diagnostics in generalized log-gamma regression models.	|Computational Statistics & Data Analysis	|Edwin M. M. Ortega	|1-2	|165-186	|42	|2003
+JACCARD 2 2 0.8
+
+#query 658 1
+16987	|Interacting sequential Monte Carlo samplers for trans-dimensional simulation.	|Computational Statistics & Data Analysis	|Arnaud Doucet	|4	|1765-1791	|52	|2008
+JACCARD 2 2 0.8
+
+#query 659 1
+17032	|Testing general hypotheses under binomial sampling: the two sample case - asymptotic theory and exact procedures.	|Computational Statistics & Data Analysis	|Axel Munk	|3	|723-739	|49	|2005
+JACCARD 1 1 0.8
+
+#query 660 1
+17046	|An empirical assessment of ranking accuracy in ranked set sampling.	|Computational Statistics & Data Analysis	|Elizabeth A. Stasny	|2	|1411-1419	|51	|2006
+JACCARD 2 2 0.8
+
+#query 661 1
+17082	|Bayesian analysis of finite mixtures of multinomial and negative-multinomial distributions.	|Computational Statistics & Data Analysis	|J. Mart�n	|11	|5452-5466	|51	|2007
+JACCARD 1 1 0.8
+
+#query 662 1
+17111	|Order statistics from inverse weibull distribution and associated inference.	|Computational Statistics & Data Analysis	|K. S. Sultan	|1-2	|149-163	|42	|2003
+JACCARD 1 1 0.8
+
+#query 663 1
+17137	|Ensemble classification based on generalized additive models.	|Computational Statistics & Data Analysis	|Kristof Coussement	|6	|1535-1546	|54	|2010
+JACCARD 1 1 0.8
+
+#query 664 1
+17182	|Informative transcription factor selection using support vector machine-based generalized approximate cross validation criteria.	|Computational Statistics & Data Analysis	|Jooyong Shim	|5	|1727-1735	|53	|2009
+JACCARD 1 1 0.8
+
+#query 665 1
+17186	|James-Stein shrinkage to improve k-means cluster analysis.	|Computational Statistics & Data Analysis	|Jinxin Gao	|9	|2113-2127	|54	|2010
+JACCARD 1 1 0.8
+
+#query 666 1
+17187	|On the identification of predictive biomarkers: Detecting treatment-by-gene interaction in high-dimensional data.	|Computational Statistics & Data Analysis	|Annette Kopp-Schneider	|5	|1275-1286	|56	|2012
+JACCARD 1 1 0.8
+
+#query 667 1
+17211	|Confidence intervals for the difference between two means.	|Computational Statistics & Data Analysis	|Paul Chiou	|4	|2238-2248	|52	|2008
+JACCARD 2 2 0.8
+
+#query 668 1
+17240	|A goodness-of-fit test for Archimedean copula models in the presence of right censoring.	|Computational Statistics & Data Analysis	|Chien-Wei Lin	|12	|3033-3043	|54	|2010
+ES 3 3 0.8
+
+#query 669 1
+17276	|Computational aspects of order pi.	|Computational Statistics & Data Analysis	|Alina Matei	|8	|3703-3717	|51	|2007
+ES 3 3 0.8
+
+#query 670 1
+17286	|Inference in HIV dynamics models via hierarchical likelihood.	|Computational Statistics & Data Analysis	|Daniel Commenges	|1	|446-456	|55	|2011
+JACCARD 1 1 0.8
+
+#query 671 1
+17318	|Mixture cure models for multivariate survival data.	|Computational Statistics & Data Analysis	|Yingwei Peng	|3	|1524-1532	|52	|2008
+JACCARD 1 1 0.8
+
+#query 672 1
+17340	|Comparative study of ROC regression techniques - Applications for the computer-aided diagnostic system in breast cancer detection.	|Computational Statistics & Data Analysis	|Mar�a Jos� Lado	|1	|888-902	|55	|2011
+JACCARD 1 1 0.8
+
+#query 673 1
+17364	|Pair-perturbation influence functions and local influence in PCA.	|Computational Statistics & Data Analysis	|Yufen Huang	|12	|5886-5899	|51	|2007
+JACCARD 1 1 0.8
+
+#query 674 1
+17386	|Weighted LAD-LASSO method for robust parameter estimation and variable selection in regression.	|Computational Statistics & Data Analysis	|Olcay Arslan	|6	|1952-1965	|56	|2012
+JACCARD 1 1 0.8
+
+#query 675 1
+17403	|Nonparametric inference in small data sets of spatially indexed curves with application to ionospheric trend determination.	|Computational Statistics & Data Analysis	|Piotr Kokoszka	|NULL	|82-94	|59	|2013
+JACCARD 1 1 0.8
+
+#query 676 1
+17435	|Robust directed tests of normality against heavy-tailed alternatives.	|Computational Statistics & Data Analysis	|Weiwen Miao	|5	|2734-2746	|51	|2007
+JACCARD 1 1 0.8
+
+#query 677 1
+17440	|Joint segmentation of wind speed and direction using a hierarchical model.	|Computational Statistics & Data Analysis	|Jean-Yves Tourneret	|12	|5603-5621	|51	|2007
+JACCARD 1 1 0.8
+
+#query 678 1
+17473	|Estimation of Hurst exponent revisited.	|Computational Statistics & Data Analysis	|Piotr Wojdyllo	|9	|4510-4525	|51	|2007
+JACCARD 1 1 0.8
+
+#query 679 1
+17475	|Dynamic Bayesian beta models.	|Computational Statistics & Data Analysis	|H. S. Migon	|6	|2074-2089	|55	|2011
+JACCARD 1 1 0.8
+
+#query 680 1
+17493	|Differential evolution and particle swarm optimisation in partitional clustering.	|Computational Statistics & Data Analysis	|Sandra Paterlini	|5	|1220-1247	|50	|2006
+JACCARD 1 1 0.8
+
+#query 681 1
+17508	|Statistical inference for the common mean of two log-normal distributions and some applications in reliability.	|Computational Statistics & Data Analysis	|Ramesh C. Gupta	|11	|3141-3164	|50	|2006
+JACCARD 1 1 0.8
+
+#query 682 1
+17520	|The complementary exponential power lifetime model.	|Computational Statistics & Data Analysis	|Gladys D. C. Barriga	|3	|1250-1259	|55	|2011
+JACCARD 1 1 0.8
+
+#query 683 1
+17559	|Estimation of ordinal pattern probabilities in Gaussian processes with stationary increments.	|Computational Statistics & Data Analysis	|Mathieu Sinn	|4	|1781-1790	|55	|2011
+JACCARD 1 1 0.8
+
+#query 684 1
+17573	|A nonparametric-test-based structural similarity measure for digital images.	|Computational Statistics & Data Analysis	|Haiyan Wang	|11	|2925-2936	|55	|2011
+JACCARD 2 2 0.8
+
+#query 685 1
+17602	|On robust tail index estimation.	|Computational Statistics & Data Analysis	|Dieter Schell	|11	|3430-3443	|56	|2012
+JACCARD 1 1 0.8
+
+#query 686 1
+17634	|Time series clustering based on forecast densities.	|Computational Statistics & Data Analysis	|Ana Justel	|2	|762-776	|51	|2006
+JACCARD 1 1 0.8
+
+#query 687 1
+17635	|Series of randomized complete block experiments with non-normal data.	|Computational Statistics & Data Analysis	|Hans-Peter Piepho	|7	|1840-1857	|54	|2010
+JACCARD 1 1 0.8
+
+#query 688 1
+17662	|On empirical Bayes penalized quasi-likelihood inference in GLMMs and in Bayesian disease mapping and ecological modeling.	|Computational Statistics & Data Analysis	|Yi Lin	|8	|2950-2967	|53	|2009
+JACCARD 1 1 0.8
+
+#query 689 1
+17668	|Improving the estimation of Kendall's tau when censoring affects only one of the variables.	|Computational Statistics & Data Analysis	|Thierry Duchesne	|12	|5743-5764	|51	|2007
+JACCARD 2 2 0.8
+
+#query 690 1
+17686	|Time-frequency analysis - G.	|Computational Statistics & Data Analysis	|Wayne A. Woodward	|3	|1997-2028	|51	|2006
+JACCARD 1 1 0.8
+
+#query 691 1
+17690	|2E estimation of mixture complexity for count data.	|Computational Statistics & Data Analysis	|T. Umashanger	|12	|4243-4254	|53	|2009
+JACCARD 1 1 0.8
+
+#query 692 1
+17731	|Forecasting the US unemployment rate.	|Computational Statistics & Data Analysis	|Tommaso Proietti	|3	|451-476	|42	|2003
+JACCARD 2 2 0.8
+
+#query 693 1
+17735	|Maximum likelihood estimation and model comparison of nonlinear structural equation models with continuous and polytomous variables.	|Computational Statistics & Data Analysis	|Xin-Yuan Song	|1-2	|125-142	|44	|2003
+ES 7 7 0.8
+
+#query 694 1
+17762	|Archimedean copula estimation using Bayesian splines smoothing techniques.	|Computational Statistics & Data Analysis	|Philippe Lambert	|12	|6307-6320	|51	|2007
+JACCARD 1 1 0.8
+
+#query 695 1
+17770	|Resampling methods for ranked set samples.	|Computational Statistics & Data Analysis	|Gang Zheng	|2	|1039-1050	|51	|2006
+JACCARD 1 1 0.8
+
+#query 696 1
+17806	|Linear discrimination for three-level multivariate data with a separable additive mean vector and a doubly exchangeable covariance structure.	|Computational Statistics & Data Analysis	|Ricardo Leiva	|6	|1644-1661	|56	|2012
+JACCARD 1 1 0.8
+
+#query 697 1
+17842	|How useful are approximations to mean and variance of the index of dissimilarity?	|Computational Statistics & Data Analysis	|Jyoti A. Champanerkar	|4	|2098-2109	|52	|2008
+JACCARD 1 1 0.8
+
+#query 698 1
+17844	|Quantile estimation in two-phase sampling.	|Computational Statistics & Data Analysis	|Sarjinder Singh	|5	|2559-2572	|51	|2007
+JACCARD 1 1 0.8
+
+#query 699 1
+17845	|Second Issue for Computational Statistics for Clinical Research.	|Computational Statistics & Data Analysis	|Joyce C. Niland	|5	|995-997	|56	|2012
+JACCARD 2 2 0.8
+
+#query 700 1
+17847	|A latent variable model for estimating disease transmission rate from data on household outbreaks.	|Computational Statistics & Data Analysis	|Ning Li	|11	|3354-3368	|50	|2006
+JACCARD 1 1 0.8
+
+#query 701 1
+17856	|Efficient Bayesian estimation of multivariate state space models.	|Computational Statistics & Data Analysis	|Chris M. Strickland	|12	|4116-4125	|53	|2009
+JACCARD 1 1 0.8
+
+#query 702 1
+17881	|Bundling classifiers by bagging trees.	|Computational Statistics & Data Analysis	|Torsten Hothorn	|4	|1068-1078	|49	|2005
+JACCARD 1 1 0.8
+
+#query 703 1
+17893	|Sums of exchangeable Bernoulli random variables for family and litter frequency data.	|Computational Statistics & Data Analysis	|Chang Yu	|3	|1636-1649	|52	|2008
+JACCARD 1 1 0.8
+
+#query 704 1
+17900	|Comparison of methods for identifying phenotype subgroups using categorical features data with application to autism spectrum disorder.	|Computational Statistics & Data Analysis	|Jane M. Charles	|1	|114-125	|56	|2012
+JACCARD 1 1 0.8
+
+#query 705 1
+17934	|1 regularization.	|Computational Statistics & Data Analysis	|Hidetoshi Matsui	|12	|3304-3310	|55	|2011
+JACCARD 1 1 0.8
+
+#query 706 1
+17968	|Simultaneous multifactor DIF analysis and detection in Item Response Theory.	|Computational Statistics & Data Analysis	|Dani Gamerman	|NULL	|144-160	|59	|2013
+JACCARD 2 2 0.8
+
+#query 707 1
+17993	|A unified view on lifetime distributions arising from selection mechanisms.	|Computational Statistics & Data Analysis	|M�rio de Castro	|12	|3311-3319	|55	|2011
+JACCARD 1 1 0.8
+
+#query 708 1
+18026	|Confidence intervals for probabilistic network classifiers.	|Computational Statistics & Data Analysis	|A. J. Feelders	|4	|998-1019	|49	|2005
+JACCARD 1 1 0.8
+
+#query 709 1
+18034	|Confidence interval estimating procedures for standardized incidence rates.	|Computational Statistics & Data Analysis	|Giovanni Filardo	|7	|3501-3516	|52	|2008
+JACCARD 2 2 0.8
+
+#query 710 1
+18064	|Optimization heuristics for determining internal rating grading scales.	|Computational Statistics & Data Analysis	|J. Paha	|11	|2693-2706	|54	|2010
+JACCARD 2 2 0.8
+
+#query 711 1
+18067	|L�vy flight approximations for scaled transformations of random walks.	|Computational Statistics & Data Analysis	|Chang C. Y. Dorea	|12	|6343-6354	|51	|2007
+JACCARD 1 1 0.8
+
+#query 712 1
+18104	|An algorithm for automatic curve detection.	|Computational Statistics & Data Analysis	|Z. Mart�nez	|6	|2158-2171	|55	|2011
+JACCARD 2 2 0.8
+
+#query 713 1
+18130	|Erratum to "Improved point and interval estimation for a beta regression model" [Comput. Statist. Data Anal. 51 (2006) 960-981]	|Computational Statistics & Data Analysis	|Francisco Cribari-Neto	|7	|2445	|55	|2011
+JACCARD 1 1 0.8
+
+#query 714 1
+18139	|A random effects four-part model, with application to correlated medical costs.	|Computational Statistics & Data Analysis	|Mark R. Conaway	|9	|4458-4473	|52	|2008
+JACCARD 1 1 0.8
+
+#query 715 1
+18150	|Detection, classification and estimation of individual shapes in 2D and 3D point clouds.	|Computational Statistics & Data Analysis	|A. Srivastava	|NULL	|227-241	|58	|2013
+JACCARD 1 1 0.8
+
+#query 716 1
+18156	|Robustness via a mixture of exponential power distributions.	|Computational Statistics & Data Analysis	|Alon Hazan	|1-2	|111-121	|42	|2003
+JACCARD 1 1 0.8
+
+#query 717 1
+18188	|Generalized additive models and inflated type I error rates of smoother significance tests.	|Computational Statistics & Data Analysis	|Thomas F. Webster	|1	|366-374	|55	|2011
+JACCARD 1 1 0.8
+
+#query 718 1
+18195	|Empirical Bayes and Fully Bayes procedures to detect high-risk areas in disease mapping.	|Computational Statistics & Data Analysis	|T. Goicoa	|8	|2938-2949	|53	|2009
+JACCARD 1 1 0.8
+
+#query 719 1
+18232	|The use of mixtures for dealing with non-normal regression errors.	|Computational Statistics & Data Analysis	|Francesco Bartolucci	|4	|821-834	|48	|2005
+JACCARD 1 1 0.8
+
+#query 720 1
+18260	|Methods for quarterly disaggregation without indicators; a comparative study using simulation.	|Computational Statistics & Data Analysis	|Alejandro Rodr�guez Caro	|1	|63-78	|43	|2003
+JACCARD 1 1 0.8
+
+#query 721 1
+18287	|A variance shift model for detection of outliers in the linear mixed model.	|Computational Statistics & Data Analysis	|Robin Thompson	|9	|2128-2144	|54	|2010
+JACCARD 2 2 0.8
+
+#query 722 1
+18298	|Boosting nonlinear additive autoregressive time series.	|Computational Statistics & Data Analysis	|Nivien Shafik	|7	|2453-2464	|53	|2009
+JACCARD 1 1 0.8
+
+#query 723 1
+18314	|Local bootstrap approaches for fractional differential parameter estimation in ARFIMA models.	|Computational Statistics & Data Analysis	|Valderio Anselmo Reisen	|2	|1002-1011	|51	|2006
+JACCARD 1 1 0.8
+
+#query 724 1
+18338	|Blocking response surface designs.	|Computational Statistics & Data Analysis	|A. N. Donev	|2	|1075-1088	|51	|2006
+JACCARD 1 1 0.8
+
+#query 725 1
+18341	|Bayesian estimation and variable selection for single index models.	|Computational Statistics & Data Analysis	|Hai-Bin Wang	|7	|2617-2627	|53	|2009
+JACCARD 1 1 0.8
+
+#query 726 1
+18367	|Comparison of estimates using record statistics from Weibull model: Bayesian and non-Bayesian approaches.	|Computational Statistics & Data Analysis	|Ahmed A. Soliman	|3	|2065-2077	|51	|2006
+JACCARD 1 1 0.8
+
+#query 727 1
+18384	|Familial database search on two-person mixture.	|Computational Statistics & Data Analysis	|Wing K. Fung	|8	|2046-2051	|54	|2010
+JACCARD 2 2 0.8
+
+#query 728 1
+18393	|The fourth special issue on Computational Econometrics.	|Computational Statistics & Data Analysis	|David A. Belsley	|6	|1923-1924	|53	|2009
+JACCARD 1 1 0.8
+
+#query 729 1
+18395	|Indirect estimation of elliptical stable distributions.	|Computational Statistics & Data Analysis	|Marco J. Lombardi	|6	|2309-2324	|53	|2009
+JACCARD 1 1 0.8
+
+#query 730 1
+18416	|Intradaily dynamic portfolio selection.	|Computational Statistics & Data Analysis	|Walid Ben Omrane	|11	|2400-2418	|54	|2010
+ES 7 7 0.8
+
+#query 731 1
+18455	|KNN-kernel density-based clustering for high-dimensional multivariate data.	|Computational Statistics & Data Analysis	|Ron Wehrens	|2	|513-525	|51	|2006
+JACCARD 2 2 0.8
+
+#query 732 1
+18488	|Discriminating between Weibull and generalized exponential distributions.	|Computational Statistics & Data Analysis	|Debasis Kundu	|2	|179-196	|43	|2003
+ES 3 3 0.8
+
+#query 733 1
+18492	|Log-Burr XII regression models with censored data.	|Computational Statistics & Data Analysis	|Giovana Oliveira Silva	|7	|3820-3842	|52	|2008
+ES 3 3 0.8
+
+#query 734 1
+18508	|Further properties and new applications of the nested Dirichlet distribution.	|Computational Statistics & Data Analysis	|Man-Lai Tang	|2	|394-405	|54	|2010
+JACCARD 1 1 0.8
+
+#query 735 1
+18541	|Exact maximum likelihood estimation of structured or unit root multivariate time series models.	|Computational Statistics & Data Analysis	|Guy M�lard	|11	|2958-2986	|50	|2006
+JACCARD 1 1 0.8
+
+#query 736 1
+18575	|Robustness of Fourier estimator of integrated volatility in the presence of microstructure noise.	|Computational Statistics & Data Analysis	|S. Sanfelici	|6	|2966-2989	|52	|2008
+JACCARD 1 1 0.8
+
+#query 737 1
+18580	|Estimation of inverse mean: An orthogonal series approach.	|Computational Statistics & Data Analysis	|Qin Wang	|4	|1656-1664	|55	|2011
+JACCARD 1 1 0.8
+
+#query 738 1
+18589	|Social networks of author-coauthor relationships.	|Computational Statistics & Data Analysis	|Yasmin H. Said	|4	|2177-2184	|52	|2008
+JACCARD 1 1 0.8
+
+#query 739 1
+18613	|A semi-parametric generalization of the Cox proportional hazards regression model: Inference and applications.	|Computational Statistics & Data Analysis	|Karthik Devarajan	|1	|667-676	|55	|2011
+JACCARD 2 2 0.8
+
+#query 740 1
+18630	|Bayesian variable selection for Poisson regression with underreported responses.	|Computational Statistics & Data Analysis	|Stephanie Powers	|12	|3289-3299	|54	|2010
+JACCARD 1 1 0.8
+
+#query 741 1
+18658	|A revisit to the common mean problem: Comparing the maximum likelihood estimator with the Graybill-Deal estimator.	|Computational Statistics & Data Analysis	|Jyh-Jiuan Lin	|12	|5673-5681	|51	|2007
+JACCARD 1 1 0.8
+
+#query 742 1
+18659	|Clustering of discretely observed diffusion processes.	|Computational Statistics & Data Analysis	|Alessandro De Gregorio	|2	|598-606	|54	|2010
+JACCARD 2 2 0.8
+
+#query 743 1
+18680	|Detection of structural breaks in linear dynamic panel data models.	|Computational Statistics & Data Analysis	|Elias Tzavalis	|11	|3020-3034	|56	|2012
+JACCARD 1 1 0.8
+
+#query 744 1
+18703	|Smooth functions and local extreme values.	|Computational Statistics & Data Analysis	|A. Kovac	|10	|5155-5171	|51	|2007
+JACCARD 1 1 0.8
+
+#query 745 1
+18725	|Lepage type statistic based on the modified Baumgartner statistic.	|Computational Statistics & Data Analysis	|Hidetoshi Murakami	|10	|5061-5067	|51	|2007
+JACCARD 1 1 0.8
+
+#query 746 1
+18759	|Estimation and prediction from gamma distribution based on record values.	|Computational Statistics & Data Analysis	|G. R. Al-Dayian	|3	|1430-1440	|52	|2008
+ES 7 7 0.8
+
+#query 747 1
+18772	|Standardization of interval symbolic data based on the empirical descriptive statistics.	|Computational Statistics & Data Analysis	|Chenhua Li	|3	|602-610	|56	|2012
+JACCARD 1 1 0.8
+
+#query 748 1
+18801	|A note on iterative marginal optimization: a simple algorithm for maximum rank correlation estimation.	|Computational Statistics & Data Analysis	|Hansheng Wang	|6	|2803-2812	|51	|2007
+ES 3 3 0.8
+
+#query 749 1
+18845	|Regional business cycles in Italy.	|Computational Statistics & Data Analysis	|Ulrich Woitek	|2	|907-918	|52	|2007
+JACCARD 1 1 0.8
+
+#query 750 1
+18866	|Repeated median and hybrid filters.	|Computational Statistics & Data Analysis	|Roland Fried	|9	|2313-2338	|50	|2006
+JACCARD 2 2 0.8
+
+#query 751 1
+18898	|Selection between Weibull and lognormal distributions: A comparative simulation study.	|Computational Statistics & Data Analysis	|Bong-Jin Yum	|2	|477-485	|53	|2008
+JACCARD 1 1 0.8
+
+#query 752 1
+18916	|Size and power of tests for a zero random effect variance or polynomial regression in additive and linear mixed models.	|Computational Statistics & Data Analysis	|Fabian Scheipl	|7	|3283-3299	|52	|2008
+JACCARD 1 1 0.8
+
+#query 753 1
+18922	|A stochastic neighborhood conditional autoregressive model for spatial data.	|Computational Statistics & Data Analysis	|Gentry White	|8	|3033-3046	|53	|2009
+JACCARD 1 1 0.8
+
+#query 754 1
+18964	|Quasi-plus sampling edge correction for spatial point patterns.	|Computational Statistics & Data Analysis	|Sung Nok Chiu	|12	|5287-5295	|52	|2008
+JACCARD 1 1 0.8
+
+#query 755 1
+18967	|Bayesian significance testing and multiple comparisons from MCMC outputs.	|Computational Statistics & Data Analysis	|Takahiro Hoshino	|7	|3543-3559	|52	|2008
+JACCARD 1 1 0.8
+
+#query 756 1
+18991	|Construction of random vectors of heterogeneous component variables under specified correlation structures.	|Computational Statistics & Data Analysis	|C. G. Chul Gyu Park	|4	|621-630	|46	|2004
+JACCARD 1 1 0.8
+
+#query 757 1
+19015	|Modelling over and undercounts for design-based Monte Carlo studies in small area estimation: An application to the German register-assisted census.	|Computational Statistics & Data Analysis	|Ralf T. M�nnich	|10	|2856-2863	|56	|2012
+JACCARD 2 2 0.8
+
+#query 758 1
+19027	|2 boosting.	|Computational Statistics & Data Analysis	|Peter B�hlmann	|7	|3331-3341	|52	|2008
+JACCARD 1 1 0.8
+
+#query 759 1
+19068	|An analysis of three-level orthogonal saturated designs.	|Computational Statistics & Data Analysis	|Bartholomew P. K. Leung	|8	|1952-1961	|54	|2010
+JACCARD 2 2 0.8
+
+#query 760 1
+19109	|A-minimax and D-minimax robust optimal designs for approximately linear Haar-wavelet models.	|Computational Statistics & Data Analysis	|Yongge Tian	|10	|2942-2951	|50	|2006
+JACCARD 1 1 0.8
+
+#query 761 1
+19143	|Calibration of a path-dependent volatility model: Empirical tests.	|Computational Statistics & Data Analysis	|Paolo Foschi	|6	|2219-2235	|53	|2009
+JACCARD 1 1 0.8
+
+#query 762 1
+19189	|A Bayesian approach to sample size determination for studies designed to evaluate continuous medical tests.	|Computational Statistics & Data Analysis	|Dunlei Cheng	|2	|298-307	|54	|2010
+JACCARD 2 2 0.8
+
+#query 763 1
+19205	|Influence diagnostics in log-Birnbaum-Saunders regression models with censored data.	|Computational Statistics & Data Analysis	|Manuel Galea	|12	|5694-5707	|51	|2007
+JACCARD 1 1 0.8
+
+#query 764 1
+19207	|An iterative algorithm for fitting nonconvex penalized generalized linear models with grouped predictors.	|Computational Statistics & Data Analysis	|Yiyuan She	|10	|2976-2990	|56	|2012
+JACCARD 1 1 0.8
+
+#query 765 1
+19228	|Shape restricted nonparametric regression with Bernstein polynomials.	|Computational Statistics & Data Analysis	|J. Wang	|9	|2729-2741	|56	|2012
+JACCARD 1 1 0.8
+
+#query 766 1
+19260	|High-dimensional data clustering.	|Computational Statistics & Data Analysis	|Charles Bouveyron	|1	|502-519	|52	|2007
+ES 7 7 0.8
+
+#query 767 1
+19304	|Fast estimation of spatially dependent temporal vegetation trends using Gaussian Markov random fields.	|Computational Statistics & Data Analysis	|Lars Eklundh	|8	|2885-2896	|53	|2009
+JACCARD 1 1 0.8
+
+#query 768 1
+19316	|Estimating probabilities under the three-parameter gamma distribution using composite sampling.	|Computational Statistics & Data Analysis	|William H. Swallow	|4	|1099-1109	|53	|2009
+JACCARD 1 1 0.8
+
+#query 769 1
+19339	|Assessing the predictive ability of a multilevel binary regression model.	|Computational Statistics & Data Analysis	|R. Van Oirbeek	|6	|1966-1980	|56	|2012
+JACCARD 1 1 0.8
+
+#query 770 1
+19351	|Robust inference using hierarchical likelihood approach for heavy-tailed longitudinal outcomes with missing data: An alternative to inverse probability weighted generalized estimating equations.	|Computational Statistics & Data Analysis	|Michael G. Kenward	|NULL	|171-179	|59	|2013
+JACCARD 1 1 0.8
+
+#query 771 1
+19388	|Time-varying joint distribution through copulas.	|Computational Statistics & Data Analysis	|Hedibert F. Lopes	|11	|2383-2399	|54	|2010
+JACCARD 1 1 0.8
+
+#query 772 1
+19396	|Erratum to: "Testing for the generalized normal-Laplace distribution with applications" [Computational Statistics and Data Analysis 54 (2010) 3174-3180].	|Computational Statistics & Data Analysis	|Efthimios Tsionas	|2	|449	|56	|2012
+JACCARD 1 1 0.8
+
+#query 773 1
+19437	|Adaptive CUSUM procedures with Markovian mean estimation.	|Computational Statistics & Data Analysis	|Zhang Wu	|9	|4395-4409	|52	|2008
+JACCARD 1 1 0.8
+
+#query 774 1
+19439	|Cluster-wise assessment of cluster stability.	|Computational Statistics & Data Analysis	|Christian Hennig	|1	|258-271	|52	|2007
+JACCARD 1 1 0.8
+
+#query 775 1
+19450	|Small area estimation of poverty proportions under area-level time models.	|Computational Statistics & Data Analysis	|L. Santamar�a	|10	|2840-2855	|56	|2012
+JACCARD 2 2 0.8
+
+#query 776 1
+19480	|Complexity control in a mixture model by the Hardy-Weinberg equilibrium.	|Computational Statistics & Data Analysis	|Ella Bingham	|5	|1711-1719	|53	|2009
+JACCARD 1 1 0.8
+
+#query 777 1
+19509	|Identifying cluster number for subspace projected functional data clustering.	|Computational Statistics & Data Analysis	|Pai-Ling Li	|6	|2090-2103	|55	|2011
+JACCARD 1 1 0.8
+
+#query 778 1
+19533	|The compound class of extended Weibull power series distributions.	|Computational Statistics & Data Analysis	|Rodrigo B. Silva	|NULL	|352-367	|58	|2013
+JACCARD 1 1 0.8
+
+#query 779 1
+19555	|Simplified modeling strategies for surrogate validation with multivariate failure-time data.	|Computational Statistics & Data Analysis	|Jos� Corti�as Abrahantes	|6	|1457-1466	|54	|2010
+ES 3 3 0.8
+
+#query 780 1
+19571	|A new MAC protocol for reducing effect of needless transmission deferment induced by missed RTS/CTS handshake.	|Mobile Information Systems	|Hiroshi Matsuno	|1	|21-32	|5	|2009
+JACCARD 1 1 0.8
+
+#query 781 1
+19574	|A cluster-based web service discovery in MANET environments.	|Mobile Information Systems	|Yoo-Seok Shim	|4	|299-315	|7	|2011
+JACCARD 1 1 0.8
+
+#query 782 1
+19576	|Personalized avatars for mobile entertainment.	|Mobile Information Systems	|Mario Weber	|2-3	|95-110	|2	|2006
+ES 3 3 0.8
+
+#query 783 1
+19600	|A friendly location-aware system to facilitate the work of technical directors when broadcasting sport events.	|Mobile Information Systems	|Gorka Marcos	|1	|17-43	|8	|2012
+JACCARD 1 1 0.8
+
+#query 784 1
+19602	|Seamless MANET autoconfiguration through enhanced 802.11 beaconing.	|Mobile Information Systems	|Carlos Miguel Tavares Calafate	|1	|19-35	|9	|2013
+JACCARD 1 1 0.8
+
+#query 785 1
+19620	|E-books on the mobile e-reader.	|Mobile Information Systems	|Won Kim	|1	|55-68	|9	|2013
+JACCARD 2 2 0.8
+
+#query 786 1
+19626	|Context-aware HCI service selection.	|Mobile Information Systems	|Minyi Guo	|3	|231-254	|8	|2012
+JACCARD 1 1 0.8
+
+#query 787 1
+19632	|An enhanced MPR-based solution for flooding of broadcast messages in OLSR wireless ad hoc networks.	|Mobile Information Systems	|Han-Chieh Chao	|3	|249-257	|6	|2010
+JACCARD 1 1 0.8
+
+#query 788 1
+19651	|Tools for performance assessment of OLSR protocol.	|Mobile Information Systems	|Arjan Durresi	|2	|165-176	|5	|2009
+JACCARD 1 1 0.8
+
+#query 789 1
+19662	|MANET performance for source and destination moving scenarios considering OLSR and AODV protocols.	|Mobile Information Systems	|Makoto Ikeda	|4	|325-339	|6	|2010
+JACCARD 1 1 0.8
+
+#query 790 1
+19669	|Using bluetooth to implement a pervasive indoor positioning system with minimal requirements at the application level.	|Mobile Information Systems	|Carlos Delgado Kloos	|1	|73-82	|8	|2012
+JACCARD 2 2 0.8
+
+#query 791 1
+19680	|A web-based application of TELOSB sensor network.	|Mobile Information Systems	|Hussein T. Mouftah	|2	|147-163	|7	|2011
+JACCARD 1 1 0.8
+
+#query 792 1
+19684	|Optimizing the performance and robustness of type-2 fuzzy group nearest-neighbor queries.	|Mobile Information Systems	|Nasser Ghadiri	|2	|123-145	|7	|2011
+JACCARD 2 2 0.8
+
+#query 793 1
+19710	|Balanced bipartite graph based register allocation for network processors in mobile and wireless networks.	|Mobile Information Systems	|Song Guo	|1	|65-83	|6	|2010
+JACCARD 1 1 0.8
+
+#query 794 1
+19728	|Object Delineation by -Connected Components.	|EURASIP J. Adv. Sig. Proc.	|Paulo A. V. Miranda	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 795 1
+19744	|A Biologically Motivated Multiresolution Approach to Contour Detection.	|EURASIP J. Adv. Sig. Proc.	|Giuseppe Papari	|NULL	|NULL	|2007	|2007
+JACCARD 2 2 0.8
+
+#query 796 1
+19756	|Error Sign Feedback as an Alternative to Pilots for the Tracking of FEXT Transfer Functions in Downstream VDSL.	|EURASIP J. Adv. Sig. Proc.	|J�r�me Louveaux	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 797 1
+19773	|Measurement-Based Performance Evaluation of Advanced MIMO Transceiver Designs.	|EURASIP J. Adv. Sig. Proc.	|Christian Schneider	|11	|1712-1724	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 798 1
+19799	|Methods for depth-map filtering in view-plus-depth 3D video representation.	|EURASIP J. Adv. Sig. Proc.	|Sergey Smirnov	|NULL	|25	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 799 1
+19831	|A Statistical Detection of an Anomaly from a Few Noisy Tomographic Projections.	|EURASIP J. Adv. Sig. Proc.	|Lionel Fillatre	|14	|2215-2228	|2005	|2005
+ES 3 3 0.8
+
+#query 800 1
+19859	|Characterizing Image Sets Using Formal Concept Analysis.	|EURASIP J. Adv. Sig. Proc.	|Emmanuel Zenou	|13	|1931-1938	|2005	|2005
+JACCARD 2 2 0.8
+
+#query 801 1
+19885	|A Stereo Crosstalk Cancellation System Based on the Common-Acoustical Pole/Zero Model.	|EURASIP J. Adv. Sig. Proc.	|Fuliang Yin	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 802 1
+19891	|A framework of multitemplate ensemble for fingerprint verification.	|EURASIP J. Adv. Sig. Proc.	|Li Liu	|NULL	|14	|2012	|2012
+ES 3 3 0.8
+
+#query 803 1
+19912	|Design of a Versatile and Low Cost Volt Level A to D Conversion System for Use in Medical Instrumentation Applications.	|EURASIP J. Adv. Sig. Proc.	|Neil Robinson	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 804 1
+19942	|Multichannel ECG and Noise Modeling: Application to Maternal and Fetal ECG Signals.	|EURASIP J. Adv. Sig. Proc.	|Mohammad Bagher Shamsollahi	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 805 1
+19949	|Classified Region Algorithm for Fast Intermode Decision in H.264/AVC Encoder.	|EURASIP J. Adv. Sig. Proc.	|Karunanithi Bharanitharan	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 806 1
+19960	|Fingerprint Reference-Point Detection.	|EURASIP J. Adv. Sig. Proc.	|Xudong Jiang	|4	|498-509	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 807 1
+19970	|Performance analysis and improvement of dither modulation under the composite attacks.	|EURASIP J. Adv. Sig. Proc.	|Jie Ding	|NULL	|53	|2012	|2012
+JACCARD 2 2 0.8
+
+#query 808 1
+19992	|Time frequency and array processing of non-stationary signals.	|EURASIP J. Adv. Sig. Proc.	|Karim Abed-Meraim	|NULL	|230	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 809 1
+19997	|Hybrid RSS-RTT Localization Scheme for Indoor Wireless Networks.	|EURASIP J. Adv. Sig. Proc.	|Ram�n J. Dur�n	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 810 1
+20012	|Real-Time Adaptive Foreground/Background Segmentation.	|EURASIP J. Adv. Sig. Proc.	|Darren E. Butler	|14	|2292-2304	|2005	|2005
+JACCARD 2 2 0.8
+
+#query 811 1
+20019	|A Robust Iris Identification System Based on Wavelet Packet Decomposition and Local Comparisons of the Extracted Signatures.	|EURASIP J. Adv. Sig. Proc.	|Florence Rossant	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 812 1
+20050	|Biologically Inspired Signal Processing: Analyses, Algorithms and Applications.	|EURASIP J. Adv. Sig. Proc.	|Steve McLaughlin	|NULL	|28	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 813 1
+20050	|Biologically Inspired Signal Processing: Analyses, Algorithms and Applications.	|EURASIP J. Adv. Sig. Proc.	|Raviraj Adve	|NULL	|28	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 814 1
+20053	|Online Estimation of Time-Varying Volatility Using a Continuous-Discrete LMS Algorithm.	|EURASIP J. Adv. Sig. Proc.	|Elisabeth Lahalle	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 815 1
+20074	|On the Geolocation Bounds for Round-Trip Time-of-Arrival and All Non-Line-of-Sight Channels.	|EURASIP J. Adv. Sig. Proc.	|Laurence Mailaender	|NULL	|NULL	|2008	|2008
+ES 3 3 0.8
+
+#query 816 1
+20095	|Analog-to-Digital Conversion Using Single-Layer Integrate-and-Fire Networks with Inhibitory Connections.	|EURASIP J. Adv. Sig. Proc.	|Pankaj K. Das	|13	|2066-2075	|2004	|2004
+ES 3 3 0.8
+
+#query 817 1
+20130	|Surface Approximation Using the 2D FFENN Architecture.	|EURASIP J. Adv. Sig. Proc.	|John J. Soraghan	|17	|2696-2704	|2004	|2004
+JACCARD 2 2 0.8
+
+#query 818 1
+20150	|Distributed Space-Time Block Coded Transmission with Imperfect Channel Estimation: Achievable Rate and Power Allocation.	|EURASIP J. Adv. Sig. Proc.	|Leila Musavian	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 819 1
+20168	|Enhancing the Performance of Random Access Networks with Random Packet CDMA and Joint Detection.	|EURASIP J. Adv. Sig. Proc.	|Peiman Amini	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 820 1
+20181	|Shooter Localization in Wireless Microphone Networks.	|EURASIP J. Adv. Sig. Proc.	|Fredrik Gustafsson	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 821 1
+20189	|Bearing Fault Detection Using Artificial Neural Networks and Genetic Algorithm.	|EURASIP J. Adv. Sig. Proc.	|Khamis R. Al-Balushi	|3	|366-377	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 822 1
+20218	|Content-Based Object Movie Retrieval and Relevance Feedbacks.	|EURASIP J. Adv. Sig. Proc.	|Li-Wei Chan	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 823 1
+20227	|The Alamouti Scheme with CDMA-OFDM/OQAM.	|EURASIP J. Adv. Sig. Proc.	|Pierre Siohan	|NULL	|NULL	|2010	|2010
+ES 3 3 0.8
+
+#query 824 1
+20252	|Multiuser Detection Using Adaptive Multistage Matrix Wiener Filtering Schemes with Stage-Selection Criteria in DS-UWB.	|EURASIP J. Adv. Sig. Proc.	|Hsuan-Yu Lin	|NULL	|NULL	|2008	|2008
+ES 3 3 0.8
+
+#query 825 1
+20253	|Modeling of Video Sequences by Gaussian Mixture: Application in Motion Estimation by Block Matching Method.	|EURASIP J. Adv. Sig. Proc.	|Abdenaceur Boudlal	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 826 1
+20275	|A Simple Technique for Fast Digital Background Calibration of A/D Converters.	|EURASIP J. Adv. Sig. Proc.	|Pietro Monsurr�	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 827 1
+20300	|Quantization Effects and Stabilization of the Fast-Kalman Algorithm.	|EURASIP J. Adv. Sig. Proc.	|George Roussopoulos	|3	|169-180	|2001	|2001
+JACCARD 1 1 0.8
+
+#query 828 1
+20309	|Reducing Congestion in Obstructed Highways with Traffic Data Dissemination Using Ad hoc Vehicular Networks.	|EURASIP J. Adv. Sig. Proc.	|Maziar Nekovee	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 829 1
+20311	|Principal component based covariate shift adaption to reduce non-stationarity in a MEG-based brain-computer interface.	|EURASIP J. Adv. Sig. Proc.	|Wolfgang Rosenstiel	|NULL	|129	|2012	|2012
+JACCARD 2 2 0.8
+
+#query 830 1
+20333	|Maximum-Likelihood Semiblind Equalization of Doubly Selective Channels Using the EM Algorithm.	|EURASIP J. Adv. Sig. Proc.	|Gideon Kutz	|NULL	|NULL	|2010	|2010
+ES 3 3 0.8
+
+#query 831 1
+20365	|An efficient implementation of iterative adaptive approach for source localization.	|EURASIP J. Adv. Sig. Proc.	|Hao Zhang	|NULL	|7	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 832 1
+20379	|Robust Adaptive Modified Newton Algorithm for Generalized Eigendecomposition and Its Application.	|EURASIP J. Adv. Sig. Proc.	|Wei Guo	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 833 1
+20404	|Segmentation algorithm via Cellular Neural/Nonlinear Network: implementation on Bio-inspired hardware platform.	|EURASIP J. Adv. Sig. Proc.	|Giuseppe Grassi	|NULL	|69	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 834 1
+20407	|Chaotic signal reconstruction with application to noise radar system.	|EURASIP J. Adv. Sig. Proc.	|Zishu He	|NULL	|2	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 835 1
+20407	|Chaotic signal reconstruction with application to noise radar system.	|EURASIP J. Adv. Sig. Proc.	|Chunlin Han	|NULL	|2	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 836 1
+20424	|Automatic Target Detection Using Wavelet Transform.	|EURASIP J. Adv. Sig. Proc.	|L. Ganesan	|17	|2663-2674	|2004	|2004
+JACCARD 2 2 0.8
+
+#query 837 1
+20432	|A New Method for Estimating the Number of Harmonic Components in Noise with Application in High Resolution Radar.	|EURASIP J. Adv. Sig. Proc.	|Emanuel Radoi	|8	|1177-1188	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 838 1
+20464	|Design Verification and Performance Evaluation of an Enhanced Wideband CDMA Receiver Using Channel Measurements.	|EURASIP J. Adv. Sig. Proc.	|Venkatesh Sampath	|11	|1736-1752	|2005	|2005
+ES 3 3 0.8
+
+#query 839 1
+20489	|Intercluster Connection in Cognitive Wireless Mesh Networks Based on Intelligent Network Coding.	|EURASIP J. Adv. Sig. Proc.	|Zhifeng Zhao	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 840 1
+20513	|Parametric Coding of Stereo Audio.	|EURASIP J. Adv. Sig. Proc.	|Erik Schuijers	|9	|1305-1322	|2005	|2005
+ES 3 3 0.8
+
+#query 841 1
+20523	|A concatenation scheme of LDPC codes and source codes for flash memories.	|EURASIP J. Adv. Sig. Proc.	|Song Pan	|NULL	|208	|2012	|2012
+ES 3 3 0.8
+
+#query 842 1
+20537	|A Robust Formant Extraction Algorithm Combining Spectral Peak Picking and Root Polishing.	|EURASIP J. Adv. Sig. Proc.	|Wonyong Sung	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 843 1
+20570	|Efficient On-Demand Image Transmission in Visual Sensor Networks.	|EURASIP J. Adv. Sig. Proc.	|King-Shan Lui	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 844 1
+20579	|A New Method for Identifying the Life Parameters via Radar.	|EURASIP J. Adv. Sig. Proc.	|Jianqi Wang	|NULL	|NULL	|2007	|2007
+JACCARD 2 2 0.8
+
+#query 845 1
+20604	|Simulation of Specular Surface Imaging Based on Computer Graphics: Application on a Vision Inspection System.	|EURASIP J. Adv. Sig. Proc.	|Ralph Seulin	|7	|649-658	|2002	|2002
+JACCARD 1 1 0.8
+
+#query 846 1
+20630	|Maximum Likelihood DOA Estimation of Multiple Wideband Sources in the Presence of Nonuniform Sensor Noise.	|EURASIP J. Adv. Sig. Proc.	|Chiao-En Chen	|NULL	|NULL	|2008	|2008
+JACCARD 2 2 0.8
+
+#query 847 1
+20631	|Sparse Approximation of Images Inspired from the Functional Architecture of the Primary Visual Areas.	|EURASIP J. Adv. Sig. Proc.	|Gabriel Crist�bal	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 848 1
+20643	|Localization using iterative angle of arrival method sharing snapshots of coherent subarrays.	|EURASIP J. Adv. Sig. Proc.	|Shun Kawakami	|NULL	|46	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 849 1
+20646	|A New Pipelined Systolic Array-Based Architecture for Matrix Inversion in FPGAs with Kalman Filter Case Study.	|EURASIP J. Adv. Sig. Proc.	|Abbas Bigdeli	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 850 1
+20674	|Stylistic gait synthesis based on hidden Markov models.	|EURASIP J. Adv. Sig. Proc.	|Thierry Dutoit	|NULL	|72	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 851 1
+20675	|A Complete Image Compression Scheme Based on Overlapped Block Transform with Post-Processing.	|EURASIP J. Adv. Sig. Proc.	|B. Li	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 852 1
+20696	|Univariate and Bivariate Empirical Mode Decomposition for Postural Stability Analysis.	|EURASIP J. Adv. Sig. Proc.	|David J. Hewson	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 853 1
+20707	|Phonologically-based biomarkers for major depressive disorder.	|EURASIP J. Adv. Sig. Proc.	|Thomas F. Quatieri	|NULL	|42	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 854 1
+20709	|Flow Vision for Autonomous Underwater Vehicles via an Artificial Lateral Line.	|EURASIP J. Adv. Sig. Proc.	|Chang Liu	|NULL	|NULL	|2011	|2011
+JACCARD 2 2 0.8
+
+#query 855 1
+20719	|Higher-Order Permanent Scatterers Analysis.	|EURASIP J. Adv. Sig. Proc.	|Alessandro Ferretti	|20	|3231-3242	|2005	|2005
+JACCARD 2 2 0.8
+
+#query 856 1
+20742	|On base station cooperation using statistical CSI in jointly correlated MIMO downlink channels.	|EURASIP J. Adv. Sig. Proc.	|Xiqi Gao	|NULL	|81	|2012	|2012
+JACCARD 2 2 0.8
+
+#query 857 1
+20755	|A Computationally Efficient Method for Polyphonic Pitch Estimation.	|EURASIP J. Adv. Sig. Proc.	|Giorgio Zoia	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 858 1
+20783	|Pulse Interval Modulation for Ultra-High Speed IR-UWB Communications Systems.	|EURASIP J. Adv. Sig. Proc.	|Tomislav Matic	|NULL	|NULL	|2010	|2010
+ES 3 3 0.8
+
+#query 859 1
+20787	|Attenuation Analysis of Lamb Waves Using the Chirplet Transform.	|EURASIP J. Adv. Sig. Proc.	|Helge Sprenger	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 860 1
+20804	|Blind Source Separation Combining Independent Component Analysis and Beamforming.	|EURASIP J. Adv. Sig. Proc.	|Fumitada Itakura	|11	|1135-1146	|2003	|2003
+JACCARD 1 1 0.8
+
+#query 861 1
+20810	|A Machine Vision Quality Control System for Industrial Acrylic Fibre Production.	|EURASIP J. Adv. Sig. Proc.	|Jo�o Dinis	|7	|728-735	|2002	|2002
+JACCARD 2 2 0.8
+
+#query 862 1
+20828	|Automated optical inspection system for digital TV sets.	|EURASIP J. Adv. Sig. Proc.	|Mihajlo Katona	|NULL	|140	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 863 1
+20844	|DSP-Enabled Radio Astronomy: Towards IIIZW35 Reconquest.	|EURASIP J. Adv. Sig. Proc.	|Rodolphe Weber	|16	|2686-2693	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 864 1
+20865	|An Alternative Method to Compute the Bit Error Probability of Modulation Schemes Subject to Nakagami-m Fading.	|EURASIP J. Adv. Sig. Proc.	|Wamberto J. L. Queiroz	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 865 1
+20888	|A New Robust Watermarking Scheme to Increase Image Security.	|EURASIP J. Adv. Sig. Proc.	|Reza Mortezaei	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 866 1
+20909	|A learning-based target decomposition method using Kernel KSVD for polarimetric SAR image classification.	|EURASIP J. Adv. Sig. Proc.	|Xin Xu	|NULL	|159	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 867 1
+20925	|A New Method to Calibrate Attachment Angles of Data Loggers in Swimming Sharks.	|EURASIP J. Adv. Sig. Proc.	|Yuuki Watanabe	|NULL	|NULL	|2010	|2010
+ES 3 3 0.8
+
+#query 868 1
+20942	|Doubly Selective Channel Estimation for Amplify-and-Forward Relay Networks.	|EURASIP J. Adv. Sig. Proc.	|Rongtao Xu	|NULL	|251	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 869 1
+20960	|The Cramer-Rao Bound and DMT Signal Optimisation for the Identification of a Wiener-Type Model.	|EURASIP J. Adv. Sig. Proc.	|G. Paoli	|12	|1817-1830	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 870 1
+20960	|The Cramer-Rao Bound and DMT Signal Optimisation for the Identification of a Wiener-Type Model.	|EURASIP J. Adv. Sig. Proc.	|Gernot Kubin	|12	|1817-1830	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 871 1
+20979	|Recognition of human activities with wearable sensors.	|EURASIP J. Adv. Sig. Proc.	|Yongcai Guo	|NULL	|108	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 872 1
+21005	|Intra-Symbol Windowing for Egress Reduction in DMT Transmitters.	|EURASIP J. Adv. Sig. Proc.	|Geert Ysebaert	|NULL	|NULL	|2006	|2006
+ES 7 7 0.8
+
+#query 873 1
+21026	|On the Use of the Correlation between Acoustic Descriptors for the Normal/Pathological Voices Discrimination.	|EURASIP J. Adv. Sig. Proc.	|Marc Remacle	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 874 1
+21058	|Compression at the Source for Digital Camcorders.	|EURASIP J. Adv. Sig. Proc.	|Arie Feuer	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 875 1
+21060	|Dynamic Bayesian Networks for Audio-Visual Speech Recognition.	|EURASIP J. Adv. Sig. Proc.	|Xiaoxing Liu	|11	|1274-1288	|2002	|2002
+JACCARD 1 1 0.8
+
+#query 876 1
+21093	|Assessment of Severe Apnoea through Voice Analysis, Automatic Speech, and Speaker Recognition Techniques.	|EURASIP J. Adv. Sig. Proc.	|Luis A. Hern�ndez G�mez	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 877 1
+21099	|Optimal linear precoding for opportunistic spectrum sharing under arbitrary input distributions assumption.	|EURASIP J. Adv. Sig. Proc.	|Yifei Zhao	|NULL	|59	|2013	|2013
+JACCARD 1 1 0.8
+
+#query 878 1
+21105	|Multitarget Identification and Localization Using Bistatic MIMO Radar Systems.	|EURASIP J. Adv. Sig. Proc.	|Jun Li 0007	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 879 1
+21132	|Full Waveform Analysis for Long-Range 3D Imaging Laser Radar.	|EURASIP J. Adv. Sig. Proc.	|Robert J. Collins	|NULL	|NULL	|2010	|2010
+ES 3 3 0.8
+
+#query 880 1
+21135	|Detecting Network Intrusions Using Signal Processing with Query-Based Sampling Filter.	|EURASIP J. Adv. Sig. Proc.	|Liang-Bin Lai	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 881 1
+21146	|Advances in Modal Analysis Using a Robust and Multiscale Method.	|EURASIP J. Adv. Sig. Proc.	|Christian Frisson	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 882 1
+21160	|A unified approach to sparse signal processing.	|EURASIP J. Adv. Sig. Proc.	|Saeid Sanei	|NULL	|44	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 883 1
+21193	|Analysis of the Effects of Finite Precision in Neural Network-Based Sound Classifiers for Digital Hearing Aids.	|EURASIP J. Adv. Sig. Proc.	|Lucas Cuadra	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 884 1
+21200	|3DTV: Capture, Transmission, and Display of 3D Video.	|EURASIP J. Adv. Sig. Proc.	|George A. Triantafyllidis	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 885 1
+21226	|Advances in Signal Processing for Maritime Applications.	|EURASIP J. Adv. Sig. Proc.	|Gary Wood	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 886 1
+21251	|An FPGA Implementation of (3, 6)-Regular Low-Density Parity-Check Code Decoder.	|EURASIP J. Adv. Sig. Proc.	|Tong Zhang 0002	|6	|530-542	|2003	|2003
+JACCARD 1 1 0.8
+
+#query 887 1
+21283	|Study on adaptive compressed sensing & reconstruction of quantized speech signals.	|EURASIP J. Adv. Sig. Proc.	|Ji Yunyun	|NULL	|232	|2012	|2012
+JACCARD 2 2 0.8
+
+#query 888 1
+21302	|Efficient and Precise Processing for Squinted Spotlight SAR through a Modified Stolt Mapping.	|EURASIP J. Adv. Sig. Proc.	|Marijke Vandewal	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 889 1
+21308	|Near optimal bound of orthogonal matching pursuit using restricted isometric constant.	|EURASIP J. Adv. Sig. Proc.	|Byonghyo Shim	|NULL	|8	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 890 1
+21313	|Detection and Parameter Estimation of Multicomponent LFM Signal Based on the Cubic Phase Function.	|EURASIP J. Adv. Sig. Proc.	|Yong Wang	|NULL	|NULL	|2008	|2008
+JACCARD 2 2 0.8
+
+#query 891 1
+21331	|Reproducible research in signal processing.	|EURASIP J. Adv. Sig. Proc.	|Fulvio Gini	|NULL	|93	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 892 1
+21346	|Segmentation and Content-Based Watermarking for Color Image and Image Region Indexing and Retrieval.	|EURASIP J. Adv. Sig. Proc.	|Vasileios Mezaris	|4	|418-431	|2002	|2002
+ES 7 7 0.8
+
+#query 893 1
+21361	|Machine Learning in Image Processing.	|EURASIP J. Adv. Sig. Proc.	|S�bastien Lef�vre	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 894 1
+21382	|Teager-Kaiser Energy and Higher-Order Operators in White-Light Interference Microscopy for Surface Shape Measurement.	|EURASIP J. Adv. Sig. Proc.	|Paul C. Montgomery	|17	|2804-2815	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 895 1
+21391	|A shrinkage probability hypothesis density filter for multitarget tracking.	|EURASIP J. Adv. Sig. Proc.	|Hao Zhang	|NULL	|116	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 896 1
+21422	|Real-Time Recognition of Percussive Sounds by a Model-Based Method.	|EURASIP J. Adv. Sig. Proc.	|Cumhur Erkut	|NULL	|NULL	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 897 1
+21441	|Joint Watermarking and Encryption of Color Images in the Fibonacci-Haar Domain.	|EURASIP J. Adv. Sig. Proc.	|Michela Cancellaro	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 898 1
+21448	|Data-precoded algorithm for multiple-relay assisted systems.	|EURASIP J. Adv. Sig. Proc.	|At�lio Gameiro	|NULL	|22	|2012	|2012
+JACCARD 2 2 0.8
+
+#query 899 1
+21462	|Crosstalk Models for Short VDSL2 Lines from Measured 30 MHz Data.	|EURASIP J. Adv. Sig. Proc.	|Nicholas D. Sidiropoulos	|NULL	|NULL	|2006	|2006
+JACCARD 2 2 0.8
+
+#query 900 1
+21475	|Corrections to "Multitarget Identification and Localization Using Bistatic MIMO Radar Systems".	|EURASIP J. Adv. Sig. Proc.	|Jun Li 0007	|NULL	|NULL	|2008	|2008
+JACCARD 2 2 0.8
+
+#query 901 1
+21502	|Scheduling for Multiuser MIMO Downlink Channels with Ranking-Based Feedback.	|EURASIP J. Adv. Sig. Proc.	|Thomas E. S�lzer	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 902 1
+21519	|Interference-free SDMA for FBMC-OQAM.	|EURASIP J. Adv. Sig. Proc.	|Thibault Deleu	|NULL	|46	|2013	|2013
+JACCARD 1 1 0.8
+
+#query 903 1
+21549	|Sector-Based Detection for Hands-Free Speech Enhancement in Cars.	|EURASIP J. Adv. Sig. Proc.	|Guillaume Lathoud	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 904 1
+21555	|Generalized Alamouti Codes for Trading Quality of Service against Data Rate in MIMO UMTS.	|EURASIP J. Adv. Sig. Proc.	|Christoph F. Mecklenbr�uker	|5	|662-675	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 905 1
+21560	|Advanced Signal Processing and Pattern Recognition Methods for Biometrics.	|EURASIP J. Adv. Sig. Proc.	|Nikolaos V. Boulgouris	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 906 1
+21577	|Dynamic MR-Imaging with Radial Scanning, a Post-Acquisition Keyhole Approach.	|EURASIP J. Adv. Sig. Proc.	|Frank T. A. W. Wajer	|5	|405-412	|2003	|2003
+JACCARD 1 1 0.8
+
+#query 907 1
+21609	|Event Detection Using "Variable Module Graphs" for Home Care Applications.	|EURASIP J. Adv. Sig. Proc.	|Amit Sethi	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 908 1
+21637	|Spectrogram Analysis of Genomes.	|EURASIP J. Adv. Sig. Proc.	|Anshul Kundaje	|1	|29-42	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 909 1
+21656	|Caenorhabditis elegans Egg-Laying Detection and Behavior Study Using Image Analysis.	|EURASIP J. Adv. Sig. Proc.	|Megan Palm	|14	|2229-2240	|2005	|2005
+JACCARD 2 2 0.8
+
+#query 910 1
+21691	|A MIMO System with Backward Compatibility for OFDM-Based WLANs.	|EURASIP J. Adv. Sig. Proc.	|Jianhua Liu	|5	|696-706	|2004	|2004
+JACCARD 2 2 0.8
+
+#query 911 1
+21714	|Detection of moving objects in image plane for robot navigation using monocular vision.	|EURASIP J. Adv. Sig. Proc.	|Ming-Jang Chiou	|NULL	|29	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 912 1
+21728	|Video Segmentation Using Fast Marching and Region Growing Algorithms.	|EURASIP J. Adv. Sig. Proc.	|Eftychios Sifakis	|4	|379-388	|2002	|2002
+JACCARD 1 1 0.8
+
+#query 913 1
+21759	|Phase-Based Binocular Perception of Motion in Depth: Cortical-Like Operators and Analog VLSI Architectures.	|EURASIP J. Adv. Sig. Proc.	|Fabio Solari	|7	|690-702	|2003	|2003
+ES 3 3 0.8
+
+#query 914 1
+21759	|Phase-Based Binocular Perception of Motion in Depth: Cortical-Like Operators and Analog VLSI Architectures.	|EURASIP J. Adv. Sig. Proc.	|Paolo Cavalleri	|7	|690-702	|2003	|2003
+JACCARD 1 1 0.8
+
+#query 915 1
+21766	|Reliable Communications over Rapidly Time-Varying Channels.	|EURASIP J. Adv. Sig. Proc.	|Georgios B. Giannakis	|NULL	|NULL	|2006	|2006
+ES 3 3 0.8
+
+#query 916 1
+21784	|Design and Experimental Evaluation of a Vehicular Network Based on NEMO and MANET.	|EURASIP J. Adv. Sig. Proc.	|Manabu Tsukada	|NULL	|NULL	|2010	|2010
+JACCARD 2 2 0.8
+
+#query 917 1
+21805	|Mainlobe Jammer Nulling via TSI Finders: A Space Fast-Time Adaptive Processor.	|EURASIP J. Adv. Sig. Proc.	|Dan Madurasinghe	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 918 1
+21817	|Coorbit Theory, Multi--Modulation Frames, and the Concept of Joint Sparsity for Medical Multichannel Data Analysis.	|EURASIP J. Adv. Sig. Proc.	|Stephan Dahlke	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 919 1
+21851	|The Vienna LTE simulators - Enabling reproducibility in wireless communications research.	|EURASIP J. Adv. Sig. Proc.	|Martin Wrulich	|NULL	|29	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 920 1
+21855	|Spectral Efficiency Comparison of OFDM/FBMC for Uplink Cognitive Radio Networks.	|EURASIP J. Adv. Sig. Proc.	|Daniel Roviras	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 921 1
+21858	|A novel type II relay-assisted retransmission scheme for uplink of LTE-advanced system.	|EURASIP J. Adv. Sig. Proc.	|Satoshi Nagata	|NULL	|57	|2013	|2013
+JACCARD 1 1 0.8
+
+#query 922 1
+21867	|Three-Dimensional Facial Adaptation for MPEG-4 Talking Heads.	|EURASIP J. Adv. Sig. Proc.	|Fani Deligianni	|10	|1005-1020	|2002	|2002
+JACCARD 1 1 0.8
+
+#query 923 1
+21882	|Efficiency analysis of color image filtering.	|EURASIP J. Adv. Sig. Proc.	|Nikolay N. Ponomarenko	|NULL	|41	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 924 1
+21906	|Artificial Neural Network-Based Clutter Reduction Systems for Ship Size Estimation in Maritime Radars.	|EURASIP J. Adv. Sig. Proc.	|Ra�l Vicen Bueno	|NULL	|NULL	|2010	|2010
+ES 3 3 0.8
+
+#query 925 1
+21934	|Dereverberation and denoising based on generalized spectral subtraction by multi-channel LMS algorithm using a small-scale microphone array.	|EURASIP J. Adv. Sig. Proc.	|Kyohei Odani	|NULL	|12	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 926 1
+21957	|Fast DCT-I, DCT-III, and DCT-IV via Moments.	|EURASIP J. Adv. Sig. Proc.	|G. Y. Wang	|12	|1902-1909	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 927 1
+21976	|Efficient Measurement of Shape Dissimilarity between 3D Models Using Z-Buffer and Surface Roving Method.	|EURASIP J. Adv. Sig. Proc.	|Kyoung Mu Lee	|10	|1127-1134	|2002	|2002
+JACCARD 1 1 0.8
+
+#query 928 1
+21989	|Anthropomorphic Coding of Speech and Audio: A Model Inversion Approach.	|EURASIP J. Adv. Sig. Proc.	|W. Bastiaan Kleijn	|9	|1334-1349	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 929 1
+21998	|A Comparison of Set Redundancy Compression Techniques.	|EURASIP J. Adv. Sig. Proc.	|Samy Ait-Aoudia	|NULL	|NULL	|2006	|2006
+JACCARD 1 1 0.8
+
+#query 930 1
+22003	|Optimized Irregular Low-Density Parity-Check Codes for Multicarrier Modulations over Frequency-Selective Channels.	|EURASIP J. Adv. Sig. Proc.	|Guillaume Gelle	|10	|1546-1556	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 931 1
+22036	|Recursive and Fast Recursive Capon Spectral Estimators.	|EURASIP J. Adv. Sig. Proc.	|Jingdong Chen	|NULL	|NULL	|2007	|2007
+ES 3 3 0.8
+
+#query 932 1
+22065	|A complexity-performance-balanced multiuser detector based on artificial fish swarm algorithm for DS-UWB systems in the AWGN and multipath environments.	|EURASIP J. Adv. Sig. Proc.	|Hongjian Sun	|NULL	|229	|2012	|2012
+JACCARD 1 1 0.8
+
+#query 933 1
+22097	|Sinusoidal Analysis-Synthesis of Audio Using Perceptual Criteria.	|EURASIP J. Adv. Sig. Proc.	|Ted Painter	|1	|15-20	|2003	|2003
+ES 3 3 0.8
+
+#query 934 1
+22115	|Recent Advances in Biometric Systems: A Signal Processing Perspective.	|EURASIP J. Adv. Sig. Proc.	|Kevin W. Bowyer	|NULL	|NULL	|2009	|2009
+ES 3 3 0.8
+
+#query 935 1
+22129	|Power-Constrained Fuzzy Logic Control of Video Streaming over a Wireless Interconnect.	|EURASIP J. Adv. Sig. Proc.	|Rouzbeh Razavi	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 936 1
+22146	|A Secret Image Sharing Method Using Integer Wavelet Transform.	|EURASIP J. Adv. Sig. Proc.	|Chin-Pan Huang	|NULL	|NULL	|2007	|2007
+JACCARD 1 1 0.8
+
+#query 937 1
+22152	|An analysis on equal width quantization and linearly separable subcode encoding-based discretization and its performance resemblances.	|EURASIP J. Adv. Sig. Proc.	|Andrew Beng Jin Teoh	|NULL	|82	|2011	|2011
+JACCARD 2 2 0.8
+
+#query 938 1
+22165	|A Metric Multidimensional Scaling-Based Nonlinear Manifold Learning Approach for Unsupervised Data Reduction.	|EURASIP J. Adv. Sig. Proc.	|Jean-Paul Armspach	|NULL	|NULL	|2008	|2008
+JACCARD 2 2 0.8
+
+#query 939 1
+22193	|Joint Video Summarization and Transmission Adaptation for Energy-Efficient Wireless Video Streaming.	|EURASIP J. Adv. Sig. Proc.	|Zhu Li	|NULL	|NULL	|2008	|2008
+JACCARD 1 1 0.8
+
+#query 940 1
+22223	|A Survey of Watermarking Algorithms for Image Authentication.	|EURASIP J. Adv. Sig. Proc.	|Jean-Luc Dugelay	|6	|613-621	|2002	|2002
+JACCARD 1 1 0.8
+
+#query 941 1
+22254	|Time-Frequency Characterization of Cerebral Hemodynamics of Migraine Sufferers as Assessed by NIRS Signals.	|EURASIP J. Adv. Sig. Proc.	|Filippo Molinari	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 942 1
+22276	|Covariance Tracking via Geometric Particle Filtering.	|EURASIP J. Adv. Sig. Proc.	|Zelin Shi	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 943 1
+22303	|Analysis of Approximations and Aperture Distortion for 3D Migration of Bistatic Radar Data with the Two-Step Approach.	|EURASIP J. Adv. Sig. Proc.	|Luigi Zanzi	|NULL	|NULL	|2010	|2010
+JACCARD 1 1 0.8
+
+#query 944 1
+22330	|Editorial.	|EURASIP J. Adv. Sig. Proc.	|S�ren K. Riis	|18	|2911-2914	|2005	|2005
+JACCARD 2 2 0.8
+
+#query 945 1
+22344	|A Noise Reduction Preprocessor for Mobile Voice Communication.	|EURASIP J. Adv. Sig. Proc.	|Richard V. Cox	|8	|1046-1058	|2004	|2004
+JACCARD 2 2 0.8
+
+#query 946 1
+22366	|Fourier-Lapped Multilayer Perceptron Method for Speech Quality Assessment.	|EURASIP J. Adv. Sig. Proc.	|Jo�o Marcos Travassos Romano	|9	|1425-1434	|2005	|2005
+JACCARD 1 1 0.8
+
+#query 947 1
+22370	|Design of Farthest-Point Masks for Image Halftoning.	|EURASIP J. Adv. Sig. Proc.	|Cecilia Moloney	|12	|1886-1898	|2004	|2004
+JACCARD 1 1 0.8
+
+#query 948 1
+22395	|Signal characterisation and processing in the forward scatter mode of bistatic passive coherent location systems.	|EURASIP J. Adv. Sig. Proc.	|Kalin Kabakchiev	|NULL	|36	|2013	|2013
+JACCARD 1 1 0.8
+
+#query 949 1
+22408	|Adaptive primary user's signal detection algorithm based on matrix accumulation estimation for cognitive radio.	|EURASIP J. Adv. Sig. Proc.	|Zifa Zhong	|NULL	|51	|2011	|2011
+ES 3 3 0.8
+
+#query 950 1
+22414	|Design of Orthogonal Filtered Multitone Modulation Systems and Comparison among Efficient Realizations.	|EURASIP J. Adv. Sig. Proc.	|Nicola Moret	|NULL	|NULL	|2010	|2010
+JACCARD 2 2 0.8
+
+#query 951 1
+22439	|Back-and-Forth Methodology for Objective Voice Quality Assessment: From/to Expert Knowledge to/from Automatic Classification of Dysphonia.	|EURASIP J. Adv. Sig. Proc.	|Gilles Pouchoulin	|NULL	|NULL	|2009	|2009
+JACCARD 1 1 0.8
+
+#query 952 1
+22451	|An FPGA-Based Electronic Cochlea.	|EURASIP J. Adv. Sig. Proc.	|Philip Heng Wai Leong	|7	|629-638	|2003	|2003
+JACCARD 1 1 0.8
+
+#query 953 1
+22483	|A comparative study of some methods for color medical images segmentation.	|EURASIP J. Adv. Sig. Proc.	|Liana Stanescu	|NULL	|128	|2011	|2011
+JACCARD 1 1 0.8
+
+#query 954 1
+22500	|Study of Harmonics-to-Noise Ratio and Critical-Band Energy Spectrum of Speech as Acoustic Indicators of Laryngeal and Voice Pathology.	|EURASIP J. Adv. Sig. Proc.	|Kumara Shama	|NULL	|NULL	|2007	|2007
+JACCARD 2 2 0.8
+
+#query 955 1
+22516	|Robust Adaptive Beamforming for Multiple Signals of Interest with Cycle Frequency Error.	|EURASIP J. Adv. Sig. Proc.	|Chia-Cheng Huang	|NULL	|NULL	|2010	|2010
+JACCARD 2 2 0.8
+
+#query 956 1
+22518	|Reduced Complexity Volterra Models for Nonlinear System Identification.	|EURASIP J. Adv. Sig. Proc.	|Geoffrey A. Williamson	|4	|257-265	|2001	|2001
+ES 7 7 0.8
+
+#query 957 1
+22542	|An Integrated Real-Time Beamforming and Postfiltering System for Nonstationary Noise Environments.	|EURASIP J. Adv. Sig. Proc.	|Sharon Gannot	|11	|1064-1073	|2003	|2003
+ES 7 7 0.8
+
+#query 958 1
+22558	|Comparison of Antenna Array Systems Using OFDM for Software Radio via the SIBIC Model.	|EURASIP J. Adv. Sig. Proc.	|Michael W. Hoffman	|16	|2730-2738	|2005	|2005
+JACCARD 2 2 0.8
+
+#query 959 1
+22587	|Real-Time Trace Generation.	|Int. Journal in Computer Simulation	|William W. White	|1	|53-	|6	|1996
+JACCARD 1 1 0.8
+
+#query 960 1
+22614	|Q+: Interactive Visual Modeling for Performance Analysis and Simulation of Queueing Systems.	|Int. Journal in Computer Simulation	|Bernice S. Gotz	|2	|0-	|4	|1994
+JACCARD 1 1 0.8
+
+#query 961 1
+22628	|Compiler Integrated Multiprocessor Simulation.	|Int. Journal in Computer Simulation	|Ian D. Mathieson	|2	|NULL	|1	|1991
+JACCARD 2 2 0.8
+
+#query 962 1
+22654	|Analyzing the Cost of a Cache Miss Using Pipeline Spectroscopy.	|J. Instruction-Level Parallelism	|Philip G. Emma	|NULL	|NULL	|10	|2008
+JACCARD 2 2 0.8
+
+#query 963 1
+22679	|A Cost Model For Integrated Restructuring Optimizations.	|J. Instruction-Level Parallelism	|Bharat Chandramouli	|NULL	|NULL	|5	|2003
+JACCARD 1 1 0.8
+
+#query 964 1
+22691	|An Evaluation of Deeply Decoupled Cores.	|J. Instruction-Level Parallelism	|Suleyman Sair	|NULL	|NULL	|8	|2006
+JACCARD 1 1 0.8
+
+#query 965 1
+22710	|Exploiting Bias in the Hysteresis Bit of 2-bit Saturating Counters in Branch Predictors.	|J. Instruction-Level Parallelism	|Dana S. Henry	|NULL	|NULL	|5	|2003
+JACCARD 1 1 0.8
+
+#query 966 1
+22724	|Accelerating Meta Data Checks for Software Correctness and Security.	|J. Instruction-Level Parallelism	|Brad Calder	|NULL	|NULL	|9	|2007
+JACCARD 1 1 0.8
+
+#query 967 1
+22731	|Breaking Address Mapping Symmetry at Multi-levels of Memory Heirarchy to Reduce DRAM Row-buffer Conflicts.	|J. Instruction-Level Parallelism	|Xiaodong Zhang 0001	|NULL	|NULL	|3	|2001
+JACCARD 1 1 0.8
+
+#query 968 1
+22764	|Characteristics of ant-inspired traffic flow.	|Swarm Intelligence	|Alexander John	|1	|25-41	|2	|2008
+JACCARD 1 1 0.8
+
+#query 969 1
+22784	|Words, antibodies and their interactions.	|Swarm Intelligence	|Manolis Vavalis	|4	|275-300	|4	|2010
+JACCARD 1 1 0.8
+
+#query 970 1
+22813	|SWARMORPH-script: a language for arbitrary morphology generation in self-assembling robots.	|Swarm Intelligence	|Marco Dorigo	|2-4	|143-165	|2	|2008
+JACCARD 1 1 0.8
+
+#query 971 1
+22828	|Parameterized Bounded-Depth Frege Is not Optimal.	|TOCT	|Massimo Lauria	|3	|7	|4	|2012
+JACCARD 2 2 0.8
+
+#query 972 1
+22843	|On the Sum of Square Roots of Polynomials and Related Problems.	|TOCT	|Chandan Saha	|4	|9	|4	|2012
+JACCARD 2 2 0.8
+
+#query 973 1
+22846	|Collusion-Resistant Mechanisms with Verification Yielding Optimal Solutions.	|TOCT	|Carmine Ventre	|2	|6	|4	|2012
+JACCARD 1 1 0.8
+
+#query 974 1
+22850	|Pebbles and Branching Programs for Tree Evaluation.	|TOCT	|Mark Braverman	|2	|4	|3	|2012
+JACCARD 1 1 0.8
+
+#query 975 1
+22861	|Model-Based Clustring Framework for Intrusion Detection in Ad Hoc Networks.	|Egyptian Computer Science Journal	|Mohamed M. Abd-Eldayem	|3	|NULL	|30	|2008
+JACCARD 1 1 0.8
+
+#query 976 1
+22895	|Software Evolution within Test Plans - How, When and Why?	|Egyptian Computer Science Journal	|Ladislav Samuelis	|2	|NULL	|29	|2007
+JACCARD 1 1 0.8
+
+#query 977 1
+22913	|A Central-3-Residues-Based Clustering Approach for Studying the Effect of Hydrophobicity on Protein Backbone Angles.	|Egyptian Computer Science Journal	|Hisham Al-Shishiny	|4	|NULL	|31	|2009
+JACCARD 1 1 0.8
+
+#query 978 1
+22929	|New Techniques for Enhancement of SOM-Based Cluster Visualization.	|Egyptian Computer Science Journal	|Khaled Ahmed Nagaty	|1	|NULL	|25	|2003
+JACCARD 1 1 0.8
+
+#query 979 1
+22942	|Increasing the Performance of Active Memory during Allocation Process.	|Egyptian Computer Science Journal	|M. A. Abbas	|3	|75-85	|28	|2006
+JACCARD 1 1 0.8
+
+#query 980 1
+22984	|Messages Exchange Based on Middleware Service Technology.	|Egyptian Computer Science Journal	|Zhang Xiong	|2	|NULL	|25	|2003
+JACCARD 2 2 0.8
+
+#query 981 1
+23019	|Bayesian Conditioning for estimating the relative degrees of Reliability in a group of Neural Networks engaged at Iris Biometric Identification.	|Egyptian Computer Science Journal	|Aldo Franco Dragoni	|3	|1-13	|30	|2008
+JACCARD 1 1 0.8
+
+#query 982 1
+23053	|Evaluation of the Ontology Web Language (OWL) as a Knowledge Representation.	|Egyptian Computer Science Journal	|Mostafa M. Aref	|2	|78-85	|28	|2006
+JACCARD 1 1 0.8
+
+#query 983 1
+23062	|The Gmuware Biomedical Data Warehouse System for Integrating Heterogeneous Biomedical Data Sources.	|Egyptian Computer Science Journal	|Sultanah Al-Shammari	|1	|NULL	|31	|2009
+JACCARD 1 1 0.8
+
+#query 984 1
+23070	|A Case-based Tutoring System for Managerial Education.	|Egyptian Computer Science Journal	|Nevine M. Labib	|2	|NULL	|30	|2008
+JACCARD 1 1 0.8
+
+#query 985 1
+23103	|An RBF Based Method for 2d Image Compression.	|Egyptian Computer Science Journal	|Mohamed Hosny	|2	|NULL	|24	|2002
+JACCARD 2 2 0.8
+
+#query 986 1
+23109	|Recognizing Unsignaled Discourse Coherence Relations in English using Syntactic and Semantic Features.	|Egyptian Computer Science Journal	|Iraky Khalifa	|5	|NULL	|34	|2010
+JACCARD 1 1 0.8
+
+#query 987 1
+23144	|Extending Traditional IT-Governance Knowledge Towards SOA and Cloud Governance.	|IJKSR	|Lubomira Stantcheva	|2	|30-43	|3	|2012
+JACCARD 2 2 0.8
+
+#query 988 1
+23150	|Evaluation of E-Learning.	|IJKSR	|Bernhard Ertl	|3	|33-43	|1	|2010
+JACCARD 1 1 0.8
+
+#query 989 1
+23164	|A Quantitative Approach to Identify the Arguments that Support Decisions in E-Cognocracy.	|IJKSR	|Alberto Tur�n	|3	|36-48	|2	|2011
+JACCARD 2 2 0.8
+
+#query 990 1
+23180	|A Different Perspective on Lecture Video-Streaming: How to Use Technology to Help Change the Traditional Lecture Model.	|IJKSR	|Marco Ronchetti	|2	|50-60	|1	|2010
+JACCARD 2 2 0.8
+
+#query 991 1
+23202	|Simplifying autonomic enterprise Java Bean applications via model-driven engineering and simulation.	|Software and System Modeling	|Jules White	|1	|3-23	|7	|2008
+JACCARD 2 2 0.8
+
+#query 992 1
+23223	|MDI: A Rule-based Multi-document and Tool Integration Approach.	|Software and System Modeling	|Alexander K�nigs	|4	|349-368	|5	|2006
+JACCARD 1 1 0.8
+
+#query 993 1
+23225	|The KeY tool.	|Software and System Modeling	|Richard Bubel	|1	|32-54	|4	|2005
+JACCARD 1 1 0.8
+
+#query 994 1
+23258	|Dealing with Forward and Backward Jumps in Workflow Management Systems.	|Software and System Modeling	|Peter Dadam	|1	|37-58	|2	|2003
+ES 3 3 0.8
+
+#query 995 1
+23299	|Questionnaire-based variability modeling for system configuration.	|Software and System Modeling	|Wil M. P. van der Aalst	|2	|251-274	|8	|2009
+JACCARD 2 2 0.8
+
+#query 996 1
+23325	|Modeling presentation layers of web applications for testing.	|Software and System Modeling	|Jeff Offutt	|2	|257-280	|9	|2010
+JACCARD 1 1 0.8
+
+#query 997 1
+23349	|3.	|Software and System Modeling	|Hans Vangheluwe	|3	|194-209	|3	|2004
+JACCARD 1 1 0.8
+
+#query 998 1
+23358	|On model typing.	|Software and System Modeling	|Jean-Marc J�z�quel	|4	|401-413	|6	|2007
+JACCARD 2 2 0.8
+
+#query 999 1
+23375	|Refactoring object constraint language specifications.	|Software and System Modeling	|Cl�udia Werner	|2	|113-138	|6	|2007
+JACCARD 1 1 0.8
+
+#query 1000 1
+23379	|A model-driven traceability framework for software product lines.	|Software and System Modeling	|Jean-Claude Royer	|4	|427-451	|9	|2010
+JACCARD 1 1 0.8
+
